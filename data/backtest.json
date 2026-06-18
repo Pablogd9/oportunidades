@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-18T21:41:33Z",
+  "updated": "2026-06-18T21:45:53Z",
   "model_version": "3.0",
   "summary": {
     "n_fechas": 15,
@@ -175,13 +175,13 @@
       "total_con_dato": 10,
       "tasa_acierto": 80.0,
       "sectores_top10": [
-        "Ciberseguridad",
+        "Innovación",
         "Europa",
         "Salud",
-        "E-commerce",
-        "Innovación",
         "Fintech",
-        "Oro Físico"
+        "Ciberseguridad",
+        "Oro Físico",
+        "E-commerce"
       ],
       "n_sectores": 7
     },
@@ -349,12 +349,12 @@
       "total_con_dato": 10,
       "tasa_acierto": 90.0,
       "sectores_top10": [
-        "Europa",
-        "E-commerce",
         "Innovación",
+        "Europa",
         "China",
         "Oro Físico",
-        "Mineras Oro"
+        "Mineras Oro",
+        "E-commerce"
       ],
       "n_sectores": 6
     },
@@ -522,10 +522,10 @@
       "total_con_dato": 10,
       "tasa_acierto": 90.0,
       "sectores_top10": [
-        "Ciberseguridad",
-        "Europa",
         "Innovación",
+        "Europa",
         "Fintech",
+        "Ciberseguridad",
         "China",
         "Oro Físico",
         "Mineras Oro"
@@ -696,10 +696,10 @@
       "total_con_dato": 10,
       "tasa_acierto": 80.0,
       "sectores_top10": [
+        "Innovación",
+        "Infraestructura",
         "Defensa",
         "Ciberseguridad",
-        "Infraestructura",
-        "Innovación",
         "China",
         "Oro Físico",
         "Mineras Oro"
@@ -870,13 +870,13 @@
       "total_con_dato": 10,
       "tasa_acierto": 90.0,
       "sectores_top10": [
+        "Innovación",
         "Defensa",
         "Infraestructura",
         "Europa",
-        "Innovación",
         "Fintech",
-        "Oro Físico",
-        "Uranio"
+        "Uranio",
+        "Oro Físico"
       ],
       "n_sectores": 7
     },
@@ -1044,12 +1044,12 @@
       "total_con_dato": 10,
       "tasa_acierto": 100.0,
       "sectores_top10": [
+        "Innovación",
         "Defensa",
         "Inteligencia Artificial",
-        "Innovación",
         "Fintech",
-        "Oro Físico",
-        "Uranio"
+        "Uranio",
+        "Oro Físico"
       ],
       "n_sectores": 6
     },
@@ -1217,13 +1217,13 @@
       "total_con_dato": 10,
       "tasa_acierto": 60.0,
       "sectores_top10": [
+        "Innovación",
         "Defensa",
         "Europa",
         "Inteligencia Artificial",
-        "Innovación",
         "Fintech",
-        "China",
-        "Uranio"
+        "Uranio",
+        "China"
       ],
       "n_sectores": 7
     },
@@ -1391,15 +1391,15 @@
       "total_con_dato": 10,
       "tasa_acierto": 50.0,
       "sectores_top10": [
-        "Defensa",
-        "Bitcoin Miners",
-        "Europa",
-        "Vietnam",
-        "E-commerce",
         "Innovación",
+        "Defensa",
+        "Europa",
         "Fintech",
+        "Bitcoin Miners",
         "Oro Físico",
-        "Mineras Oro"
+        "Mineras Oro",
+        "E-commerce",
+        "Vietnam"
       ],
       "n_sectores": 9
     },
@@ -1567,10 +1567,10 @@
       "total_con_dato": 10,
       "tasa_acierto": 70.0,
       "sectores_top10": [
-        "Defensa",
-        "Bitcoin Miners",
-        "Europa",
         "Innovación",
+        "Defensa",
+        "Europa",
+        "Bitcoin Miners",
         "Oro Físico",
         "Mineras Oro"
       ],
@@ -1742,10 +1742,10 @@
       "sectores_top10": [
         "Defensa",
         "Europa",
+        "Índice",
+        "Uranio",
         "China",
         "Oro Físico",
-        "Uranio",
-        "Índice",
         "Mineras Oro"
       ],
       "n_sectores": 7
@@ -1914,13 +1914,13 @@
       "total_con_dato": 10,
       "tasa_acierto": 70.0,
       "sectores_top10": [
+        "Innovación",
         "Defensa",
         "Europa",
-        "Energía Limpia",
-        "Eólica",
-        "Innovación",
         "Oro Físico",
-        "Mineras Oro"
+        "Mineras Oro",
+        "Eólica",
+        "Energía Limpia"
       ],
       "n_sectores": 7
     },
@@ -2091,10 +2091,10 @@
         "Defensa",
         "Europa",
         "Inteligencia Artificial",
-        "Vietnam",
-        "Eólica",
         "Uranio",
-        "Mineras Oro"
+        "Mineras Oro",
+        "Eólica",
+        "Vietnam"
       ],
       "n_sectores": 7
     },
@@ -2262,12 +2262,12 @@
       "total_con_dato": 10,
       "tasa_acierto": 40.0,
       "sectores_top10": [
-        "Defensa",
-        "Bitcoin Miners",
-        "Energía Limpia",
         "Innovación",
+        "Defensa",
         "Uranio",
-        "Mineras Oro"
+        "Bitcoin Miners",
+        "Mineras Oro",
+        "Energía Limpia"
       ],
       "n_sectores": 6
     },
@@ -2435,13 +2435,13 @@
       "total_con_dato": 10,
       "tasa_acierto": 60.0,
       "sectores_top10": [
-        "Bitcoin Miners",
-        "Solar",
+        "Semiconductores",
         "Hidrógeno",
-        "Litio",
         "Uranio",
+        "Bitcoin Miners",
         "Mineras Oro",
-        "Semiconductores"
+        "Litio",
+        "Solar"
       ],
       "n_sectores": 7
     },
@@ -2609,15 +2609,15 @@
       "total_con_dato": 10,
       "tasa_acierto": 60.0,
       "sectores_top10": [
-        "Infraestructura",
-        "Bitcoin Miners",
-        "Solar",
-        "Hidrógeno",
-        "Litio",
         "Innovación",
-        "Uranio",
+        "Infraestructura",
+        "Hidrógeno",
         "Cobre",
-        "Biotecnología"
+        "Uranio",
+        "Biotecnología",
+        "Bitcoin Miners",
+        "Litio",
+        "Solar"
       ],
       "n_sectores": 9
     }
