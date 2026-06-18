@@ -3,9 +3,6 @@
 """
 Motor del escaner de oportunidades - version 4 (largo plazo).
 
-Disenado para un inversor mensual con horizonte 20-40 anos.
-Genera un Top 3 claro y explicado para decidir donde aportar cada mes.
-
 Criterios:
   1. Tendencia secular (40%): retorno 2 anos completos.
   2. Calidad de tendencia (25%): consistencia mensual 12M.
@@ -28,7 +25,7 @@ WEIGHTS = {
     "momentum3m": 0.15,
 }
 
-LEVERAGED    = {"Apalancado"}
+LEVERAGED      = {"Apalancado"}
 MAX_PER_SECTOR = 2
 
 def _get(url, timeout=25):
@@ -127,28 +124,26 @@ def secular_return(prices):
 
 def compute_factors(prices):
     if not prices or len(prices) < 60: return None
-    secular = secular_return(prices)
-    quality = consistency_12m(prices)
+    secular  = secular_return(prices)
+    quality  = consistency_12m(prices)
     dist_max = distance_from_max_1y(prices)
-    entry_raw = None
-    if dist_max is not None:
-        entry_raw = min(100, max(0, -dist_max * 2))
-    mom3m = ret_n(prices, 63)
-    r1m   = ret_n(prices, 21)
-    r6m   = ret_n(prices, 126)
-    r12m  = ret_n(prices, 252)
-    vol   = vol_annual(prices, 60)
-    sma50 = sma_n(prices, 50)
-    sma200= sma_n(prices, 200)
-    dd    = drawdown_from_max(prices)
-    ar    = ann_ret(prices)
+    entry_raw = min(100, max(0, -dist_max * 2)) if dist_max is not None else None
+    mom3m    = ret_n(prices, 63)
+    r1m      = ret_n(prices, 21)
+    r6m      = ret_n(prices, 126)
+    r12m     = ret_n(prices, 252)
+    vol      = vol_annual(prices, 60)
+    sma50    = sma_n(prices, 50)
+    sma200   = sma_n(prices, 200)
+    dd       = drawdown_from_max(prices)
+    ar       = ann_ret(prices)
     dist_sma200 = ((prices[-1]/sma200 - 1)*100) if sma200 else None
     return {
-        "secular":   secular,
-        "quality":   quality,
-        "entry_raw": entry_raw,
-        "mom3m":     mom3m,
-        "dist_max":  dist_max,
+        "secular":    secular,
+        "quality":    quality,
+        "entry_raw":  entry_raw,
+        "mom3m":      mom3m,
+        "dist_max":   dist_max,
         "r1m": r1m, "r3m": mom3m, "r6m": r6m, "r12m": r12m,
         "vol": vol, "drawdown": dd, "ann_ret": ar,
         "dist_sma200": dist_sma200,
@@ -176,7 +171,7 @@ def normalize_pe_within_sector(records):
         if s not in sectors: sectors[s] = []
         if r.get("pe"): sectors[s].append(r["pe"])
     for r in records:
-        s = r.get("sector","")
+        s  = r.get("sector","")
         pe = r.get("pe")
         vals = sectors.get(s, [])
         if not pe or len(vals) < 2:
@@ -194,37 +189,45 @@ def compute_score(r):
     ) * 100, 1)
 
 def build_reasons(r):
+    """r todavia tiene r['factors'] cuando se llama esta funcion."""
     ups, dns = [], []
     f = r["factors"]
+
     sec = f.get("secular")
     if sec is not None:
         if sec > 60:   ups.append(f"Tendencia secular muy fuerte (+{sec:.0f}% en 2 años)")
         elif sec > 20: ups.append(f"Tendencia secular positiva (+{sec:.0f}% en 2 años)")
         elif sec < 0:  dns.append(f"Tendencia secular negativa ({sec:.0f}% en 2 años)")
+
     qual = f.get("quality")
     if qual is not None:
         if qual >= 75:   ups.append(f"Tendencia muy consistente ({qual:.0f}% meses positivos en 12M)")
         elif qual >= 58: ups.append(f"Tendencia consistente ({qual:.0f}% meses positivos en 12M)")
         elif qual <= 42: dns.append(f"Tendencia inconsistente ({qual:.0f}% meses positivos)")
+
     dist = f.get("dist_max")
     if dist is not None:
         if dist < -30:   ups.append(f"Excelente punto de entrada: {dist:.0f}% bajo máximos")
         elif dist < -15: ups.append(f"Buen punto de entrada: {dist:.0f}% bajo máximos")
         elif dist > -5:  dns.append(f"Cerca de máximos históricos ({dist:.0f}%) — entrada exigente")
+
     m3 = f.get("mom3m")
     if m3 is not None:
         if m3 > 10:    ups.append(f"Momentum 3M positivo (+{m3:.1f}%) — mercado confirma la tendencia")
         elif m3 > 0:   ups.append(f"Momentum 3M levemente positivo (+{m3:.1f}%)")
         elif m3 < -15: dns.append(f"Corrección reciente fuerte ({m3:.1f}% en 3M)")
+
     d200 = f.get("dist_sma200")
     if d200 is not None:
         if d200 > 0:     ups.append(f"Por encima de la media de 200 días (+{d200:.1f}%)")
         elif d200 < -10: dns.append(f"Por debajo de la media de 200 días ({d200:.1f}%)")
-    pe = r.get("pe")
+
+    pe      = r.get("pe")
     pe_norm = r["norm"].get("pe", 0.5)
     if pe:
         if pe_norm > 0.7:  ups.append(f"PER ({pe:.0f}x) bajo para su sector")
         elif pe_norm < 0.3:dns.append(f"PER ({pe:.0f}x) alto para su sector")
+
     return ups[:4], dns[:3]
 
 def build_recommendation(top3, month_str):
@@ -258,6 +261,7 @@ def main():
     universe = json.loads(raw)["etfs"]
     print(f"Analizando {len(universe)} ETFs (modelo v4 — largo plazo)...")
     records = []
+
     for etf in universe:
         sym = etf["symbol"]
         print(f"  {sym}...", end=" ", flush=True)
@@ -269,29 +273,38 @@ def main():
             print("insuficiente"); continue
         fund = fetch_pe(sym)
         rec = {
-            "id": etf["id"], "name": etf["name"], "symbol": sym,
-            "sector": etf["sector"], "last": round(prices[-1], 4),
-            "factors": factors, "norm": {},
-            "pe": fund.get("pe"), "beta": fund.get("beta"), "dy": fund.get("dy"),
+            "id":     etf["id"],
+            "name":   etf["name"],
+            "symbol": sym,
+            "sector": etf["sector"],
+            "last":   round(prices[-1], 4),
+            "factors": factors,
+            "norm":    {},
+            "pe":   fund.get("pe"),
+            "beta": fund.get("beta"),
+            "dy":   fund.get("dy"),
             "sparkline":   [round(p,4) for p in prices[-60:]],
             "spark_dates": dates[-60:],
         }
         records.append(rec)
-        print(f"ok")
+        print("ok")
+
     if not records:
         print("ERROR: sin datos"); return
+
     normalize_cross(records, "secular")
     normalize_cross(records, "quality")
     normalize_cross(records, "entry_raw")
     normalize_cross(records, "mom3m")
     normalize_pe_within_sector(records)
+
     for r in records:
-        r["score"] = compute_score(r)
-        r["score_secular"]    = round(r["norm"].get("secular",   0.5)*100, 0)
-        r["score_quality"]    = round(r["norm"].get("quality",   0.5)*100, 0)
-        r["score_entry"]      = round(r["norm"].get("entry_raw", 0.5)*100, 0)
-        r["score_momentum3m"] = round(r["norm"].get("mom3m",     0.5)*100, 0)
-        r["score_valoracion"] = round(r["norm"].get("pe",        0.5)*100, 0)
+        r["score"]          = compute_score(r)
+        r["score_secular"]  = round(r["norm"].get("secular",   0.5)*100, 0)
+        r["score_quality"]  = round(r["norm"].get("quality",   0.5)*100, 0)
+        r["score_entry"]    = round(r["norm"].get("entry_raw", 0.5)*100, 0)
+        r["score_momentum3m"] = round(r["norm"].get("mom3m",   0.5)*100, 0)
+        r["score_valoracion"] = round(r["norm"].get("pe",      0.5)*100, 0)
         r["r1m"]         = r["factors"].get("r1m")
         r["r3m"]         = r["factors"].get("r3m")
         r["r6m"]         = r["factors"].get("r6m")
@@ -303,20 +316,26 @@ def main():
         r["dist_sma200"] = r["factors"].get("dist_sma200")
         r["secular_ret"] = r["factors"].get("secular")
         r["quality_pct"] = r["factors"].get("quality")
-        for k in list(r.keys()):
-            if k in ("factors","norm"): del r[k]
+        # build_reasons ANTES de borrar factors
         ups, dns = build_reasons(r)
         r["reasons_up"]   = ups
         r["reasons_down"] = dns
+        # ahora si borramos factors y norm
+        del r["factors"]
+        del r["norm"]
+
     records.sort(key=lambda x: x["score"], reverse=True)
     top3  = build_top3_diversified(records)
     top10 = records[:10]
+
     best_sector = {}
     for r in records:
         s = r["sector"]
         if s not in best_sector: best_sector[s] = r
-    month_str = datetime.date.today().strftime("%B %Y")
+
+    month_str      = datetime.date.today().strftime("%B %Y")
     recommendation = build_recommendation(top3, month_str)
+
     out = {
         "updated":        datetime.datetime.utcnow().isoformat(timespec="seconds") + "Z",
         "total_analyzed": len(records),
@@ -329,9 +348,11 @@ def main():
         "best_by_sector": list(best_sector.values()),
         "warnings":       WARN,
     }
+
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as fh:
         json.dump(out, fh, ensure_ascii=False, indent=2)
+
     print(f"\nOK. {len(records)} ETFs (modelo largo plazo v4)")
     print(f"\n{'='*55}")
     print(f"RECOMENDACIÓN DE ESTE MES:")
