@@ -29,22 +29,14 @@ jobs:
       - name: Ejecutar escaner
         run: python scripts/scan.py
 
-      - name: Ejecutar backtest (solo a las 7:30 UTC)
-        run: |
-          HOUR=$(date -u +%H)
-          if [ "$HOUR" = "07" ]; then
-            echo "Ejecutando backtest..."
-            python scripts/backtest.py
-          else
-            echo "Backtest solo se ejecuta a las 7:30 UTC. Saltando."
-          fi
+      - name: Ejecutar backtest
+        run: python scripts/backtest.py
 
       - name: Guardar resultados
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/output.json
-          git add data/backtest.json 2>/dev/null || true
+          git add data/output.json data/backtest.json
           if git diff --staged --quiet; then
             echo "Sin cambios."
           else
