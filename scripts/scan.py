@@ -1,17 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Motor del escaner de oportunidades - version 2.
-Modelo de factores basado en evidencia academica:
-
-  1. Momentum ajustado (12M - 1M): Jegadeesh & Titman 1993.
-  2. Tendencia (vs SMA200): time series momentum.
-  3. Sharpe implicito (retorno 12M / volatilidad).
-  4. Valoracion relativa (PER vs media del sector).
-  5. Señal de entrada (RSI + distancia a SMA50).
-
-Todos los factores se normalizan en [0,1] sobre el universo completo.
-Sin dependencias externas. Solo libreria estandar Python.
+Motor del escaner de oportunidades - version 3.
+Mejoras vs v2:
+- Limite de 2 ETFs por sector en el Top10 (evita sesgo de concentracion).
+- Penalizacion por sobreextension (momentum > 30% en 6M reduce score).
+- ETFs apalancados excluidos del Top10 (no aptos para largo plazo).
+- Nuevas metricas: consistencia de tendencia, ratio recuperacion.
 """
 
 import json, math, os, re, urllib.request, datetime
@@ -19,7 +14,7 @@ import json, math, os, re, urllib.request, datetime
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 UNI  = os.path.join(ROOT, "universe.json")
 OUT  = os.path.join(ROOT, "data", "output.json")
-UA   = {"User-Agent": "Mozilla/5.0 (compatible; OpportunityScanner/2.0)"}
+UA   = {"User-Agent": "Mozilla/5.0 (compatible; OpportunityScanner/3.0)"}
 WARN = []
 
 WEIGHTS = {
@@ -29,6 +24,9 @@ WEIGHTS = {
     "entrada":      0.12,
     "valoracion":   0.08,
 }
+
+LEVERAGED = {"Apalancado"}
+MAX_PER_SECTOR = 2
 
 def _get(url, timeout=25):
     req = urllib.request.Request(url, headers=UA)
@@ -82,7 +80,7 @@ def sma_n(prices, n):
 
 def vol_annual(prices, n=60):
     if len(prices) < n + 1: return None
-    rets = [prices[i]/prices[i-1]-1 for i in range(max(1, len(prices)-n), len(prices))]
+    rets = [prices[i]/prices[i-1]-1 for i in range(max(1,len(prices)-n), len(prices))]
     if len(rets) < 5: return None
     mean = sum(rets)/len(rets)
     sd = math.sqrt(sum((r-mean)**2 for r in rets)/(len(rets)-1))
@@ -108,10 +106,36 @@ def ann_ret(prices, n=252):
     if actual < 20: return None
     return round((prices[-1]/prices[-actual-1])**(252/actual)*100 - 100, 1)
 
+def consistency_6m(prices):
+    if len(prices) < 130: return None
+    monthly_rets = []
+    for i in range(6):
+        start = -(21*(i+1)+1)
+        end   = -(21*i+1) if i > 0 else -1
+        if abs(start) >= len(prices): continue
+        p0 = prices[start]
+        p1 = prices[end]
+        if p0 > 0:
+            monthly_rets.append(p1/p0 - 1)
+    if not monthly_rets: return None
+    positive = sum(1 for r in monthly_rets if r > 0)
+    return round(positive / len(monthly_rets) * 100, 0)
+
+def recovery_ratio(prices, n=252):
+    dd = drawdown_from_max(prices, n)
+    ar = ann_ret(prices, n)
+    if dd is None or ar is None or dd == 0: return None
+    return round(ar / abs(dd), 2)
+
+def overextension_penalty(r6m):
+    if r6m is None: return 1.0
+    if r6m > 50: return 0.70
+    if r6m > 30: return 0.85
+    return 1.0
+
 def compute_factors(prices):
-    if not prices or len(prices) < 60:
-        return None
-    r12 = ret_n(prices, 252)
+    if not prices or len(prices) < 60: return None
+    r12 = ret_n(prices, min(252, len(prices)-1))
     r1  = ret_n(prices, 21)
     if r12 is None: r12 = ret_n(prices, len(prices)-1)
     mom_adj = (r12 - r1) if (r12 is not None and r1 is not None) else r12
@@ -128,36 +152,33 @@ def compute_factors(prices):
         entry = rsi_score * (1 - stretch_penalty)
     else:
         entry = None
+    r6m = ret_n(prices, 126)
     return {
-        "mom_adj":     round(mom_adj, 2)    if mom_adj    is not None else None,
-        "trend":       round(trend, 2)      if trend      is not None else None,
-        "sharpe_impl": round(sharpe_impl,3) if sharpe_impl is not None else None,
-        "entry":       round(entry, 1)      if entry      is not None else None,
-        "r1m":  round(ret_n(prices,21),2)   if ret_n(prices,21)  is not None else None,
-        "r3m":  round(ret_n(prices,63),2)   if ret_n(prices,63)  is not None else None,
-        "r6m":  round(ret_n(prices,126),2)  if ret_n(prices,126) is not None else None,
-        "r12m": round(r12,2)                if r12               is not None else None,
-        "vol":  round(vol,1)                if vol               is not None else None,
-        "rsi":  rsi,
-        "sma50":  round(sma50,4)  if sma50  else None,
-        "sma200": round(sma200,4) if sma200 else None,
-        "dist_sma50":  round(dist_sma50,1),
+        "mom_adj": mom_adj, "trend": trend,
+        "sharpe_impl": sharpe_impl, "entry": entry,
+        "r1m":  ret_n(prices,21), "r3m":  ret_n(prices,63),
+        "r6m":  r6m, "r12m": r12,
+        "vol":  vol, "rsi":  rsi,
+        "sma50": sma50, "sma200": sma200, "dist_sma50": dist_sma50,
         "drawdown": drawdown_from_max(prices),
         "ann_ret":  ann_ret(prices),
+        "consistency_6m": consistency_6m(prices),
+        "recovery_ratio": recovery_ratio(prices),
+        "overext_penalty": overextension_penalty(r6m),
     }
 
 def normalize_cross(records, key):
-    vals = [r[key] for r in records if r.get(key) is not None]
+    vals = [r["factors"][key] for r in records if r["factors"].get(key) is not None]
     if len(vals) < 2:
-        for r in records: r[f"_n_{key}"] = 0.5
+        for r in records: r["norm"][key] = 0.5
         return
     mn, mx = min(vals), max(vals)
     rng = mx - mn
     median = sorted(vals)[len(vals)//2]
     for r in records:
-        v = r.get(key)
+        v = r["factors"].get(key)
         if v is None: v = median
-        r[f"_n_{key}"] = (v - mn) / rng if rng > 0 else 0.5
+        r["norm"][key] = (v - mn) / rng if rng > 0 else 0.5
 
 def normalize_pe_within_sector(records):
     sectors = {}
@@ -170,62 +191,86 @@ def normalize_pe_within_sector(records):
         pe = r.get("pe")
         vals = sectors.get(s, [])
         if not pe or len(vals) < 2:
-            r["_n_pe"] = 0.5
-            continue
+            r["norm"]["pe"] = 0.5; continue
         mn, mx = min(vals), max(vals)
         rng = mx - mn
-        r["_n_pe"] = 1 - ((pe - mn)/rng) if rng > 0 else 0.5
+        r["norm"]["pe"] = 1 - ((pe - mn)/rng) if rng > 0 else 0.5
 
 def compute_score(r):
-    return round((
-        WEIGHTS["momentum_adj"] * r.get("_n_mom_adj", 0.5) +
-        WEIGHTS["tendencia"]    * r.get("_n_trend",   0.5) +
-        WEIGHTS["sharpe_impl"]  * r.get("_n_sharpe_impl", 0.5) +
-        WEIGHTS["entrada"]      * r.get("_n_entry",   0.5) +
-        WEIGHTS["valoracion"]   * r.get("_n_pe",      0.5)
-    ) * 100, 1)
+    base = (
+        WEIGHTS["momentum_adj"] * r["norm"].get("mom_adj", 0.5) +
+        WEIGHTS["tendencia"]    * r["norm"].get("trend",   0.5) +
+        WEIGHTS["sharpe_impl"]  * r["norm"].get("sharpe_impl", 0.5) +
+        WEIGHTS["entrada"]      * r["norm"].get("entry",   0.5) +
+        WEIGHTS["valoracion"]   * r["norm"].get("pe",      0.5)
+    ) * 100
+    penalty = r["factors"].get("overext_penalty", 1.0)
+    return round(base * penalty, 1)
 
-def build_reasons(r):
+def build_reasons(r, score):
     ups, dns = [], []
-    mom = r.get("mom_adj")
+    mom = r["factors"].get("mom_adj")
     if mom is not None:
         if mom > 20:   ups.append(f"Momentum ajustado muy fuerte (+{mom:.1f}%) — tendencia sólida")
         elif mom > 5:  ups.append(f"Momentum ajustado positivo (+{mom:.1f}%)")
         elif mom < -15:dns.append(f"Momentum negativo ({mom:.1f}%) — tendencia débil")
-    trend = r.get("trend")
+    trend = r["factors"].get("trend")
     if trend is not None:
         if trend > 15:   ups.append(f"Muy por encima de SMA200 (+{trend:.1f}%) — tendencia alcista fuerte")
         elif trend > 5:  ups.append(f"Por encima de SMA200 (+{trend:.1f}%) — tendencia positiva")
         elif trend < -5: dns.append(f"Por debajo de SMA200 ({trend:.1f}%) — tendencia bajista")
-    sh = r.get("sharpe_impl")
-    vol = r.get("vol")
+    sh = r["factors"].get("sharpe_impl")
+    vol = r["factors"].get("vol")
     if sh is not None:
         if sh > 1.5:   ups.append(f"Excelente calidad de retorno (Sharpe impl. {sh:.2f})")
         elif sh > 0.8: ups.append(f"Buena relación retorno/riesgo (Sharpe impl. {sh:.2f})")
         elif sh < 0:
             if vol: dns.append(f"Retorno negativo con alta volatilidad ({vol:.0f}%)")
-    rsi = r.get("rsi")
-    dist = r.get("dist_sma50", 0)
+    rsi = r["factors"].get("rsi")
+    dist = r["factors"].get("dist_sma50", 0)
     if rsi is not None:
-        if rsi < 30:       ups.append(f"RSI en sobreventa ({rsi:.0f}) — posible rebote técnico")
-        elif rsi < 45:     ups.append(f"RSI neutral-bajo ({rsi:.0f}) — zona de entrada favorable")
-        elif 45<=rsi<=60:  ups.append(f"RSI neutral ({rsi:.0f}) — momento de entrada equilibrado")
-        elif rsi > 70:     dns.append(f"RSI en sobrecompra ({rsi:.0f}) — entrada tardía")
-    if dist > 15:          dns.append(f"Precio muy estirado sobre SMA50 (+{dist:.0f}%) — riesgo de corrección")
+        if rsi < 30:      ups.append(f"RSI en sobreventa ({rsi:.0f}) — posible rebote técnico")
+        elif rsi < 45:    ups.append(f"RSI neutral-bajo ({rsi:.0f}) — zona de entrada favorable")
+        elif 45<=rsi<=60: ups.append(f"RSI neutral ({rsi:.0f}) — momento de entrada equilibrado")
+        elif rsi > 70:    dns.append(f"RSI en sobrecompra ({rsi:.0f}) — entrada tardía")
+    if dist > 15:         dns.append(f"Precio muy estirado sobre SMA50 (+{dist:.0f}%) — riesgo de corrección")
     pe = r.get("pe")
-    pe_norm = r.get("_n_pe", 0.5)
+    pe_norm = r["norm"].get("pe", 0.5)
     if pe:
         if pe_norm > 0.7:  ups.append(f"PER ({pe:.0f}x) bajo para su sector — valoración atractiva")
         elif pe_norm < 0.3:dns.append(f"PER ({pe:.0f}x) alto para su sector — valoración exigente")
-    dd = r.get("drawdown")
+    cons = r["factors"].get("consistency_6m")
+    if cons is not None:
+        if cons >= 80: ups.append(f"Tendencia muy consistente ({cons:.0f}% meses positivos en 6M)")
+        elif cons <= 40: dns.append(f"Tendencia inconsistente ({cons:.0f}% meses positivos en 6M)")
+    penalty = r["factors"].get("overext_penalty", 1.0)
+    if penalty < 1.0:
+        r6m = r["factors"].get("r6m")
+        dns.append(f"Sobreextensión detectada (+{r6m:.0f}% en 6M) — score penalizado {int((1-penalty)*100)}%")
+    dd = r["factors"].get("drawdown")
     if dd is not None and dd < -25:
         ups.append(f"Caída desde máximos del {dd:.0f}% — potencial de recuperación")
+    rr = r["factors"].get("recovery_ratio")
+    if rr is not None and rr > 1.5:
+        ups.append(f"Excelente ratio recuperación ({rr:.1f}) — resiliente a las caídas")
     return ups[:4], dns[:3]
+
+def build_top10_diversified(records):
+    non_lev = [r for r in records if r.get("sector") not in LEVERAGED]
+    sector_count = {}
+    top10 = []
+    for r in non_lev:
+        s = r.get("sector","")
+        if sector_count.get(s, 0) >= MAX_PER_SECTOR: continue
+        top10.append(r)
+        sector_count[s] = sector_count.get(s, 0) + 1
+        if len(top10) >= 10: break
+    return top10
 
 def main():
     raw = open(UNI, encoding="utf-8").read()
     universe = json.loads(raw)["etfs"]
-    print(f"Analizando {len(universe)} ETFs con modelo de factores v2...")
+    print(f"Analizando {len(universe)} ETFs (modelo v3)...")
     records = []
     for etf in universe:
         sym = etf["symbol"]
@@ -238,22 +283,15 @@ def main():
             print("insuficiente"); continue
         fund = fetch_pe(sym)
         rec = {
-            "id": etf["id"], "name": etf["name"], "symbol": sym, "sector": etf["sector"],
-            "last": round(prices[-1], 4),
-            "mom_adj": factors["mom_adj"], "trend": factors["trend"],
-            "sharpe_impl": factors["sharpe_impl"], "entry": factors["entry"],
-            "r1m": factors["r1m"], "r3m": factors["r3m"],
-            "r6m": factors["r6m"], "r12m": factors["r12m"],
-            "vol": factors["vol"], "rsi": factors["rsi"],
-            "sma50": factors["sma50"], "sma200": factors["sma200"],
-            "dist_sma50": factors["dist_sma50"],
-            "drawdown": factors["drawdown"], "ann_ret": factors["ann_ret"],
+            "id": etf["id"], "name": etf["name"], "symbol": sym,
+            "sector": etf["sector"], "last": round(prices[-1], 4),
+            "factors": factors, "norm": {},
             "pe": fund.get("pe"), "beta": fund.get("beta"), "dy": fund.get("dy"),
             "sparkline":   [round(p,4) for p in prices[-60:]],
             "spark_dates": dates[-60:],
         }
         records.append(rec)
-        print(f"ok score pendiente")
+        print(f"ok")
     if not records:
         print("ERROR: sin datos"); return
     normalize_cross(records, "mom_adj")
@@ -263,17 +301,29 @@ def main():
     normalize_pe_within_sector(records)
     for r in records:
         r["score"] = compute_score(r)
-        r["score_momentum"]  = round(r.get("_n_mom_adj",0.5)*100, 0)
-        r["score_tendencia"] = round(r.get("_n_trend",0.5)*100, 0)
-        r["score_sharpe"]    = round(r.get("_n_sharpe_impl",0.5)*100, 0)
-        r["score_entrada"]   = round(r.get("_n_entry",0.5)*100, 0)
-        r["score_valoracion"]= round(r.get("_n_pe",0.5)*100, 0)
+        r["score_momentum"]   = round(r["norm"].get("mom_adj",0.5)*100, 0)
+        r["score_tendencia"]  = round(r["norm"].get("trend",0.5)*100, 0)
+        r["score_sharpe"]     = round(r["norm"].get("sharpe_impl",0.5)*100, 0)
+        r["score_entrada"]    = round(r["norm"].get("entry",0.5)*100, 0)
+        r["score_valoracion"] = round(r["norm"].get("pe",0.5)*100, 0)
+        r["r1m"]  = r["factors"].get("r1m")
+        r["r3m"]  = r["factors"].get("r3m")
+        r["r6m"]  = r["factors"].get("r6m")
+        r["r12m"] = r["factors"].get("r12m")
+        r["vol"]  = r["factors"].get("vol")
+        r["rsi"]  = r["factors"].get("rsi")
+        r["drawdown"]        = r["factors"].get("drawdown")
+        r["ann_ret"]         = r["factors"].get("ann_ret")
+        r["consistency_6m"]  = r["factors"].get("consistency_6m")
+        r["recovery_ratio"]  = r["factors"].get("recovery_ratio")
+        r["overext_penalty"] = r["factors"].get("overext_penalty")
         for k in list(r.keys()):
-            if k.startswith("_n_"): del r[k]
-        ups, dns = build_reasons(r)
+            if k in ("factors","norm"): del r[k]
+        ups, dns = build_reasons(r, r["score"])
         r["reasons_up"] = ups
         r["reasons_down"] = dns
     records.sort(key=lambda x: x["score"], reverse=True)
+    top10 = build_top10_diversified(records)
     best_sector = {}
     for r in records:
         s = r["sector"]
@@ -281,9 +331,9 @@ def main():
     out = {
         "updated":        datetime.datetime.utcnow().isoformat(timespec="seconds") + "Z",
         "total_analyzed": len(records),
-        "model_version":  "2.0",
+        "model_version":  "3.0",
         "factor_weights": WEIGHTS,
-        "top10":          records[:10],
+        "top10":          top10,
         "all":            records,
         "best_by_sector": list(best_sector.values()),
         "warnings":       WARN,
@@ -291,9 +341,9 @@ def main():
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as fh:
         json.dump(out, fh, ensure_ascii=False, indent=2)
-    print(f"\nOK. {len(records)} ETFs analizados. Top 5:")
-    for r in records[:5]:
-        print(f"  {r['score']:5.1f} — {r['name'][:45]} ({r['symbol']})")
+    print(f"\nOK. {len(records)} ETFs. Top 3 diversificado:")
+    for r in top10[:3]:
+        print(f"  {r['score']:5.1f} — {r['name'][:45]} ({r['symbol']}) [{r['sector']}]")
     print(f"Avisos: {len(WARN)}")
 
 if __name__ == "__main__":
