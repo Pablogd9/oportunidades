@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Backtest historico del modelo de oportunidades.
-
-Para cada mes del ultimo año:
-1. Calcula los scores con datos disponibles HASTA ese dia (sin mirar el futuro).
-2. Guarda el Top 10 de ese momento con su score.
-3. Mide la rentabilidad REAL de esos ETFs en los 1, 3 y 6 meses siguientes.
-4. Marca si el sistema acerto o no.
+Backtest historico del modelo v3.
+Mismos cambios que scan.py v3:
+- Limite 2 ETFs por sector en el Top10.
+- Penalizacion por sobreextension.
+- Apalancados excluidos del Top10.
 """
 
 import json, math, os, re, urllib.request, datetime
@@ -15,7 +13,7 @@ import json, math, os, re, urllib.request, datetime
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 UNI  = os.path.join(ROOT, "universe.json")
 OUT  = os.path.join(ROOT, "data", "backtest.json")
-UA   = {"User-Agent": "Mozilla/5.0 (compatible; Backtest/1.0)"}
+UA   = {"User-Agent": "Mozilla/5.0 (compatible; Backtest/2.0)"}
 
 WEIGHTS = {
     "momentum_adj": 0.35,
@@ -24,6 +22,9 @@ WEIGHTS = {
     "entrada":      0.12,
     "valoracion":   0.08,
 }
+
+LEVERAGED = {"Apalancado"}
+MAX_PER_SECTOR = 2
 
 def _get(url, timeout=25):
     req = urllib.request.Request(url, headers=UA)
@@ -73,6 +74,12 @@ def rsi_14(prices):
     if al == 0: return 100.0
     return round(100 - 100/(1 + ag/al), 1)
 
+def overextension_penalty(r6m):
+    if r6m is None: return 1.0
+    if r6m > 50: return 0.70
+    if r6m > 30: return 0.85
+    return 1.0
+
 def compute_raw_factors(prices):
     if not prices or len(prices) < 60: return None
     r12 = ret_n(prices, min(252, len(prices)-1))
@@ -91,7 +98,12 @@ def compute_raw_factors(prices):
         entry = rsi_score * (1 - stretch_penalty)
     else:
         entry = None
-    return {"mom_adj": mom_adj, "trend": trend, "sharpe_impl": sharpe_impl, "entry": entry}
+    r6m = ret_n(prices, 126)
+    return {
+        "mom_adj": mom_adj, "trend": trend,
+        "sharpe_impl": sharpe_impl, "entry": entry,
+        "r6m": r6m, "overext_penalty": overextension_penalty(r6m),
+    }
 
 def normalize_and_score(records):
     def norm(key):
@@ -109,28 +121,39 @@ def normalize_and_score(records):
     for key in ["mom_adj","trend","sharpe_impl","entry"]:
         norm(key)
     for r in records:
-        r["score"] = round((
+        base = (
             WEIGHTS["momentum_adj"] * r["norm"].get("mom_adj", 0.5) +
             WEIGHTS["tendencia"]    * r["norm"].get("trend",   0.5) +
             WEIGHTS["sharpe_impl"]  * r["norm"].get("sharpe_impl", 0.5) +
             WEIGHTS["entrada"]      * r["norm"].get("entry",   0.5) +
             WEIGHTS["valoracion"]   * 0.5
-        ) * 100, 1)
+        ) * 100
+        penalty = r["factors"].get("overext_penalty", 1.0)
+        r["score"] = round(base * penalty, 1)
+
+def build_top10_diversified(records):
+    non_lev = [r for r in records if r.get("sector") not in LEVERAGED]
+    sector_count = {}
+    top10 = []
+    for r in sorted(non_lev, key=lambda x: x["score"], reverse=True):
+        s = r.get("sector","")
+        if sector_count.get(s, 0) >= MAX_PER_SECTOR: continue
+        top10.append(r)
+        sector_count[s] = sector_count.get(s, 0) + 1
+        if len(top10) >= 10: break
+    return top10
 
 def prices_up_to(all_prices, all_dates, target_date):
     cutoff = target_date.isoformat()
     for i, d in enumerate(all_dates):
-        if d > cutoff:
-            return all_prices[:i]
+        if d > cutoff: return all_prices[:i]
     return all_prices[:]
 
 def future_return_at(all_prices, all_dates, from_date, n_days):
     from_str = from_date.isoformat()
     start_idx = None
     for i, d in enumerate(all_dates):
-        if d >= from_str:
-            start_idx = i
-            break
+        if d >= from_str: start_idx = i; break
     if start_idx is None: return None
     end_idx = min(start_idx + n_days, len(all_prices) - 1)
     if end_idx <= start_idx: return None
@@ -149,8 +172,7 @@ def price_at(all_prices, all_dates, target_date):
 def main():
     raw = open(UNI, encoding="utf-8").read()
     universe = json.loads(raw)["etfs"]
-
-    print(f"Descargando historico de {len(universe)} ETFs...")
+    print(f"Descargando historico de {len(universe)} ETFs (modelo v3)...")
     etf_data = {}
     for etf in universe:
         sym = etf["symbol"]
@@ -176,7 +198,7 @@ def main():
         eval_dates.append(d)
     eval_dates = sorted(eval_dates)
 
-    print(f"\nCalculando backtest para {len(eval_dates)} fechas...")
+    print(f"\nCalculando backtest para {len(eval_dates)} fechas (v3)...")
     snapshots = []
 
     for eval_date in eval_dates:
@@ -196,14 +218,17 @@ def main():
         normalize_and_score(records)
         records.sort(key=lambda x: x["score"], reverse=True)
 
-        top10 = []
-        for r in records[:10]:
+        top10 = build_top10_diversified(records)
+        bottom5 = records[-5:]
+
+        top10_with_rets = []
+        for r in top10:
             edata = etf_data[r["id"]]
             ret_1m = future_return_at(edata["prices"], edata["dates"], eval_date, 21)
             ret_3m = future_return_at(edata["prices"], edata["dates"], eval_date, 63)
             ret_6m = future_return_at(edata["prices"], edata["dates"], eval_date, 126)
             acerto_3m = None if ret_3m is None else ret_3m > 0
-            top10.append({
+            top10_with_rets.append({
                 "id": r["id"], "name": r["name"], "symbol": r["symbol"],
                 "sector": r["sector"], "score": r["score"],
                 "price_signal": r["price_at_signal"],
@@ -211,28 +236,31 @@ def main():
                 "acerto_3m": acerto_3m,
             })
             status = "✓" if acerto_3m else ("✗" if acerto_3m is False else "?")
-            print(f"    {r['symbol']:10s} score={r['score']:5.1f} ret3M={str(ret_3m)+'%' if ret_3m else '?':8s} {status}")
+            print(f"    {r['symbol']:10s} [{r['sector'][:12]:12s}] score={r['score']:5.1f} ret3M={str(ret_3m)+'%' if ret_3m else '?':8s} {status}")
 
-        bottom5 = []
-        for r in records[-5:]:
+        bot5_with_rets = []
+        for r in bottom5:
             edata = etf_data[r["id"]]
             ret_3m = future_return_at(edata["prices"], edata["dates"], eval_date, 63)
-            bottom5.append({"id": r["id"], "name": r["name"], "score": r["score"], "ret_3m": ret_3m})
+            bot5_with_rets.append({"id":r["id"],"name":r["name"],"score":r["score"],"ret_3m":ret_3m})
 
-        top_rets = [e["ret_3m"] for e in top10 if e["ret_3m"] is not None]
-        bot_rets = [e["ret_3m"] for e in bottom5 if e["ret_3m"] is not None]
+        top_rets = [e["ret_3m"] for e in top10_with_rets if e["ret_3m"] is not None]
+        bot_rets = [e["ret_3m"] for e in bot5_with_rets if e["ret_3m"] is not None]
         avg_top = round(sum(top_rets)/len(top_rets), 2) if top_rets else None
         avg_bot = round(sum(bot_rets)/len(bot_rets), 2) if bot_rets else None
         spread  = round(avg_top - avg_bot, 2) if avg_top is not None and avg_bot is not None else None
-        aciertos = sum(1 for e in top10 if e["acerto_3m"] is True)
-        total_con_dato = sum(1 for e in top10 if e["acerto_3m"] is not None)
+        aciertos = sum(1 for e in top10_with_rets if e["acerto_3m"] is True)
+        total_con_dato = sum(1 for e in top10_with_rets if e["acerto_3m"] is not None)
+        sectores_top10 = list(set(e["sector"] for e in top10_with_rets))
 
         snapshots.append({
             "date": eval_date.isoformat(), "n_etfs": len(records),
-            "top10": top10, "bottom5": bottom5,
+            "top10": top10_with_rets, "bottom5": bot5_with_rets,
             "avg_top_3m": avg_top, "avg_bot_3m": avg_bot, "spread_3m": spread,
             "aciertos": aciertos, "total_con_dato": total_con_dato,
             "tasa_acierto": round(aciertos/total_con_dato*100, 0) if total_con_dato else None,
+            "sectores_top10": sectores_top10,
+            "n_sectores": len(sectores_top10),
         })
 
     spreads = [s["spread_3m"] for s in snapshots if s["spread_3m"] is not None]
@@ -240,6 +268,7 @@ def main():
     mean_spread = round(sum(spreads)/len(spreads), 2) if spreads else None
     mean_tasa   = round(sum(tasas)/len(tasas), 1) if tasas else None
     pos_spreads = sum(1 for s in spreads if s > 0)
+    avg_sectores = round(sum(s["n_sectores"] for s in snapshots)/len(snapshots), 1) if snapshots else None
 
     summary = {
         "n_fechas": len(snapshots),
@@ -247,28 +276,36 @@ def main():
         "tasa_acierto_media": mean_tasa,
         "meses_positivos": pos_spreads,
         "meses_total": len(spreads),
+        "avg_sectores_top10": avg_sectores,
         "interpretacion": (
             f"En {pos_spreads} de {len(spreads)} meses el Top10 superó al Bottom5. "
             f"Tasa de acierto media: {mean_tasa}%. "
+            f"Media de {avg_sectores} sectores distintos en el Top10. "
             + ("El modelo muestra poder predictivo." if (mean_tasa or 0) > 55
                else "El modelo no muestra ventaja clara sobre el azar.")
         )
     }
 
     out = {
-        "updated": datetime.datetime.utcnow().isoformat(timespec="seconds") + "Z",
-        "summary": summary,
+        "updated":  datetime.datetime.utcnow().isoformat(timespec="seconds") + "Z",
+        "model_version": "3.0",
+        "summary":  summary,
         "snapshots": snapshots,
-        "metodologia": "Scores calculados sin datos futuros. Rentabilidades medidas en los meses siguientes.",
+        "metodologia": "Scores calculados sin datos futuros. Top10 diversificado: max 2 ETFs por sector, sin apalancados. Penalizacion por sobreextension.",
     }
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as fh:
         json.dump(out, fh, ensure_ascii=False, indent=2)
 
-    print(f"\n{'='*50}")
-    print(f"Fechas: {len(snapshots)} | Spread medio: {mean_spread}% | Tasa acierto: {mean_tasa}%")
-    print(f"{'='*50}")
+    print(f"\n{'='*55}")
+    print(f"BACKTEST v3 — MODELO DIVERSIFICADO LARGO PLAZO")
+    print(f"  Fechas:           {len(snapshots)}")
+    print(f"  Spread medio 3M:  {mean_spread}%  (v2 era -1.57%)")
+    print(f"  Tasa acierto:     {mean_tasa}%   (v2 era 71.3%)")
+    print(f"  Meses positivos:  {pos_spreads}/{len(spreads)}")
+    print(f"  Sectores Top10:   {avg_sectores} de media")
+    print(f"{'='*55}")
 
 if __name__ == "__main__":
     main()
