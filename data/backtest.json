@@ -1,20 +1,22 @@
 {
-  "updated": "2026-06-20T15:04:52Z",
+  "updated": "2026-06-20T15:19:29Z",
   "model_version": "7.0",
   "summary": {
+    "metodologia": "Retorno desde cada fecha de señal HASTA HOY — horizonte largo plazo real",
+    "fecha_calculo": "2026-06-20",
     "n_fechas": 36,
-    "alpha_medio_3m": -1.67,
-    "ret_medio_top2_3m": 2.43,
-    "ret_medio_iwda_3m": 4.1,
-    "tasa_acierto_media": 58.3,
-    "meses_alpha_positivo": 15,
-    "meses_total_alpha": 36,
+    "alpha_medio_hoy": 15.48,
+    "ret_medio_top2_hoy": 47.32,
+    "ret_medio_iwda_hoy": 31.84,
+    "meses_bate_iwda": 16,
+    "meses_total": 36,
+    "pct_bate_iwda": 44.4,
     "predictividad_score": {
       "alto_70_100": {
-        "n_meses": 30,
-        "ret_medio": 2.76,
-        "alpha_medio": -1.76,
-        "meses": [
+        "n_fechas": 30,
+        "ret_medio": 54.01,
+        "alpha_medio": 20.28,
+        "fechas": [
           "2023-06-01",
           "2023-07-01",
           "2023-08-01",
@@ -48,10 +50,10 @@
         ]
       },
       "medio_55_70": {
-        "n_meses": 6,
-        "ret_medio": 0.76,
-        "alpha_medio": -1.23,
-        "meses": [
+        "n_fechas": 6,
+        "ret_medio": 13.83,
+        "alpha_medio": -8.52,
+        "fechas": [
           "2024-08-01",
           "2024-11-01",
           "2025-01-01",
@@ -60,24 +62,19 @@
           "2026-04-01"
         ]
       },
-      "bajo_40_55": {
-        "n_meses": 0,
+      "bajo_0_55": {
+        "n_fechas": 0,
         "ret_medio": null,
         "alpha_medio": null,
-        "meses": []
-      },
-      "muy_bajo_0_40": {
-        "n_meses": 0,
-        "ret_medio": null,
-        "alpha_medio": null,
-        "meses": []
+        "fechas": []
       }
     },
-    "interpretacion": "Alpha medio vs IWDA: -1.67%. Tasa de acierto: 58.3%. Modelo v7: vol-normalizado, 5A historico, 85/15 pesos."
+    "interpretacion": "En 16 de 36 fechas, seguir el sistema habría dado mejor resultado que IWDA hasta hoy. Alpha medio: 15.48%."
   },
   "snapshots": [
     {
       "date": "2023-06-01",
+      "meses_desde": 36.6,
       "top2": [
         {
           "id": "WGMI",
@@ -87,10 +84,8 @@
           "score_final": 77.8,
           "score_tech": 79.2,
           "score_macro": 70.0,
-          "ret_1m": 28.11,
-          "ret_3m": 5.11,
-          "ret_6m": 0.18,
-          "acerto_3m": true
+          "ret_hasta_hoy": 515.95,
+          "meses_mantenido": 36.6
         },
         {
           "id": "BOTZ",
@@ -100,10 +95,8 @@
           "score_final": 74.9,
           "score_tech": 79.3,
           "score_macro": 50,
-          "ret_1m": 3.77,
-          "ret_3m": -3.92,
-          "ret_6m": -5.0,
-          "acerto_3m": false
+          "ret_hasta_hoy": 37.92,
+          "meses_mantenido": 36.6
         }
       ],
       "full_ranking": [
@@ -189,17 +182,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": 0.6,
-      "iwda_3m": 4.88,
-      "iwda_6m": 6.05,
-      "alpha_3m": -4.28,
-      "aciertos": 1,
-      "total_con_dato": 2,
-      "tasa_acierto": 50.0,
+      "avg_top2_hoy": 276.94,
+      "iwda_hoy": 67.9,
+      "alpha_hoy": 209.04,
+      "bate_iwda": true,
       "score_top1": 77.8
     },
     {
       "date": "2023-07-01",
+      "meses_desde": 35.6,
       "top2": [
         {
           "id": "WGMI",
@@ -209,10 +200,8 @@
           "score_final": 78.3,
           "score_tech": 79.8,
           "score_macro": 70.0,
-          "ret_1m": 5.62,
-          "ret_3m": -33.2,
-          "ret_6m": 22.33,
-          "acerto_3m": false
+          "ret_hasta_hoy": 380.8,
+          "meses_mantenido": 35.6
         },
         {
           "id": "BOTZ",
@@ -222,10 +211,8 @@
           "score_final": 77.1,
           "score_tech": 81.9,
           "score_macro": 50,
-          "ret_1m": -4.02,
-          "ret_3m": -14.44,
-          "ret_6m": -4.02,
-          "acerto_3m": false
+          "ret_hasta_hoy": 32.91,
+          "meses_mantenido": 35.6
         }
       ],
       "full_ranking": [
@@ -311,17 +298,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": -23.82,
-      "iwda_3m": -0.31,
-      "iwda_6m": 6.01,
-      "alpha_3m": -23.51,
-      "aciertos": 0,
-      "total_con_dato": 2,
-      "tasa_acierto": 0.0,
+      "avg_top2_hoy": 206.86,
+      "iwda_hoy": 61.27,
+      "alpha_hoy": 145.59,
+      "bate_iwda": true,
       "score_top1": 78.3
     },
     {
       "date": "2023-08-01",
+      "meses_desde": 34.6,
       "top2": [
         {
           "id": "CIBR",
@@ -331,10 +316,8 @@
           "score_final": 75.2,
           "score_tech": 79.6,
           "score_macro": 50,
-          "ret_1m": -2.31,
-          "ret_3m": -7.8,
-          "ret_6m": 17.16,
-          "acerto_3m": false
+          "ret_hasta_hoy": 77.14,
+          "meses_mantenido": 34.6
         },
         {
           "id": "ARKG",
@@ -344,10 +327,8 @@
           "score_final": 72.9,
           "score_tech": 76.9,
           "score_macro": 50,
-          "ret_1m": -12.96,
-          "ret_3m": -39.44,
-          "ret_6m": -23.22,
-          "acerto_3m": false
+          "ret_hasta_hoy": -0.49,
+          "meses_mantenido": 34.6
         }
       ],
       "full_ranking": [
@@ -433,17 +414,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": -23.62,
-      "iwda_3m": -6.4,
-      "iwda_6m": 8.04,
-      "alpha_3m": -17.22,
-      "aciertos": 0,
-      "total_con_dato": 2,
-      "tasa_acierto": 0.0,
+      "avg_top2_hoy": 38.33,
+      "iwda_hoy": 58.1,
+      "alpha_hoy": -19.77,
+      "bate_iwda": false,
       "score_top1": 75.2
     },
     {
       "date": "2023-09-01",
+      "meses_desde": 33.6,
       "top2": [
         {
           "id": "FLIN",
@@ -453,10 +432,8 @@
           "score_final": 71.3,
           "score_tech": 75.1,
           "score_macro": 50,
-          "ret_1m": -0.36,
-          "ret_3m": 5.24,
-          "ret_6m": 16.75,
-          "acerto_3m": true
+          "ret_hasta_hoy": 11.0,
+          "meses_mantenido": 33.6
         },
         {
           "id": "CIBR",
@@ -466,10 +443,8 @@
           "score_final": 70.8,
           "score_tech": 74.5,
           "score_macro": 50,
-          "ret_1m": -5.29,
-          "ret_3m": 6.54,
-          "ret_6m": 19.46,
-          "acerto_3m": true
+          "ret_hasta_hoy": 78.34,
+          "meses_mantenido": 33.6
         }
       ],
       "full_ranking": [
@@ -555,17 +530,15 @@
           "score_macro": 65
         }
       ],
-      "avg_top2_3m": 5.89,
-      "iwda_3m": -0.35,
-      "iwda_6m": 11.78,
-      "alpha_3m": 6.24,
-      "aciertos": 2,
-      "total_con_dato": 2,
-      "tasa_acierto": 100.0,
+      "avg_top2_hoy": 44.67,
+      "iwda_hoy": 58.23,
+      "alpha_hoy": -13.56,
+      "bate_iwda": false,
       "score_top1": 71.3
     },
     {
       "date": "2023-10-01",
+      "meses_desde": 32.6,
       "top2": [
         {
           "id": "URA",
@@ -575,10 +548,8 @@
           "score_final": 75.9,
           "score_tech": 80.5,
           "score_macro": 50,
-          "ret_1m": 2.95,
-          "ret_3m": 4.07,
-          "ret_6m": 20.37,
-          "acerto_3m": true
+          "ret_hasta_hoy": 83.28,
+          "meses_mantenido": 32.6
         },
         {
           "id": "FLIN",
@@ -588,10 +559,8 @@
           "score_final": 75.5,
           "score_tech": 80.0,
           "score_macro": 50,
-          "ret_1m": -2.31,
-          "ret_3m": 10.25,
-          "ret_6m": 17.62,
-          "acerto_3m": true
+          "ret_hasta_hoy": 11.1,
+          "meses_mantenido": 32.6
         }
       ],
       "full_ranking": [
@@ -677,17 +646,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": 7.16,
-      "iwda_3m": 6.49,
-      "iwda_6m": 17.46,
-      "alpha_3m": 0.67,
-      "aciertos": 2,
-      "total_con_dato": 2,
-      "tasa_acierto": 100.0,
+      "avg_top2_hoy": 47.19,
+      "iwda_hoy": 61.67,
+      "alpha_hoy": -14.48,
+      "bate_iwda": false,
       "score_top1": 75.9
     },
     {
       "date": "2023-11-01",
+      "meses_desde": 31.6,
       "top2": [
         {
           "id": "URA",
@@ -697,10 +664,8 @@
           "score_final": 76.2,
           "score_tech": 80.8,
           "score_macro": 50,
-          "ret_1m": 6.87,
-          "ret_3m": 16.4,
-          "ret_6m": 13.85,
-          "acerto_3m": true
+          "ret_hasta_hoy": 76.44,
+          "meses_mantenido": 31.6
         },
         {
           "id": "CIBR",
@@ -710,10 +675,8 @@
           "score_final": 73.0,
           "score_tech": 77.0,
           "score_macro": 50,
-          "ret_1m": 12.75,
-          "ret_3m": 26.62,
-          "ret_6m": 21.17,
-          "acerto_3m": true
+          "ret_hasta_hoy": 88.73,
+          "meses_mantenido": 31.6
         }
       ],
       "full_ranking": [
@@ -799,17 +762,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": 21.51,
-      "iwda_3m": 12.2,
-      "iwda_6m": 18.75,
-      "alpha_3m": 9.31,
-      "aciertos": 2,
-      "total_con_dato": 2,
-      "tasa_acierto": 100.0,
+      "avg_top2_hoy": 82.59,
+      "iwda_hoy": 65.36,
+      "alpha_hoy": 17.23,
+      "bate_iwda": true,
       "score_top1": 76.2
     },
     {
       "date": "2023-12-01",
+      "meses_desde": 30.6,
       "top2": [
         {
           "id": "BUG",
@@ -819,10 +780,8 @@
           "score_final": 75.2,
           "score_tech": 79.6,
           "score_macro": 50,
-          "ret_1m": 2.53,
-          "ret_3m": 7.69,
-          "ret_6m": 0.88,
-          "acerto_3m": true
+          "ret_hasta_hoy": 24.14,
+          "meses_mantenido": 30.6
         },
         {
           "id": "URA",
@@ -832,10 +791,8 @@
           "score_final": 74.1,
           "score_tech": 78.4,
           "score_macro": 50,
-          "ret_1m": -7.29,
-          "ret_3m": -4.8,
-          "ret_6m": 6.01,
-          "acerto_3m": false
+          "ret_hasta_hoy": 65.1,
+          "meses_mantenido": 30.6
         }
       ],
       "full_ranking": [
@@ -921,17 +878,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": 1.45,
-      "iwda_3m": 11.2,
-      "iwda_6m": 14.18,
-      "alpha_3m": -9.75,
-      "aciertos": 1,
-      "total_con_dato": 2,
-      "tasa_acierto": 50.0,
+      "avg_top2_hoy": 44.62,
+      "iwda_hoy": 56.32,
+      "alpha_hoy": -11.7,
+      "bate_iwda": false,
       "score_top1": 75.2
     },
     {
       "date": "2024-01-01",
+      "meses_desde": 29.6,
       "top2": [
         {
           "id": "INDA",
@@ -941,10 +896,8 @@
           "score_final": 74.6,
           "score_tech": 78.9,
           "score_macro": 50,
-          "ret_1m": 3.21,
-          "ret_3m": 6.18,
-          "ret_6m": 15.9,
-          "acerto_3m": true
+          "ret_hasta_hoy": 0.8,
+          "meses_mantenido": 29.6
         },
         {
           "id": "BUG",
@@ -954,10 +907,8 @@
           "score_final": 74.1,
           "score_tech": 78.4,
           "score_macro": 50,
-          "ret_1m": 6.62,
-          "ret_3m": 3.5,
-          "ret_6m": 4.03,
-          "acerto_3m": true
+          "ret_hasta_hoy": 18.75,
+          "meses_mantenido": 29.6
         }
       ],
       "full_ranking": [
@@ -1043,17 +994,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": 4.84,
-      "iwda_3m": 10.3,
-      "iwda_6m": 15.11,
-      "alpha_3m": -5.46,
-      "aciertos": 2,
-      "total_con_dato": 2,
-      "tasa_acierto": 100.0,
+      "avg_top2_hoy": 9.78,
+      "iwda_hoy": 51.82,
+      "alpha_hoy": -42.04,
+      "bate_iwda": false,
       "score_top1": 74.6
     },
     {
       "date": "2024-02-01",
+      "meses_desde": 28.6,
       "top2": [
         {
           "id": "CIBR",
@@ -1063,10 +1012,8 @@
           "score_final": 76.4,
           "score_tech": 81.1,
           "score_macro": 50,
-          "ret_1m": 2.21,
-          "ret_3m": -3.78,
-          "ret_6m": -5.66,
-          "acerto_3m": false
+          "ret_hasta_hoy": 48.95,
+          "meses_mantenido": 28.6
         },
         {
           "id": "URNM",
@@ -1076,10 +1023,8 @@
           "score_final": 75.7,
           "score_tech": 80.2,
           "score_macro": 50,
-          "ret_1m": -17.82,
-          "ret_3m": -8.33,
-          "ret_6m": -30.7,
-          "acerto_3m": false
+          "ret_hasta_hoy": -2.38,
+          "meses_mantenido": 28.6
         }
       ],
       "full_ranking": [
@@ -1165,17 +1110,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": -6.05,
-      "iwda_3m": 5.84,
-      "iwda_6m": 12.63,
-      "alpha_3m": -11.89,
-      "aciertos": 0,
-      "total_con_dato": 2,
-      "tasa_acierto": 0.0,
+      "avg_top2_hoy": 23.29,
+      "iwda_hoy": 47.38,
+      "alpha_hoy": -24.09,
+      "bate_iwda": false,
       "score_top1": 76.4
     },
     {
       "date": "2024-03-01",
+      "meses_desde": 27.6,
       "top2": [
         {
           "id": "BITO",
@@ -1185,10 +1128,8 @@
           "score_final": 79.6,
           "score_tech": 81.3,
           "score_macro": 70.0,
-          "ret_1m": -0.31,
-          "ret_3m": -5.93,
-          "ret_6m": -34.48,
-          "acerto_3m": false
+          "ret_hasta_hoy": -70.48,
+          "meses_mantenido": 27.6
         },
         {
           "id": "SMH",
@@ -1198,10 +1139,8 @@
           "score_final": 75.6,
           "score_tech": 80.1,
           "score_macro": 50,
-          "ret_1m": 2.03,
-          "ret_3m": 9.04,
-          "ret_6m": 10.39,
-          "acerto_3m": true
+          "ret_hasta_hoy": 199.21,
+          "meses_mantenido": 27.6
         }
       ],
       "full_ranking": [
@@ -1287,17 +1226,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": 1.55,
-      "iwda_3m": 2.87,
-      "iwda_6m": 7.44,
-      "alpha_3m": -1.32,
-      "aciertos": 1,
-      "total_con_dato": 2,
-      "tasa_acierto": 50.0,
+      "avg_top2_hoy": 64.37,
+      "iwda_hoy": 40.56,
+      "alpha_hoy": 23.81,
+      "bate_iwda": true,
       "score_top1": 79.6
     },
     {
       "date": "2024-04-01",
+      "meses_desde": 26.6,
       "top2": [
         {
           "id": "BITO",
@@ -1307,10 +1244,8 @@
           "score_final": 81.0,
           "score_tech": 83.0,
           "score_macro": 70.0,
-          "ret_1m": -16.42,
-          "ret_3m": -27.71,
-          "ret_6m": -37.37,
-          "acerto_3m": false
+          "ret_hasta_hoy": -72.06,
+          "meses_mantenido": 26.6
         },
         {
           "id": "SEMI",
@@ -1320,10 +1255,8 @@
           "score_final": 79.1,
           "score_tech": 84.2,
           "score_macro": 50,
-          "ret_1m": -6.78,
-          "ret_3m": 9.12,
-          "ret_6m": 3.36,
-          "acerto_3m": true
+          "ret_hasta_hoy": 217.48,
+          "meses_mantenido": 26.6
         }
       ],
       "full_ranking": [
@@ -1409,17 +1342,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": -9.3,
-      "iwda_3m": 4.36,
-      "iwda_6m": 6.21,
-      "alpha_3m": -13.66,
-      "aciertos": 1,
-      "total_con_dato": 2,
-      "tasa_acierto": 50.0,
+      "avg_top2_hoy": 72.71,
+      "iwda_hoy": 37.64,
+      "alpha_hoy": 35.07,
+      "bate_iwda": true,
       "score_top1": 81.0
     },
     {
       "date": "2024-05-01",
+      "meses_desde": 25.6,
       "top2": [
         {
           "id": "SEMI",
@@ -1429,10 +1360,8 @@
           "score_final": 78.6,
           "score_tech": 83.6,
           "score_macro": 50,
-          "ret_1m": 9.28,
-          "ret_3m": 5.71,
-          "ret_6m": 9.61,
-          "acerto_3m": true
+          "ret_hasta_hoy": 240.56,
+          "meses_mantenido": 25.6
         },
         {
           "id": "PAVE",
@@ -1442,10 +1371,8 @@
           "score_final": 77.3,
           "score_tech": 82.1,
           "score_macro": 50,
-          "ret_1m": 3.48,
-          "ret_3m": 3.77,
-          "ret_6m": 10.96,
-          "acerto_3m": true
+          "ret_hasta_hoy": 56.58,
+          "meses_mantenido": 25.6
         }
       ],
       "full_ranking": [
@@ -1531,17 +1458,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": 4.74,
-      "iwda_3m": 5.71,
-      "iwda_6m": 12.16,
-      "alpha_3m": -0.97,
-      "aciertos": 2,
-      "total_con_dato": 2,
-      "tasa_acierto": 100.0,
+      "avg_top2_hoy": 148.57,
+      "iwda_hoy": 40.38,
+      "alpha_hoy": 108.19,
+      "bate_iwda": true,
       "score_top1": 78.6
     },
     {
       "date": "2024-06-01",
+      "meses_desde": 24.6,
       "top2": [
         {
           "id": "SMH",
@@ -1551,10 +1476,8 @@
           "score_final": 76.9,
           "score_tech": 81.6,
           "score_macro": 50,
-          "ret_1m": 10.74,
-          "ret_3m": -7.51,
-          "ret_6m": 1.8,
-          "acerto_3m": false
+          "ret_hasta_hoy": 171.02,
+          "meses_mantenido": 24.6
         },
         {
           "id": "PAVE",
@@ -1564,10 +1487,8 @@
           "score_final": 72.6,
           "score_tech": 76.6,
           "score_macro": 50,
-          "ret_1m": -2.87,
-          "ret_3m": -0.18,
-          "ret_6m": 19.92,
-          "acerto_3m": false
+          "ret_hasta_hoy": 54.06,
+          "meses_mantenido": 24.6
         }
       ],
       "full_ranking": [
@@ -1653,17 +1574,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": -3.84,
-      "iwda_3m": 4.44,
-      "iwda_6m": 14.74,
-      "alpha_3m": -8.28,
-      "aciertos": 0,
-      "total_con_dato": 2,
-      "tasa_acierto": 0.0,
+      "avg_top2_hoy": 112.54,
+      "iwda_hoy": 36.65,
+      "alpha_hoy": 75.89,
+      "bate_iwda": true,
       "score_top1": 76.9
     },
     {
       "date": "2024-07-01",
+      "meses_desde": 23.6,
       "top2": [
         {
           "id": "SMH",
@@ -1673,10 +1592,8 @@
           "score_final": 77.5,
           "score_tech": 82.3,
           "score_macro": 50,
-          "ret_1m": -5.37,
-          "ret_3m": -5.96,
-          "ret_6m": -6.26,
-          "acerto_3m": false
+          "ret_hasta_hoy": 152.82,
+          "meses_mantenido": 23.6
         },
         {
           "id": "INDA",
@@ -1686,10 +1603,8 @@
           "score_final": 61.9,
           "score_tech": 64.0,
           "score_macro": 50,
-          "ret_1m": 2.21,
-          "ret_3m": 4.18,
-          "ret_6m": -6.28,
-          "acerto_3m": true
+          "ret_hasta_hoy": -12.67,
+          "meses_mantenido": 23.6
         }
       ],
       "full_ranking": [
@@ -1775,17 +1690,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": -0.89,
-      "iwda_3m": 1.78,
-      "iwda_6m": 10.8,
-      "alpha_3m": -2.67,
-      "aciertos": 1,
-      "total_con_dato": 2,
-      "tasa_acierto": 50.0,
+      "avg_top2_hoy": 70.08,
+      "iwda_hoy": 31.9,
+      "alpha_hoy": 38.18,
+      "bate_iwda": true,
       "score_top1": 77.5
     },
     {
       "date": "2024-08-01",
+      "meses_desde": 22.6,
       "top2": [
         {
           "id": "XBI",
@@ -1795,10 +1708,8 @@
           "score_final": 66.1,
           "score_tech": 68.9,
           "score_macro": 50,
-          "ret_1m": 2.62,
-          "ret_3m": -0.25,
-          "ret_6m": -7.35,
-          "acerto_3m": false
+          "ret_hasta_hoy": 42.62,
+          "meses_mantenido": 22.6
         },
         {
           "id": "IGF",
@@ -1808,10 +1719,8 @@
           "score_final": 66.0,
           "score_tech": 68.8,
           "score_macro": 50,
-          "ret_1m": 4.51,
-          "ret_3m": 7.27,
-          "ret_6m": 6.51,
-          "acerto_3m": true
+          "ret_hasta_hoy": 31.78,
+          "meses_mantenido": 22.6
         }
       ],
       "full_ranking": [
@@ -1897,17 +1806,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": 3.51,
-      "iwda_3m": 5.63,
-      "iwda_6m": 13.09,
-      "alpha_3m": -2.12,
-      "aciertos": 1,
-      "total_con_dato": 2,
-      "tasa_acierto": 50.0,
+      "avg_top2_hoy": 37.2,
+      "iwda_hoy": 32.15,
+      "alpha_hoy": 5.05,
+      "bate_iwda": true,
       "score_top1": 66.1
     },
     {
       "date": "2024-09-01",
+      "meses_desde": 21.6,
       "top2": [
         {
           "id": "IGF",
@@ -1917,10 +1824,8 @@
           "score_final": 72.0,
           "score_tech": 75.9,
           "score_macro": 50,
-          "ret_1m": 4.58,
-          "ret_3m": 5.11,
-          "ret_6m": 0.13,
-          "acerto_3m": true
+          "ret_hasta_hoy": 26.37,
+          "meses_mantenido": 21.6
         },
         {
           "id": "XLV",
@@ -1930,10 +1835,8 @@
           "score_final": 68.9,
           "score_tech": 69.6,
           "score_macro": 65,
-          "ret_1m": -2.55,
-          "ret_3m": -6.21,
-          "ret_6m": -4.86,
-          "acerto_3m": false
+          "ret_hasta_hoy": -4.78,
+          "meses_mantenido": 21.6
         }
       ],
       "full_ranking": [
@@ -2019,17 +1922,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": -0.55,
-      "iwda_3m": 9.16,
-      "iwda_6m": 10.22,
-      "alpha_3m": -9.71,
-      "aciertos": 1,
-      "total_con_dato": 2,
-      "tasa_acierto": 50.0,
+      "avg_top2_hoy": 10.79,
+      "iwda_hoy": 30.47,
+      "alpha_hoy": -19.68,
+      "bate_iwda": false,
       "score_top1": 72.0
     },
     {
       "date": "2024-10-01",
+      "meses_desde": 20.6,
       "top2": [
         {
           "id": "IGF",
@@ -2039,10 +1940,8 @@
           "score_final": 71.8,
           "score_tech": 75.6,
           "score_macro": 50,
-          "ret_1m": -1.54,
-          "ret_3m": -4.18,
-          "ret_6m": 0.99,
-          "acerto_3m": false
+          "ret_hasta_hoy": 20.95,
+          "meses_mantenido": 20.6
         },
         {
           "id": "INDA",
@@ -2052,10 +1951,8 @@
           "score_final": 66.2,
           "score_tech": 69.1,
           "score_macro": 50,
-          "ret_1m": -5.48,
-          "ret_3m": -9.52,
-          "ret_6m": -12.03,
-          "acerto_3m": false
+          "ret_hasta_hoy": -15.68,
+          "meses_mantenido": 20.6
         }
       ],
       "full_ranking": [
@@ -2141,17 +2038,15 @@
           "score_macro": 65.66360052562419
         }
       ],
-      "avg_top2_3m": -6.85,
-      "iwda_3m": 7.88,
-      "iwda_6m": 0.59,
-      "alpha_3m": -14.73,
-      "aciertos": 0,
-      "total_con_dato": 2,
-      "tasa_acierto": 0.0,
+      "avg_top2_hoy": 2.63,
+      "iwda_hoy": 29.27,
+      "alpha_hoy": -26.64,
+      "bate_iwda": false,
       "score_top1": 71.8
     },
     {
       "date": "2024-11-01",
+      "meses_desde": 19.6,
       "top2": [
         {
           "id": "IGF",
@@ -2161,10 +2056,8 @@
           "score_final": 65.9,
           "score_tech": 68.7,
           "score_macro": 50,
-          "ret_1m": 3.41,
-          "ret_3m": 1.53,
-          "ret_6m": 9.03,
-          "acerto_3m": true
+          "ret_hasta_hoy": 24.42,
+          "meses_mantenido": 19.6
         },
         {
           "id": "IHI",
@@ -2174,10 +2067,8 @@
           "score_final": 64.0,
           "score_tech": 63.8,
           "score_macro": 65,
-          "ret_1m": 2.64,
-          "ret_3m": 10.06,
-          "ret_6m": 2.38,
-          "acerto_3m": true
+          "ret_hasta_hoy": -18.16,
+          "meses_mantenido": 19.6
         }
       ],
       "full_ranking": [
@@ -2263,17 +2154,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": 5.79,
-      "iwda_3m": 9.09,
-      "iwda_6m": -3.07,
-      "alpha_3m": -3.3,
-      "aciertos": 2,
-      "total_con_dato": 2,
-      "tasa_acierto": 100.0,
+      "avg_top2_hoy": 3.13,
+      "iwda_hoy": 26.97,
+      "alpha_hoy": -23.84,
+      "bate_iwda": false,
       "score_top1": 65.9
     },
     {
       "date": "2024-12-01",
+      "meses_desde": 18.6,
       "top2": [
         {
           "id": "WGMI",
@@ -2283,10 +2172,8 @@
           "score_final": 70.8,
           "score_tech": 72.0,
           "score_macro": 64.0604467805519,
-          "ret_1m": -16.03,
-          "ret_3m": -42.82,
-          "ret_6m": -34.13,
-          "acerto_3m": false
+          "ret_hasta_hoy": 148.79,
+          "meses_mantenido": 18.6
         },
         {
           "id": "BUG",
@@ -2296,10 +2183,8 @@
           "score_final": 70.0,
           "score_tech": 73.5,
           "score_macro": 50,
-          "ret_1m": -4.83,
-          "ret_3m": -1.01,
-          "ret_6m": 5.98,
-          "acerto_3m": false
+          "ret_hasta_hoy": 0.39,
+          "meses_mantenido": 18.6
         }
       ],
       "full_ranking": [
@@ -2385,17 +2270,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": -21.91,
-      "iwda_3m": -3.3,
-      "iwda_6m": -5.34,
-      "alpha_3m": -18.61,
-      "aciertos": 0,
-      "total_con_dato": 2,
-      "tasa_acierto": 0.0,
+      "avg_top2_hoy": 74.59,
+      "iwda_hoy": 18.09,
+      "alpha_hoy": 56.5,
+      "bate_iwda": true,
       "score_top1": 70.8
     },
     {
       "date": "2025-01-01",
+      "meses_desde": 17.6,
       "top2": [
         {
           "id": "ARKG",
@@ -2405,10 +2288,8 @@
           "score_final": 61.7,
           "score_tech": 63.8,
           "score_macro": 50,
-          "ret_1m": 9.81,
-          "ret_3m": -22.32,
-          "ret_6m": 2.58,
-          "acerto_3m": false
+          "ret_hasta_hoy": 50.7,
+          "meses_mantenido": 17.6
         },
         {
           "id": "IGF",
@@ -2418,10 +2299,8 @@
           "score_final": 61.5,
           "score_tech": 63.5,
           "score_macro": 50,
-          "ret_1m": 1.29,
-          "ret_3m": -1.31,
-          "ret_6m": 10.77,
-          "acerto_3m": false
+          "ret_hasta_hoy": 25.27,
+          "meses_mantenido": 17.6
         }
       ],
       "full_ranking": [
@@ -2507,17 +2386,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": -11.81,
-      "iwda_3m": -6.57,
-      "iwda_6m": -4.84,
-      "alpha_3m": -5.24,
-      "aciertos": 0,
-      "total_con_dato": 2,
-      "tasa_acierto": 0.0,
+      "avg_top2_hoy": 37.98,
+      "iwda_hoy": 18.54,
+      "alpha_hoy": 19.44,
+      "bate_iwda": true,
       "score_top1": 61.7
     },
     {
       "date": "2025-02-01",
+      "meses_desde": 16.6,
       "top2": [
         {
           "id": "IHI",
@@ -2527,10 +2404,8 @@
           "score_final": 64.7,
           "score_tech": 64.7,
           "score_macro": 65,
-          "ret_1m": -1.06,
-          "ret_3m": -6.33,
-          "ret_6m": -5.68,
-          "acerto_3m": false
+          "ret_hasta_hoy": -24.5,
+          "meses_mantenido": 16.6
         },
         {
           "id": "CIBR",
@@ -2540,10 +2415,8 @@
           "score_final": 59.3,
           "score_tech": 60.9,
           "score_macro": 50,
-          "ret_1m": -0.18,
-          "ret_3m": 1.16,
-          "ret_6m": 7.04,
-          "acerto_3m": true
+          "ret_hasta_hoy": 25.3,
+          "meses_mantenido": 16.6
         }
       ],
       "full_ranking": [
@@ -2638,17 +2511,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": -2.58,
-      "iwda_3m": -11.15,
-      "iwda_6m": -5.05,
-      "alpha_3m": 8.57,
-      "aciertos": 1,
-      "total_con_dato": 2,
-      "tasa_acierto": 50.0,
+      "avg_top2_hoy": 0.4,
+      "iwda_hoy": 16.39,
+      "alpha_hoy": -15.99,
+      "bate_iwda": false,
       "score_top1": 64.7
     },
     {
       "date": "2025-03-01",
+      "meses_desde": 15.6,
       "top2": [
         {
           "id": "IHI",
@@ -2658,10 +2529,8 @@
           "score_final": 70.2,
           "score_tech": 71.1,
           "score_macro": 65,
-          "ret_1m": -6.2,
-          "ret_3m": -3.63,
-          "ret_6m": -3.5,
-          "acerto_3m": false
+          "ret_hasta_hoy": -24.28,
+          "meses_mantenido": 15.6
         },
         {
           "id": "CIBR",
@@ -2671,10 +2540,8 @@
           "score_final": 60.6,
           "score_tech": 62.5,
           "score_macro": 50,
-          "ret_1m": -2.9,
-          "ret_3m": 10.9,
-          "ret_6m": 10.56,
-          "acerto_3m": true
+          "ret_hasta_hoy": 28.75,
+          "meses_mantenido": 15.6
         }
       ],
       "full_ranking": [
@@ -2769,17 +2636,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": 3.64,
-      "iwda_3m": -5.38,
-      "iwda_6m": -1.1,
-      "alpha_3m": 9.02,
-      "aciertos": 1,
-      "total_con_dato": 2,
-      "tasa_acierto": 50.0,
+      "avg_top2_hoy": 2.23,
+      "iwda_hoy": 18.03,
+      "alpha_hoy": -15.8,
+      "bate_iwda": false,
       "score_top1": 70.2
     },
     {
       "date": "2025-04-01",
+      "meses_desde": 14.6,
       "top2": [
         {
           "id": "IHI",
@@ -2789,10 +2654,8 @@
           "score_final": 56.2,
           "score_tech": 54.6,
           "score_macro": 65,
-          "ret_1m": -1.15,
-          "ret_3m": 3.67,
-          "ret_6m": -0.72,
-          "acerto_3m": true
+          "ret_hasta_hoy": -19.28,
+          "meses_mantenido": 14.6
         },
         {
           "id": "IGF",
@@ -2802,10 +2665,8 @@
           "score_final": 55.9,
           "score_tech": 56.9,
           "score_macro": 50,
-          "ret_1m": 2.79,
-          "ret_3m": 7.45,
-          "ret_6m": 11.65,
-          "acerto_3m": true
+          "ret_hasta_hoy": 20.14,
+          "meses_mantenido": 14.6
         }
       ],
       "full_ranking": [
@@ -2900,17 +2761,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": 5.56,
-      "iwda_3m": 1.85,
-      "iwda_6m": 9.14,
-      "alpha_3m": 3.71,
-      "aciertos": 2,
-      "total_con_dato": 2,
-      "tasa_acierto": 100.0,
+      "avg_top2_hoy": 0.43,
+      "iwda_hoy": 26.88,
+      "alpha_hoy": -26.45,
+      "bate_iwda": false,
       "score_top1": 56.2
     },
     {
       "date": "2025-05-01",
+      "meses_desde": 13.6,
       "top2": [
         {
           "id": "NATO",
@@ -2920,10 +2779,8 @@
           "score_final": 73.8,
           "score_tech": 75.4,
           "score_macro": 65,
-          "ret_1m": 12.66,
-          "ret_3m": 18.38,
-          "ret_6m": 27.13,
-          "acerto_3m": true
+          "ret_hasta_hoy": 34.75,
+          "meses_mantenido": 13.6
         },
         {
           "id": "IGF",
@@ -2933,10 +2790,8 @@
           "score_final": 63.6,
           "score_tech": 66.0,
           "score_macro": 50,
-          "ret_1m": 5.65,
-          "ret_3m": 4.87,
-          "ret_6m": 8.45,
-          "acerto_3m": true
+          "ret_hasta_hoy": 16.88,
+          "meses_mantenido": 13.6
         }
       ],
       "full_ranking": [
@@ -3031,17 +2886,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": 11.62,
-      "iwda_3m": 9.5,
-      "iwda_6m": 16.47,
-      "alpha_3m": 2.12,
-      "aciertos": 2,
-      "total_con_dato": 2,
-      "tasa_acierto": 100.0,
+      "avg_top2_hoy": 25.81,
+      "iwda_hoy": 30.54,
+      "alpha_hoy": -4.73,
+      "bate_iwda": false,
       "score_top1": 73.8
     },
     {
       "date": "2025-06-01",
+      "meses_desde": 12.6,
       "top2": [
         {
           "id": "NATO",
@@ -3051,10 +2904,8 @@
           "score_final": 74.4,
           "score_tech": 76.1,
           "score_macro": 65,
-          "ret_1m": 4.56,
-          "ret_3m": 6.73,
-          "ret_6m": 3.59,
-          "acerto_3m": true
+          "ret_hasta_hoy": 19.61,
+          "meses_mantenido": 12.6
         },
         {
           "id": "IGF",
@@ -3064,10 +2915,8 @@
           "score_final": 68.5,
           "score_tech": 71.8,
           "score_macro": 50,
-          "ret_1m": -1.06,
-          "ret_3m": 0.18,
-          "ret_6m": 4.91,
-          "acerto_3m": true
+          "ret_hasta_hoy": 10.63,
+          "meses_mantenido": 12.6
         }
       ],
       "full_ranking": [
@@ -3162,17 +3011,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": 3.46,
-      "iwda_3m": 6.6,
-      "iwda_6m": 11.16,
-      "alpha_3m": -3.14,
-      "aciertos": 2,
-      "total_con_dato": 2,
-      "tasa_acierto": 100.0,
+      "avg_top2_hoy": 15.12,
+      "iwda_hoy": 26.34,
+      "alpha_hoy": -11.22,
+      "bate_iwda": false,
       "score_top1": 74.4
     },
     {
       "date": "2025-07-01",
+      "meses_desde": 11.6,
       "top2": [
         {
           "id": "NATO",
@@ -3182,10 +3029,8 @@
           "score_final": 73.4,
           "score_tech": 74.9,
           "score_macro": 65,
-          "ret_1m": 2.58,
-          "ret_3m": 11.41,
-          "ret_6m": 8.68,
-          "acerto_3m": true
+          "ret_hasta_hoy": 16.37,
+          "meses_mantenido": 11.6
         },
         {
           "id": "IGF",
@@ -3195,10 +3040,8 @@
           "score_final": 71.7,
           "score_tech": 75.5,
           "score_macro": 50,
-          "ret_1m": 0.0,
-          "ret_3m": 3.45,
-          "ret_6m": 4.47,
-          "acerto_3m": true
+          "ret_hasta_hoy": 11.68,
+          "meses_mantenido": 11.6
         }
       ],
       "full_ranking": [
@@ -3293,17 +3136,15 @@
           "score_macro": 58.488830486202374
         }
       ],
-      "avg_top2_3m": 7.43,
-      "iwda_3m": 7.06,
-      "iwda_6m": 11.51,
-      "alpha_3m": 0.37,
-      "aciertos": 2,
-      "total_con_dato": 2,
-      "tasa_acierto": 100.0,
+      "avg_top2_hoy": 14.03,
+      "iwda_hoy": 24.83,
+      "alpha_hoy": -10.8,
+      "bate_iwda": false,
       "score_top1": 73.4
     },
     {
       "date": "2025-08-01",
+      "meses_desde": 10.6,
       "top2": [
         {
           "id": "URA",
@@ -3313,10 +3154,8 @@
           "score_final": 71.3,
           "score_tech": 75.1,
           "score_macro": 50,
-          "ret_1m": 6.28,
-          "ret_3m": 47.02,
-          "ret_6m": 39.38,
-          "acerto_3m": true
+          "ret_hasta_hoy": 25.01,
+          "meses_mantenido": 10.6
         },
         {
           "id": "IGF",
@@ -3326,10 +3165,8 @@
           "score_final": 65.6,
           "score_tech": 68.4,
           "score_macro": 50,
-          "ret_1m": 0.93,
-          "ret_3m": 3.41,
-          "ret_6m": 8.04,
-          "acerto_3m": true
+          "ret_hasta_hoy": 11.45,
+          "meses_mantenido": 10.6
         }
       ],
       "full_ranking": [
@@ -3424,17 +3261,15 @@
           "score_macro": 65
         }
       ],
-      "avg_top2_3m": 25.22,
-      "iwda_3m": 9.74,
-      "iwda_6m": 9.4,
-      "alpha_3m": 15.48,
-      "aciertos": 2,
-      "total_con_dato": 2,
-      "tasa_acierto": 100.0,
+      "avg_top2_hoy": 18.23,
+      "iwda_hoy": 22.58,
+      "alpha_hoy": -4.35,
+      "bate_iwda": false,
       "score_top1": 71.3
     },
     {
       "date": "2025-09-01",
+      "meses_desde": 9.6,
       "top2": [
         {
           "id": "URA",
@@ -3444,10 +3279,8 @@
           "score_final": 74.2,
           "score_tech": 78.5,
           "score_macro": 50,
-          "ret_1m": 18.81,
-          "ret_3m": 8.81,
-          "ret_6m": 29.91,
-          "acerto_3m": true
+          "ret_hasta_hoy": 17.63,
+          "meses_mantenido": 9.6
         },
         {
           "id": "WGMI",
@@ -3457,10 +3290,8 @@
           "score_final": 71.5,
           "score_tech": 74.1,
           "score_macro": 56.85939553219448,
-          "ret_1m": 42.45,
-          "ret_3m": 49.37,
-          "ret_6m": 30.21,
-          "acerto_3m": true
+          "ret_hasta_hoy": 117.26,
+          "meses_mantenido": 9.6
         }
       ],
       "full_ranking": [
@@ -3555,17 +3386,15 @@
           "score_macro": 65
         }
       ],
-      "avg_top2_3m": 29.09,
-      "iwda_3m": 5.88,
-      "iwda_6m": 8.34,
-      "alpha_3m": 23.21,
-      "aciertos": 2,
-      "total_con_dato": 2,
-      "tasa_acierto": 100.0,
+      "avg_top2_hoy": 67.45,
+      "iwda_hoy": 19.07,
+      "alpha_hoy": 48.38,
+      "bate_iwda": true,
       "score_top1": 74.2
     },
     {
       "date": "2025-10-01",
+      "meses_desde": 8.6,
       "top2": [
         {
           "id": "URA",
@@ -3575,10 +3404,8 @@
           "score_final": 78.9,
           "score_tech": 84.0,
           "score_macro": 50,
-          "ret_1m": 16.43,
-          "ret_3m": -11.46,
-          "ret_6m": 1.33,
-          "acerto_3m": false
+          "ret_hasta_hoy": -0.99,
+          "meses_mantenido": 8.6
         },
         {
           "id": "WGMI",
@@ -3588,10 +3415,8 @@
           "score_final": 76.7,
           "score_tech": 80.3,
           "score_macro": 56.07095926412615,
-          "ret_1m": 25.83,
-          "ret_3m": -15.09,
-          "ret_6m": -20.66,
-          "acerto_3m": false
+          "ret_hasta_hoy": 52.52,
+          "meses_mantenido": 8.6
         }
       ],
       "full_ranking": [
@@ -3686,17 +3511,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": -13.28,
-      "iwda_3m": 3.25,
-      "iwda_6m": 2.15,
-      "alpha_3m": -16.53,
-      "aciertos": 0,
-      "total_con_dato": 2,
-      "tasa_acierto": 0.0,
+      "avg_top2_hoy": 25.77,
+      "iwda_hoy": 15.55,
+      "alpha_hoy": 10.22,
+      "bate_iwda": true,
       "score_top1": 78.9
     },
     {
       "date": "2025-11-01",
+      "meses_desde": 7.6,
       "top2": [
         {
           "id": "URA",
@@ -3706,10 +3529,8 @@
           "score_final": 78.4,
           "score_tech": 83.4,
           "score_macro": 50,
-          "ret_1m": -11.34,
-          "ret_3m": -0.36,
-          "ret_6m": 10.8,
-          "acerto_3m": false
+          "ret_hasta_hoy": -9.13,
+          "meses_mantenido": 7.6
         },
         {
           "id": "WGMI",
@@ -3719,10 +3540,8 @@
           "score_final": 78.1,
           "score_tech": 81.3,
           "score_macro": 60,
-          "ret_1m": -26.02,
-          "ret_3m": -34.45,
-          "ret_6m": -1.14,
-          "acerto_3m": false
+          "ret_hasta_hoy": 11.85,
+          "meses_mantenido": 7.6
         }
       ],
       "full_ranking": [
@@ -3817,17 +3636,15 @@
           "score_macro": 65
         }
       ],
-      "avg_top2_3m": -17.41,
-      "iwda_3m": 0.88,
-      "iwda_6m": 6.86,
-      "alpha_3m": -18.29,
-      "aciertos": 0,
-      "total_con_dato": 2,
-      "tasa_acierto": 0.0,
+      "avg_top2_hoy": 1.36,
+      "iwda_hoy": 11.5,
+      "alpha_hoy": -10.14,
+      "bate_iwda": false,
       "score_top1": 78.4
     },
     {
       "date": "2025-12-01",
+      "meses_desde": 6.6,
       "top2": [
         {
           "id": "XBI",
@@ -3837,10 +3654,8 @@
           "score_final": 76.9,
           "score_tech": 81.6,
           "score_macro": 50,
-          "ret_1m": 1.74,
-          "ret_3m": 5.48,
-          "ret_6m": 8.33,
-          "acerto_3m": true
+          "ret_hasta_hoy": 17.41,
+          "meses_mantenido": 6.6
         },
         {
           "id": "XLV",
@@ -3850,10 +3665,8 @@
           "score_final": 76.3,
           "score_tech": 78.3,
           "score_macro": 65,
-          "ret_1m": -0.32,
-          "ret_3m": 1.13,
-          "ret_6m": -4.98,
-          "acerto_3m": true
+          "ret_hasta_hoy": -3.79,
+          "meses_mantenido": 6.6
         }
       ],
       "full_ranking": [
@@ -3948,17 +3761,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": 3.31,
-      "iwda_3m": 1.51,
-      "iwda_6m": 11.62,
-      "alpha_3m": 1.8,
-      "aciertos": 2,
-      "total_con_dato": 2,
-      "tasa_acierto": 100.0,
+      "avg_top2_hoy": 6.81,
+      "iwda_hoy": 12.48,
+      "alpha_hoy": -5.67,
+      "bate_iwda": false,
       "score_top1": 76.9
     },
     {
       "date": "2026-01-01",
+      "meses_desde": 5.6,
       "top2": [
         {
           "id": "XBI",
@@ -3968,10 +3779,8 @@
           "score_final": 74.9,
           "score_tech": 79.3,
           "score_macro": 50,
-          "ret_1m": 5.04,
-          "ret_3m": 5.99,
-          "ret_6m": 15.8,
-          "acerto_3m": true
+          "ret_hasta_hoy": 15.8,
+          "meses_mantenido": 5.6
         },
         {
           "id": "XLV",
@@ -3981,10 +3790,8 @@
           "score_final": 70.4,
           "score_tech": 71.3,
           "score_macro": 65,
-          "ret_1m": -0.91,
-          "ret_3m": -5.94,
-          "ret_6m": -3.93,
-          "acerto_3m": false
+          "ret_hasta_hoy": -3.93,
+          "meses_mantenido": 5.6
         }
       ],
       "full_ranking": [
@@ -4079,17 +3886,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": 0.02,
-      "iwda_3m": -0.87,
-      "iwda_6m": 12.11,
-      "alpha_3m": 0.89,
-      "aciertos": 1,
-      "total_con_dato": 2,
-      "tasa_acierto": 50.0,
+      "avg_top2_hoy": 5.94,
+      "iwda_hoy": 12.11,
+      "alpha_hoy": -6.17,
+      "bate_iwda": false,
       "score_top1": 74.9
     },
     {
       "date": "2026-02-01",
+      "meses_desde": 4.6,
       "top2": [
         {
           "id": "SEMI",
@@ -4099,10 +3904,8 @@
           "score_final": 75.5,
           "score_tech": 80.0,
           "score_macro": 50,
-          "ret_1m": -3.41,
-          "ret_3m": 35.12,
-          "ret_6m": 79.42,
-          "acerto_3m": true
+          "ret_hasta_hoy": 79.42,
+          "meses_mantenido": 4.6
         },
         {
           "id": "XBI",
@@ -4112,10 +3915,8 @@
           "score_final": 74.7,
           "score_tech": 79.1,
           "score_macro": 50,
-          "ret_1m": -0.73,
-          "ret_3m": 4.83,
-          "ret_6m": 10.5,
-          "acerto_3m": true
+          "ret_hasta_hoy": 10.5,
+          "meses_mantenido": 4.6
         }
       ],
       "full_ranking": [
@@ -4210,17 +4011,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": 19.97,
-      "iwda_3m": 5.42,
-      "iwda_6m": 10.04,
-      "alpha_3m": 14.55,
-      "aciertos": 2,
-      "total_con_dato": 2,
-      "tasa_acierto": 100.0,
+      "avg_top2_hoy": 44.96,
+      "iwda_hoy": 10.04,
+      "alpha_hoy": 34.92,
+      "bate_iwda": true,
       "score_top1": 75.5
     },
     {
       "date": "2026-03-01",
+      "meses_desde": 3.6,
       "top2": [
         {
           "id": "SEMI",
@@ -4230,10 +4029,8 @@
           "score_final": 76.9,
           "score_tech": 81.7,
           "score_macro": 50,
-          "ret_1m": -9.84,
-          "ret_3m": 66.5,
-          "ret_6m": 78.34,
-          "acerto_3m": true
+          "ret_hasta_hoy": 78.34,
+          "meses_mantenido": 3.6
         },
         {
           "id": "ROBO",
@@ -4243,10 +4040,8 @@
           "score_final": 74.2,
           "score_tech": 78.5,
           "score_macro": 50,
-          "ret_1m": -12.28,
-          "ret_3m": 14.82,
-          "ret_6m": 10.24,
-          "acerto_3m": true
+          "ret_hasta_hoy": 10.24,
+          "meses_mantenido": 3.6
         }
       ],
       "full_ranking": [
@@ -4341,17 +4136,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": 40.66,
-      "iwda_3m": 8.86,
-      "iwda_6m": 9.65,
-      "alpha_3m": 31.8,
-      "aciertos": 2,
-      "total_con_dato": 2,
-      "tasa_acierto": 100.0,
+      "avg_top2_hoy": 44.29,
+      "iwda_hoy": 9.65,
+      "alpha_hoy": 34.64,
+      "bate_iwda": true,
       "score_top1": 76.9
     },
     {
       "date": "2026-04-01",
+      "meses_desde": 2.6,
       "top2": [
         {
           "id": "IGF",
@@ -4361,10 +4154,8 @@
           "score_final": 68.7,
           "score_tech": 72.0,
           "score_macro": 50,
-          "ret_1m": 1.37,
-          "ret_3m": -1.28,
-          "ret_6m": -1.28,
-          "acerto_3m": false
+          "ret_hasta_hoy": -1.84,
+          "meses_mantenido": 2.6
         },
         {
           "id": "XBI",
@@ -4374,10 +4165,8 @@
           "score_final": 65.1,
           "score_tech": 67.8,
           "score_macro": 50,
-          "ret_1m": 1.45,
-          "ret_3m": 9.47,
-          "ret_6m": 9.47,
-          "acerto_3m": true
+          "ret_hasta_hoy": 9.47,
+          "meses_mantenido": 2.6
         }
       ],
       "full_ranking": [
@@ -4472,17 +4261,15 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": 4.1,
-      "iwda_3m": 13.12,
-      "iwda_6m": 13.12,
-      "alpha_3m": -9.02,
-      "aciertos": 1,
-      "total_con_dato": 2,
-      "tasa_acierto": 50.0,
+      "avg_top2_hoy": 3.82,
+      "iwda_hoy": 13.12,
+      "alpha_hoy": -9.3,
+      "bate_iwda": false,
       "score_top1": 68.7
     },
     {
       "date": "2026-05-01",
+      "meses_desde": 1.6,
       "top2": [
         {
           "id": "IGF",
@@ -4492,10 +4279,8 @@
           "score_final": 71.0,
           "score_tech": 74.7,
           "score_macro": 50,
-          "ret_1m": -2.14,
-          "ret_3m": -2.61,
-          "ret_6m": -2.61,
-          "acerto_3m": false
+          "ret_hasta_hoy": -3.17,
+          "meses_mantenido": 1.6
         },
         {
           "id": "SEMI",
@@ -4505,10 +4290,8 @@
           "score_final": 70.9,
           "score_tech": 74.6,
           "score_macro": 50,
-          "ret_1m": 29.7,
-          "ret_3m": 38.92,
-          "ret_6m": 38.92,
-          "acerto_3m": true
+          "ret_hasta_hoy": 38.92,
+          "meses_mantenido": 1.6
         }
       ],
       "full_ranking": [
@@ -4603,15 +4386,12 @@
           "score_macro": 50
         }
       ],
-      "avg_top2_3m": 18.16,
-      "iwda_3m": 6.36,
-      "iwda_6m": 6.36,
-      "alpha_3m": 11.8,
-      "aciertos": 1,
-      "total_con_dato": 2,
-      "tasa_acierto": 50.0,
+      "avg_top2_hoy": 17.88,
+      "iwda_hoy": 6.36,
+      "alpha_hoy": 11.52,
+      "bate_iwda": true,
       "score_top1": 71.0
     }
   ],
-  "metodologia": "v7: percentiles vol-normalizados, 5A historico, 85% tecnico 15% macro, sin VIX, EMA semanal BTC."
+  "metodologia": "Retorno desde señal hasta HOY. Horizonte largo plazo real."
 }
