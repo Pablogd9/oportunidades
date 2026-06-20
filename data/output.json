@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-20T10:17:48Z",
+  "updated": "2026-06-20T11:11:31Z",
   "total_analyzed": 20,
   "model_version": "6.0",
   "recommendation": {
@@ -178,9 +178,9 @@
       "signal": "red",
       "signal_text": "Señal de salida — 3 meses bajo EMA200 y caída >15%. Considera rotar.",
       "dist_ema200": -17.3,
-      "r3m": -15.28,
-      "r12m": -43.03,
-      "drawdown": -44.31,
+      "r3m": -15.33,
+      "r12m": -43.07,
+      "drawdown": -44.34,
       "sparkline": [
         65014.3125,
         66806.1719,
@@ -241,7 +241,7 @@
         56504.5234,
         55981.7539,
         55361.2227,
-        55503.0703
+        55471.3789
       ],
       "spark_dates": [
         "2026-04-21",
@@ -5253,7 +5253,7 @@
     "dolar": "Dólar estable — impacto neutro",
     "halving": "Ciclo medio (26M) — momentum moderado",
     "fred": false,
-    "updated": "2026-06-20T10:17:39Z"
+    "updated": "2026-06-20T11:11:23Z"
   },
   "warnings": []
 }
