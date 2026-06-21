@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-20T21:46:54Z",
+  "updated": "2026-06-21T09:34:59Z",
   "fred_available": false,
   "vix": {
     "value": 16.4,
@@ -12,8 +12,8 @@
   "dxy": {
     "value": 100.85,
     "trend": "neutral",
-    "pct_6m": 99.0,
-    "score_inverse": 1.0,
+    "pct_6m": 100.0,
+    "score_inverse": 0.0,
     "interpretation": "Dólar estable — impacto neutro"
   },
   "inr": {
@@ -301,8 +301,8 @@
   },
   "bitcoin_halving": {
     "phase": "mid_cycle",
-    "days_since_halving": 792,
-    "months_since_halving": 26.0,
+    "days_since_halving": 793,
+    "months_since_halving": 26.1,
     "halving_score": 60,
     "description": "Ciclo medio (26M) — momentum moderado",
     "next_halving_approx": "2028-04"
