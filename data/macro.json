@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-21T10:52:24Z",
-  "fred_available": false,
+  "updated": "2026-06-21T11:07:28Z",
+  "fred_available": true,
   "vix": {
     "value": 16.4,
     "trend": "down",
@@ -293,11 +293,13 @@
     ]
   },
   "interest_rates": {
-    "fed_funds": null,
-    "proxy": "TLT",
+    "fed_funds": 3.63,
     "trend": "neutral",
-    "score": 50,
-    "interpretation": "Tipos estables — impacto neutro"
+    "pct_2y": 53.0,
+    "score": 47.0,
+    "yield_curve": 0.29,
+    "curve_status": "Plana",
+    "interpretation": "Tipos moderados — impacto neutro"
   },
   "bitcoin_halving": {
     "phase": "mid_cycle",
