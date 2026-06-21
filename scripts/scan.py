@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Motor del escaner de oportunidades - version 7.
+Motor del escaner de oportunidades - version 8.
 
-Mejoras vs v6:
-  - Historico ampliado a 5 anos (vs 2 anos).
-  - Percentiles normalizados por volatilidad (movimientos comparables entre ETFs).
-  - Peso macro reducido a 15% (vs 30%) para horizonte largo plazo.
-  - VIX eliminado del macro (irrelevante a 20 anos).
-  - EMA200 semanal para Bitcoin (menos ruido).
-  - Tecnico pesa 85% (vs 70%).
+Mejoras vs v7:
+  - Filtro de sobrevaloración: PER expansion ratio + PEG + maximos 5A + aceleracion momentum.
+  - Penaliza cuando el PER crece mas rapido que el precio (beneficios no acompañan).
+  - Bonus cuando el PER baja mientras el precio sube (beneficios superan al precio).
+  - Distancia al maximo historico de 5 anos (no solo 52 semanas).
+  - Penalizacion anti-burbujas: score x0.5 si 2.5+ señales de sobrevaloración.
 """
 
 import json, math, os, urllib.request, datetime
@@ -18,7 +17,7 @@ ROOT  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 UNI   = os.path.join(ROOT, "universe.json")
 MACRO = os.path.join(ROOT, "data", "macro.json")
 OUT   = os.path.join(ROOT, "data", "output.json")
-UA    = {"User-Agent": "Mozilla/5.0 (compatible; QuantScanner/7.0)"}
+UA    = {"User-Agent": "Mozilla/5.0 (compatible; QuantScanner/8.0)"}
 WARN  = []
 
 CARTERA = [
@@ -27,8 +26,7 @@ CARTERA = [
 ]
 
 W_FINAL = {"tech": 0.85, "macro": 0.15}
-
-W_TECH = {
+W_TECH  = {
     "rel_strength": 0.25,
     "ema200":       0.25,
     "mom6m":        0.20,
@@ -77,23 +75,33 @@ def fetch_history_weekly(symbol, rng="5y"):
         WARN.append(f"{symbol}_weekly: {e}")
         return None, None
 
-def fetch_pe(symbol):
-    url = f"https://query1.finance.yahoo.com/v10/finance/quoteSummary/{symbol}?modules=summaryDetail,defaultKeyStatistics"
+def fetch_fundamentals(symbol):
+    url = f"https://query1.finance.yahoo.com/v10/finance/quoteSummary/{symbol}?modules=summaryDetail,defaultKeyStatistics,financialData"
     try:
         d  = _get(url)
         r  = d["quoteSummary"]["result"][0]
         sd = r.get("summaryDetail", {})
         ks = r.get("defaultKeyStatistics", {})
-        pe   = (sd.get("trailingPE") or {}).get("raw") or (ks.get("trailingPE") or {}).get("raw")
-        beta = (ks.get("beta") or {}).get("raw") or (sd.get("beta") or {}).get("raw")
-        dy   = (sd.get("dividendYield") or {}).get("raw")
+        fd = r.get("financialData", {})
+        pe_trailing = (sd.get("trailingPE") or {}).get("raw")
+        pe_forward  = (sd.get("forwardPE")  or {}).get("raw") or (ks.get("forwardPE") or {}).get("raw")
+        beta        = (ks.get("beta") or {}).get("raw") or (sd.get("beta") or {}).get("raw")
+        dy          = (sd.get("dividendYield") or {}).get("raw")
+        eps_trailing= (ks.get("trailingEps") or {}).get("raw")
+        eps_forward = (ks.get("forwardEps")  or {}).get("raw")
+        growth_est  = (fd.get("earningsGrowth") or {}).get("raw") or (fd.get("revenueGrowth") or {}).get("raw")
         return {
-            "pe":   round(pe,1)     if pe   else None,
-            "beta": round(beta,2)   if beta else None,
-            "dy":   round(dy*100,2) if dy   else None,
+            "pe":          round(pe_trailing,1) if pe_trailing else None,
+            "pe_forward":  round(pe_forward,1)  if pe_forward  else None,
+            "beta":        round(beta,2)         if beta        else None,
+            "dy":          round(dy*100,2)       if dy          else None,
+            "eps_trailing":round(eps_trailing,2) if eps_trailing else None,
+            "eps_forward": round(eps_forward,2)  if eps_forward  else None,
+            "growth_est":  round(growth_est*100,1) if growth_est else None,
         }
     except:
-        return {"pe": None, "beta": None, "dy": None}
+        return {"pe":None,"pe_forward":None,"beta":None,"dy":None,
+                "eps_trailing":None,"eps_forward":None,"growth_est":None}
 
 def ema_n(prices, n):
     if len(prices) < n: return None
@@ -115,12 +123,17 @@ def vol_annual(prices, n=60):
     return sd * math.sqrt(252) * 100
 
 def vol_std(prices, n=252):
-    return vol_annual(prices, n) or 20.0
+    return vol_annual(prices, min(n, len(prices)-1)) or 20.0
 
 def drawdown_from_max(prices, n=252):
     if len(prices) < 2: return None
     window = prices[-min(n,len(prices)):]
     peak   = max(window)
+    return round((prices[-1]/peak-1)*100,2) if peak > 0 else None
+
+def drawdown_from_alltime_max(prices):
+    if len(prices) < 2: return None
+    peak = max(prices)
     return round((prices[-1]/peak-1)*100,2) if peak > 0 else None
 
 def ann_ret(prices, n=252):
@@ -144,13 +157,99 @@ def percentile_in_own_history(value, series):
     below = sum(1 for v in series if v <= value)
     return round(below/len(series)*100, 1)
 
+def compute_overvaluation(prices, fund):
+    signals      = []
+    signal_count = 0
+    bonus        = False
+    pe_now       = fund.get("pe")
+    growth_est   = fund.get("growth_est")
+
+    # Señal 1: Expansion de multiples
+    per_expansion = None
+    if pe_now and len(prices) >= 252:
+        price_12m_ago = prices[-253] if len(prices) > 252 else prices[0]
+        price_now     = prices[-1]
+        if price_12m_ago > 0 and price_now > 0:
+            price_ratio         = price_now / price_12m_ago
+            per_12m_ago_implied = pe_now / price_ratio
+            per_expansion       = pe_now / per_12m_ago_implied
+            if per_expansion > 1.5:
+                signals.append(f"PER se expandió x{per_expansion:.1f} vs precio — beneficios no acompañan")
+                signal_count += 1
+            elif per_expansion > 1.3:
+                signals.append(f"Expansión de múltiplos moderada (x{per_expansion:.1f})")
+                signal_count += 0.5
+            elif per_expansion < 0.8 and pe_now:
+                bonus = True
+
+    # Señal 2: PEG ratio
+    peg = None
+    if pe_now and growth_est and growth_est > 0:
+        peg = round(pe_now / growth_est, 2)
+        if peg > 3:
+            signals.append(f"PEG muy alto ({peg:.1f}) — precio muy caro vs crecimiento")
+            signal_count += 1
+        elif peg > 2:
+            signals.append(f"PEG elevado ({peg:.1f}) — cautela")
+            signal_count += 0.5
+        elif peg < 1:
+            bonus = True
+
+    # Señal 3: Maximos historicos 5 anos
+    dist_alltime = drawdown_from_alltime_max(prices)
+    if dist_alltime is not None:
+        if dist_alltime > -2:
+            signals.append(f"En maximos historicos absolutos ({dist_alltime:.1f}%) — territorio nunca visto")
+            signal_count += 1
+        elif dist_alltime > -5:
+            signals.append(f"Muy cerca de maximos historicos ({dist_alltime:.1f}%)")
+            signal_count += 0.5
+
+    # Señal 4: Aceleracion momentum
+    mom3m_now = ret_n(prices, 63)
+    mom3m_history = []
+    n = len(prices)
+    for i in range(1, min(504, n-63)):
+        r = ret_n(prices[:n-i], 63)
+        if r is not None: mom3m_history.append(r)
+    if mom3m_now is not None and mom3m_history:
+        avg_mom3m = sum(mom3m_history) / len(mom3m_history)
+        if avg_mom3m > 0 and mom3m_now > avg_mom3m * 3:
+            signals.append(f"Momentum 3M ({mom3m_now:.1f}%) es {mom3m_now/avg_mom3m:.1f}x la media — euforia posible")
+            signal_count += 1
+        elif avg_mom3m > 0 and mom3m_now > avg_mom3m * 2:
+            signals.append(f"Momentum 3M acelerado ({mom3m_now:.1f}% vs media {avg_mom3m:.1f}%)")
+            signal_count += 0.5
+
+    if signal_count >= 2.5:
+        penalty = 0.5;  level = "🔴 Burbuja probable"
+    elif signal_count >= 1.5:
+        penalty = 0.7;  level = "🟠 Sobrevaloración significativa"
+    elif signal_count >= 0.5:
+        penalty = 0.85; level = "🟡 Ligera sobrevaloración"
+    elif bonus:
+        penalty = 1.10; level = "🟢 Precio justificado — beneficios acompañan"
+    else:
+        penalty = 1.0;  level = "⚪ Valoración neutral"
+
+    return {
+        "overval_score": round(min(100, signal_count/3*100), 0),
+        "signals":       signals,
+        "penalty":       penalty,
+        "level":         level,
+        "per_expansion": round(per_expansion,2) if per_expansion else None,
+        "peg":           peg,
+        "dist_alltime":  dist_alltime,
+        "bonus":         bonus,
+    }
+
 def compute_technical_score(prices, iwda_prices):
     if not prices or len(prices) < 60: return None, {}
-    n = len(prices)
+    n   = len(prices)
     vol = vol_std(prices, min(252, n-1))
     details = {}
 
-    # Factor 1: Fuerza relativa vs MSCI World 6M (vol-normalizada)
+    # Factor 1: Fuerza relativa vs MSCI World 6M
     rs_now = None; rs_hist = []
     if iwda_prices and len(iwda_prices) >= 126:
         r_e = ret_n(prices, min(126,n-1))
@@ -168,21 +267,21 @@ def compute_technical_score(prices, iwda_prices):
     details["rel_strength"] = {
         "value": round(rs_now,2) if rs_now else None, "percentile": pct_rel,
         "interpretation": (
-            "Lidera al mercado global (ajustado por volatilidad)" if rs_now and rs_now > 1
+            "Lidera al mercado global" if rs_now and rs_now > 1
             else "Va por detrás del mercado" if rs_now and rs_now < -1
             else "En línea con el mercado"
         )
     }
 
-    # Factor 2: EMA200 distancia vol-normalizada
+    # Factor 2: EMA200 vol-normalizada
     e200 = ema_n(prices, min(200,n))
     dist_ema200_now = ((prices[-1]/e200-1)*100) if e200 else None
-    dist_ema_norm = (dist_ema200_now / (vol/20.0)) if dist_ema200_now else None
+    dist_ema_norm   = (dist_ema200_now / (vol/20.0)) if dist_ema200_now else None
     ema200_hist = []
     for i in range(1, min(504, n-200)):
         pc=prices[:n-i]; e=ema_n(pc,min(200,len(pc)))
         if e:
-            d = (pc[-1]/e-1)*100; v = vol_std(pc, min(252,len(pc)-1))
+            d=(pc[-1]/e-1)*100; v=vol_std(pc,min(252,len(pc)-1))
             ema200_hist.append(d/(v/20.0))
     pct_ema = percentile_in_own_history(dist_ema_norm, ema200_hist)
     details["ema200"] = {
@@ -198,13 +297,13 @@ def compute_technical_score(prices, iwda_prices):
     }
 
     # Factor 3: Momentum 6M vol-normalizado
-    mom6m_now = ret_n(prices, min(126,n-1))
+    mom6m_now  = ret_n(prices, min(126,n-1))
     mom6m_norm = (mom6m_now / (vol/20.0)) if mom6m_now is not None else None
     mom6m_hist = []
     for i in range(1, min(756,n-126)):
         pc=prices[:n-i]; r=ret_n(pc,min(126,len(pc)-1))
         if r is not None:
-            v = vol_std(pc, min(252,len(pc)-1))
+            v=vol_std(pc,min(252,len(pc)-1))
             mom6m_hist.append(r/(v/20.0))
     pct_mom6 = percentile_in_own_history(mom6m_norm, mom6m_hist)
     details["mom6m"] = {
@@ -218,19 +317,29 @@ def compute_technical_score(prices, iwda_prices):
         )
     }
 
-    # Factor 4: Punto de entrada vs maximo 52 semanas
-    dist_max_now = drawdown_from_max(prices, 252)
+    # Factor 4: Punto de entrada — maximo 52s (60%) + maximo 5A (40%)
+    dist_max_52w = drawdown_from_max(prices, 252)
+    dist_max_5y  = drawdown_from_alltime_max(prices)
+    if dist_max_52w is not None and dist_max_5y is not None:
+        entry_combined = dist_max_52w * 0.60 + dist_max_5y * 0.40
+    elif dist_max_52w is not None:
+        entry_combined = dist_max_52w
+    else:
+        entry_combined = None
     dd_hist = []
     for i in range(1, min(756,n-252)):
         pc=prices[:n-i]; d=drawdown_from_max(pc,min(252,len(pc)))
         if d is not None: dd_hist.append(-d)
-    pct_entry = percentile_in_own_history(-dist_max_now if dist_max_now is not None else None, dd_hist)
+    pct_entry = percentile_in_own_history(-entry_combined if entry_combined is not None else None, dd_hist)
     details["entry"] = {
-        "dist_from_max": dist_max_now, "percentile": pct_entry,
+        "dist_from_max_52w": dist_max_52w,
+        "dist_from_max_5y":  dist_max_5y,
+        "percentile": pct_entry,
         "interpretation": (
-            f"Excelente entrada: {dist_max_now:.0f}% bajo máximos" if dist_max_now and dist_max_now < -25
-            else f"Buena entrada: {dist_max_now:.0f}% bajo máximos" if dist_max_now and dist_max_now < -10
-            else f"Cerca de máximos ({dist_max_now:.0f}%) — entrada exigente" if dist_max_now
+            f"Excelente entrada: {dist_max_5y:.0f}% bajo maximos historicos" if dist_max_5y and dist_max_5y < -25
+            else f"Buena entrada: {dist_max_52w:.0f}% bajo maximos 52s" if dist_max_52w and dist_max_52w < -10
+            else f"En maximos historicos — entrada muy exigente" if dist_max_5y and dist_max_5y > -3
+            else f"Cerca de maximos ({dist_max_52w:.0f}%)" if dist_max_52w
             else "Sin datos"
         )
     }
@@ -253,14 +362,14 @@ def compute_technical_score(prices, iwda_prices):
     }
 
     score_tech = (
-        W_TECH["rel_strength"] * pct_rel +
-        W_TECH["ema200"]       * pct_ema +
+        W_TECH["rel_strength"] * pct_rel  +
+        W_TECH["ema200"]       * pct_ema  +
         W_TECH["mom6m"]        * pct_mom6 +
         W_TECH["entry"]        * pct_entry +
         W_TECH["consistency"]  * pct_consist
     )
 
-    mom3m = ret_n(prices, min(63,n-1))
+    mom3m   = ret_n(prices, min(63,n-1))
     penalty = 1.0
     if mom3m is not None and mom3m < -10:
         penalty = 0.6
@@ -269,12 +378,14 @@ def compute_technical_score(prices, iwda_prices):
         details["penalty"] = {"applied":False,"mom3m":round(mom3m,2) if mom3m else None}
 
     details["extra"] = {
-        "r1m":  round(ret_n(prices,21),2)   if ret_n(prices,21)   else None,
-        "r3m":  round(mom3m,2)              if mom3m              else None,
-        "r6m":  round(mom6m_now,2)          if mom6m_now          else None,
-        "r12m": round(ret_n(prices,252),2)  if ret_n(prices,252)  else None,
-        "vol":  round(vol_annual(prices),1) if vol_annual(prices) else None,
-        "drawdown": dist_max_now, "ann_ret": ann_ret(prices),
+        "r1m":       round(ret_n(prices,21),2)   if ret_n(prices,21)   else None,
+        "r3m":       round(mom3m,2)              if mom3m              else None,
+        "r6m":       round(mom6m_now,2)          if mom6m_now          else None,
+        "r12m":      round(ret_n(prices,252),2)  if ret_n(prices,252)  else None,
+        "vol":       round(vol_annual(prices),1) if vol_annual(prices) else None,
+        "drawdown":  dist_max_52w,
+        "ann_ret":   ann_ret(prices),
+        "dist_max_5y": dist_max_5y,
     }
 
     return round(score_tech * penalty, 1), details
@@ -297,7 +408,7 @@ def compute_macro_score(macro_profile, macro):
         details = {"tipos":{"weight":"100%","score":rates_score,"desc":rates.get("interpretation","")}}
     elif macro_profile == "defensive_government":
         score = 65
-        details = {"base":{"weight":"100%","score":65,"desc":"Gasto gubernamental estructural — insensible al ciclo"}}
+        details = {"base":{"weight":"100%","score":65,"desc":"Gasto gubernamental estructural"}}
     elif macro_profile == "em_dollar_sensitive":
         score = dxy_inv * 0.60 + rates_score * 0.40
         if inr.get("trend") == "down":
@@ -311,14 +422,14 @@ def compute_macro_score(macro_profile, macro):
         score = rates_score * 0.40 + 70 * 0.60
         details = {
             "tipos":{"weight":"40%","score":rates_score,"desc":rates.get("interpretation","")},
-            "base":{"weight":"60%","score":70,"desc":"Demanda estructural — crece con o sin tipos"},
+            "base":{"weight":"60%","score":70,"desc":"Demanda estructural no cíclica"},
         }
     elif macro_profile == "rates_debt_sensitive":
         score = rates_score
         details = {"tipos":{"weight":"100%","score":rates_score,"desc":rates.get("interpretation","")}}
     elif macro_profile == "defensive_demographics":
         score = 65
-        details = {"base":{"weight":"100%","score":65,"desc":"Envejecimiento poblacional inevitable — insensible al ciclo"}}
+        details = {"base":{"weight":"100%","score":65,"desc":"Envejecimiento poblacional inevitable"}}
     elif macro_profile == "crypto_halving":
         score = rates_score * 0.30 + dxy_inv * 0.30 + halv_score * 0.40
         details = {
@@ -337,8 +448,9 @@ def compute_macro_score(macro_profile, macro):
 
     return round(min(100, max(0, score)), 1), details
 
-def compute_final_score(score_tech, score_macro):
-    return round(score_tech * W_FINAL["tech"] + score_macro * W_FINAL["macro"], 1)
+def compute_final_score(score_tech, score_macro, overval_penalty):
+    base = score_tech * W_FINAL["tech"] + score_macro * W_FINAL["macro"]
+    return round(base * overval_penalty, 1)
 
 def ema200_signal_daily(prices):
     if len(prices) < 200: return "neutral"
@@ -387,7 +499,8 @@ def build_portfolio_signals(cartera):
             prices_w, dates_w = fetch_history_weekly(asset["symbol"], "5y")
             prices_d, dates_d = fetch_history(asset["symbol"], "5y")
             if not prices_w or len(prices_w) < 50:
-                signals.append({**asset,"signal":"neutral","signal_text":"Sin datos","dist_ema200":None,"r3m":None,"r12m":None,"drawdown":None,"sparkline":[],"spark_dates":[]})
+                signals.append({**asset,"signal":"neutral","signal_text":"Sin datos",
+                    "dist_ema200":None,"r3m":None,"r12m":None,"drawdown":None,"sparkline":[],"spark_dates":[]})
                 continue
             signal = ema200_signal_weekly(prices_w)
             e200   = ema_n(prices_w, min(200,len(prices_w)-1))
@@ -397,7 +510,8 @@ def build_portfolio_signals(cartera):
         else:
             prices_d, dates_d = fetch_history(asset["symbol"], "5y")
             if not prices_d or len(prices_d) < 60:
-                signals.append({**asset,"signal":"neutral","signal_text":"Sin datos","dist_ema200":None,"r3m":None,"r12m":None,"drawdown":None,"sparkline":[],"spark_dates":[]})
+                signals.append({**asset,"signal":"neutral","signal_text":"Sin datos",
+                    "dist_ema200":None,"r3m":None,"r12m":None,"drawdown":None,"sparkline":[],"spark_dates":[]})
                 continue
             signal = ema200_signal_daily(prices_d)
             e200   = ema_n(prices_d, 200)
@@ -405,9 +519,9 @@ def build_portfolio_signals(cartera):
             prices_for_metrics = prices_d
             dates_for_spark    = dates_d
 
-        r3m = ret_n(prices_for_metrics, 63)
-        r12m= ret_n(prices_for_metrics, 252)
-        dd  = drawdown_from_max(prices_for_metrics)
+        r3m  = ret_n(prices_for_metrics, 63)
+        r12m = ret_n(prices_for_metrics, 252)
+        dd   = drawdown_from_max(prices_for_metrics)
         if signal == "green":
             text = "Tesis intacta — EMA200 alcista. Sigue aportando."
         elif signal == "yellow":
@@ -418,49 +532,64 @@ def build_portfolio_signals(cartera):
             **asset, "signal":signal, "signal_text":text,
             "dist_ema200":dist_e, "ema_type":"weekly" if is_crypto else "daily",
             "r3m":round(r3m,2) if r3m else None,
-            "r12m":round(r12m,2) if r12m else None,
-            "drawdown":dd,
+            "r12m":round(r12m,2) if r12m else None, "drawdown":dd,
             "sparkline":[round(p,4) for p in prices_for_metrics[-60:]],
             "spark_dates":dates_for_spark[-60:] if dates_for_spark else [],
         })
     return signals
 
-def build_reasons(etf_data, macro_details):
+def build_reasons(etf_data, macro_details, overval):
     ups, dns = [], []
     td = etf_data.get("tech_details", {})
+
     rs = td.get("rel_strength", {})
     if rs.get("value") is not None:
         pct = rs.get("percentile",50)
         if pct > 70: ups.append(f"{rs['interpretation']} — percentil {pct:.0f}")
         elif pct < 30: dns.append(f"{rs['interpretation']} — percentil {pct:.0f}")
+
     em = td.get("ema200", {})
     if em.get("value") is not None:
-        pct = em.get("percentile",50); val = em["value"]
-        if pct > 70 and val > 0: ups.append(f"{em['interpretation']} — momento excepcional (pct {pct:.0f})")
+        pct=em.get("percentile",50); val=em["value"]
+        if pct > 70 and val > 0: ups.append(f"{em['interpretation']} — pct {pct:.0f}")
         elif val > 0: ups.append(f"{em['interpretation']}")
         elif pct < 30: dns.append(f"{em['interpretation']} — momento débil")
+
     m6 = td.get("mom6m", {})
     if m6.get("value") is not None:
         pct = m6.get("percentile",50)
         if pct > 75: ups.append(f"{m6['interpretation']} — percentil {pct:.0f}")
         elif pct < 25: dns.append(f"{m6['interpretation']} — percentil {pct:.0f}")
+
     en = td.get("entry", {})
-    if en.get("dist_from_max") is not None:
+    if en.get("dist_from_max_5y") is not None:
         pct = en.get("percentile",50)
-        if pct > 65: ups.append(f"{en['interpretation']} — mejor que {pct:.0f}% del tiempo")
+        if pct > 65: ups.append(f"{en['interpretation']}")
         elif pct < 35: dns.append(f"{en['interpretation']}")
+
     co = td.get("consistency", {})
     if co.get("value") is not None:
         if co["percentile"] > 70: ups.append(f"{co['interpretation']}")
         elif co["percentile"] < 30: dns.append(f"{co['interpretation']}")
+
     pen = td.get("penalty", {})
     if pen.get("applied"): dns.append(pen.get("reason",""))
+
+    if overval:
+        for sig in overval.get("signals",[])[:2]:
+            dns.append(f"Valoración: {sig}")
+        if overval.get("bonus"):
+            ups.append(f"Valoración: {overval.get('level','')} — precio justificado")
+        elif overval.get("penalty",1) < 1:
+            dns.append(f"Valoración: {overval.get('level','')}")
+
     for key, md in macro_details.items():
         if isinstance(md, dict) and md.get("desc"):
             score = md.get("score", 50)
             if score > 70:   ups.append(f"Macro: {md['desc']}")
             elif score < 30: dns.append(f"Macro: {md['desc']}")
-    return ups[:4], dns[:3]
+
+    return ups[:4], dns[:4]
 
 def best_etf_per_sector(records):
     sectors = {}
@@ -482,17 +611,22 @@ def build_recommendation(sector_ranking, month_str, portfolio_signals):
     if score1 >= 70:   dist1,dist2,calidad = 350,150,"🟢 Señal fuerte"
     elif score1 >= 55: dist1,dist2,calidad = 300,200,"🟡 Señal moderada"
     else:              dist1,dist2,calidad = 250,250,"🟠 Señal débil — diversifica más"
+    top2_score = top2["score_final"] if top2 else 0
+    top2_nota  = f"Top2 con señal fuerte ({top2_score:.0f}) — considera aumentar su peso" if top2_score >= 70 and score1 >= 70 else None
     distribucion = [{"rank":1,"name":top1["name"],"symbol":top1["symbol"],
-                     "sector":top1["sector"],"score":score1,"euros":dist1,"pct":round(dist1/500*100)}]
+                     "sector":top1["sector"],"score":score1,"euros":dist1,"pct":round(dist1/500*100),
+                     "overval_level":top1.get("overval_level","⚪")}]
     if top2:
         distribucion.append({"rank":2,"name":top2["name"],"symbol":top2["symbol"],
-                             "sector":top2["sector"],"score":top2["score_final"],
-                             "euros":dist2,"pct":round(dist2/500*100)})
+                             "sector":top2["sector"],"score":top2_score,
+                             "euros":dist2,"pct":round(dist2/500*100),
+                             "overval_level":top2.get("overval_level","⚪")})
     return {
         "mes":month_str,"calidad":calidad,"score_top1":score1,
         "accion_principal":accion,"distribucion":distribucion,
         "por_que":top1.get("reasons_up",[])[:2],
-        "nota":"Revisa las señales de tu cartera. Si alguna está en 🔴 rojo, considera rotar antes de añadir."
+        "top2_nota":top2_nota,
+        "nota":"Revisa el nivel de valoración. 🔴 o 🟠 indica riesgo de sobrevaloración."
     }
 
 def main():
@@ -506,7 +640,7 @@ def main():
         print("  Warning: macro.json no encontrado.")
     print("Descargando IWDA benchmark (5 anos)...")
     iwda_prices, _ = fetch_history("IWDA.AS", "5y")
-    print(f"Analizando {len(universe)} ETFs (modelo v7)...")
+    print(f"Analizando {len(universe)} ETFs (modelo v8)...")
     records = []
     for etf in universe:
         sym = etf["symbol"]
@@ -516,8 +650,9 @@ def main():
         score_tech, tech_details = compute_technical_score(prices, iwda_prices)
         if score_tech is None: print("insuficiente"); continue
         score_macro, macro_details = compute_macro_score(etf.get("macro_profile",""), macro)
-        score_final = compute_final_score(score_tech, score_macro)
-        fund = fetch_pe(sym)
+        fund    = fetch_fundamentals(sym)
+        overval = compute_overvaluation(prices, fund)
+        score_final = compute_final_score(score_tech, score_macro, overval["penalty"])
         extra = tech_details.get("extra", {})
         rec = {
             "id":etf["id"],"name":etf["name"],"symbol":sym,"sector":etf["sector"],
@@ -532,23 +667,34 @@ def main():
             "rel_strength":  tech_details.get("rel_strength",{}).get("value"),
             "dist_ema200":   tech_details.get("ema200",{}).get("value"),
             "ema200_abs":    tech_details.get("ema200",{}).get("ema200_abs"),
-            "dist_from_max": tech_details.get("entry",{}).get("dist_from_max"),
+            "dist_from_max": tech_details.get("entry",{}).get("dist_from_max_52w"),
+            "dist_from_max_5y":tech_details.get("entry",{}).get("dist_from_max_5y"),
             "consistency_pct":tech_details.get("consistency",{}).get("value"),
             "mom_penalty":   not tech_details.get("penalty",{}).get("applied",False),
-            "r1m":extra.get("r1m"),"r3m":extra.get("r3m"),"r6m":extra.get("r6m"),
-            "r12m":extra.get("r12m"),"vol":extra.get("vol"),
-            "drawdown":extra.get("drawdown"),"ann_ret":extra.get("ann_ret"),
-            "pe":fund.get("pe"),"beta":fund.get("beta"),"dy":fund.get("dy"),
+            "r1m":extra.get("r1m"),"r3m":extra.get("r3m"),
+            "r6m":extra.get("r6m"),"r12m":extra.get("r12m"),
+            "vol":extra.get("vol"),"drawdown":extra.get("drawdown"),"ann_ret":extra.get("ann_ret"),
+            "pe":fund.get("pe"),"pe_forward":fund.get("pe_forward"),
+            "beta":fund.get("beta"),"dy":fund.get("dy"),
+            "eps_trailing":fund.get("eps_trailing"),"eps_forward":fund.get("eps_forward"),
+            "growth_est":fund.get("growth_est"),
+            "overval_score":  overval["overval_score"],
+            "overval_level":  overval["level"],
+            "overval_penalty":overval["penalty"],
+            "overval_signals":overval["signals"],
+            "per_expansion":  overval.get("per_expansion"),
+            "peg":            overval.get("peg"),
+            "dist_from_max_5y_overval":overval.get("dist_alltime"),
             "sparkline":  [round(p,4) for p in prices[-60:]],
             "spark_dates":dates[-60:] if dates else [],
             "tech_details":tech_details,"macro_details":macro_details,
         }
-        ups, dns = build_reasons(rec, macro_details)
+        ups, dns = build_reasons(rec, macro_details, overval)
         rec["reasons_up"] = ups; rec["reasons_down"] = dns
         del rec["tech_details"]; del rec["macro_details"]
         records.append(rec)
-        pen = "⚠️" if not rec["mom_penalty"] else ""
-        print(f"tech={score_tech:.0f} macro={score_macro:.0f} final={score_final:.0f} n={len(prices)}d {pen}")
+        overval_str = f" {overval['level']}" if overval["penalty"] != 1.0 else ""
+        print(f"tech={score_tech:.0f} macro={score_macro:.0f} final={score_final:.0f}{overval_str}")
     if not records: print("ERROR: sin datos"); return
     records.sort(key=lambda x: x["score_final"], reverse=True)
     sector_ranking = best_etf_per_sector(records)
@@ -556,12 +702,12 @@ def main():
     print("\nAnalizando cartera actual...")
     portfolio_signals = build_portfolio_signals(CARTERA)
     for s in portfolio_signals:
-        icon = "✅" if s["signal"]=="green" else ("⚠️" if s["signal"]=="yellow" else "🔴")
+        icon  = "✅" if s["signal"]=="green" else ("⚠️" if s["signal"]=="yellow" else "🔴")
         ema_t = "(semanal)" if s.get("ema_type")=="weekly" else "(diaria)"
         print(f"  {icon} {s['symbol']} {ema_t}: {s['signal_text']}")
-    month_str = datetime.date.today().strftime("%B %Y")
+    month_str      = datetime.date.today().strftime("%B %Y")
     recommendation = build_recommendation(sector_ranking, month_str, portfolio_signals)
-    macro_context = {
+    macro_context  = {
         "tipos":  macro.get("interest_rates",{}).get("interpretation","Sin datos"),
         "vix":    macro.get("vix",{}).get("interpretation","Sin datos"),
         "dolar":  macro.get("dxy",{}).get("interpretation","Sin datos"),
@@ -572,7 +718,7 @@ def main():
     out = {
         "updated":        datetime.datetime.utcnow().isoformat(timespec="seconds")+"Z",
         "total_analyzed": len(records),
-        "model_version":  "7.0",
+        "model_version":  "8.0",
         "factor_weights": {"tech":W_FINAL["tech"],"macro":W_FINAL["macro"],"tech_factors":W_TECH},
         "recommendation": recommendation,
         "portfolio_signals":portfolio_signals,
@@ -584,16 +730,16 @@ def main():
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT,"w",encoding="utf-8") as fh:
         json.dump(out, fh, ensure_ascii=False, indent=2)
-    print(f"\n{'='*60}")
+    print(f"\n{'='*65}")
     print(f"RECOMENDACIÓN {month_str} — {recommendation['calidad']}")
     print(f"  {recommendation['accion_principal']}")
     for d in recommendation.get("distribucion",[]):
-        print(f"  #{d['rank']} {d['symbol']:10s} score={d['score']:5.1f} → €{d['euros']} ({d['pct']}%)")
-    print(f"\nRANKING SECTORES (v7):")
+        print(f"  #{d['rank']} {d['symbol']:10s} score={d['score']:5.1f} → €{d['euros']} ({d['pct']}%) {d.get('overval_level','')}")
+    print(f"\nRANKING SECTORES (v8):")
     for i,r in enumerate(sector_ranking[:5]):
-        print(f"  #{i+1} {r['sector']:20s} {r['symbol']:10s} score={r['score_final']:5.1f} (T:{r['score_tech']:.0f} M:{r['score_macro']:.0f})")
-    print(f"{'='*60}")
-    print(f"Modelo v7: 85/15, vol-normalizado, 5A, EMA semanal BTC. Avisos: {len(WARN)}")
+        print(f"  #{i+1} {r['sector']:20s} {r['symbol']:10s} score={r['score_final']:5.1f} {r.get('overval_level','')}")
+    print(f"{'='*65}")
+    print(f"Modelo v8: filtro sobrevaloración activo. Avisos: {len(WARN)}")
 
 if __name__ == "__main__":
     main()
