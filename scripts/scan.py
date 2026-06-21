@@ -48,13 +48,13 @@ ETF_HOLDINGS = {
     "FLIN": ["INFY","HDB","IBN","RELIANCE","HDFCB","WIT","TCS","BHARTIARTL","ICICIBC","SBIN",
               "KOTAKBANK","BAJFINANCE","LT","ASIANPAINT","ULTRACEMCO","TITAN","NESTLEIND","POWERGRID","NTPC","COALINDIA"],
     "COPX": ["FCX","SCCO","BHP","RIO","GLEN","TECK","FM","HBM","CMMC","ERO",
-              "LUNR","IVN","ANTO","CS","TGB","GEX","NGEX","MTAL","CU","FQVLF"],
+              "LUNR","IVN","ANTO","FREECOPPER","CS","TGB","GEX","NGEX","MTAL","CU"],
     "GNOM": ["ILMN","PACB","RXRX","CRSP","EDIT","NTLA","BEAM","VERV","IONS","ALNY",
-              "MRNA","REGN","VRTX","BMRN","FATE","BLUE","SGMO","ARCT","TBIO","BLUE"],
-    "PHO":  ["XYL","AWK","PRIM","ARIS","MSEX","SJW","AWR","CWT","NI","GHM",
-              "ITRI","WATTS","GWW","ARTNA","XYLEM","WTR","LAYNE","GWCO","YORW","MUELLER"],
-    "ICLN": ["NEE","ENPH","FSLR","BEP","SEDG","CWEN","PLUG","HASI","AY","ARRY",
-              "MAXN","SPWR","RUN","AMRC","NOVA","NEP","ORSTED","VESTAS","RWE","BEPC"],
+              "MRNA","REGN","VRTX","BMRN","SGEN","FATE","BLUE","SGMO","ARCT","TBIO"],
+    "PHO":  ["XYLEM","AWK","WTR","PRIM","ARIS","MSEX","SJW","AWR","CWT","YORW",
+              "NI","GHM","REXNORD","ITRI","WATTS","MUELLER","GWW","LAYNE","ARTNA","GWCO"],
+    "ICLN": ["NEE","ENPH","FSLR","ORSTED","VESTAS","RWE","BEP","SEDG","CWEN","PLUG",
+              "HASI","AY","NOVA","ARRY","MAXN","SPWR","RUN","NOVA","OPTT","AMRC"],
 }
 
 def _get(url, timeout=25):
@@ -197,10 +197,10 @@ def compute_correlation_matrix(sector_prices_dict, n_months=12):
             ra_n=ra[-n:]; rb_n=rb[-n:]
             ma=sum(ra_n)/n; mb=sum(rb_n)/n
             cov=sum((ra_n[j]-ma)*(rb_n[j]-mb) for j in range(n))/n
-            sa_std=math.sqrt(sum((r-ma)**2 for r in ra_n)/n)
-            sb_std=math.sqrt(sum((r-mb)**2 for r in rb_n)/n)
-            if sa_std>0 and sb_std>0:
-                corr=round(cov/(sa_std*sb_std),3)
+            sa_s=math.sqrt(sum((r-ma)**2 for r in ra_n)/n)
+            sb_s=math.sqrt(sum((r-mb)**2 for r in rb_n)/n)
+            if sa_s>0 and sb_s>0:
+                corr=round(cov/(sa_s*sb_s),3)
                 correlations[(sa,sb)]=corr; correlations[(sb,sa)]=corr
     return correlations
 
@@ -347,7 +347,7 @@ def compute_technical_score(prices,iwda_prices,w_tech,mwa=0.0):
                 rsh.append((ree-rii)/(vol_std(pe,min(252,len(pe)-1))/20.0))
     pct_rs=percentile_in_own_history(rs,rsh)
     det["rel_strength"]={"value":round(rs,2) if rs else None,"percentile":pct_rs,
-        "interpretation":("Lidera al mercado" if rs and rs>1 else "Va por detrás" if rs and rs<-1 else "En línea")}
+        "interpretation":("Lidera al mercado" if rs and rs>1 else "Va por detrás" if rs and rs<-1 else "En línea con el mercado")}
     e200=ema_n(prices,min(200,n)); de200=((prices[-1]/e200-1)*100) if e200 else None
     en=(de200/(vol/20.0)) if de200 else None; eh=[]
     for i in range(1,min(504,n-200)):
@@ -379,7 +379,7 @@ def compute_technical_score(prices,iwda_prices,w_tech,mwa=0.0):
     det["entry"]={"dist_from_max_52w":d52,"dist_from_max_5y":d5y,"percentile":pct_en,
         "interpretation":(f"Excelente entrada: {d5y:.0f}% bajo máximos" if d5y and d5y<-25
             else f"Buena entrada: {d52:.0f}% bajo máximos 52s" if d52 and d52<-10
-            else "En máximos — entrada exigente" if d5y and d5y>-3
+            else "En máximos históricos — entrada exigente" if d5y and d5y>-3
             else f"Cerca de máximos ({d52:.0f}%)" if d52 else "Sin datos")}
     co=consistency_6m(prices); coh=[]
     for i in range(1,min(756,n-130)):
@@ -387,7 +387,7 @@ def compute_technical_score(prices,iwda_prices,w_tech,mwa=0.0):
         if c is not None: coh.append(c)
     pct_co=percentile_in_own_history(co,coh)
     det["consistency"]={"value":co,"percentile":pct_co,
-        "interpretation":(f"Muy consistente ({co:.0f}%)" if co and co>=80
+        "interpretation":(f"Muy consistente ({co:.0f}% meses positivos)" if co and co>=80
             else f"Consistente ({co:.0f}%)" if co and co>=60
             else f"Inconsistente ({co:.0f}%)" if co else "Sin datos")}
     score=(w["rel_strength"]*pct_rs+w["ema200"]*pct_e+w["mom6m"]*pct_m6+
@@ -557,18 +557,22 @@ def get_prev_eps_snapshot(symbol):
 def build_reasons(etf_data,macro_det,overval,fpatterns,breadth_desc,regime,er_adj,er_desc):
     ups,dns=[],[]
     td=etf_data.get("tech_details",{})
-    for key in ["rel_strength","mom6m"]:
-        f=td.get(key,{})
-        if f.get("value") is not None:
-            pct=f.get("percentile",50)
-            if pct>70: ups.append(f"{f.get('interpretation',key)} — pct {pct:.0f}")
-            elif pct<30: dns.append(f"{f.get('interpretation',key)} — pct {pct:.0f}")
+    rs=td.get("rel_strength",{})
+    if rs.get("value") is not None:
+        pct=rs.get("percentile",50)
+        if pct>70: ups.append(f"{rs['interpretation']} — pct {pct:.0f}")
+        elif pct<30: dns.append(f"{rs['interpretation']} — pct {pct:.0f}")
     em=td.get("ema200",{})
     if em.get("value") is not None:
         pct=em.get("percentile",50); val=em["value"]
         if pct>70 and val>0: ups.append(f"{em['interpretation']} — pct {pct:.0f}")
         elif val>0: ups.append(f"{em['interpretation']}")
         elif pct<30: dns.append(f"{em['interpretation']} — pct {pct:.0f}")
+    m6=td.get("mom6m",{})
+    if m6.get("value") is not None:
+        pct=m6.get("percentile",50)
+        if pct>75: ups.append(f"{m6['interpretation']} — pct {pct:.0f}")
+        elif pct<25: dns.append(f"{m6['interpretation']} — pct {pct:.0f}")
     en=td.get("entry",{})
     if en.get("dist_from_max_5y") is not None:
         pct=en.get("percentile",50)
@@ -584,7 +588,7 @@ def build_reasons(etf_data,macro_det,overval,fpatterns,breadth_desc,regime,er_ad
     elif any(x in breadth_desc.lower() for x in ["positivo","excelente"]): ups.append(f"Breadth: {breadth_desc}")
     if er_adj>0: ups.append(f"Earnings: {er_desc}")
     elif er_adj<0: dns.append(f"Earnings: {er_desc}")
-    if regime=="opportunity": ups.append("Régimen: pánico — oportunidad histórica")
+    if regime=="opportunity": ups.append("Régimen: pánico — oportunidad histórica de entrada")
     for md in macro_det.values():
         if isinstance(md,dict) and md.get("desc"):
             if md.get("score",50)>70: ups.append(f"Macro: {md['desc']}")
@@ -614,7 +618,7 @@ def build_recommendation(sector_ranking,month_str,portfolio_signals,regime_info,
         corr=get_correlation(correlations,top1["sector"],candidate["sector"])
         if abs(corr)<=MAX_CORRELATION: top2=candidate; break
     if top2 is None and len(sector_ranking)>1:
-        top2=sector_ranking[1]; WARN.append(f"Top2 sin filtro correlacion")
+        top2=sector_ranking[1]; WARN.append("Top2 sin filtro correlacion")
     ya_tiene=any(s["symbol"]==top1["symbol"] for s in portfolio_signals)
     accion=(f"Añade más: {top1['name']} ({top1['symbol']}) — sigue siendo el #1"
             if ya_tiene else f"Aporta este mes en: {top1['name']} ({top1['symbol']})")
@@ -764,7 +768,8 @@ def main():
         er=f" er{r.get('earnings_revision_adj',0):+d}" if r.get("earnings_revision_adj",0)!=0 else ""
         print(f"  #{i+1} {r['sector']:22s} {r['symbol']:10s} score={r['score_final']:5.1f} {r.get('overval_level','')}{fp}{br}{er}")
     print(f"{'='*65}")
-    print(f"v11: 13 sectores | correlacion | earnings | curva tipos | diario. Avisos: {len(WARN)}")
+    print(f"v11: 13 sectores | correlacion Top2 | earnings revision | curva tipos | diario señales")
+    print(f"Avisos: {len(WARN)}")
 
 if __name__ == "__main__":
     main()
