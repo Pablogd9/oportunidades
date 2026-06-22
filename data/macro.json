@@ -1,8 +1,8 @@
 {
-  "updated": "2026-06-22T18:02:50Z",
+  "updated": "2026-06-22T22:21:20Z",
   "fred_available": true,
   "vix": {
-    "value": 17.3,
+    "value": 17.28,
     "trend": "up",
     "pct_6m": 37.0,
     "score": 63.0,
@@ -30,12 +30,13 @@
     "interpretation": "Precio spot estable"
   },
   "iwda": {
-    "price": 125.03,
-    "ret_1m": 1.79,
-    "ret_3m": 14.95,
-    "ret_6m": 14.41,
-    "ret_1y": 25.59,
+    "price": 124.82,
+    "ret_1m": 2.72,
+    "ret_3m": 13.63,
+    "ret_6m": 13.75,
+    "ret_1y": 26.55,
     "prices_6m": [
+      109.285,
       110.425,
       110.95,
       111.165,
@@ -160,10 +161,10 @@
       124.14,
       124.21,
       124.62,
-      124.82,
-      125.03
+      124.82
     ],
     "dates_6m": [
+      "2025-12-17",
       "2025-12-18",
       "2025-12-19",
       "2025-12-22",
@@ -288,8 +289,7 @@
       "2026-06-16",
       "2026-06-17",
       "2026-06-18",
-      "2026-06-19",
-      "2026-06-22"
+      "2026-06-19"
     ]
   },
   "interest_rates": {
@@ -297,7 +297,7 @@
     "trend": "neutral",
     "pct_2y": 53.0,
     "score": 47.0,
-    "yield_curve": 0.29,
+    "yield_curve": 0.27,
     "curve_status": "Plana",
     "interpretation": "Tipos moderados — impacto neutro"
   },
