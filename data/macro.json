@@ -1,23 +1,23 @@
 {
-  "updated": "2026-06-23T10:46:50Z",
+  "updated": "2026-06-23T16:08:43Z",
   "fred_available": true,
   "vix": {
-    "value": 19.83,
+    "value": 19.45,
     "trend": "up",
-    "pct_6m": 69.0,
-    "score": 31.0,
+    "pct_6m": 66.0,
+    "score": 34.0,
     "oportunidad_entrada": false,
     "interpretation": "Normal — entorno neutral"
   },
   "dxy": {
-    "value": 101.17,
+    "value": 101.37,
     "trend": "neutral",
     "pct_6m": 100.0,
     "score_inverse": 0.0,
     "interpretation": "Dólar estable — impacto neutro"
   },
   "inr": {
-    "value": 94.735,
+    "value": 94.725,
     "trend": "neutral",
     "pct_6m": 73.0,
     "interpretation": "Rupia estable/apreciándose — favorable para India ETFs"
@@ -30,11 +30,11 @@
     "interpretation": "Precio spot estable"
   },
   "iwda": {
-    "price": 123.55,
-    "ret_1m": 0.02,
-    "ret_3m": 13.16,
-    "ret_6m": 11.89,
-    "ret_1y": 24.23,
+    "price": 123.99,
+    "ret_1m": 0.37,
+    "ret_3m": 13.56,
+    "ret_6m": 12.28,
+    "ret_1y": 24.67,
     "prices_6m": [
       110.95,
       111.165,
@@ -161,7 +161,7 @@
       124.62,
       124.82,
       125.03,
-      123.55
+      123.99
     ],
     "dates_6m": [
       "2025-12-19",
