@@ -1,217 +1,143 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import json, os, datetime, urllib.request
-from concurrent.futures import ThreadPoolExecutor, as_completed
+import json, os, urllib.request, datetime, time
 
 ROOT     = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE    = os.path.join(ROOT, "data", "cache")
-MANIFEST = os.path.join(CACHE, "_manifest.json")
-UA       = {"User-Agent": "Mozilla/5.0 (compatible; CacheBuilder/1.0)"}
+HOLD_DIR = os.path.join(ROOT, "data", "cache", "holdings")
+UA       = {"User-Agent": "pablo@example.com QuantScanner/1.0"}
 
-UNIVERSE = [
-    {"id":"SMH",  "symbol":"SMH",     "name":"VanEck Semiconductor ETF",           "sector":"Semiconductores", "use":"backtest+scan", "inception":"2000-05-05", "aum_bn":72.0},
-    {"id":"IBB",  "symbol":"IBB",     "name":"iShares Nasdaq Biotechnology ETF",   "sector":"Biotecnologia",   "use":"backtest+scan", "inception":"2001-02-05", "aum_bn":7.8},
-    {"id":"ITA",  "symbol":"ITA",     "name":"iShares US Aerospace & Defense",     "sector":"Defensa",         "use":"backtest+scan", "inception":"2001-05-01", "aum_bn":6.1},
-    {"id":"IGV",  "symbol":"IGV",     "name":"iShares Expanded Tech-Software ETF", "sector":"Software y Cloud","use":"backtest+scan", "inception":"2001-07-10", "aum_bn":9.2},
-    {"id":"VHT",  "symbol":"VHT",     "name":"Vanguard Health Care ETF",           "sector":"Salud",           "use":"backtest+scan", "inception":"2004-01-26", "aum_bn":18.2},
-    {"id":"PHO",  "symbol":"PHO",     "name":"Invesco Water Resources ETF",        "sector":"Agua",            "use":"backtest+scan", "inception":"2005-12-06", "aum_bn":2.1},
-    {"id":"XBI",  "symbol":"XBI",     "name":"SPDR S&P Biotech ETF",               "sector":"Biotecnologia",   "use":"backtest+scan", "inception":"2006-02-06", "aum_bn":6.4},
-    {"id":"IHI",  "symbol":"IHI",     "name":"iShares US Medical Devices ETF",     "sector":"Salud",           "use":"backtest+scan", "inception":"2006-05-01", "aum_bn":4.1},
-    {"id":"ICLN", "symbol":"ICLN",    "name":"iShares Global Clean Energy ETF",    "sector":"Energia Limpia",  "use":"backtest+scan", "inception":"2008-06-24", "aum_bn":2.8},
-    {"id":"GRID", "symbol":"GRID",    "name":"First Trust NASDAQ Smart Grid",      "sector":"Infraestructura", "use":"backtest+scan", "inception":"2009-11-19", "aum_bn":0.6},
-    {"id":"COPX", "symbol":"COPX",    "name":"Global X Copper Miners ETF",         "sector":"Cobre y Metales", "use":"backtest+scan", "inception":"2010-04-19", "aum_bn":2.3},
-    {"id":"LIT",  "symbol":"LIT",     "name":"Global X Lithium & Battery Tech ETF","sector":"Litio y Baterias","use":"backtest+scan", "inception":"2010-07-22", "aum_bn":1.4},
-    {"id":"INDA", "symbol":"INDA",    "name":"iShares MSCI India ETF",             "sector":"India",           "use":"backtest+scan", "inception":"2012-02-02", "aum_bn":8.9},
-    {"id":"ROBO", "symbol":"ROBO",    "name":"Robo Global Robotics & Automation",  "sector":"Robotica e IA",   "use":"backtest+scan", "inception":"2013-10-22", "aum_bn":1.8},
-    {"id":"CIBR", "symbol":"CIBR",    "name":"First Trust Nasdaq Cybersecurity",   "sector":"Ciberseguridad",  "use":"backtest+scan", "inception":"2015-07-07", "aum_bn":6.2},
-    {"id":"PAVE", "symbol":"PAVE",    "name":"Global X US Infrastructure Dev",     "sector":"Infraestructura", "use":"backtest+scan", "inception":"2016-10-11", "aum_bn":7.3},
-    {"id":"NLR",  "symbol":"NLR",     "name":"VanEck Uranium+Nuclear Energy ETF",  "sector":"Uranio y Nuclear","use":"proxy",         "inception":"2007-08-13", "aum_bn":0.9},
-    {"id":"XAR",  "symbol":"XAR",     "name":"SPDR S&P Aerospace & Defense ETF",   "sector":"Defensa",         "use":"proxy",         "inception":"2011-09-28", "aum_bn":2.1},
-    {"id":"HACK", "symbol":"HACK",    "name":"ETFMG Prime Cyber Security ETF",     "sector":"Ciberseguridad",  "use":"proxy",         "inception":"2014-11-12", "aum_bn":1.5},
-    {"id":"CGW",  "symbol":"CGW",     "name":"Invesco S&P Global Water ETF",       "sector":"Agua",            "use":"proxy",         "inception":"2005-05-13", "aum_bn":0.8},
-    {"id":"SEMI", "symbol":"SEMI.AS", "name":"iShares MSCI Global Semiconductors", "sector":"Semiconductores", "use":"scan_only",     "inception":"2010-10-01", "aum_bn":8.2},
-    {"id":"WTAI", "symbol":"WTAI",    "name":"WisdomTree AI ETF",                  "sector":"IA y Robotica",   "use":"scan_only",     "inception":"2023-01-10", "aum_bn":1.2},
-    {"id":"NATO", "symbol":"NATO",    "name":"VanEck Defense ETF",                 "sector":"Defensa",         "use":"scan_only",     "inception":"2023-08-08", "aum_bn":1.8},
-    {"id":"GNOM", "symbol":"GNOM",    "name":"Global X Genomics & Biotech ETF",    "sector":"Genomica",        "use":"scan_only",     "inception":"2019-04-05", "aum_bn":0.5},
-    {"id":"EMXC", "symbol":"EMXC",    "name":"iShares MSCI EM ex China ETF",       "sector":"Emergentes",      "use":"scan_only",     "inception":"2017-07-13", "aum_bn":9.2},
-    {"id":"FLIN", "symbol":"FLIN",    "name":"Franklin FTSE India ETF",            "sector":"India",           "use":"scan_only",     "inception":"2017-02-06", "aum_bn":0.9},
-    {"id":"BUG",  "symbol":"BUG",     "name":"Global X Cybersecurity ETF",         "sector":"Ciberseguridad",  "use":"scan_only",     "inception":"2019-11-04", "aum_bn":0.8},
-    {"id":"QCLN", "symbol":"QCLN",    "name":"First Trust NASDAQ Clean Edge ETF",  "sector":"Energia Limpia",  "use":"scan_only",     "inception":"2007-02-20", "aum_bn":1.1},
-    {"id":"URNM", "symbol":"URNM",    "name":"Sprott Uranium Miners ETF",          "sector":"Uranio y Nuclear","use":"scan_only",     "inception":"2019-12-03", "aum_bn":1.2},
-    {"id":"IWDA", "symbol":"IWDA.AS", "name":"iShares Core MSCI World UCITS ETF",  "sector":"Benchmark",       "use":"benchmark",     "inception":"2009-09-25", "aum_bn":120.0},
-    {"id":"SPY",  "symbol":"SPY",     "name":"SPDR S&P 500 ETF Trust",             "sector":"Benchmark",       "use":"benchmark",     "inception":"1993-01-22", "aum_bn":580.0},
-]
+ETF_CIK_MAP = {
+    "ITA":  "0001100663",
+    "COPX": "0001432353",
+    "ROBO": "0001318814",
+    "INDA": "0001100663",
+    "PHO":  "0000049077",
+    "ICLN": "0001100663",
+    "IGV":  "0001100663",
+    "LIT":  "0001432353",
+}
 
-MAX_WORKERS = 6
+ETF_HOLDINGS_FALLBACK = {
+    "ITA":  ["RTX","LMT","NOC","GD","BA","HII","TDG","HEI","TXT","LDOS",
+              "SAIC","CACI","BAH","MOOG","AXON","KTOS","AVAV","SPR","DRS","L3H"],
+    "COPX": ["FCX","SCCO","BHP","RIO","GLEN","TECK","FM","HBM","CMMC","ERO",
+              "IVN","ANTO","TGB","NGEX","MTAL","CS","FQVLF","CU","LUNR","GEX"],
+    "ROBO": ["ISRG","ABB","FANUC","KEYB","BRKS","NOVT","NDSN","TRMB","ROP",
+              "AZTA","ONTO","LRCX","GTLS","ITRI","XYL","FLOW","BRKR","MKSI","IRBT"],
+    "INDA": ["INFY","WIPRO","HDB","IBN","WIT","RELIANCE","BHARTIARTL","TCS",
+              "HINDUNILVR","ICICIBC","SBIN","LT","KOTAKBANK","BAJFINANCE","ASIANPAINT",
+              "ULTRACEMCO","TITAN","NESTLEIND","HDFCB","AXBK"],
+    "PHO":  ["XYL","AWK","PRIM","MSEX","SJW","AWR","CWT","NI","GHM",
+              "ITRI","WATTS","GWW","ARTNA","WTR","YORW","MUELLER","ARIS","LAYNE","GWCO","REXNORD"],
+    "ICLN": ["NEE","ENPH","FSLR","BEP","SEDG","CWEN","PLUG","HASI","AY",
+              "ARRY","MAXN","RUN","AMRC","NOVA","NEP","BEPC","SPWR","VWDRY","ORSTED","RWE"],
+    "IGV":  ["MSFT","CRM","ORCL","ADBE","NOW","SNOW","PLTR","WDAY","TEAM","INTU",
+              "ADSK","ANSS","CDNS","PTC","TTWO","EA","RBLX","U","DDOG","ZS"],
+    "LIT":  ["ALB","SQM","LTHM","LAC","SGML","PLL","LIVENT","ALTM","EVGO","CHPT",
+              "BYDDF","CATL","PANASONIC","LG","SAMSUNG","TESLA","BYD","ENVX","FREY","FREYR"],
+}
 
-def _get(url, timeout=30):
+def _get(url, timeout=20):
     req=urllib.request.Request(url,headers=UA)
     with urllib.request.urlopen(req,timeout=timeout) as r:
         return json.loads(r.read().decode("utf-8"))
 
-def fetch_full_history(symbol):
-    url=f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?range=max&interval=1d"
+def fetch_holdings_edgar(symbol, cik):
     try:
-        d=_get(url); res=d["chart"]["result"][0]
-        ts=res.get("timestamp") or []
-        cls=(res.get("indicators") or {}).get("quote",[{}])[0].get("close") or []
-        pairs={}
-        for t,c in zip(ts,cls):
-            if c is None: continue
-            pairs[datetime.datetime.utcfromtimestamp(t).strftime("%Y-%m-%d")]=round(float(c),6)
-        series=sorted(pairs.items())
-        return {"dates":[d for d,_ in series],"prices":[p for _,p in series],
-                "count":len(series),"first":series[0][0] if series else None,
-                "last":series[-1][0] if series else None}
-    except Exception as e:
-        return {"error":str(e),"dates":[],"prices":[],"count":0}
+        data=_get(f"https://data.sec.gov/submissions/CIK{cik.zfill(10)}.json")
+        filings=data.get("filings",{}).get("recent",{})
+        forms=filings.get("form",[]); dates=filings.get("filingDate",[])
+        nport_idx=next((i for i,f in enumerate(forms) if f in ("N-PORT","N-PORT/A")),None)
+        if nport_idx is None: return None,"No N-PORT encontrado"
+        filing_date=dates[nport_idx]
+        facts=_get(f"https://data.sec.gov/api/xbrl/companyfacts/CIK{cik.zfill(10)}.json")
+        investments=facts.get("facts",{}).get("nport-p",{})
+        if not investments: return None,"Sin datos XBRL N-PORT"
+        holdings_raw={}
+        if "InvstOrSecs" in investments:
+            for item in investments["InvstOrSecs"].get("units",{}).get("USD",[]):
+                ticker=item.get("ticker") or item.get("name","")
+                val=item.get("val",0)
+                if ticker and val>0: holdings_raw[ticker]=holdings_raw.get(ticker,0)+val
+        if not holdings_raw: return None,"Sin holdings en XBRL"
+        total=sum(holdings_raw.values())
+        holdings=[{"ticker":t,"weight_pct":round(v/total*100,2) if total>0 else 0,"value_usd":round(v)}
+                  for t,v in sorted(holdings_raw.items(),key=lambda x:-x[1])[:30]]
+        return holdings,filing_date
+    except Exception as e: return None,str(e)
 
-def fetch_recent_history(symbol):
-    url=f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?range=1mo&interval=1d"
+def fetch_holdings_yahoo(symbol):
     try:
-        d=_get(url); res=d["chart"]["result"][0]
-        ts=res.get("timestamp") or []
-        cls=(res.get("indicators") or {}).get("quote",[{}])[0].get("close") or []
-        pairs={}
-        for t,c in zip(ts,cls):
-            if c is None: continue
-            pairs[datetime.datetime.utcfromtimestamp(t).strftime("%Y-%m-%d")]=round(float(c),6)
-        series=sorted(pairs.items())
-        return {"dates":[d for d,_ in series],"prices":[p for _,p in series]}
-    except Exception as e:
-        return {"error":str(e),"dates":[],"prices":[]}
+        d=_get(f"https://query1.finance.yahoo.com/v10/finance/quoteSummary/{symbol}?modules=topHoldings")
+        raw=d["quoteSummary"]["result"][0]["topHoldings"]["holdings"]
+        holdings=[{"ticker":h.get("symbol",""),"weight_pct":round(h.get("holdingPercent",0)*100,2),"value_usd":None}
+                  for h in raw[:20] if h.get("symbol")]
+        return holdings if holdings else None
+    except: return None
 
-def load_manifest():
-    if os.path.exists(MANIFEST):
-        with open(MANIFEST,encoding="utf-8") as f: return json.load(f)
-    return {"updated":None,"etfs":{}}
+def save_holdings(symbol,holdings,source,report_date=None):
+    os.makedirs(HOLD_DIR,exist_ok=True)
+    path=os.path.join(HOLD_DIR,f"{symbol.replace('.','-')}_holdings.json")
+    with open(path,"w",encoding="utf-8") as f:
+        json.dump({"symbol":symbol,"source":source,
+                   "report_date":report_date or datetime.date.today().isoformat(),
+                   "updated":datetime.datetime.utcnow().isoformat(timespec="seconds")+"Z",
+                   "count":len(holdings),"tickers":[h["ticker"] for h in holdings],
+                   "holdings":holdings},f,ensure_ascii=False,indent=2)
 
-def save_manifest(manifest):
-    manifest["updated"]=datetime.datetime.utcnow().isoformat(timespec="seconds")+"Z"
-    with open(MANIFEST,"w",encoding="utf-8") as f: json.dump(manifest,f,ensure_ascii=False,indent=2)
-
-def load_cache(symbol):
-    path=os.path.join(CACHE,f"{symbol.replace('.','-')}.json")
+def load_holdings(symbol):
+    path=os.path.join(HOLD_DIR,f"{symbol.replace('.','-')}_holdings.json")
     if os.path.exists(path):
         with open(path,encoding="utf-8") as f: return json.load(f)
     return None
 
-def save_cache(symbol,data):
-    path=os.path.join(CACHE,f"{symbol.replace('.','-')}.json")
-    with open(path,"w",encoding="utf-8") as f: json.dump(data,f,ensure_ascii=False,separators=(",",":"))
+def needs_update(symbol):
+    cached=load_holdings(symbol)
+    if not cached: return True
+    try:
+        dt=datetime.datetime.fromisoformat(cached.get("updated","").replace("Z",""))
+        return (datetime.datetime.utcnow()-dt).days>90
+    except: return True
 
-def merge_with_cache(cached,new_data):
-    if not new_data.get("dates"): return cached,0
-    existing=set(cached["dates"]); added=0
-    for date,price in zip(new_data["dates"],new_data["prices"]):
-        if date not in existing and date>cached["last"]:
-            cached["dates"].append(date); cached["prices"].append(price); added+=1
-    if added>0:
-        pairs=sorted(zip(cached["dates"],cached["prices"]))
-        cached["dates"]=[d for d,_ in pairs]; cached["prices"]=[p for _,p in pairs]
-        cached["count"]=len(cached["dates"]); cached["last"]=cached["dates"][-1]
-    return cached,added
-
-def needs_update(manifest,symbol):
-    info=manifest["etfs"].get(symbol,{})
-    last=info.get("last_updated")
-    if not last: return True
-    days=(datetime.datetime.utcnow()-datetime.datetime.fromisoformat(last.replace("Z",""))).days
-    return days>=1
-
-def process_etf(etf,manifest,force_full=False):
-    symbol=etf["symbol"]
-    result={"symbol":symbol,"id":etf["id"],"status":None,"days":0,"added":0}
-    cached=load_cache(symbol)
-    if cached and cached.get("count",0)>0 and not force_full:
-        if not needs_update(manifest,symbol):
-            result["status"]="skip"; result["days"]=cached["count"]; return result
-        new_data=fetch_recent_history(symbol)
-        if new_data.get("error"):
-            result["status"]=f"error: {new_data['error']}"; return result
-        cached,added=merge_with_cache(cached,new_data)
-        cached["last_updated"]=datetime.datetime.utcnow().isoformat(timespec="seconds")+"Z"
-        save_cache(symbol,cached)
-        result["status"]="updated"; result["days"]=cached["count"]; result["added"]=added
-    else:
-        data=fetch_full_history(symbol)
-        if data.get("error") or data["count"]==0:
-            result["status"]=f"error: {data.get('error','sin datos')}"; return result
-        data.update({"symbol":symbol,"id":etf["id"],"name":etf["name"],"sector":etf["sector"],
-                     "use":etf["use"],"inception":etf.get("inception"),"aum_bn":etf.get("aum_bn"),
-                     "last_updated":datetime.datetime.utcnow().isoformat(timespec="seconds")+"Z"})
-        save_cache(symbol,data)
-        result["status"]="downloaded"; result["days"]=data["count"]
-    return result
-
-def validate_cache():
-    print("\nValidando cache...")
-    issues=[]
-    for etf in UNIVERSE:
-        symbol=etf["symbol"]; cached=load_cache(symbol)
-        if not cached: issues.append(f"  {symbol}: no encontrado"); continue
-        if cached.get("count",0)<20: issues.append(f"  {symbol}: solo {cached.get('count',0)} dias"); continue
-        print(f"  {symbol:10s} {cached['count']:5d} dias | {cached.get('first')} -> {cached.get('last')}")
-    if issues: [print(i) for i in issues]
-    else: print("Cache validado correctamente")
-
-def print_summary():
-    print("\n"+"="*60+"\nRESUMEN DEL CACHE\n"+"="*60)
-    for group_name,group in [("BACKTEST",[e for e in UNIVERSE if "backtest" in e["use"]]),
-                              ("PROXY",[e for e in UNIVERSE if e["use"]=="proxy"]),
-                              ("SOLO ESCANER",[e for e in UNIVERSE if e["use"]=="scan_only"]),
-                              ("BENCHMARK",[e for e in UNIVERSE if e["use"]=="benchmark"])]:
-        print(f"\n[{group_name}]")
-        for etf in group:
-            cached=load_cache(etf["symbol"])
-            if cached and cached.get("count",0)>0:
-                try: years=round((datetime.date.fromisoformat(cached["last"])-datetime.date.fromisoformat(cached["first"])).days/365.25,1)
-                except: years=0
-                print(f"  {etf['symbol']:10s} {cached['count']:>6} dias | {cached.get('first')} -> {cached.get('last')} | {years:.1f}A")
-            else: print(f"  {etf['symbol']:10s} sin datos")
-    print("\n"+"="*60+"\nPODER ESTADISTICO (rolling window 5 anos)\n"+"-"*60)
-    total=0
-    for etf in [e for e in UNIVERSE if "backtest" in e["use"]]:
-        cached=load_cache(etf["symbol"])
-        if cached and cached.get("count",0)>0:
-            try:
-                years=(datetime.date.fromisoformat(cached["last"])-datetime.date.fromisoformat(cached["first"])).days/365.25
-                if years>5: s=int((years-5)*12); total+=s; print(f"  {etf['symbol']:10s} {years:.1f}A -> ~{s} senales")
-            except: pass
-    print(f"\n  TOTAL senales estimadas: ~{total}")
-    if total>200: print("  EXCELENTE — p-value < 0.05 alcanzable")
-    elif total>120: print("  BUENO — potencia estadistica suficiente")
-    else: print("  INSUFICIENTE")
-    print("="*60)
+def get_holdings(symbol):
+    if not needs_update(symbol):
+        cached=load_holdings(symbol)
+        if cached and cached.get("tickers"): return cached["tickers"]
+    print(f"  {symbol}...",end=" ",flush=True)
+    cik=ETF_CIK_MAP.get(symbol)
+    if cik:
+        h,info=fetch_holdings_edgar(symbol,cik)
+        if h:
+            save_holdings(symbol,h,"SEC EDGAR N-PORT",info)
+            print(f"EDGAR ({len(h)} holdings, {info})")
+            return [x["ticker"] for x in h]
+        print(f"EDGAR fallo ({info}), Yahoo...",end=" ",flush=True)
+    h=fetch_holdings_yahoo(symbol)
+    if h:
+        save_holdings(symbol,h,"Yahoo Finance")
+        print(f"Yahoo ({len(h)} holdings)")
+        return [x["ticker"] for x in h]
+    fb=ETF_HOLDINGS_FALLBACK.get(symbol,[])
+    if fb:
+        save_holdings(symbol,[{"ticker":t,"weight_pct":round(100/len(fb),1),"value_usd":None} for t in fb],"fallback")
+        print(f"fallback ({len(fb)} holdings)")
+        return fb
+    print("sin datos"); return []
 
 def main():
-    import sys
-    force_full="--force" in sys.argv
-    os.makedirs(CACHE,exist_ok=True)
-    manifest=load_manifest()
-    print(f"Actualizando cache — {len(UNIVERSE)} simbolos\n")
-    t_start=datetime.datetime.utcnow(); results=[]; errors=[]
-    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
-        futures={ex.submit(process_etf,etf,manifest,force_full):etf for etf in UNIVERSE}
-        for future in as_completed(futures):
-            etf=futures[future]
-            try:
-                r=future.result(); results.append(r)
-                s,sym,days,added=r["status"],r["symbol"],r["days"],r.get("added",0)
-                if s=="downloaded": print(f"  {sym:12s} {days:5d} dias (historico completo)")
-                elif s=="updated":  print(f"  {sym:12s} {days:5d} dias (+{added} nuevos)")
-                elif s=="skip":     print(f"  {sym:12s} {days:5d} dias (sin cambios)")
-                elif s and s.startswith("error"): print(f"  {sym:12s} ERROR: {s}"); errors.append(sym)
-                manifest["etfs"][sym]={"last_updated":datetime.datetime.utcnow().isoformat(timespec="seconds")+"Z","days":days,"status":s}
-            except Exception as e:
-                print(f"  {etf['symbol']:12s} EXCEPCION: {e}"); errors.append(etf["symbol"])
-    save_manifest(manifest)
-    elapsed=round((datetime.datetime.utcnow()-t_start).seconds,0)
-    dl=sum(1 for r in results if r["status"]=="downloaded")
-    print(f"\nCompletado en {elapsed}s | Descargados:{dl} | Errores:{len(errors)}")
-    if errors: print(f"Errores: {', '.join(errors)}")
-    validate_cache()
-    print_summary()
+    print("Actualizando holdings via SEC EDGAR...")
+    os.makedirs(HOLD_DIR,exist_ok=True)
+    updated=0; failed=0
+    for symbol in ETF_HOLDINGS_FALLBACK:
+        tickers=get_holdings(symbol)
+        if tickers: updated+=1
+        else: failed+=1
+        time.sleep(0.5)
+    print(f"\nActualizados: {updated} | Fallidos: {failed}\nRESUMEN:")
+    for symbol in ETF_HOLDINGS_FALLBACK:
+        cached=load_holdings(symbol)
+        if cached: print(f"  {symbol:8s} {cached['count']:3d} holdings | {cached['source']:25s} | {cached.get('report_date','?')}")
+        else: print(f"  {symbol:8s} sin datos")
 
 if __name__=="__main__":
     main()
