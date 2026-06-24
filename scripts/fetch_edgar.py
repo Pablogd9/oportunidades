@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-fetch_edgar.py — Holdings reales de ETFs via SEC EDGAR N-PORT.
-"""
-
 import json, os, urllib.request, datetime, time
 
 ROOT     = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -48,8 +44,7 @@ def _get(url, timeout=20):
 
 def fetch_holdings_edgar(symbol, cik):
     try:
-        url=f"https://data.sec.gov/submissions/CIK{cik.zfill(10)}.json"
-        data=_get(url)
+        data=_get(f"https://data.sec.gov/submissions/CIK{cik.zfill(10)}.json")
         filings=data.get("filings",{}).get("recent",{})
         forms=filings.get("form",[]); dates=filings.get("filingDate",[])
         nport_idx=next((i for i,f in enumerate(forms) if f in ("N-PORT","N-PORT/A")),None)
@@ -71,7 +66,7 @@ def fetch_holdings_edgar(symbol, cik):
         return holdings,filing_date
     except Exception as e: return None,str(e)
 
-def fetch_holdings_simple(symbol):
+def fetch_holdings_yahoo(symbol):
     try:
         d=_get(f"https://query1.finance.yahoo.com/v10/finance/quoteSummary/{symbol}?modules=topHoldings")
         raw=d["quoteSummary"]["result"][0]["topHoldings"]["holdings"]
@@ -116,8 +111,8 @@ def get_holdings(symbol):
             save_holdings(symbol,h,"SEC EDGAR N-PORT",info)
             print(f"EDGAR ({len(h)} holdings, {info})")
             return [x["ticker"] for x in h]
-        print(f"EDGAR falló ({info}), Yahoo...",end=" ",flush=True)
-    h=fetch_holdings_simple(symbol)
+        print(f"EDGAR fallo ({info}), Yahoo...",end=" ",flush=True)
+    h=fetch_holdings_yahoo(symbol)
     if h:
         save_holdings(symbol,h,"Yahoo Finance")
         print(f"Yahoo ({len(h)} holdings)")
