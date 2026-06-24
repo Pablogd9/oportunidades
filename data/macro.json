@@ -1,25 +1,25 @@
 {
-  "updated": "2026-06-23T21:57:10Z",
+  "updated": "2026-06-24T08:52:32Z",
   "fred_available": true,
   "vix": {
-    "value": 19.49,
+    "value": 19.23,
     "trend": "up",
-    "pct_6m": 66.0,
-    "score": 34.0,
+    "pct_6m": 63.0,
+    "score": 37.0,
     "oportunidad_entrada": false,
     "interpretation": "Normal — entorno neutral"
   },
   "dxy": {
-    "value": 101.36,
-    "trend": "neutral",
+    "value": 101.6,
+    "trend": "up",
     "pct_6m": 100.0,
     "score_inverse": 0.0,
-    "interpretation": "Dólar estable — impacto neutro"
+    "interpretation": "Dólar fuerte — presión sobre emergentes y cripto"
   },
   "inr": {
-    "value": 94.725,
+    "value": 94.645,
     "trend": "neutral",
-    "pct_6m": 73.0,
+    "pct_6m": 71.0,
     "interpretation": "Rupia estable/apreciándose — favorable para India ETFs"
   },
   "uranium_spot": {
@@ -30,13 +30,12 @@
     "interpretation": "Precio spot estable"
   },
   "iwda": {
-    "price": 123.99,
-    "ret_1m": 0.37,
-    "ret_3m": 13.56,
-    "ret_6m": 12.28,
-    "ret_1y": 24.67,
+    "price": 124.27,
+    "ret_1m": 0.94,
+    "ret_3m": 13.77,
+    "ret_6m": 12.01,
+    "ret_1y": 24.86,
     "prices_6m": [
-      110.95,
       111.165,
       111.4,
       111.5,
@@ -161,10 +160,10 @@
       124.62,
       124.82,
       125.03,
-      123.99
+      123.99,
+      124.27
     ],
     "dates_6m": [
-      "2025-12-19",
       "2025-12-22",
       "2025-12-23",
       "2025-12-24",
@@ -289,7 +288,8 @@
       "2026-06-18",
       "2026-06-19",
       "2026-06-22",
-      "2026-06-23"
+      "2026-06-23",
+      "2026-06-24"
     ]
   },
   "interest_rates": {
@@ -303,7 +303,7 @@
   },
   "bitcoin_halving": {
     "phase": "mid_cycle",
-    "days_since_halving": 795,
+    "days_since_halving": 796,
     "months_since_halving": 26.1,
     "halving_score": 60,
     "description": "Ciclo medio (26M) — momentum moderado",
