@@ -1,0 +1,31 @@
+name: Actualizar cache de datos
+
+on:
+  schedule:
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Actualizar cache
+        run: python scripts/fetch_cache.py
+
+      - name: Commit cache
+        run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add data/cache/
+          git diff --staged --quiet || git commit -m "Cache $(date -u '+%Y-%m-%d %H:%M') UTC"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
