@@ -1,12 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import json, os, datetime, urllib.request
+"""
+fetch_cache.py v2 — Descarga datos diarios por tramos y los concatena.
+
+Yahoo Finance limita rng=max a datos mensuales para series largas.
+Solucion: descargar por tramos de 2 anos con period1/period2 en timestamp
+y concatenar para obtener datos diarios completos desde el inicio.
+"""
+
+import json, os, datetime, urllib.request, time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 ROOT     = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE    = os.path.join(ROOT, "data", "cache")
 MANIFEST = os.path.join(CACHE, "_manifest.json")
-UA       = {"User-Agent": "Mozilla/5.0 (compatible; CacheBuilder/1.0)"}
+UA       = {"User-Agent": "Mozilla/5.0 (compatible; CacheBuilder/2.0)"}
 
 UNIVERSE = [
     {"id":"SMH",  "symbol":"SMH",     "name":"VanEck Semiconductor ETF",           "sector":"Semiconductores", "use":"backtest+scan", "inception":"2000-05-05", "aum_bn":72.0},
@@ -42,15 +50,19 @@ UNIVERSE = [
     {"id":"SPY",  "symbol":"SPY",     "name":"SPDR S&P 500 ETF Trust",             "sector":"Benchmark",       "use":"benchmark",     "inception":"1993-01-22", "aum_bn":580.0},
 ]
 
-MAX_WORKERS = 6
+MAX_WORKERS = 4
+TRAMO_YEARS = 2
 
 def _get(url, timeout=30):
     req=urllib.request.Request(url,headers=UA)
     with urllib.request.urlopen(req,timeout=timeout) as r:
         return json.loads(r.read().decode("utf-8"))
 
-def fetch_full_history(symbol):
-    url=f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?range=max&interval=1d"
+def fetch_tramo(symbol, date_start, date_end):
+    ts1=int(datetime.datetime.combine(date_start,datetime.time.min).timestamp())
+    ts2=int(datetime.datetime.combine(date_end,  datetime.time.max).timestamp())
+    url=(f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
+         f"?period1={ts1}&period2={ts2}&interval=1d")
     try:
         d=_get(url); res=d["chart"]["result"][0]
         ts=res.get("timestamp") or []
@@ -59,27 +71,33 @@ def fetch_full_history(symbol):
         for t,c in zip(ts,cls):
             if c is None: continue
             pairs[datetime.datetime.utcfromtimestamp(t).strftime("%Y-%m-%d")]=round(float(c),6)
-        series=sorted(pairs.items())
-        return {"dates":[d for d,_ in series],"prices":[p for _,p in series],
-                "count":len(series),"first":series[0][0] if series else None,
-                "last":series[-1][0] if series else None}
-    except Exception as e:
-        return {"error":str(e),"dates":[],"prices":[],"count":0}
+        return pairs
+    except: return {}
 
-def fetch_recent_history(symbol):
-    url=f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?range=1mo&interval=1d"
-    try:
-        d=_get(url); res=d["chart"]["result"][0]
-        ts=res.get("timestamp") or []
-        cls=(res.get("indicators") or {}).get("quote",[{}])[0].get("close") or []
-        pairs={}
-        for t,c in zip(ts,cls):
-            if c is None: continue
-            pairs[datetime.datetime.utcfromtimestamp(t).strftime("%Y-%m-%d")]=round(float(c),6)
-        series=sorted(pairs.items())
-        return {"dates":[d for d,_ in series],"prices":[p for _,p in series]}
-    except Exception as e:
-        return {"error":str(e),"dates":[],"prices":[]}
+def fetch_full_daily(symbol, inception_str):
+    try: start=datetime.date.fromisoformat(inception_str)
+    except: start=datetime.date(2000,1,1)
+    today=datetime.date.today(); all_pairs={}
+    tramo_start=start
+    while tramo_start<today:
+        tramo_end=min(
+            datetime.date(tramo_start.year+TRAMO_YEARS,tramo_start.month,tramo_start.day),
+            today)
+        pairs=fetch_tramo(symbol,tramo_start,tramo_end)
+        all_pairs.update(pairs)
+        tramo_start=tramo_end+datetime.timedelta(days=1)
+        time.sleep(0.2)
+    if not all_pairs: return {"error":"sin datos","dates":[],"prices":[],"count":0}
+    series=sorted(all_pairs.items())
+    return {"dates":[d for d,_ in series],"prices":[p for _,p in series],
+            "count":len(series),"first":series[0][0],"last":series[-1][0]}
+
+def fetch_recent_daily(symbol):
+    end=datetime.date.today(); start=end-datetime.timedelta(days=35)
+    pairs=fetch_tramo(symbol,start,end)
+    if not pairs: return {"error":"sin datos","dates":[],"prices":[]}
+    series=sorted(pairs.items())
+    return {"dates":[d for d,_ in series],"prices":[p for _,p in series]}
 
 def load_manifest():
     if os.path.exists(MANIFEST):
@@ -98,7 +116,8 @@ def load_cache(symbol):
 
 def save_cache(symbol,data):
     path=os.path.join(CACHE,f"{symbol.replace('.','-')}.json")
-    with open(path,"w",encoding="utf-8") as f: json.dump(data,f,ensure_ascii=False,separators=(",",":"))
+    with open(path,"w",encoding="utf-8") as f:
+        json.dump(data,f,ensure_ascii=False,separators=(",",":"))
 
 def merge_with_cache(cached,new_data):
     if not new_data.get("dates"): return cached,0
@@ -112,6 +131,16 @@ def merge_with_cache(cached,new_data):
         cached["count"]=len(cached["dates"]); cached["last"]=cached["dates"][-1]
     return cached,added
 
+def is_daily_data(cached):
+    if not cached or cached.get("count",0)<20: return False
+    try:
+        first=datetime.date.fromisoformat(cached["first"])
+        last=datetime.date.fromisoformat(cached["last"])
+        years=(last-first).days/365.25
+        if years<0.1: return True
+        return (cached["count"]/years)>100
+    except: return False
+
 def needs_update(manifest,symbol):
     info=manifest["etfs"].get(symbol,{})
     last=info.get("last_updated")
@@ -120,13 +149,15 @@ def needs_update(manifest,symbol):
     return days>=1
 
 def process_etf(etf,manifest,force_full=False):
-    symbol=etf["symbol"]
+    symbol=etf["symbol"]; inception=etf.get("inception","2000-01-01")
     result={"symbol":symbol,"id":etf["id"],"status":None,"days":0,"added":0}
     cached=load_cache(symbol)
-    if cached and cached.get("count",0)>0 and not force_full:
+    if cached and not is_daily_data(cached) and not force_full:
+        force_full=True
+    if cached and cached.get("count",0)>0 and is_daily_data(cached) and not force_full:
         if not needs_update(manifest,symbol):
             result["status"]="skip"; result["days"]=cached["count"]; return result
-        new_data=fetch_recent_history(symbol)
+        new_data=fetch_recent_daily(symbol)
         if new_data.get("error"):
             result["status"]=f"error: {new_data['error']}"; return result
         cached,added=merge_with_cache(cached,new_data)
@@ -134,11 +165,12 @@ def process_etf(etf,manifest,force_full=False):
         save_cache(symbol,cached)
         result["status"]="updated"; result["days"]=cached["count"]; result["added"]=added
     else:
-        data=fetch_full_history(symbol)
+        data=fetch_full_daily(symbol,inception)
         if data.get("error") or data["count"]==0:
             result["status"]=f"error: {data.get('error','sin datos')}"; return result
-        data.update({"symbol":symbol,"id":etf["id"],"name":etf["name"],"sector":etf["sector"],
-                     "use":etf["use"],"inception":etf.get("inception"),"aum_bn":etf.get("aum_bn"),
+        data.update({"symbol":symbol,"id":etf["id"],"name":etf["name"],
+                     "sector":etf["sector"],"use":etf["use"],
+                     "inception":inception,"aum_bn":etf.get("aum_bn"),
                      "last_updated":datetime.datetime.utcnow().isoformat(timespec="seconds")+"Z"})
         save_cache(symbol,data)
         result["status"]="downloaded"; result["days"]=data["count"]
@@ -150,13 +182,16 @@ def validate_cache():
     for etf in UNIVERSE:
         symbol=etf["symbol"]; cached=load_cache(symbol)
         if not cached: issues.append(f"  {symbol}: no encontrado"); continue
-        if cached.get("count",0)<20: issues.append(f"  {symbol}: solo {cached.get('count',0)} dias"); continue
-        print(f"  {symbol:10s} {cached['count']:5d} dias | {cached.get('first')} -> {cached.get('last')}")
-    if issues: [print(i) for i in issues]
-    else: print("Cache validado correctamente")
+        if cached.get("count",0)<20: issues.append(f"  {symbol}: muy pocos datos"); continue
+        daily=is_daily_data(cached); freq="diario" if daily else "MENSUAL"
+        print(f"  {symbol:10s} {cached['count']:6d} dias [{freq}] | {cached.get('first')} -> {cached.get('last')}")
+        if not daily: issues.append(f"  {symbol}: datos mensuales")
+    if issues: print("\nProblemas:"); [print(i) for i in issues]
+    else: print("\nTodos los datos son DIARIOS")
+    return len(issues)==0
 
 def print_summary():
-    print("\n"+"="*60+"\nRESUMEN DEL CACHE\n"+"="*60)
+    print("\n"+"="*65+"\nRESUMEN DEL CACHE\n"+"="*65)
     for group_name,group in [("BACKTEST",[e for e in UNIVERSE if "backtest" in e["use"]]),
                               ("PROXY",[e for e in UNIVERSE if e["use"]=="proxy"]),
                               ("SOLO ESCANER",[e for e in UNIVERSE if e["use"]=="scan_only"]),
@@ -167,40 +202,56 @@ def print_summary():
             if cached and cached.get("count",0)>0:
                 try: years=round((datetime.date.fromisoformat(cached["last"])-datetime.date.fromisoformat(cached["first"])).days/365.25,1)
                 except: years=0
-                print(f"  {etf['symbol']:10s} {cached['count']:>6} dias | {cached.get('first')} -> {cached.get('last')} | {years:.1f}A")
+                flag="" if is_daily_data(cached) else " MENSUAL"
+                print(f"  {etf['symbol']:10s} {cached['count']:>6} dias | {cached.get('first')} -> {cached.get('last')} | {years:.1f}A{flag}")
             else: print(f"  {etf['symbol']:10s} sin datos")
-    print("\n"+"="*60+"\nPODER ESTADISTICO (rolling window 5 anos)\n"+"-"*60)
+    print("\n"+"="*65+"\nPODER ESTADISTICO\n"+"-"*65)
     total=0
     for etf in [e for e in UNIVERSE if "backtest" in e["use"]]:
         cached=load_cache(etf["symbol"])
-        if cached and cached.get("count",0)>0:
+        if cached and cached.get("count",0)>0 and is_daily_data(cached):
             try:
                 years=(datetime.date.fromisoformat(cached["last"])-datetime.date.fromisoformat(cached["first"])).days/365.25
                 if years>5: s=int((years-5)*12); total+=s; print(f"  {etf['symbol']:10s} {years:.1f}A -> ~{s} senales")
             except: pass
-    print(f"\n  TOTAL senales estimadas: ~{total}")
+    print(f"\n  TOTAL: ~{total} senales")
     if total>200: print("  EXCELENTE")
     elif total>120: print("  BUENO")
     else: print("  INSUFICIENTE")
-    print("="*60)
+    print("="*65)
 
 def main():
     import sys
     force_full="--force" in sys.argv
     os.makedirs(CACHE,exist_ok=True)
     manifest=load_manifest()
-    print(f"Actualizando cache — {len(UNIVERSE)} simbolos\n")
+    print(f"fetch_cache v2 — datos DIARIOS por tramos de {TRAMO_YEARS} anos\n{len(UNIVERSE)} simbolos\n")
     t_start=datetime.datetime.utcnow(); results=[]; errors=[]
+    long_etfs =[e for e in UNIVERSE if e.get("inception","2010")<"2010"]
+    short_etfs=[e for e in UNIVERSE if e.get("inception","2010")>="2010"]
+    print(f"Historico largo (secuencial): {len(long_etfs)}")
+    for etf in long_etfs:
+        try:
+            r=process_etf(etf,manifest,force_full); results.append(r)
+            s,sym,days,added=r["status"],r["symbol"],r["days"],r.get("added",0)
+            if s=="downloaded": print(f"  {sym:12s} {days:6d} dias (completo)")
+            elif s=="updated":  print(f"  {sym:12s} {days:6d} dias (+{added})")
+            elif s=="skip":     print(f"  {sym:12s} {days:6d} dias (ok)")
+            elif s and s.startswith("error"): print(f"  {sym:12s} ERROR: {s}"); errors.append(sym)
+            manifest["etfs"][sym]={"last_updated":datetime.datetime.utcnow().isoformat(timespec="seconds")+"Z","days":days,"status":s}
+        except Exception as e:
+            print(f"  {etf['symbol']:12s} EXCEPCION: {e}"); errors.append(etf["symbol"])
+    print(f"\nHistorico corto (paralelo): {len(short_etfs)}")
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
-        futures={ex.submit(process_etf,etf,manifest,force_full):etf for etf in UNIVERSE}
+        futures={ex.submit(process_etf,etf,manifest,force_full):etf for etf in short_etfs}
         for future in as_completed(futures):
             etf=futures[future]
             try:
                 r=future.result(); results.append(r)
                 s,sym,days,added=r["status"],r["symbol"],r["days"],r.get("added",0)
-                if s=="downloaded": print(f"  {sym:12s} {days:5d} dias (historico completo)")
-                elif s=="updated":  print(f"  {sym:12s} {days:5d} dias (+{added} nuevos)")
-                elif s=="skip":     print(f"  {sym:12s} {days:5d} dias (sin cambios)")
+                if s=="downloaded": print(f"  {sym:12s} {days:6d} dias (completo)")
+                elif s=="updated":  print(f"  {sym:12s} {days:6d} dias (+{added})")
+                elif s=="skip":     print(f"  {sym:12s} {days:6d} dias (ok)")
                 elif s and s.startswith("error"): print(f"  {sym:12s} ERROR: {s}"); errors.append(sym)
                 manifest["etfs"][sym]={"last_updated":datetime.datetime.utcnow().isoformat(timespec="seconds")+"Z","days":days,"status":s}
             except Exception as e:
