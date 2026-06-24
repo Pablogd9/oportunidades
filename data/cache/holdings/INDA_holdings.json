@@ -1,0 +1,131 @@
+{
+  "symbol": "INDA",
+  "source": "fallback",
+  "report_date": "2026-06-24",
+  "updated": "2026-06-24T22:04:11Z",
+  "count": 20,
+  "tickers": [
+    "INFY",
+    "WIPRO",
+    "HDB",
+    "IBN",
+    "WIT",
+    "RELIANCE",
+    "BHARTIARTL",
+    "TCS",
+    "HINDUNILVR",
+    "ICICIBC",
+    "SBIN",
+    "LT",
+    "KOTAKBANK",
+    "BAJFINANCE",
+    "ASIANPAINT",
+    "ULTRACEMCO",
+    "TITAN",
+    "NESTLEIND",
+    "HDFCB",
+    "AXBK"
+  ],
+  "holdings": [
+    {
+      "ticker": "INFY",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "WIPRO",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "HDB",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "IBN",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "WIT",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "RELIANCE",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "BHARTIARTL",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "TCS",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "HINDUNILVR",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "ICICIBC",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "SBIN",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "LT",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "KOTAKBANK",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "BAJFINANCE",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "ASIANPAINT",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "ULTRACEMCO",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "TITAN",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "NESTLEIND",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "HDFCB",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "AXBK",
+      "weight_pct": 5.0,
+      "value_usd": null
+    }
+  ]
+}

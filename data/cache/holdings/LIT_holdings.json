@@ -1,0 +1,131 @@
+{
+  "symbol": "LIT",
+  "source": "fallback",
+  "report_date": "2026-06-24",
+  "updated": "2026-06-24T22:04:14Z",
+  "count": 20,
+  "tickers": [
+    "ALB",
+    "SQM",
+    "LTHM",
+    "LAC",
+    "SGML",
+    "PLL",
+    "LIVENT",
+    "ALTM",
+    "EVGO",
+    "CHPT",
+    "BYDDF",
+    "CATL",
+    "PANASONIC",
+    "LG",
+    "SAMSUNG",
+    "TESLA",
+    "BYD",
+    "ENVX",
+    "FREY",
+    "FREYR"
+  ],
+  "holdings": [
+    {
+      "ticker": "ALB",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "SQM",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "LTHM",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "LAC",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "SGML",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "PLL",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "LIVENT",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "ALTM",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "EVGO",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "CHPT",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "BYDDF",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "CATL",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "PANASONIC",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "LG",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "SAMSUNG",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "TESLA",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "BYD",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "ENVX",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "FREY",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "FREYR",
+      "weight_pct": 5.0,
+      "value_usd": null
+    }
+  ]
+}

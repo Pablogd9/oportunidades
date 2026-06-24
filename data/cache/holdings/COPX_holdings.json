@@ -1,0 +1,131 @@
+{
+  "symbol": "COPX",
+  "source": "fallback",
+  "report_date": "2026-06-24",
+  "updated": "2026-06-24T22:04:10Z",
+  "count": 20,
+  "tickers": [
+    "FCX",
+    "SCCO",
+    "BHP",
+    "RIO",
+    "GLEN",
+    "TECK",
+    "FM",
+    "HBM",
+    "CMMC",
+    "ERO",
+    "IVN",
+    "ANTO",
+    "TGB",
+    "NGEX",
+    "MTAL",
+    "CS",
+    "FQVLF",
+    "CU",
+    "LUNR",
+    "GEX"
+  ],
+  "holdings": [
+    {
+      "ticker": "FCX",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "SCCO",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "BHP",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "RIO",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "GLEN",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "TECK",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "FM",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "HBM",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "CMMC",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "ERO",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "IVN",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "ANTO",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "TGB",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "NGEX",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "MTAL",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "CS",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "FQVLF",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "CU",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "LUNR",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "GEX",
+      "weight_pct": 5.0,
+      "value_usd": null
+    }
+  ]
+}

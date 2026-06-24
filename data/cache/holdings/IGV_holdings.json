@@ -1,0 +1,131 @@
+{
+  "symbol": "IGV",
+  "source": "fallback",
+  "report_date": "2026-06-24",
+  "updated": "2026-06-24T22:04:13Z",
+  "count": 20,
+  "tickers": [
+    "MSFT",
+    "CRM",
+    "ORCL",
+    "ADBE",
+    "NOW",
+    "SNOW",
+    "PLTR",
+    "WDAY",
+    "TEAM",
+    "INTU",
+    "ADSK",
+    "ANSS",
+    "CDNS",
+    "PTC",
+    "TTWO",
+    "EA",
+    "RBLX",
+    "U",
+    "DDOG",
+    "ZS"
+  ],
+  "holdings": [
+    {
+      "ticker": "MSFT",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "CRM",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "ORCL",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "ADBE",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "NOW",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "SNOW",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "PLTR",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "WDAY",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "TEAM",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "INTU",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "ADSK",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "ANSS",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "CDNS",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "PTC",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "TTWO",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "EA",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "RBLX",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "U",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "DDOG",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "ZS",
+      "weight_pct": 5.0,
+      "value_usd": null
+    }
+  ]
+}

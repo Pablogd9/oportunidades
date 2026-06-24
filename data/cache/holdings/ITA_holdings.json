@@ -1,0 +1,131 @@
+{
+  "symbol": "ITA",
+  "source": "fallback",
+  "report_date": "2026-06-24",
+  "updated": "2026-06-24T22:04:09Z",
+  "count": 20,
+  "tickers": [
+    "RTX",
+    "LMT",
+    "NOC",
+    "GD",
+    "BA",
+    "HII",
+    "TDG",
+    "HEI",
+    "TXT",
+    "LDOS",
+    "SAIC",
+    "CACI",
+    "BAH",
+    "MOOG",
+    "AXON",
+    "KTOS",
+    "AVAV",
+    "SPR",
+    "DRS",
+    "L3H"
+  ],
+  "holdings": [
+    {
+      "ticker": "RTX",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "LMT",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "NOC",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "GD",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "BA",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "HII",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "TDG",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "HEI",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "TXT",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "LDOS",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "SAIC",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "CACI",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "BAH",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "MOOG",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "AXON",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "KTOS",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "AVAV",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "SPR",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "DRS",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "L3H",
+      "weight_pct": 5.0,
+      "value_usd": null
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "symbol": "ICLN",
+  "source": "fallback",
+  "report_date": "2026-06-24",
+  "updated": "2026-06-24T22:04:12Z",
+  "count": 20,
+  "tickers": [
+    "NEE",
+    "ENPH",
+    "FSLR",
+    "BEP",
+    "SEDG",
+    "CWEN",
+    "PLUG",
+    "HASI",
+    "AY",
+    "ARRY",
+    "MAXN",
+    "RUN",
+    "AMRC",
+    "NOVA",
+    "NEP",
+    "BEPC",
+    "SPWR",
+    "VWDRY",
+    "ORSTED",
+    "RWE"
+  ],
+  "holdings": [
+    {
+      "ticker": "NEE",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "ENPH",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "FSLR",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "BEP",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "SEDG",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "CWEN",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "PLUG",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "HASI",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "AY",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "ARRY",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "MAXN",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "RUN",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "AMRC",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "NOVA",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "NEP",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "BEPC",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "SPWR",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "VWDRY",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "ORSTED",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "RWE",
+      "weight_pct": 5.0,
+      "value_usd": null
+    }
+  ]
+}

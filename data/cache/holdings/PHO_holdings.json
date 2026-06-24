@@ -1,0 +1,131 @@
+{
+  "symbol": "PHO",
+  "source": "fallback",
+  "report_date": "2026-06-24",
+  "updated": "2026-06-24T22:04:12Z",
+  "count": 20,
+  "tickers": [
+    "XYL",
+    "AWK",
+    "PRIM",
+    "MSEX",
+    "SJW",
+    "AWR",
+    "CWT",
+    "NI",
+    "GHM",
+    "ITRI",
+    "WATTS",
+    "GWW",
+    "ARTNA",
+    "WTR",
+    "YORW",
+    "MUELLER",
+    "ARIS",
+    "LAYNE",
+    "GWCO",
+    "REXNORD"
+  ],
+  "holdings": [
+    {
+      "ticker": "XYL",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "AWK",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "PRIM",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "MSEX",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "SJW",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "AWR",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "CWT",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "NI",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "GHM",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "ITRI",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "WATTS",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "GWW",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "ARTNA",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "WTR",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "YORW",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "MUELLER",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "ARIS",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "LAYNE",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "GWCO",
+      "weight_pct": 5.0,
+      "value_usd": null
+    },
+    {
+      "ticker": "REXNORD",
+      "weight_pct": 5.0,
+      "value_usd": null
+    }
+  ]
+}

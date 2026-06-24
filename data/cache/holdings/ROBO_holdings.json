@@ -1,0 +1,125 @@
+{
+  "symbol": "ROBO",
+  "source": "fallback",
+  "report_date": "2026-06-24",
+  "updated": "2026-06-24T22:04:10Z",
+  "count": 19,
+  "tickers": [
+    "ISRG",
+    "ABB",
+    "FANUC",
+    "KEYB",
+    "BRKS",
+    "NOVT",
+    "NDSN",
+    "TRMB",
+    "ROP",
+    "AZTA",
+    "ONTO",
+    "LRCX",
+    "GTLS",
+    "ITRI",
+    "XYL",
+    "FLOW",
+    "BRKR",
+    "MKSI",
+    "IRBT"
+  ],
+  "holdings": [
+    {
+      "ticker": "ISRG",
+      "weight_pct": 5.3,
+      "value_usd": null
+    },
+    {
+      "ticker": "ABB",
+      "weight_pct": 5.3,
+      "value_usd": null
+    },
+    {
+      "ticker": "FANUC",
+      "weight_pct": 5.3,
+      "value_usd": null
+    },
+    {
+      "ticker": "KEYB",
+      "weight_pct": 5.3,
+      "value_usd": null
+    },
+    {
+      "ticker": "BRKS",
+      "weight_pct": 5.3,
+      "value_usd": null
+    },
+    {
+      "ticker": "NOVT",
+      "weight_pct": 5.3,
+      "value_usd": null
+    },
+    {
+      "ticker": "NDSN",
+      "weight_pct": 5.3,
+      "value_usd": null
+    },
+    {
+      "ticker": "TRMB",
+      "weight_pct": 5.3,
+      "value_usd": null
+    },
+    {
+      "ticker": "ROP",
+      "weight_pct": 5.3,
+      "value_usd": null
+    },
+    {
+      "ticker": "AZTA",
+      "weight_pct": 5.3,
+      "value_usd": null
+    },
+    {
+      "ticker": "ONTO",
+      "weight_pct": 5.3,
+      "value_usd": null
+    },
+    {
+      "ticker": "LRCX",
+      "weight_pct": 5.3,
+      "value_usd": null
+    },
+    {
+      "ticker": "GTLS",
+      "weight_pct": 5.3,
+      "value_usd": null
+    },
+    {
+      "ticker": "ITRI",
+      "weight_pct": 5.3,
+      "value_usd": null
+    },
+    {
+      "ticker": "XYL",
+      "weight_pct": 5.3,
+      "value_usd": null
+    },
+    {
+      "ticker": "FLOW",
+      "weight_pct": 5.3,
+      "value_usd": null
+    },
+    {
+      "ticker": "BRKR",
+      "weight_pct": 5.3,
+      "value_usd": null
+    },
+    {
+      "ticker": "MKSI",
+      "weight_pct": 5.3,
+      "value_usd": null
+    },
+    {
+      "ticker": "IRBT",
+      "weight_pct": 5.3,
+      "value_usd": null
+    }
+  ]
+}
