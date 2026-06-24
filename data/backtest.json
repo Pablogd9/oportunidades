@@ -1,2365 +1,607 @@
 {
-  "updated": "2026-06-21T11:34:13Z",
-  "model_version": "8.0",
+  "updated": "2026-06-24T23:45:38Z",
   "summary": {
-    "metodologia": "Top1 bate IWDA. 70/30. Cartera acumulativa 36M hasta hoy.",
-    "fecha_calculo": "2026-06-21",
-    "n_fechas": 36,
-    "total_invertido": 18000,
-    "valor_cartera_sistema": 27264.94,
-    "valor_cartera_iwda": 23730.7,
-    "rentabilidad_sistema": 51.47,
-    "rentabilidad_iwda": 31.84,
-    "alpha_cartera": 19.63,
-    "alpha_medio_ponderado": 19.64,
-    "ret_medio_ponderado": 51.47,
-    "ret_medio_iwda": 31.84,
-    "top1_bate_iwda": 23,
-    "total_con_dato": 36,
-    "pct_top1_bate_iwda": 63.9,
-    "predictividad_score": {
-      "alto_70_100": {
-        "n_fechas": 23,
-        "ret_medio": 66.38,
-        "alpha_medio": 29.71,
-        "fechas": [
-          "2023-06-01",
-          "2023-07-01",
-          "2023-08-01",
-          "2023-09-01",
-          "2023-10-01",
-          "2023-11-01",
-          "2023-12-01",
-          "2024-01-01",
-          "2024-02-01",
-          "2024-03-01",
-          "2024-04-01",
-          "2024-05-01",
-          "2024-06-01",
-          "2024-07-01",
-          "2024-12-01",
-          "2025-07-01",
-          "2025-09-01",
-          "2025-10-01",
-          "2025-12-01",
-          "2026-01-01",
-          "2026-02-01",
-          "2026-03-01",
-          "2026-05-01"
-        ]
+    "fecha": "2026-06-24",
+    "model_version": "10.0",
+    "universo": 17,
+    "metodologia": {
+      "rolling_window_anos": 5,
+      "backtest_A": "Señales mensuales independientes, ventana 1 mes, p-value bootstrap",
+      "backtest_B": "Simulacion €500/mes acumulativo hasta hoy",
+      "splicing": "URNM con proxy NLR pre-2019, correlacion minima 0.65"
+    },
+    "backtest_A": {
+      "n_senales": 19,
+      "alpha_medio_mes": 1.201,
+      "alpha_anualizado": 14.41,
+      "pct_bate_iwda": 57.9,
+      "predictividad": {
+        "alto_70+": {
+          "n": 14,
+          "alpha_medio": 1.19
+        },
+        "medio_55-70": {
+          "n": 5,
+          "alpha_medio": 1.22
+        },
+        "bajo_55-": {
+          "n": 0,
+          "alpha_medio": null
+        }
       },
-      "medio_55_70": {
-        "n_fechas": 13,
-        "ret_medio": 25.1,
-        "alpha_medio": 1.81,
-        "fechas": [
-          "2024-08-01",
-          "2024-09-01",
-          "2024-10-01",
-          "2024-11-01",
-          "2025-01-01",
-          "2025-02-01",
-          "2025-03-01",
-          "2025-04-01",
-          "2025-05-01",
-          "2025-06-01",
-          "2025-08-01",
-          "2025-11-01",
-          "2026-04-01"
-        ]
-      },
-      "bajo_0_55": {
-        "n_fechas": 0,
-        "ret_medio": null,
-        "alpha_medio": null,
-        "fechas": []
+      "bootstrap": {
+        "pvalue": 0.366,
+        "percentil_real": 63.4,
+        "alpha_medio_aleatorio": 0.857,
+        "n_simulaciones": 1000,
+        "significancia": "✗  No significativo — puede ser azar"
       }
     },
-    "interpretacion": "Cartera acumulativa (€18000, €500/mes x 36 meses): sistema €27265 vs IWDA €23731. Alpha total: 19.63%. Top1 bate IWDA en 23/36 fechas."
+    "backtest_B": {
+      "n_meses": 19,
+      "total_invertido": 9500,
+      "valor_sistema": 12661.14,
+      "valor_iwda": 11011.45,
+      "ret_sistema": 33.28,
+      "ret_iwda": 15.91,
+      "alpha_total": 17.37,
+      "diferencia_euros": 1649.69
+    },
+    "interpretacion": "A(19señales): alpha +1.201%/mes (+14.4%/año). ✗  No significativo — puede ser azar. B(19meses): sistema €12,661 vs IWDA €11,011 (alpha +17.37%)"
   },
-  "snapshots": [
-    {
-      "date": "2023-06-01",
-      "meses_desde": 36.7,
-      "top1": {
-        "name": "Valkyrie Bitcoin Miners ETF",
-        "symbol": "WGMI",
-        "sector": "Bitcoin y Cripto",
-        "score": 81.8,
-        "ret_hasta_hoy": 546.06
-      },
-      "top2": {
-        "name": "WisdomTree AI ETF",
-        "symbol": "WTAI",
-        "sector": "IA y Robotica",
-        "score": 79.2,
-        "ret_hasta_hoy": 158.28
-      },
-      "ret_ponderado_hoy": 429.73,
-      "iwda_hoy": 67.9,
-      "alpha_ponderado": 361.83,
-      "bate_top1": true,
-      "score_top1": 81.8,
-      "full_ranking": [
-        {
-          "id": "WGMI",
-          "name": "Valkyrie Bitcoin Miners ETF",
-          "symbol": "WGMI",
-          "sector": "Bitcoin y Cripto",
-          "score_final": 81.8
-        },
-        {
-          "id": "WTAI",
-          "name": "WisdomTree AI ETF",
-          "symbol": "WTAI",
-          "sector": "IA y Robotica",
-          "score_final": 79.2
-        },
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 77.8
-        },
-        {
-          "id": "BUG",
-          "name": "Global X Cybersecurity ETF",
-          "symbol": "BUG",
-          "sector": "Ciberseguridad",
-          "score_final": 76.5
-        },
-        {
-          "id": "SEMI",
-          "name": "iShares MSCI Global Semiconductors",
-          "symbol": "SEMI.AS",
-          "sector": "Semiconductores",
-          "score_final": 73.3
-        }
-      ]
-    },
-    {
-      "date": "2023-07-01",
-      "meses_desde": 35.7,
-      "top1": {
-        "name": "Valkyrie Bitcoin Miners ETF",
-        "symbol": "WGMI",
-        "sector": "Bitcoin y Cripto",
-        "score": 81.1,
-        "ret_hasta_hoy": 404.3
-      },
-      "top2": {
-        "name": "WisdomTree AI ETF",
-        "symbol": "WTAI",
-        "sector": "IA y Robotica",
-        "score": 80.8,
-        "ret_hasta_hoy": 147.66
-      },
-      "ret_ponderado_hoy": 327.31,
-      "iwda_hoy": 61.27,
-      "alpha_ponderado": 266.04,
-      "bate_top1": true,
-      "score_top1": 81.1,
-      "full_ranking": [
-        {
-          "id": "WGMI",
-          "name": "Valkyrie Bitcoin Miners ETF",
-          "symbol": "WGMI",
-          "sector": "Bitcoin y Cripto",
-          "score_final": 81.1
-        },
-        {
-          "id": "WTAI",
-          "name": "WisdomTree AI ETF",
-          "symbol": "WTAI",
-          "sector": "IA y Robotica",
-          "score_final": 80.8
-        },
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 80.5
-        },
-        {
-          "id": "BUG",
-          "name": "Global X Cybersecurity ETF",
-          "symbol": "BUG",
-          "sector": "Ciberseguridad",
-          "score_final": 77.7
-        },
-        {
-          "id": "IHI",
-          "name": "iShares US Medical Devices",
-          "symbol": "IHI",
-          "sector": "Salud",
-          "score_final": 71.2
-        }
-      ]
-    },
-    {
-      "date": "2023-08-01",
-      "meses_desde": 34.7,
-      "top1": {
-        "name": "First Trust Nasdaq Cybersecurity",
-        "symbol": "CIBR",
-        "sector": "Ciberseguridad",
-        "score": 77.4,
-        "ret_hasta_hoy": 77.79
-      },
-      "top2": {
-        "name": "ARK Genomic Revolution ETF",
-        "symbol": "ARKG",
-        "sector": "Biotecnologia",
-        "score": 76.9,
-        "ret_hasta_hoy": -0.49
-      },
-      "ret_ponderado_hoy": 54.31,
-      "iwda_hoy": 58.1,
-      "alpha_ponderado": -3.79,
-      "bate_top1": true,
-      "score_top1": 77.4,
-      "full_ranking": [
-        {
-          "id": "CIBR",
-          "name": "First Trust Nasdaq Cybersecurity",
-          "symbol": "CIBR",
-          "sector": "Ciberseguridad",
-          "score_final": 77.4
-        },
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 76.9
-        },
-        {
-          "id": "WTAI",
-          "name": "WisdomTree AI ETF",
-          "symbol": "WTAI",
-          "sector": "IA y Robotica",
-          "score_final": 75.7
-        },
-        {
-          "id": "WGMI",
-          "name": "Valkyrie Bitcoin Miners ETF",
-          "symbol": "WGMI",
-          "sector": "Bitcoin y Cripto",
-          "score_final": 74.1
-        },
-        {
-          "id": "INDA",
-          "name": "iShares MSCI India ETF",
-          "symbol": "INDA",
-          "sector": "India",
-          "score_final": 71.1
-        }
-      ]
-    },
-    {
-      "date": "2023-09-01",
-      "meses_desde": 33.6,
-      "top1": {
-        "name": "First Trust Nasdaq Cybersecurity",
-        "symbol": "CIBR",
-        "sector": "Ciberseguridad",
-        "score": 74.1,
-        "ret_hasta_hoy": 79.0
-      },
-      "top2": {
-        "name": "iShares MSCI India ETF",
-        "symbol": "INDA",
-        "sector": "India",
-        "score": 73.5,
-        "ret_hasta_hoy": 12.07
-      },
-      "ret_ponderado_hoy": 58.92,
-      "iwda_hoy": 58.23,
-      "alpha_ponderado": 0.69,
-      "bate_top1": true,
-      "score_top1": 74.1,
-      "full_ranking": [
-        {
-          "id": "CIBR",
-          "name": "First Trust Nasdaq Cybersecurity",
-          "symbol": "CIBR",
-          "sector": "Ciberseguridad",
-          "score_final": 74.1
-        },
-        {
-          "id": "INDA",
-          "name": "iShares MSCI India ETF",
-          "symbol": "INDA",
-          "sector": "India",
-          "score_final": 73.5
-        },
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 72.1
-        },
-        {
-          "id": "WGMI",
-          "name": "Valkyrie Bitcoin Miners ETF",
-          "symbol": "WGMI",
-          "sector": "Bitcoin y Cripto",
-          "score_final": 68.6
-        },
-        {
-          "id": "SEMI",
-          "name": "iShares MSCI Global Semiconductors",
-          "symbol": "SEMI.AS",
-          "sector": "Semiconductores",
-          "score_final": 65.6
-        }
-      ]
-    },
-    {
-      "date": "2023-10-01",
-      "meses_desde": 32.7,
-      "top1": {
-        "name": "iShares MSCI India ETF",
-        "symbol": "INDA",
-        "sector": "India",
-        "score": 76.6,
-        "ret_hasta_hoy": 12.15
-      },
-      "top2": {
-        "name": "First Trust Nasdaq Cybersecurity",
-        "symbol": "CIBR",
-        "sector": "Ciberseguridad",
-        "score": 64.6,
-        "ret_hasta_hoy": 85.52
-      },
-      "ret_ponderado_hoy": 34.16,
-      "iwda_hoy": 61.67,
-      "alpha_ponderado": -27.51,
-      "bate_top1": false,
-      "score_top1": 76.6,
-      "full_ranking": [
-        {
-          "id": "INDA",
-          "name": "iShares MSCI India ETF",
-          "symbol": "INDA",
-          "sector": "India",
-          "score_final": 76.6
-        },
-        {
-          "id": "CIBR",
-          "name": "First Trust Nasdaq Cybersecurity",
-          "symbol": "CIBR",
-          "sector": "Ciberseguridad",
-          "score_final": 64.6
-        },
-        {
-          "id": "NLR",
-          "name": "VanEck Uranium+Nuclear Energy ETF",
-          "symbol": "NLR",
-          "sector": "Uranio y Nuclear",
-          "score_final": 57.1
-        },
-        {
-          "id": "SMH",
-          "name": "VanEck Semiconductor ETF",
-          "symbol": "SMH",
-          "sector": "Semiconductores",
-          "score_final": 55.4
-        },
-        {
-          "id": "WTAI",
-          "name": "WisdomTree AI ETF",
-          "symbol": "WTAI",
-          "sector": "IA y Robotica",
-          "score_final": 53.6
-        }
-      ]
-    },
-    {
-      "date": "2023-11-01",
-      "meses_desde": 31.6,
-      "top1": {
-        "name": "First Trust Nasdaq Cybersecurity",
-        "symbol": "CIBR",
-        "sector": "Ciberseguridad",
-        "score": 73.9,
-        "ret_hasta_hoy": 89.42
-      },
-      "top2": {
-        "name": "ProShares Bitcoin Strategy ETF",
-        "symbol": "BITO",
-        "sector": "Bitcoin y Cripto",
-        "score": 71.8,
-        "ret_hasta_hoy": -51.17
-      },
-      "ret_ponderado_hoy": 47.24,
-      "iwda_hoy": 65.36,
-      "alpha_ponderado": -18.12,
-      "bate_top1": true,
-      "score_top1": 73.9,
-      "full_ranking": [
-        {
-          "id": "CIBR",
-          "name": "First Trust Nasdaq Cybersecurity",
-          "symbol": "CIBR",
-          "sector": "Ciberseguridad",
-          "score_final": 73.9
-        },
-        {
-          "id": "BITO",
-          "name": "ProShares Bitcoin Strategy ETF",
-          "symbol": "BITO",
-          "sector": "Bitcoin y Cripto",
-          "score_final": 71.8
-        },
-        {
-          "id": "FLIN",
-          "name": "Franklin FTSE India ETF",
-          "symbol": "FLIN",
-          "sector": "India",
-          "score_final": 67.8
-        },
-        {
-          "id": "SMH",
-          "name": "VanEck Semiconductor ETF",
-          "symbol": "SMH",
-          "sector": "Semiconductores",
-          "score_final": 60.3
-        },
-        {
-          "id": "NLR",
-          "name": "VanEck Uranium+Nuclear Energy ETF",
-          "symbol": "NLR",
-          "sector": "Uranio y Nuclear",
-          "score_final": 57.1
-        }
-      ]
-    },
-    {
-      "date": "2023-12-01",
-      "meses_desde": 30.7,
-      "top1": {
-        "name": "Global X Cybersecurity ETF",
-        "symbol": "BUG",
-        "sector": "Ciberseguridad",
-        "score": 77.3,
-        "ret_hasta_hoy": 24.14
-      },
-      "top2": {
-        "name": "ProShares Bitcoin Strategy ETF",
-        "symbol": "BITO",
-        "sector": "Bitcoin y Cripto",
-        "score": 77.1,
-        "ret_hasta_hoy": -55.58
-      },
-      "ret_ponderado_hoy": 0.22,
-      "iwda_hoy": 56.32,
-      "alpha_ponderado": -56.1,
-      "bate_top1": false,
-      "score_top1": 77.3,
-      "full_ranking": [
-        {
-          "id": "BUG",
-          "name": "Global X Cybersecurity ETF",
-          "symbol": "BUG",
-          "sector": "Ciberseguridad",
-          "score_final": 77.3
-        },
-        {
-          "id": "BITO",
-          "name": "ProShares Bitcoin Strategy ETF",
-          "symbol": "BITO",
-          "sector": "Bitcoin y Cripto",
-          "score_final": 77.1
-        },
-        {
-          "id": "INDA",
-          "name": "iShares MSCI India ETF",
-          "symbol": "INDA",
-          "sector": "India",
-          "score_final": 74.4
-        },
-        {
-          "id": "WTAI",
-          "name": "WisdomTree AI ETF",
-          "symbol": "WTAI",
-          "sector": "IA y Robotica",
-          "score_final": 63.0
-        },
-        {
-          "id": "VHT",
-          "name": "Vanguard Health Care ETF",
-          "symbol": "VHT",
-          "sector": "Salud",
-          "score_final": 55.6
-        }
-      ]
-    },
-    {
-      "date": "2024-01-01",
-      "meses_desde": 29.6,
-      "top1": {
-        "name": "iShares Nasdaq Biotechnology ETF",
-        "symbol": "IBB",
-        "sector": "Biotecnologia",
-        "score": 76.7,
-        "ret_hasta_hoy": 25.76
-      },
-      "top2": {
-        "name": "Global X Cybersecurity ETF",
-        "symbol": "BUG",
-        "sector": "Ciberseguridad",
-        "score": 75.6,
-        "ret_hasta_hoy": 18.75
-      },
-      "ret_ponderado_hoy": 23.66,
-      "iwda_hoy": 51.82,
-      "alpha_ponderado": -28.16,
-      "bate_top1": false,
-      "score_top1": 76.7,
-      "full_ranking": [
-        {
-          "id": "IBB",
-          "name": "iShares Nasdaq Biotechnology ETF",
-          "symbol": "IBB",
-          "sector": "Biotecnologia",
-          "score_final": 76.7
-        },
-        {
-          "id": "BUG",
-          "name": "Global X Cybersecurity ETF",
-          "symbol": "BUG",
-          "sector": "Ciberseguridad",
-          "score_final": 75.6
-        },
-        {
-          "id": "BITO",
-          "name": "ProShares Bitcoin Strategy ETF",
-          "symbol": "BITO",
-          "sector": "Bitcoin y Cripto",
-          "score_final": 73.6
-        },
-        {
-          "id": "NLR",
-          "name": "VanEck Uranium+Nuclear Energy ETF",
-          "symbol": "NLR",
-          "sector": "Uranio y Nuclear",
-          "score_final": 71.8
-        },
-        {
-          "id": "WTAI",
-          "name": "WisdomTree AI ETF",
-          "symbol": "WTAI",
-          "sector": "IA y Robotica",
-          "score_final": 67.3
-        }
-      ]
-    },
-    {
-      "date": "2024-02-01",
-      "meses_desde": 28.6,
-      "top1": {
-        "name": "ProShares Bitcoin Strategy ETF",
-        "symbol": "BITO",
-        "sector": "Bitcoin y Cripto",
-        "score": 79.0,
-        "ret_hasta_hoy": -58.02
-      },
-      "top2": {
-        "name": "Global X Cybersecurity ETF",
-        "symbol": "BUG",
-        "sector": "Ciberseguridad",
-        "score": 77.1,
-        "ret_hasta_hoy": 11.37
-      },
-      "ret_ponderado_hoy": -37.2,
-      "iwda_hoy": 47.38,
-      "alpha_ponderado": -84.58,
-      "bate_top1": false,
-      "score_top1": 79.0,
-      "full_ranking": [
-        {
-          "id": "BITO",
-          "name": "ProShares Bitcoin Strategy ETF",
-          "symbol": "BITO",
-          "sector": "Bitcoin y Cripto",
-          "score_final": 79.0
-        },
-        {
-          "id": "BUG",
-          "name": "Global X Cybersecurity ETF",
-          "symbol": "BUG",
-          "sector": "Ciberseguridad",
-          "score_final": 77.1
-        },
-        {
-          "id": "IBB",
-          "name": "iShares Nasdaq Biotechnology ETF",
-          "symbol": "IBB",
-          "sector": "Biotecnologia",
-          "score_final": 72.8
-        },
-        {
-          "id": "IHI",
-          "name": "iShares US Medical Devices",
-          "symbol": "IHI",
-          "sector": "Salud",
-          "score_final": 66.0
-        },
-        {
-          "id": "BOTZ",
-          "name": "Global X Robotics & AI",
-          "symbol": "BOTZ",
-          "sector": "IA y Robotica",
-          "score_final": 64.1
-        }
-      ]
-    },
-    {
-      "date": "2024-03-01",
-      "meses_desde": 27.7,
-      "top1": {
-        "name": "SPDR S&P Biotech ETF",
-        "symbol": "XBI",
-        "sector": "Biotecnologia",
-        "score": 78.1,
-        "ret_hasta_hoy": 38.6
-      },
-      "top2": {
-        "name": "Global X Robotics & AI",
-        "symbol": "BOTZ",
-        "sector": "IA y Robotica",
-        "score": 72.1,
-        "ret_hasta_hoy": 20.89
-      },
-      "ret_ponderado_hoy": 33.29,
-      "iwda_hoy": 40.56,
-      "alpha_ponderado": -7.27,
-      "bate_top1": false,
-      "score_top1": 78.1,
-      "full_ranking": [
-        {
-          "id": "XBI",
-          "name": "SPDR S&P Biotech ETF",
-          "symbol": "XBI",
-          "sector": "Biotecnologia",
-          "score_final": 78.1
-        },
-        {
-          "id": "BOTZ",
-          "name": "Global X Robotics & AI",
-          "symbol": "BOTZ",
-          "sector": "IA y Robotica",
-          "score_final": 72.1
-        },
-        {
-          "id": "IHI",
-          "name": "iShares US Medical Devices",
-          "symbol": "IHI",
-          "sector": "Salud",
-          "score_final": 70.9
-        },
-        {
-          "id": "URNM",
-          "name": "Sprott Uranium Miners ETF",
-          "symbol": "URNM",
-          "sector": "Uranio y Nuclear",
-          "score_final": 65.7
-        },
-        {
-          "id": "BITO",
-          "name": "ProShares Bitcoin Strategy ETF",
-          "symbol": "BITO",
-          "sector": "Bitcoin y Cripto",
-          "score_final": 61.8
-        }
-      ]
-    },
-    {
-      "date": "2024-04-01",
-      "meses_desde": 26.6,
-      "top1": {
-        "name": "iShares US Medical Devices",
-        "symbol": "IHI",
-        "sector": "Salud",
-        "score": 76.0,
-        "ret_hasta_hoy": -15.19
-      },
-      "top2": {
-        "name": "First Trust Nasdaq Cybersecurity",
-        "symbol": "CIBR",
-        "sector": "Ciberseguridad",
-        "score": 72.0,
-        "ret_hasta_hoy": 50.61
-      },
-      "ret_ponderado_hoy": 4.55,
-      "iwda_hoy": 37.64,
-      "alpha_ponderado": -33.09,
-      "bate_top1": false,
-      "score_top1": 76.0,
-      "full_ranking": [
-        {
-          "id": "IHI",
-          "name": "iShares US Medical Devices",
-          "symbol": "IHI",
-          "sector": "Salud",
-          "score_final": 76.0
-        },
-        {
-          "id": "CIBR",
-          "name": "First Trust Nasdaq Cybersecurity",
-          "symbol": "CIBR",
-          "sector": "Ciberseguridad",
-          "score_final": 72.0
-        },
-        {
-          "id": "ROBO",
-          "name": "Robo Global Robotics & Automation",
-          "symbol": "ROBO",
-          "sector": "IA y Robotica",
-          "score_final": 70.8
-        },
-        {
-          "id": "IBB",
-          "name": "iShares Nasdaq Biotechnology ETF",
-          "symbol": "IBB",
-          "sector": "Biotecnologia",
-          "score_final": 69.6
-        },
-        {
-          "id": "BITO",
-          "name": "ProShares Bitcoin Strategy ETF",
-          "symbol": "BITO",
-          "sector": "Bitcoin y Cripto",
-          "score_final": 61.4
-        }
-      ]
-    },
-    {
-      "date": "2024-05-01",
-      "meses_desde": 25.7,
-      "top1": {
-        "name": "SPDR S&P Biotech ETF",
-        "symbol": "XBI",
-        "sector": "Biotecnologia",
-        "score": 79.5,
-        "ret_hasta_hoy": 61.14
-      },
-      "top2": {
-        "name": "iShares MSCI Global Semiconductors",
-        "symbol": "SEMI.AS",
-        "sector": "Semiconductores",
-        "score": 78.6,
-        "ret_hasta_hoy": 240.56
-      },
-      "ret_ponderado_hoy": 114.97,
-      "iwda_hoy": 40.38,
-      "alpha_ponderado": 74.59,
-      "bate_top1": true,
-      "score_top1": 79.5,
-      "full_ranking": [
-        {
-          "id": "XBI",
-          "name": "SPDR S&P Biotech ETF",
-          "symbol": "XBI",
-          "sector": "Biotecnologia",
-          "score_final": 79.5
-        },
-        {
-          "id": "SEMI",
-          "name": "iShares MSCI Global Semiconductors",
-          "symbol": "SEMI.AS",
-          "sector": "Semiconductores",
-          "score_final": 78.6
-        },
-        {
-          "id": "PAVE",
-          "name": "Global X US Infrastructure Dev",
-          "symbol": "PAVE",
-          "sector": "Infraestructura",
-          "score_final": 77.3
-        },
-        {
-          "id": "IHI",
-          "name": "iShares US Medical Devices",
-          "symbol": "IHI",
-          "sector": "Salud",
-          "score_final": 74.7
-        },
-        {
-          "id": "BOTZ",
-          "name": "Global X Robotics & AI",
-          "symbol": "BOTZ",
-          "sector": "IA y Robotica",
-          "score_final": 72.2
-        }
-      ]
-    },
-    {
-      "date": "2024-06-01",
-      "meses_desde": 24.6,
-      "top1": {
-        "name": "ProShares Bitcoin Strategy ETF",
-        "symbol": "BITO",
-        "sector": "Bitcoin y Cripto",
-        "score": 74.9,
-        "ret_hasta_hoy": -67.28
-      },
-      "top2": {
-        "name": "iShares MSCI Global Semiconductors",
-        "symbol": "SEMI.AS",
-        "sector": "Semiconductores",
-        "score": 71.9,
-        "ret_hasta_hoy": 205.47
-      },
-      "ret_ponderado_hoy": 14.55,
-      "iwda_hoy": 36.65,
-      "alpha_ponderado": -22.1,
-      "bate_top1": false,
-      "score_top1": 74.9,
-      "full_ranking": [
-        {
-          "id": "BITO",
-          "name": "ProShares Bitcoin Strategy ETF",
-          "symbol": "BITO",
-          "sector": "Bitcoin y Cripto",
-          "score_final": 74.9
-        },
-        {
-          "id": "SEMI",
-          "name": "iShares MSCI Global Semiconductors",
-          "symbol": "SEMI.AS",
-          "sector": "Semiconductores",
-          "score_final": 71.9
-        },
-        {
-          "id": "IBB",
-          "name": "iShares Nasdaq Biotechnology ETF",
-          "symbol": "IBB",
-          "sector": "Biotecnologia",
-          "score_final": 71.6
-        },
-        {
-          "id": "IHI",
-          "name": "iShares US Medical Devices",
-          "symbol": "IHI",
-          "sector": "Salud",
-          "score_final": 65.7
-        },
-        {
-          "id": "PAVE",
-          "name": "Global X US Infrastructure Dev",
-          "symbol": "PAVE",
-          "sector": "Infraestructura",
-          "score_final": 62.8
-        }
-      ]
-    },
-    {
-      "date": "2024-07-01",
-      "meses_desde": 23.7,
-      "top1": {
-        "name": "VanEck Semiconductor ETF",
-        "symbol": "SMH",
-        "sector": "Semiconductores",
-        "score": 77.5,
-        "ret_hasta_hoy": 152.82
-      },
-      "top2": {
-        "name": "SPDR S&P Biotech ETF",
-        "symbol": "XBI",
-        "sector": "Biotecnologia",
-        "score": 59.3,
-        "ret_hasta_hoy": 51.25
-      },
-      "ret_ponderado_hoy": 122.35,
-      "iwda_hoy": 31.9,
-      "alpha_ponderado": 90.45,
-      "bate_top1": true,
-      "score_top1": 77.5,
-      "full_ranking": [
-        {
-          "id": "SMH",
-          "name": "VanEck Semiconductor ETF",
-          "symbol": "SMH",
-          "sector": "Semiconductores",
-          "score_final": 77.5
-        },
-        {
-          "id": "XBI",
-          "name": "SPDR S&P Biotech ETF",
-          "symbol": "XBI",
-          "sector": "Biotecnologia",
-          "score_final": 59.3
-        },
-        {
-          "id": "GRID",
-          "name": "First Trust NASDAQ Smart Grid",
-          "symbol": "GRID",
-          "sector": "Infraestructura",
-          "score_final": 56.2
-        },
-        {
-          "id": "BOTZ",
-          "name": "Global X Robotics & AI",
-          "symbol": "BOTZ",
-          "sector": "IA y Robotica",
-          "score_final": 55.2
-        },
-        {
-          "id": "NLR",
-          "name": "VanEck Uranium+Nuclear Energy ETF",
-          "symbol": "NLR",
-          "sector": "Uranio y Nuclear",
-          "score_final": 54.4
-        }
-      ]
-    },
-    {
-      "date": "2024-08-01",
-      "meses_desde": 22.6,
-      "top1": {
-        "name": "First Trust NASDAQ Smart Grid",
-        "symbol": "GRID",
-        "sector": "Infraestructura",
-        "score": 67.4,
-        "ret_hasta_hoy": 67.84
-      },
-      "top2": {
-        "name": "ARK Genomic Revolution ETF",
-        "symbol": "ARKG",
-        "sector": "Biotecnologia",
-        "score": 62.3,
-        "ret_hasta_hoy": 41.55
-      },
-      "ret_ponderado_hoy": 59.95,
-      "iwda_hoy": 32.15,
-      "alpha_ponderado": 27.8,
-      "bate_top1": true,
-      "score_top1": 67.4,
-      "full_ranking": [
-        {
-          "id": "GRID",
-          "name": "First Trust NASDAQ Smart Grid",
-          "symbol": "GRID",
-          "sector": "Infraestructura",
-          "score_final": 67.4
-        },
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 62.3
-        },
-        {
-          "id": "SMH",
-          "name": "VanEck Semiconductor ETF",
-          "symbol": "SMH",
-          "sector": "Semiconductores",
-          "score_final": 59.4
-        },
-        {
-          "id": "ITA",
-          "name": "iShares US Aerospace & Defense",
-          "symbol": "ITA",
-          "sector": "Defensa",
-          "score_final": 55.6
-        },
-        {
-          "id": "IHI",
-          "name": "iShares US Medical Devices",
-          "symbol": "IHI",
-          "sector": "Salud",
-          "score_final": 50.6
-        }
-      ]
-    },
-    {
-      "date": "2024-09-01",
-      "meses_desde": 21.6,
-      "top1": {
-        "name": "ARK Genomic Revolution ETF",
-        "symbol": "ARKG",
-        "sector": "Biotecnologia",
-        "score": 56.9,
-        "ret_hasta_hoy": 46.74
-      },
-      "top2": {
-        "name": "iShares US Aerospace & Defense",
-        "symbol": "ITA",
-        "sector": "Defensa",
-        "score": 55.0,
-        "ret_hasta_hoy": 67.52
-      },
-      "ret_ponderado_hoy": 52.97,
-      "iwda_hoy": 30.47,
-      "alpha_ponderado": 22.5,
-      "bate_top1": true,
-      "score_top1": 56.9,
-      "full_ranking": [
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 56.9
-        },
-        {
-          "id": "ITA",
-          "name": "iShares US Aerospace & Defense",
-          "symbol": "ITA",
-          "sector": "Defensa",
-          "score_final": 55.0
-        },
-        {
-          "id": "SMH",
-          "name": "VanEck Semiconductor ETF",
-          "symbol": "SMH",
-          "sector": "Semiconductores",
-          "score_final": 50.1
-        },
-        {
-          "id": "BOTZ",
-          "name": "Global X Robotics & AI",
-          "symbol": "BOTZ",
-          "sector": "IA y Robotica",
-          "score_final": 50.0
-        },
-        {
-          "id": "WGMI",
-          "name": "Valkyrie Bitcoin Miners ETF",
-          "symbol": "WGMI",
-          "sector": "Bitcoin y Cripto",
-          "score_final": 49.0
-        }
-      ]
-    },
-    {
-      "date": "2024-10-01",
-      "meses_desde": 20.6,
-      "top1": {
-        "name": "ARK Genomic Revolution ETF",
-        "symbol": "ARKG",
-        "sector": "Biotecnologia",
-        "score": 62.9,
-        "ret_hasta_hoy": 48.33
-      },
-      "top2": {
-        "name": "Global X Robotics & AI",
-        "symbol": "BOTZ",
-        "sector": "IA y Robotica",
-        "score": 54.9,
-        "ret_hasta_hoy": 21.23
-      },
-      "ret_ponderado_hoy": 40.2,
-      "iwda_hoy": 29.27,
-      "alpha_ponderado": 10.93,
-      "bate_top1": true,
-      "score_top1": 62.9,
-      "full_ranking": [
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 62.9
-        },
-        {
-          "id": "BOTZ",
-          "name": "Global X Robotics & AI",
-          "symbol": "BOTZ",
-          "sector": "IA y Robotica",
-          "score_final": 54.9
-        },
-        {
-          "id": "BUG",
-          "name": "Global X Cybersecurity ETF",
-          "symbol": "BUG",
-          "sector": "Ciberseguridad",
-          "score_final": 50.9
-        },
-        {
-          "id": "VHT",
-          "name": "Vanguard Health Care ETF",
-          "symbol": "VHT",
-          "sector": "Salud",
-          "score_final": 48.9
-        },
-        {
-          "id": "INDA",
-          "name": "iShares MSCI India ETF",
-          "symbol": "INDA",
-          "sector": "India",
-          "score_final": 48.6
-        }
-      ]
-    },
-    {
-      "date": "2024-11-01",
-      "meses_desde": 19.6,
-      "top1": {
-        "name": "iShares Nasdaq Biotechnology ETF",
-        "symbol": "IBB",
-        "sector": "Biotecnologia",
-        "score": 67.0,
-        "ret_hasta_hoy": 21.61
-      },
-      "top2": {
-        "name": "iShares US Aerospace & Defense",
-        "symbol": "ITA",
-        "sector": "Defensa",
-        "score": 66.4,
-        "ret_hasta_hoy": 65.35
-      },
-      "ret_ponderado_hoy": 34.73,
-      "iwda_hoy": 26.97,
-      "alpha_ponderado": 7.76,
-      "bate_top1": false,
-      "score_top1": 67.0,
-      "full_ranking": [
-        {
-          "id": "IBB",
-          "name": "iShares Nasdaq Biotechnology ETF",
-          "symbol": "IBB",
-          "sector": "Biotecnologia",
-          "score_final": 67.0
-        },
-        {
-          "id": "ITA",
-          "name": "iShares US Aerospace & Defense",
-          "symbol": "ITA",
-          "sector": "Defensa",
-          "score_final": 66.4
-        },
-        {
-          "id": "WGMI",
-          "name": "Valkyrie Bitcoin Miners ETF",
-          "symbol": "WGMI",
-          "sector": "Bitcoin y Cripto",
-          "score_final": 62.0
-        },
-        {
-          "id": "VHT",
-          "name": "Vanguard Health Care ETF",
-          "symbol": "VHT",
-          "sector": "Salud",
-          "score_final": 57.6
-        },
-        {
-          "id": "BOTZ",
-          "name": "Global X Robotics & AI",
-          "symbol": "BOTZ",
-          "sector": "IA y Robotica",
-          "score_final": 48.7
-        }
-      ]
-    },
+  "snapshots_a": [
     {
       "date": "2024-12-01",
-      "meses_desde": 18.6,
       "top1": {
-        "name": "ARK Genomic Revolution ETF",
-        "symbol": "ARKG",
-        "sector": "Biotecnologia",
-        "score": 77.9,
-        "ret_hasta_hoy": 38.1
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 73.9
       },
       "top2": {
-        "name": "iShares US Medical Devices",
         "symbol": "IHI",
         "sector": "Salud",
-        "score": 71.0,
-        "ret_hasta_hoy": -19.4
+        "score": 70.1
       },
-      "ret_ponderado_hoy": 20.85,
-      "iwda_hoy": 18.09,
-      "alpha_ponderado": 2.76,
-      "bate_top1": true,
-      "score_top1": 77.9,
-      "full_ranking": [
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 77.9
-        },
-        {
-          "id": "IHI",
-          "name": "iShares US Medical Devices",
-          "symbol": "IHI",
-          "sector": "Salud",
-          "score_final": 71.0
-        },
-        {
-          "id": "BOTZ",
-          "name": "Global X Robotics & AI",
-          "symbol": "BOTZ",
-          "sector": "IA y Robotica",
-          "score_final": 59.6
-        },
-        {
-          "id": "CIBR",
-          "name": "First Trust Nasdaq Cybersecurity",
-          "symbol": "CIBR",
-          "sector": "Ciberseguridad",
-          "score_final": 58.0
-        },
-        {
-          "id": "WGMI",
-          "name": "Valkyrie Bitcoin Miners ETF",
-          "symbol": "WGMI",
-          "sector": "Bitcoin y Cripto",
-          "score_final": 52.4
-        }
-      ]
+      "ret_top1": -9.7,
+      "ret_top2": -4.16,
+      "ret_ponderado": -8.04,
+      "ret_iwda": -1.46,
+      "alpha": -6.58,
+      "bate_top1": false,
+      "score_top1": 73.9
     },
     {
       "date": "2025-01-01",
-      "meses_desde": 17.6,
       "top1": {
-        "name": "ARK Genomic Revolution ETF",
-        "symbol": "ARKG",
-        "sector": "Biotecnologia",
-        "score": 67.9,
-        "ret_hasta_hoy": 50.7
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 75.4
       },
       "top2": {
-        "name": "First Trust Nasdaq Cybersecurity",
         "symbol": "CIBR",
         "sector": "Ciberseguridad",
-        "score": 60.3,
-        "ret_hasta_hoy": 32.61
+        "score": 59.3
       },
-      "ret_ponderado_hoy": 45.27,
-      "iwda_hoy": 18.54,
-      "alpha_ponderado": 26.73,
-      "bate_top1": true,
-      "score_top1": 67.9,
-      "full_ranking": [
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 67.9
-        },
-        {
-          "id": "CIBR",
-          "name": "First Trust Nasdaq Cybersecurity",
-          "symbol": "CIBR",
-          "sector": "Ciberseguridad",
-          "score_final": 60.3
-        },
-        {
-          "id": "IHI",
-          "name": "iShares US Medical Devices",
-          "symbol": "IHI",
-          "sector": "Salud",
-          "score_final": 60.0
-        },
-        {
-          "id": "ITA",
-          "name": "iShares US Aerospace & Defense",
-          "symbol": "ITA",
-          "sector": "Defensa",
-          "score_final": 58.7
-        },
-        {
-          "id": "ROBO",
-          "name": "Robo Global Robotics & Automation",
-          "symbol": "ROBO",
-          "sector": "IA y Robotica",
-          "score_final": 54.1
-        }
-      ]
+      "ret_top1": -0.71,
+      "ret_top2": 6.54,
+      "ret_ponderado": 1.47,
+      "ret_iwda": 3.86,
+      "alpha": -2.39,
+      "bate_top1": false,
+      "score_top1": 75.4
     },
     {
       "date": "2025-02-01",
-      "meses_desde": 16.6,
       "top1": {
-        "name": "ARK Genomic Revolution ETF",
-        "symbol": "ARKG",
-        "sector": "Biotecnologia",
-        "score": 60.8,
-        "ret_hasta_hoy": 38.73
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 69.1
       },
       "top2": {
-        "name": "ProShares Bitcoin Strategy ETF",
-        "symbol": "BITO",
-        "sector": "Bitcoin y Cripto",
-        "score": 56.5,
-        "ret_hasta_hoy": -63.71
+        "symbol": "IGV",
+        "sector": "Software y Cloud",
+        "score": 58.9
       },
-      "ret_ponderado_hoy": 8.0,
-      "iwda_hoy": 16.39,
-      "alpha_ponderado": -8.39,
+      "ret_top1": 0.62,
+      "ret_top2": -5.27,
+      "ret_ponderado": -1.15,
+      "ret_iwda": -2.53,
+      "alpha": 1.38,
       "bate_top1": true,
-      "score_top1": 60.8,
-      "full_ranking": [
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 60.8
-        },
-        {
-          "id": "BITO",
-          "name": "ProShares Bitcoin Strategy ETF",
-          "symbol": "BITO",
-          "sector": "Bitcoin y Cripto",
-          "score_final": 56.5
-        },
-        {
-          "id": "WTAI",
-          "name": "WisdomTree AI ETF",
-          "symbol": "WTAI",
-          "sector": "IA y Robotica",
-          "score_final": 53.3
-        },
-        {
-          "id": "IHI",
-          "name": "iShares US Medical Devices",
-          "symbol": "IHI",
-          "sector": "Salud",
-          "score_final": 50.0
-        },
-        {
-          "id": "NLR",
-          "name": "VanEck Uranium+Nuclear Energy ETF",
-          "symbol": "NLR",
-          "sector": "Uranio y Nuclear",
-          "score_final": 47.1
-        }
-      ]
+      "score_top1": 69.1
     },
     {
       "date": "2025-03-01",
-      "meses_desde": 15.7,
       "top1": {
-        "name": "iShares US Medical Devices",
         "symbol": "IHI",
         "sector": "Salud",
-        "score": 62.6,
-        "ret_hasta_hoy": -23.23
+        "score": 71.3
       },
       "top2": {
-        "name": "First Trust Nasdaq Cybersecurity",
         "symbol": "CIBR",
         "sector": "Ciberseguridad",
-        "score": 60.6,
-        "ret_hasta_hoy": 29.23
+        "score": 59.9
       },
-      "ret_ponderado_hoy": -7.49,
-      "iwda_hoy": 18.03,
-      "alpha_ponderado": -25.52,
-      "bate_top1": false,
-      "score_top1": 62.6,
-      "full_ranking": [
-        {
-          "id": "IHI",
-          "name": "iShares US Medical Devices",
-          "symbol": "IHI",
-          "sector": "Salud",
-          "score_final": 62.6
-        },
-        {
-          "id": "CIBR",
-          "name": "First Trust Nasdaq Cybersecurity",
-          "symbol": "CIBR",
-          "sector": "Ciberseguridad",
-          "score_final": 60.6
-        },
-        {
-          "id": "WTAI",
-          "name": "WisdomTree AI ETF",
-          "symbol": "WTAI",
-          "sector": "IA y Robotica",
-          "score_final": 58.8
-        },
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 52.4
-        },
-        {
-          "id": "ITA",
-          "name": "iShares US Aerospace & Defense",
-          "symbol": "ITA",
-          "sector": "Defensa",
-          "score_final": 45.5
-        }
-      ]
+      "ret_top1": -5.61,
+      "ret_top2": -4.7,
+      "ret_ponderado": -5.34,
+      "ret_iwda": -7.89,
+      "alpha": 2.55,
+      "bate_top1": true,
+      "score_top1": 71.3
     },
     {
       "date": "2025-04-01",
-      "meses_desde": 14.7,
       "top1": {
-        "name": "iShares US Medical Devices",
-        "symbol": "IHI",
-        "sector": "Salud",
-        "score": 56.7,
-        "ret_hasta_hoy": -18.16
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 59.3
       },
       "top2": {
-        "name": "Global X Cybersecurity ETF",
-        "symbol": "BUG",
-        "sector": "Ciberseguridad",
-        "score": 55.2,
-        "ret_hasta_hoy": 3.73
+        "symbol": "IHI",
+        "sector": "Salud",
+        "score": 55.9
       },
-      "ret_ponderado_hoy": -11.59,
-      "iwda_hoy": 26.88,
-      "alpha_ponderado": -38.47,
-      "bate_top1": false,
-      "score_top1": 56.7,
-      "full_ranking": [
-        {
-          "id": "IHI",
-          "name": "iShares US Medical Devices",
-          "symbol": "IHI",
-          "sector": "Salud",
-          "score_final": 56.7
-        },
-        {
-          "id": "BUG",
-          "name": "Global X Cybersecurity ETF",
-          "symbol": "BUG",
-          "sector": "Ciberseguridad",
-          "score_final": 55.2
-        },
-        {
-          "id": "ITA",
-          "name": "iShares US Aerospace & Defense",
-          "symbol": "ITA",
-          "sector": "Defensa",
-          "score_final": 46.9
-        },
-        {
-          "id": "PAVE",
-          "name": "Global X US Infrastructure Dev",
-          "symbol": "PAVE",
-          "sector": "Infraestructura",
-          "score_final": 30.9
-        },
-        {
-          "id": "BITO",
-          "name": "ProShares Bitcoin Strategy ETF",
-          "symbol": "BITO",
-          "sector": "Bitcoin y Cripto",
-          "score_final": 29.8
-        }
-      ]
+      "ret_top1": -5.1,
+      "ret_top2": -0.28,
+      "ret_ponderado": -3.65,
+      "ret_iwda": -5.13,
+      "alpha": 1.48,
+      "bate_top1": true,
+      "score_top1": 59.3
     },
     {
       "date": "2025-05-01",
-      "meses_desde": 13.7,
       "top1": {
-        "name": "Global X Cybersecurity ETF",
-        "symbol": "BUG",
-        "sector": "Ciberseguridad",
-        "score": 61.5,
-        "ret_hasta_hoy": 0.3
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 66.8
       },
       "top2": {
-        "name": "iShares US Medical Devices",
-        "symbol": "IHI",
-        "sector": "Salud",
-        "score": 54.7,
-        "ret_hasta_hoy": -17.21
+        "symbol": "CIBR",
+        "sector": "Ciberseguridad",
+        "score": 60.2
       },
-      "ret_ponderado_hoy": -4.95,
-      "iwda_hoy": 30.54,
-      "alpha_ponderado": -35.49,
-      "bate_top1": false,
-      "score_top1": 61.5,
-      "full_ranking": [
-        {
-          "id": "BUG",
-          "name": "Global X Cybersecurity ETF",
-          "symbol": "BUG",
-          "sector": "Ciberseguridad",
-          "score_final": 61.5
-        },
-        {
-          "id": "IHI",
-          "name": "iShares US Medical Devices",
-          "symbol": "IHI",
-          "sector": "Salud",
-          "score_final": 54.7
-        },
-        {
-          "id": "NATO",
-          "name": "VanEck Defense ETF",
-          "symbol": "NATO",
-          "sector": "Defensa",
-          "score_final": 54.6
-        },
-        {
-          "id": "INDA",
-          "name": "iShares MSCI India ETF",
-          "symbol": "INDA",
-          "sector": "India",
-          "score_final": 46.0
-        },
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 39.9
-        }
-      ]
+      "ret_top1": 7.92,
+      "ret_top2": 7.81,
+      "ret_ponderado": 7.89,
+      "ret_iwda": 6.37,
+      "alpha": 1.52,
+      "bate_top1": true,
+      "score_top1": 66.8
     },
     {
       "date": "2025-06-01",
-      "meses_desde": 12.6,
       "top1": {
-        "name": "iShares US Medical Devices",
-        "symbol": "IHI",
-        "sector": "Salud",
-        "score": 59.0,
-        "ret_hasta_hoy": -20.34
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 85.3
       },
       "top2": {
-        "name": "WisdomTree AI ETF",
-        "symbol": "WTAI",
-        "sector": "IA y Robotica",
-        "score": 57.5,
-        "ret_hasta_hoy": 112.75
+        "symbol": "IHI",
+        "sector": "Salud",
+        "score": 58.8
       },
-      "ret_ponderado_hoy": 19.59,
-      "iwda_hoy": 26.34,
-      "alpha_ponderado": -6.75,
-      "bate_top1": false,
-      "score_top1": 59.0,
-      "full_ranking": [
-        {
-          "id": "IHI",
-          "name": "iShares US Medical Devices",
-          "symbol": "IHI",
-          "sector": "Salud",
-          "score_final": 59.0
-        },
-        {
-          "id": "WTAI",
-          "name": "WisdomTree AI ETF",
-          "symbol": "WTAI",
-          "sector": "IA y Robotica",
-          "score_final": 57.5
-        },
-        {
-          "id": "BUG",
-          "name": "Global X Cybersecurity ETF",
-          "symbol": "BUG",
-          "sector": "Ciberseguridad",
-          "score_final": 56.2
-        },
-        {
-          "id": "NATO",
-          "name": "VanEck Defense ETF",
-          "symbol": "NATO",
-          "sector": "Defensa",
-          "score_final": 55.1
-        },
-        {
-          "id": "SEMI",
-          "name": "iShares MSCI Global Semiconductors",
-          "symbol": "SEMI.AS",
-          "sector": "Semiconductores",
-          "score_final": 46.9
-        }
-      ]
+      "ret_top1": 4.13,
+      "ret_top2": 1.69,
+      "ret_ponderado": 3.4,
+      "ret_iwda": 1.36,
+      "alpha": 2.04,
+      "bate_top1": true,
+      "score_top1": 85.3
     },
     {
       "date": "2025-07-01",
-      "meses_desde": 11.7,
       "top1": {
-        "name": "ARK Genomic Revolution ETF",
-        "symbol": "ARKG",
-        "sector": "Biotecnologia",
-        "score": 78.0,
-        "ret_hasta_hoy": 52.5
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 87.9
       },
       "top2": {
-        "name": "Vanguard Health Care ETF",
-        "symbol": "VHT",
-        "sector": "Salud",
-        "score": 60.6,
-        "ret_hasta_hoy": 11.6
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 68.7
       },
-      "ret_ponderado_hoy": 40.23,
-      "iwda_hoy": 24.83,
-      "alpha_ponderado": 15.4,
-      "bate_top1": true,
-      "score_top1": 78.0,
-      "full_ranking": [
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 78.0
-        },
-        {
-          "id": "VHT",
-          "name": "Vanguard Health Care ETF",
-          "symbol": "VHT",
-          "sector": "Salud",
-          "score_final": 60.6
-        },
-        {
-          "id": "NATO",
-          "name": "VanEck Defense ETF",
-          "symbol": "NATO",
-          "sector": "Defensa",
-          "score_final": 54.3
-        },
-        {
-          "id": "INDA",
-          "name": "iShares MSCI India ETF",
-          "symbol": "INDA",
-          "sector": "India",
-          "score_final": 53.6
-        },
-        {
-          "id": "NLR",
-          "name": "VanEck Uranium+Nuclear Energy ETF",
-          "symbol": "NLR",
-          "sector": "Uranio y Nuclear",
-          "score_final": 50.5
-        }
-      ]
+      "ret_top1": 1.44,
+      "ret_top2": 6.69,
+      "ret_ponderado": 3.02,
+      "ret_iwda": 4.94,
+      "alpha": -1.93,
+      "bate_top1": false,
+      "score_top1": 87.9
     },
     {
       "date": "2025-08-01",
-      "meses_desde": 10.6,
       "top1": {
-        "name": "ARK Genomic Revolution ETF",
-        "symbol": "ARKG",
-        "sector": "Biotecnologia",
-        "score": 59.6,
-        "ret_hasta_hoy": 56.45
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 86.1
       },
       "top2": {
-        "name": "VanEck Defense ETF",
-        "symbol": "NATO",
-        "sector": "Defensa",
-        "score": 56.8,
-        "ret_hasta_hoy": 12.82
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 78.0
       },
-      "ret_ponderado_hoy": 43.36,
-      "iwda_hoy": 22.58,
-      "alpha_ponderado": 20.78,
+      "ret_top1": 6.36,
+      "ret_top2": 16.32,
+      "ret_ponderado": 9.35,
+      "ret_iwda": 2.95,
+      "alpha": 6.4,
       "bate_top1": true,
-      "score_top1": 59.6,
-      "full_ranking": [
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 59.6
-        },
-        {
-          "id": "NATO",
-          "name": "VanEck Defense ETF",
-          "symbol": "NATO",
-          "sector": "Defensa",
-          "score_final": 56.8
-        },
-        {
-          "id": "INDA",
-          "name": "iShares MSCI India ETF",
-          "symbol": "INDA",
-          "sector": "India",
-          "score_final": 56.5
-        },
-        {
-          "id": "GRID",
-          "name": "First Trust NASDAQ Smart Grid",
-          "symbol": "GRID",
-          "sector": "Infraestructura",
-          "score_final": 52.5
-        },
-        {
-          "id": "NLR",
-          "name": "VanEck Uranium+Nuclear Energy ETF",
-          "symbol": "NLR",
-          "sector": "Uranio y Nuclear",
-          "score_final": 51.5
-        }
-      ]
+      "score_top1": 86.1
     },
     {
       "date": "2025-09-01",
-      "meses_desde": 9.6,
       "top1": {
-        "name": "ARK Genomic Revolution ETF",
-        "symbol": "ARKG",
-        "sector": "Biotecnologia",
-        "score": 78.2,
-        "ret_hasta_hoy": 48.63
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 84.0
       },
       "top2": {
-        "name": "Franklin FTSE India ETF",
-        "symbol": "FLIN",
-        "sector": "India",
-        "score": 56.0,
-        "ret_hasta_hoy": -5.51
+        "symbol": "XBI",
+        "sector": "Biotecnologia",
+        "score": 65.4
       },
-      "ret_ponderado_hoy": 32.39,
-      "iwda_hoy": 19.07,
-      "alpha_ponderado": 13.32,
+      "ret_top1": 9.32,
+      "ret_top2": 7.88,
+      "ret_ponderado": 8.89,
+      "ret_iwda": 2.28,
+      "alpha": 6.61,
       "bate_top1": true,
-      "score_top1": 78.2,
-      "full_ranking": [
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 78.2
-        },
-        {
-          "id": "FLIN",
-          "name": "Franklin FTSE India ETF",
-          "symbol": "FLIN",
-          "sector": "India",
-          "score_final": 56.0
-        },
-        {
-          "id": "ITA",
-          "name": "iShares US Aerospace & Defense",
-          "symbol": "ITA",
-          "sector": "Defensa",
-          "score_final": 55.6
-        },
-        {
-          "id": "ROBO",
-          "name": "Robo Global Robotics & Automation",
-          "symbol": "ROBO",
-          "sector": "IA y Robotica",
-          "score_final": 53.5
-        },
-        {
-          "id": "NLR",
-          "name": "VanEck Uranium+Nuclear Energy ETF",
-          "symbol": "NLR",
-          "sector": "Uranio y Nuclear",
-          "score_final": 52.0
-        }
-      ]
+      "score_top1": 84.0
     },
     {
       "date": "2025-10-01",
-      "meses_desde": 8.6,
       "top1": {
-        "name": "ARK Genomic Revolution ETF",
-        "symbol": "ARKG",
+        "symbol": "XBI",
         "sector": "Biotecnologia",
-        "score": 85.6,
-        "ret_hasta_hoy": 27.76
+        "score": 86.0
       },
       "top2": {
-        "name": "Global X Robotics & AI",
-        "symbol": "BOTZ",
-        "sector": "IA y Robotica",
-        "score": 60.2,
-        "ret_hasta_hoy": 7.45
+        "symbol": "ROBO",
+        "sector": "Robotica e IA",
+        "score": 67.7
       },
-      "ret_ponderado_hoy": 21.67,
-      "iwda_hoy": 15.55,
-      "alpha_ponderado": 6.12,
+      "ret_top1": 11.16,
+      "ret_top2": 4.96,
+      "ret_ponderado": 9.3,
+      "ret_iwda": 3.49,
+      "alpha": 5.81,
       "bate_top1": true,
-      "score_top1": 85.6,
-      "full_ranking": [
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 85.6
-        },
-        {
-          "id": "BOTZ",
-          "name": "Global X Robotics & AI",
-          "symbol": "BOTZ",
-          "sector": "IA y Robotica",
-          "score_final": 60.2
-        },
-        {
-          "id": "NLR",
-          "name": "VanEck Uranium+Nuclear Energy ETF",
-          "symbol": "NLR",
-          "sector": "Uranio y Nuclear",
-          "score_final": 57.1
-        },
-        {
-          "id": "ITA",
-          "name": "iShares US Aerospace & Defense",
-          "symbol": "ITA",
-          "sector": "Defensa",
-          "score_final": 55.4
-        },
-        {
-          "id": "GRID",
-          "name": "First Trust NASDAQ Smart Grid",
-          "symbol": "GRID",
-          "sector": "Infraestructura",
-          "score_final": 52.1
-        }
-      ]
+      "score_top1": 86.0
     },
     {
       "date": "2025-11-01",
-      "meses_desde": 7.6,
       "top1": {
-        "name": "ARK Genomic Revolution ETF",
-        "symbol": "ARKG",
-        "sector": "Biotecnologia",
-        "score": 61.9,
-        "ret_hasta_hoy": 20.22
+        "symbol": "ROBO",
+        "sector": "Robotica e IA",
+        "score": 65.9
       },
       "top2": {
-        "name": "Global X Robotics & AI",
-        "symbol": "BOTZ",
-        "sector": "IA y Robotica",
-        "score": 61.0,
-        "ret_hasta_hoy": 0.31
+        "symbol": "XBI",
+        "sector": "Biotecnologia",
+        "score": 61.3
       },
-      "ret_ponderado_hoy": 14.25,
-      "iwda_hoy": 11.5,
-      "alpha_ponderado": 2.75,
-      "bate_top1": true,
-      "score_top1": 61.9,
-      "full_ranking": [
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 61.9
-        },
-        {
-          "id": "BOTZ",
-          "name": "Global X Robotics & AI",
-          "symbol": "BOTZ",
-          "sector": "IA y Robotica",
-          "score_final": 61.0
-        },
-        {
-          "id": "NLR",
-          "name": "VanEck Uranium+Nuclear Energy ETF",
-          "symbol": "NLR",
-          "sector": "Uranio y Nuclear",
-          "score_final": 59.9
-        },
-        {
-          "id": "WGMI",
-          "name": "Valkyrie Bitcoin Miners ETF",
-          "symbol": "WGMI",
-          "sector": "Bitcoin y Cripto",
-          "score_final": 57.4
-        },
-        {
-          "id": "ITA",
-          "name": "iShares US Aerospace & Defense",
-          "symbol": "ITA",
-          "sector": "Defensa",
-          "score_final": 56.1
-        }
-      ]
+      "ret_top1": -2.41,
+      "ret_top2": 6.33,
+      "ret_ponderado": 0.21,
+      "ret_iwda": -0.73,
+      "alpha": 0.94,
+      "bate_top1": false,
+      "score_top1": 65.9
     },
     {
       "date": "2025-12-01",
-      "meses_desde": 6.6,
       "top1": {
-        "name": "Valkyrie Bitcoin Miners ETF",
-        "symbol": "WGMI",
-        "sector": "Bitcoin y Cripto",
-        "score": 76.3,
-        "ret_hasta_hoy": 52.56
+        "symbol": "ROBO",
+        "sector": "Robotica e IA",
+        "score": 71.6
       },
       "top2": {
-        "name": "WisdomTree AI ETF",
-        "symbol": "WTAI",
-        "sector": "IA y Robotica",
-        "score": 73.5,
-        "ret_hasta_hoy": 61.9
+        "symbol": "URNM",
+        "sector": "Uranio y Nuclear",
+        "score": 63.8
       },
-      "ret_ponderado_hoy": 55.36,
-      "iwda_hoy": 12.48,
-      "alpha_ponderado": 42.88,
+      "ret_top1": 2.02,
+      "ret_top2": 0.24,
+      "ret_ponderado": 1.49,
+      "ret_iwda": 0.5,
+      "alpha": 0.99,
       "bate_top1": true,
-      "score_top1": 76.3,
-      "full_ranking": [
-        {
-          "id": "WGMI",
-          "name": "Valkyrie Bitcoin Miners ETF",
-          "symbol": "WGMI",
-          "sector": "Bitcoin y Cripto",
-          "score_final": 76.3
-        },
-        {
-          "id": "WTAI",
-          "name": "WisdomTree AI ETF",
-          "symbol": "WTAI",
-          "sector": "IA y Robotica",
-          "score_final": 73.5
-        },
-        {
-          "id": "NLR",
-          "name": "VanEck Uranium+Nuclear Energy ETF",
-          "symbol": "NLR",
-          "sector": "Uranio y Nuclear",
-          "score_final": 64.0
-        },
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 62.7
-        },
-        {
-          "id": "GRID",
-          "name": "First Trust NASDAQ Smart Grid",
-          "symbol": "GRID",
-          "sector": "Infraestructura",
-          "score_final": 58.3
-        }
-      ]
+      "score_top1": 71.6
     },
     {
       "date": "2026-01-01",
-      "meses_desde": 5.6,
       "top1": {
-        "name": "ARK Genomic Revolution ETF",
-        "symbol": "ARKG",
-        "sector": "Biotecnologia",
-        "score": 79.9,
-        "ret_hasta_hoy": 26.32
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 75.8
       },
       "top2": {
-        "name": "WisdomTree AI ETF",
-        "symbol": "WTAI",
-        "sector": "IA y Robotica",
-        "score": 63.4,
-        "ret_hasta_hoy": 60.8
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
+        "score": 75.1
       },
-      "ret_ponderado_hoy": 36.66,
-      "iwda_hoy": 12.11,
-      "alpha_ponderado": 24.55,
+      "ret_top1": 7.85,
+      "ret_top2": 18.14,
+      "ret_ponderado": 10.94,
+      "ret_iwda": 0.59,
+      "alpha": 10.35,
       "bate_top1": true,
-      "score_top1": 79.9,
-      "full_ranking": [
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 79.9
-        },
-        {
-          "id": "WTAI",
-          "name": "WisdomTree AI ETF",
-          "symbol": "WTAI",
-          "sector": "IA y Robotica",
-          "score_final": 63.4
-        },
-        {
-          "id": "URNM",
-          "name": "Sprott Uranium Miners ETF",
-          "symbol": "URNM",
-          "sector": "Uranio y Nuclear",
-          "score_final": 56.2
-        },
-        {
-          "id": "VHT",
-          "name": "Vanguard Health Care ETF",
-          "symbol": "VHT",
-          "sector": "Salud",
-          "score_final": 53.2
-        },
-        {
-          "id": "ITA",
-          "name": "iShares US Aerospace & Defense",
-          "symbol": "ITA",
-          "sector": "Defensa",
-          "score_final": 52.4
-        }
-      ]
+      "score_top1": 75.8
     },
     {
       "date": "2026-02-01",
-      "meses_desde": 4.6,
       "top1": {
-        "name": "ARK Genomic Revolution ETF",
-        "symbol": "ARKG",
+        "symbol": "XBI",
         "sector": "Biotecnologia",
-        "score": 83.6,
-        "ret_hasta_hoy": 20.38
+        "score": 81.7
       },
       "top2": {
-        "name": "WisdomTree AI ETF",
-        "symbol": "WTAI",
-        "sector": "IA y Robotica",
-        "score": 63.6,
-        "ret_hasta_hoy": 56.11
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 76.8
       },
-      "ret_ponderado_hoy": 31.1,
-      "iwda_hoy": 10.04,
-      "alpha_ponderado": 21.06,
-      "bate_top1": true,
-      "score_top1": 83.6,
-      "full_ranking": [
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 83.6
-        },
-        {
-          "id": "WTAI",
-          "name": "WisdomTree AI ETF",
-          "symbol": "WTAI",
-          "sector": "IA y Robotica",
-          "score_final": 63.6
-        },
-        {
-          "id": "NLR",
-          "name": "VanEck Uranium+Nuclear Energy ETF",
-          "symbol": "NLR",
-          "sector": "Uranio y Nuclear",
-          "score_final": 63.6
-        },
-        {
-          "id": "ITA",
-          "name": "iShares US Aerospace & Defense",
-          "symbol": "ITA",
-          "sector": "Defensa",
-          "score_final": 61.4
-        },
-        {
-          "id": "SMH",
-          "name": "VanEck Semiconductor ETF",
-          "symbol": "SMH",
-          "sector": "Semiconductores",
-          "score_final": 57.2
-        }
-      ]
+      "ret_top1": 0.02,
+      "ret_top2": -0.05,
+      "ret_ponderado": -0.0,
+      "ret_iwda": 0.12,
+      "alpha": -0.12,
+      "bate_top1": false,
+      "score_top1": 81.7
     },
     {
       "date": "2026-03-01",
-      "meses_desde": 3.7,
       "top1": {
-        "name": "ARK Genomic Revolution ETF",
-        "symbol": "ARKG",
+        "symbol": "XBI",
         "sector": "Biotecnologia",
-        "score": 78.7,
-        "ret_hasta_hoy": 23.24
+        "score": 74.4
       },
       "top2": {
-        "name": "WisdomTree AI ETF",
-        "symbol": "WTAI",
-        "sector": "IA y Robotica",
-        "score": 58.9,
-        "ret_hasta_hoy": 57.5
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 72.4
       },
-      "ret_ponderado_hoy": 33.52,
-      "iwda_hoy": 9.65,
-      "alpha_ponderado": 23.87,
+      "ret_top1": 0.93,
+      "ret_top2": -1.16,
+      "ret_ponderado": 0.3,
+      "ret_iwda": -5.07,
+      "alpha": 5.37,
       "bate_top1": true,
-      "score_top1": 78.7,
-      "full_ranking": [
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 78.7
-        },
-        {
-          "id": "WTAI",
-          "name": "WisdomTree AI ETF",
-          "symbol": "WTAI",
-          "sector": "IA y Robotica",
-          "score_final": 58.9
-        },
-        {
-          "id": "NLR",
-          "name": "VanEck Uranium+Nuclear Energy ETF",
-          "symbol": "NLR",
-          "sector": "Uranio y Nuclear",
-          "score_final": 58.9
-        },
-        {
-          "id": "SEMI",
-          "name": "iShares MSCI Global Semiconductors",
-          "symbol": "SEMI.AS",
-          "sector": "Semiconductores",
-          "score_final": 56.1
-        },
-        {
-          "id": "EUDF",
-          "name": "iShares MSCI Europe Defence",
-          "symbol": "EUDF.DE",
-          "sector": "Defensa",
-          "score_final": 55.3
-        }
-      ]
+      "score_top1": 74.4
     },
     {
       "date": "2026-04-01",
-      "meses_desde": 2.7,
       "top1": {
-        "name": "SPDR S&P Biotech ETF",
-        "symbol": "XBI",
-        "sector": "Biotecnologia",
-        "score": 67.0,
-        "ret_hasta_hoy": 9.47
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
+        "score": 68.9
       },
       "top2": {
-        "name": "iShares MSCI Global Semiconductors",
-        "symbol": "SEMI.AS",
-        "sector": "Semiconductores",
-        "score": 62.2,
-        "ret_hasta_hoy": 84.74
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 67.9
       },
-      "ret_ponderado_hoy": 32.05,
-      "iwda_hoy": 13.12,
-      "alpha_ponderado": 18.93,
+      "ret_top1": 1.87,
+      "ret_top2": 18.54,
+      "ret_ponderado": 6.87,
+      "ret_iwda": 6.09,
+      "alpha": 0.78,
       "bate_top1": false,
-      "score_top1": 67.0,
-      "full_ranking": [
-        {
-          "id": "XBI",
-          "name": "SPDR S&P Biotech ETF",
-          "symbol": "XBI",
-          "sector": "Biotecnologia",
-          "score_final": 67.0
-        },
-        {
-          "id": "SEMI",
-          "name": "iShares MSCI Global Semiconductors",
-          "symbol": "SEMI.AS",
-          "sector": "Semiconductores",
-          "score_final": 62.2
-        },
-        {
-          "id": "ROBO",
-          "name": "Robo Global Robotics & Automation",
-          "symbol": "ROBO",
-          "sector": "IA y Robotica",
-          "score_final": 60.9
-        },
-        {
-          "id": "VHT",
-          "name": "Vanguard Health Care ETF",
-          "symbol": "VHT",
-          "sector": "Salud",
-          "score_final": 60.9
-        },
-        {
-          "id": "GRID",
-          "name": "First Trust NASDAQ Smart Grid",
-          "symbol": "GRID",
-          "sector": "Infraestructura",
-          "score_final": 56.1
-        }
-      ]
+      "score_top1": 68.9
     },
     {
       "date": "2026-05-01",
-      "meses_desde": 1.7,
       "top1": {
-        "name": "ARK Genomic Revolution ETF",
-        "symbol": "ARKG",
-        "sector": "Biotecnologia",
-        "score": 71.6,
-        "ret_hasta_hoy": 21.65
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 72.1
       },
       "top2": {
-        "name": "iShares MSCI Global Semiconductors",
-        "symbol": "SEMI.AS",
-        "sector": "Semiconductores",
-        "score": 51.9,
-        "ret_hasta_hoy": 38.92
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
+        "score": 65.5
       },
-      "ret_ponderado_hoy": 26.83,
-      "iwda_hoy": 6.36,
-      "alpha_ponderado": 20.47,
-      "bate_top1": true,
-      "score_top1": 71.6,
-      "full_ranking": [
-        {
-          "id": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "symbol": "ARKG",
-          "sector": "Biotecnologia",
-          "score_final": 71.6
-        },
-        {
-          "id": "SEMI",
-          "name": "iShares MSCI Global Semiconductors",
-          "symbol": "SEMI.AS",
-          "sector": "Semiconductores",
-          "score_final": 51.9
-        },
-        {
-          "id": "GRID",
-          "name": "First Trust NASDAQ Smart Grid",
-          "symbol": "GRID",
-          "sector": "Infraestructura",
-          "score_final": 51.5
-        },
-        {
-          "id": "URNM",
-          "name": "Sprott Uranium Miners ETF",
-          "symbol": "URNM",
-          "sector": "Uranio y Nuclear",
-          "score_final": 50.9
-        },
-        {
-          "id": "VHT",
-          "name": "Vanguard Health Care ETF",
-          "symbol": "VHT",
-          "sector": "Salud",
-          "score_final": 50.4
-        }
-      ]
+      "ret_top1": -2.96,
+      "ret_top2": 13.93,
+      "ret_ponderado": 2.11,
+      "ret_iwda": 5.7,
+      "alpha": -3.59,
+      "bate_top1": false,
+      "score_top1": 72.1
+    },
+    {
+      "date": "2026-06-01",
+      "top1": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 70.8
+      },
+      "top2": {
+        "symbol": "GRID",
+        "sector": "Infraestructura",
+        "score": 68.0
+      },
+      "ret_top1": -11.11,
+      "ret_top2": -2.7,
+      "ret_ponderado": -8.59,
+      "ret_iwda": 0.21,
+      "alpha": -8.8,
+      "bate_top1": false,
+      "score_top1": 70.8
     }
   ],
-  "cartera_detalle": [
+  "snapshots_b": [
     {
-      "fecha": "2023-06-01",
-      "symbol": "WGMI",
-      "invertido": 350,
-      "valor_hoy": 2261.21
+      "date": "2024-12-01",
+      "top1_symbol": "LIT",
+      "ret_total": 46.76,
+      "ret_iwda": 17.3,
+      "alpha_total": 29.46,
+      "valor_sis": 733.81,
+      "valor_iwd": 586.5
     },
     {
-      "fecha": "2023-06-01",
-      "symbol": "WTAI",
-      "invertido": 150,
-      "valor_hoy": 387.42
+      "date": "2025-01-01",
+      "top1_symbol": "LIT",
+      "ret_total": 75.07,
+      "ret_iwda": 19.04,
+      "alpha_total": 56.03,
+      "valor_sis": 875.36,
+      "valor_iwd": 595.2
     },
     {
-      "fecha": "2023-07-01",
-      "symbol": "WGMI",
-      "invertido": 350,
-      "valor_hoy": 1765.05
+      "date": "2025-02-01",
+      "top1_symbol": "LIT",
+      "ret_total": 61.55,
+      "ret_iwda": 14.61,
+      "alpha_total": 46.94,
+      "valor_sis": 807.74,
+      "valor_iwd": 573.05
     },
     {
-      "fecha": "2023-07-01",
-      "symbol": "WTAI",
-      "invertido": 150,
-      "valor_hoy": 371.49
+      "date": "2025-03-01",
+      "top1_symbol": "IHI",
+      "ret_total": -7.5,
+      "ret_iwda": 17.59,
+      "alpha_total": -25.09,
+      "valor_sis": 462.48,
+      "valor_iwd": 587.95
     },
     {
-      "fecha": "2023-08-01",
-      "symbol": "CIBR",
-      "invertido": 350,
-      "valor_hoy": 622.26
+      "date": "2025-04-01",
+      "top1_symbol": "LIT",
+      "ret_total": 67.89,
+      "ret_iwda": 26.03,
+      "alpha_total": 41.86,
+      "valor_sis": 839.47,
+      "valor_iwd": 630.15
     },
     {
-      "fecha": "2023-08-01",
-      "symbol": "ARKG",
-      "invertido": 150,
-      "valor_hoy": 149.26
+      "date": "2025-05-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 59.85,
+      "ret_iwda": 32.85,
+      "alpha_total": 27.0,
+      "valor_sis": 799.26,
+      "valor_iwd": 664.25
     },
     {
-      "fecha": "2023-09-01",
-      "symbol": "CIBR",
-      "invertido": 350,
-      "valor_hoy": 626.5
+      "date": "2025-06-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 38.03,
+      "ret_iwda": 25.5,
+      "alpha_total": 12.53,
+      "valor_sis": 690.17,
+      "valor_iwd": 627.5
     },
     {
-      "fecha": "2023-09-01",
-      "symbol": "INDA",
-      "invertido": 150,
-      "valor_hoy": 168.11
+      "date": "2025-07-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 70.08,
+      "ret_iwda": 24.0,
+      "alpha_total": 46.08,
+      "valor_sis": 850.38,
+      "valor_iwd": 620.0
     },
     {
-      "fecha": "2023-10-01",
-      "symbol": "INDA",
-      "invertido": 350,
-      "valor_hoy": 392.52
+      "date": "2025-08-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 63.98,
+      "ret_iwda": 21.76,
+      "alpha_total": 42.22,
+      "valor_sis": 819.91,
+      "valor_iwd": 608.8
     },
     {
-      "fecha": "2023-10-01",
-      "symbol": "CIBR",
-      "invertido": 150,
-      "valor_hoy": 278.28
+      "date": "2025-09-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 49.6,
+      "ret_iwda": 18.28,
+      "alpha_total": 31.32,
+      "valor_sis": 747.99,
+      "valor_iwd": 591.4
     },
     {
-      "fecha": "2023-11-01",
-      "symbol": "CIBR",
-      "invertido": 350,
-      "valor_hoy": 662.97
+      "date": "2025-10-01",
+      "top1_symbol": "XBI",
+      "ret_total": 40.61,
+      "ret_iwda": 14.78,
+      "alpha_total": 25.83,
+      "valor_sis": 703.03,
+      "valor_iwd": 573.9
     },
     {
-      "fecha": "2023-11-01",
-      "symbol": "BITO",
-      "invertido": 150,
-      "valor_hoy": 73.24
+      "date": "2025-11-01",
+      "top1_symbol": "ROBO",
+      "ret_total": 22.64,
+      "ret_iwda": 10.92,
+      "alpha_total": 11.72,
+      "valor_sis": 613.23,
+      "valor_iwd": 554.6
     },
     {
-      "fecha": "2023-12-01",
-      "symbol": "BUG",
-      "invertido": 350,
-      "valor_hoy": 434.49
+      "date": "2025-12-01",
+      "top1_symbol": "ROBO",
+      "ret_total": 14.59,
+      "ret_iwda": 11.73,
+      "alpha_total": 2.86,
+      "valor_sis": 572.95,
+      "valor_iwd": 558.65
     },
     {
-      "fecha": "2023-12-01",
-      "symbol": "BITO",
-      "invertido": 150,
-      "valor_hoy": 66.63
+      "date": "2026-01-01",
+      "top1_symbol": "LIT",
+      "ret_total": 16.8,
+      "ret_iwda": 11.17,
+      "alpha_total": 5.63,
+      "valor_sis": 583.99,
+      "valor_iwd": 555.85
     },
     {
-      "fecha": "2024-01-01",
-      "symbol": "IBB",
-      "invertido": 350,
-      "valor_hoy": 440.16
+      "date": "2026-02-01",
+      "top1_symbol": "XBI",
+      "ret_total": 15.99,
+      "ret_iwda": 9.3,
+      "alpha_total": 6.69,
+      "valor_sis": 579.97,
+      "valor_iwd": 546.5
     },
     {
-      "fecha": "2024-01-01",
-      "symbol": "BUG",
-      "invertido": 150,
-      "valor_hoy": 178.12
+      "date": "2026-03-01",
+      "top1_symbol": "XBI",
+      "ret_total": 14.28,
+      "ret_iwda": 8.93,
+      "alpha_total": 5.35,
+      "valor_sis": 571.41,
+      "valor_iwd": 544.65
     },
     {
-      "fecha": "2024-02-01",
-      "symbol": "BITO",
-      "invertido": 350,
-      "valor_hoy": 146.93
+      "date": "2026-04-01",
+      "top1_symbol": "COPX",
+      "ret_total": -0.4,
+      "ret_iwda": 12.37,
+      "alpha_total": -12.77,
+      "valor_sis": 498.01,
+      "valor_iwd": 561.85
     },
     {
-      "fecha": "2024-02-01",
-      "symbol": "BUG",
-      "invertido": 150,
-      "valor_hoy": 167.05
+      "date": "2026-05-01",
+      "top1_symbol": "LIT",
+      "ret_total": -9.01,
+      "ret_iwda": 5.92,
+      "alpha_total": -14.93,
+      "valor_sis": 454.93,
+      "valor_iwd": 529.6
     },
     {
-      "fecha": "2024-03-01",
-      "symbol": "XBI",
-      "invertido": 350,
-      "valor_hoy": 485.1
-    },
-    {
-      "fecha": "2024-03-01",
-      "symbol": "BOTZ",
-      "invertido": 150,
-      "valor_hoy": 181.34
+      "date": "2026-06-01",
+      "top1_symbol": "ICLN",
+      "ret_total": -8.59,
+      "ret_iwda": 0.21,
+      "alpha_total": -8.8,
+      "valor_sis": 457.06,
+      "valor_iwd": 501.05
     }
-  ],
-  "metodologia": "v8: Top1 bate IWDA, 70/30, cartera acumulativa, filtro sobrevaloración."
+  ]
 }
