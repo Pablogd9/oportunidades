@@ -2,49 +2,40 @@ name: Escanear oportunidades
 
 on:
   schedule:
-    - cron: "00 6 * * *"
-    - cron: "30 7 * * *"
-    - cron: "30 13 * * *"
-    - cron: "30 20 * * *"
-  workflow_dispatch: {}
-
-permissions:
-  contents: write
-
-concurrency:
-  group: escanear-oportunidades
-  cancel-in-progress: false
+    - cron: '0 6 * * *'
+    - cron: '30 7 * * *'
+    - cron: '30 13 * * *'
+    - cron: '30 20 * * *'
+  workflow_dispatch:
 
 jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
-      - name: Descargar repositorio
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Preparar Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
-      - name: Descargar datos macro externos
+      - name: Ejecutar macro
+        run: python scripts/macro.py
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-        run: python scripts/macro.py
+
+      - name: Actualizar holdings SEC EDGAR
+        run: python scripts/fetch_edgar.py
+        continue-on-error: true
 
       - name: Ejecutar escaner
-        env:
-          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: python scripts/scan.py
 
-      - name: Guardar resultados
+      - name: Commit resultados
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/output.json data/macro.json
-          if git diff --staged --quiet; then
-            echo "Sin cambios."
-          else
-            git commit -m "Escaneo automatico ($(date -u +%Y-%m-%d %H:%M))"
-            git push
-          fi
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add data/
+          git diff --staged --quiet || git commit -m "Scan $(date -u '+%Y-%m-%d %H:%M') UTC"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
