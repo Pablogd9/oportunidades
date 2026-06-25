@@ -1,67 +1,104 @@
 {
-  "updated": "2026-06-25T23:00:39Z",
+  "updated": "2026-06-25T23:34:30Z",
   "summary": {
     "fecha": "2026-06-25",
-    "model_version": "10.1",
+    "model_version": "11.0",
     "universo": 17,
     "metodologia": {
       "rolling_window_anos": 5,
       "horizonte_meses": 3,
-      "backtest_A": "Señales trimestrales independientes (ene/abr/jul/oct), horizonte 3 meses",
-      "backtest_B": "Simulacion €500/trimestre acumulativo hasta hoy",
-      "splicing": "URNM con proxy URA pre-2019, correlacion minima 0.55"
+      "frecuencia": "mensual",
+      "momentum_lookback": "12M skip-1",
+      "pvalue_metodo": "Newey-West lags=2 + Bootstrap",
+      "splicing": "URNM con proxy URA pre-2019"
     },
     "backtest_A": {
-      "n_senales": 37,
-      "alpha_medio_trimestre": 0.045,
-      "alpha_anualizado": 0.18,
-      "pct_bate_iwda": 48.6,
+      "n_senales": 110,
+      "alpha_medio": -0.122,
+      "alpha_anualizado_aprox": -0.49,
+      "pct_bate_iwda": 45.5,
+      "pvalue_newey_west": 0.9352,
+      "tstat": -0.081,
+      "pvalue_bootstrap": 0.942,
+      "significancia_nw": "✗  No significativo — puede ser azar",
       "predictividad": {
         "alto_70+": {
-          "n": 21,
-          "alpha_medio": 0.98
+          "n": 0,
+          "alpha_medio": null
         },
         "medio_55-70": {
-          "n": 10,
-          "alpha_medio": -2.23
+          "n": 86,
+          "alpha_medio": 0.72
         },
         "bajo_55-": {
-          "n": 6,
-          "alpha_medio": 0.56
+          "n": 24,
+          "alpha_medio": -3.14
         }
-      },
-      "bootstrap": {
-        "pvalue": 0.816,
-        "percentil_real": 18.4,
-        "alpha_medio_aleatorio": 1.006,
-        "n_simulaciones": 1000,
-        "significancia": "✗  No significativo — puede ser azar"
       }
     },
     "backtest_B": {
-      "n_trimestres": 37,
-      "total_invertido": 18500,
-      "valor_sistema": 37523.96,
-      "valor_iwda": 36256.15,
-      "ret_sistema": 102.83,
-      "ret_iwda": 95.98,
-      "alpha_total": 6.85,
-      "diferencia_euros": 1267.81
-    },
-    "interpretacion": "A(37señales trimestrales): alpha +0.045%/trimestre (+0.2%/año). ✗  No significativo — puede ser azar. B(37trimestres): sistema €37,524 vs IWDA €36,256 (alpha +6.85%)"
+      "n_meses": 110,
+      "total_invertido": 55000,
+      "valor_sistema": 116507.12,
+      "valor_iwda": 108340.5,
+      "ret_sistema": 111.83,
+      "ret_iwda": 96.98,
+      "alpha_total": 14.85,
+      "diferencia_euros": 8166.62
+    }
   },
   "snapshots_a": [
+    {
+      "date": "2017-02-01",
+      "top1": {
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 60.9
+      },
+      "top2": {
+        "symbol": "PHO",
+        "sector": "Agua",
+        "score": 58.4
+      },
+      "ret_top1": 7.52,
+      "ret_top2": 5.53,
+      "ret_ponderado": 6.92,
+      "ret_iwda": 3.89,
+      "alpha": 3.03,
+      "bate_top1": true,
+      "score_top1": 60.9
+    },
+    {
+      "date": "2017-03-01",
+      "top1": {
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
+        "score": 60.9
+      },
+      "top2": {
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 58.5
+      },
+      "ret_top1": -17.38,
+      "ret_top2": 12.92,
+      "ret_ponderado": -8.29,
+      "ret_iwda": -2.77,
+      "alpha": -5.52,
+      "bate_top1": false,
+      "score_top1": 60.9
+    },
     {
       "date": "2017-04-01",
       "top1": {
         "symbol": "LIT",
         "sector": "Litio y Baterias",
-        "score": 73.8
+        "score": 60.7
       },
       "top2": {
         "symbol": "COPX",
         "sector": "Cobre y Metales",
-        "score": 71.3
+        "score": 57.2
       },
       "ret_top1": 3.24,
       "ret_top2": -6.46,
@@ -69,19 +106,59 @@
       "ret_iwda": -2.74,
       "alpha": 3.07,
       "bate_top1": true,
-      "score_top1": 73.8
+      "score_top1": 60.7
+    },
+    {
+      "date": "2017-05-01",
+      "top1": {
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 59.8
+      },
+      "top2": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 57.8
+      },
+      "ret_top1": 7.58,
+      "ret_top2": 5.61,
+      "ret_ponderado": 6.99,
+      "ret_iwda": -3.11,
+      "alpha": 10.1,
+      "bate_top1": true,
+      "score_top1": 59.8
+    },
+    {
+      "date": "2017-06-01",
+      "top1": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 61.7
+      },
+      "top2": {
+        "symbol": "IBB",
+        "sector": "Biotecnologia",
+        "score": 53.6
+      },
+      "ret_top1": 4.82,
+      "ret_top2": 14.6,
+      "ret_ponderado": 7.75,
+      "ret_iwda": -3.21,
+      "alpha": 10.96,
+      "bate_top1": true,
+      "score_top1": 61.7
     },
     {
       "date": "2017-07-01",
       "top1": {
         "symbol": "ICLN",
         "sector": "Energia Limpia",
-        "score": 78.1
+        "score": 60.0
       },
       "top2": {
         "symbol": "XBI",
         "sector": "Biotecnologia",
-        "score": 76.3
+        "score": 59.0
       },
       "ret_top1": 4.91,
       "ret_top2": 12.17,
@@ -89,39 +166,119 @@
       "ret_iwda": 1.26,
       "alpha": 5.83,
       "bate_top1": true,
-      "score_top1": 78.1
+      "score_top1": 60.0
+    },
+    {
+      "date": "2017-08-01",
+      "top1": {
+        "symbol": "IBB",
+        "sector": "Biotecnologia",
+        "score": 60.0
+      },
+      "top2": {
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
+        "score": 55.8
+      },
+      "ret_top1": -0.5,
+      "ret_top2": 1.55,
+      "ret_ponderado": 0.11,
+      "ret_iwda": 5.46,
+      "alpha": -5.34,
+      "bate_top1": false,
+      "score_top1": 60.0
+    },
+    {
+      "date": "2017-09-01",
+      "top1": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 59.3
+      },
+      "top2": {
+        "symbol": "IHI",
+        "sector": "Salud",
+        "score": 52.0
+      },
+      "ret_top1": -2.73,
+      "ret_top2": 7.04,
+      "ret_ponderado": 0.2,
+      "ret_iwda": 5.67,
+      "alpha": -5.47,
+      "bate_top1": false,
+      "score_top1": 59.3
     },
     {
       "date": "2017-10-01",
       "top1": {
         "symbol": "ICLN",
         "sector": "Energia Limpia",
-        "score": 73.4
+        "score": 59.5
+      },
+      "top2": {
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
+        "score": 55.3
+      },
+      "ret_top1": 3.21,
+      "ret_top2": 8.96,
+      "ret_ponderado": 4.94,
+      "ret_iwda": 3.14,
+      "alpha": 1.8,
+      "bate_top1": true,
+      "score_top1": 59.5
+    },
+    {
+      "date": "2017-11-01",
+      "top1": {
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
+        "score": 57.0
+      },
+      "top2": {
+        "symbol": "ITA",
+        "sector": "Defensa",
+        "score": 55.1
+      },
+      "ret_top1": 8.29,
+      "ret_top2": 12.78,
+      "ret_ponderado": 9.64,
+      "ret_iwda": 1.59,
+      "alpha": 8.05,
+      "bate_top1": true,
+      "score_top1": 57.0
+    },
+    {
+      "date": "2017-12-01",
+      "top1": {
+        "symbol": "SMH",
+        "sector": "Semiconductores",
+        "score": 58.3
       },
       "top2": {
         "symbol": "IBB",
         "sector": "Biotecnologia",
-        "score": 65.8
+        "score": 57.1
       },
-      "ret_top1": 3.21,
-      "ret_top2": -5.41,
-      "ret_ponderado": 0.62,
-      "ret_iwda": 3.14,
-      "alpha": -2.52,
+      "ret_top1": 7.2,
+      "ret_top2": 2.25,
+      "ret_ponderado": 5.71,
+      "ret_iwda": 1.33,
+      "alpha": 4.38,
       "bate_top1": true,
-      "score_top1": 73.4
+      "score_top1": 58.3
     },
     {
       "date": "2018-01-01",
       "top1": {
         "symbol": "ICLN",
         "sector": "Energia Limpia",
-        "score": 77.2
+        "score": 60.7
       },
       "top2": {
         "symbol": "COPX",
         "sector": "Cobre y Metales",
-        "score": 75.3
+        "score": 58.1
       },
       "ret_top1": 0.63,
       "ret_top2": -7.38,
@@ -129,139 +286,419 @@
       "ret_iwda": -3.86,
       "alpha": 2.09,
       "bate_top1": true,
-      "score_top1": 77.2
+      "score_top1": 60.7
     },
     {
-      "date": "2018-04-01",
+      "date": "2018-02-01",
       "top1": {
-        "symbol": "CIBR",
-        "sector": "Ciberseguridad",
-        "score": 72.2
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 60.9
+      },
+      "top2": {
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
+        "score": 57.7
+      },
+      "ret_top1": 3.47,
+      "ret_top2": -8.08,
+      "ret_ponderado": 0.0,
+      "ret_iwda": -1.41,
+      "alpha": 1.41,
+      "bate_top1": true,
+      "score_top1": 60.9
+    },
+    {
+      "date": "2018-03-01",
+      "top1": {
+        "symbol": "VHT",
+        "sector": "Salud",
+        "score": 57.6
       },
       "top2": {
         "symbol": "ICLN",
         "sector": "Energia Limpia",
-        "score": 72.0
+        "score": 55.8
       },
-      "ret_top1": 7.24,
-      "ret_top2": -6.93,
-      "ret_ponderado": 2.99,
-      "ret_iwda": 8.74,
-      "alpha": -5.75,
+      "ret_top1": 1.31,
+      "ret_top2": 4.41,
+      "ret_ponderado": 2.24,
+      "ret_iwda": 4.93,
+      "alpha": -2.69,
       "bate_top1": false,
-      "score_top1": 72.2
+      "score_top1": 57.6
     },
     {
-      "date": "2018-07-01",
+      "date": "2018-04-01",
       "top1": {
-        "symbol": "CIBR",
-        "sector": "Ciberseguridad",
-        "score": 61.9
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 58.9
       },
       "top2": {
-        "symbol": "IGV",
-        "sector": "Software y Cloud",
-        "score": 58.8
+        "symbol": "CIBR",
+        "sector": "Ciberseguridad",
+        "score": 55.4
       },
-      "ret_top1": 5.39,
-      "ret_top2": 10.01,
-      "ret_ponderado": 6.78,
-      "ret_iwda": 6.73,
-      "alpha": 0.05,
+      "ret_top1": -6.93,
+      "ret_top2": 7.24,
+      "ret_ponderado": -2.68,
+      "ret_iwda": 8.74,
+      "alpha": -11.42,
       "bate_top1": false,
-      "score_top1": 61.9
+      "score_top1": 58.9
     },
     {
-      "date": "2018-10-01",
+      "date": "2018-05-01",
       "top1": {
-        "symbol": "IHI",
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 59.1
+      },
+      "top2": {
+        "symbol": "VHT",
         "sector": "Salud",
-        "score": 54.2
+        "score": 53.4
+      },
+      "ret_top1": -7.61,
+      "ret_top2": 8.72,
+      "ret_ponderado": -2.71,
+      "ret_iwda": 6.38,
+      "alpha": -9.09,
+      "bate_top1": false,
+      "score_top1": 59.1
+    },
+    {
+      "date": "2018-06-01",
+      "top1": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 56.6
       },
       "top2": {
         "symbol": "IBB",
         "sector": "Biotecnologia",
-        "score": 53.1
+        "score": 53.3
       },
-      "ret_top1": -12.26,
-      "ret_top2": -20.42,
-      "ret_ponderado": -14.71,
-      "ret_iwda": -12.77,
-      "alpha": -1.94,
+      "ret_top1": -9.73,
+      "ret_top2": 11.24,
+      "ret_ponderado": -3.44,
+      "ret_iwda": 3.98,
+      "alpha": -7.42,
+      "bate_top1": false,
+      "score_top1": 56.6
+    },
+    {
+      "date": "2018-07-01",
+      "top1": {
+        "symbol": "XBI",
+        "sector": "Biotecnologia",
+        "score": 52.9
+      },
+      "top2": {
+        "symbol": "IGV",
+        "sector": "Software y Cloud",
+        "score": 52.3
+      },
+      "ret_top1": -1.77,
+      "ret_top2": 10.01,
+      "ret_ponderado": 1.76,
+      "ret_iwda": 6.73,
+      "alpha": -4.97,
+      "bate_top1": false,
+      "score_top1": 52.9
+    },
+    {
+      "date": "2018-08-01",
+      "top1": {
+        "symbol": "IGV",
+        "sector": "Software y Cloud",
+        "score": 51.1
+      },
+      "top2": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 47.4
+      },
+      "ret_top1": -1.78,
+      "ret_top2": -10.49,
+      "ret_ponderado": -4.39,
+      "ret_iwda": -2.49,
+      "alpha": -1.9,
       "bate_top1": true,
-      "score_top1": 54.2
+      "score_top1": 51.1
+    },
+    {
+      "date": "2018-09-01",
+      "top1": {
+        "symbol": "GRID",
+        "sector": "Infraestructura",
+        "score": 47.3
+      },
+      "top2": {
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 47.2
+      },
+      "ret_top1": -14.92,
+      "ret_top2": -2.21,
+      "ret_ponderado": -11.11,
+      "ret_iwda": -3.83,
+      "alpha": -7.28,
+      "bate_top1": false,
+      "score_top1": 47.3
+    },
+    {
+      "date": "2018-10-01",
+      "top1": {
+        "symbol": "GRID",
+        "sector": "Infraestructura",
+        "score": 47.8
+      },
+      "top2": {
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
+        "score": 45.6
+      },
+      "ret_top1": -18.23,
+      "ret_top2": -17.67,
+      "ret_ponderado": -18.06,
+      "ret_iwda": -12.77,
+      "alpha": -5.29,
+      "bate_top1": false,
+      "score_top1": 47.8
+    },
+    {
+      "date": "2018-11-01",
+      "top1": {
+        "symbol": "VHT",
+        "sector": "Salud",
+        "score": 52.3
+      },
+      "top2": {
+        "symbol": "ITA",
+        "sector": "Defensa",
+        "score": 51.0
+      },
+      "ret_top1": 0.41,
+      "ret_top2": -0.9,
+      "ret_ponderado": 0.02,
+      "ret_iwda": -0.63,
+      "alpha": 0.65,
+      "bate_top1": true,
+      "score_top1": 52.3
+    },
+    {
+      "date": "2018-12-01",
+      "top1": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 52.1
+      },
+      "top2": {
+        "symbol": "ITA",
+        "sector": "Defensa",
+        "score": 51.3
+      },
+      "ret_top1": 7.9,
+      "ret_top2": 8.91,
+      "ret_ponderado": 8.2,
+      "ret_iwda": 2.8,
+      "alpha": 5.4,
+      "bate_top1": true,
+      "score_top1": 52.1
     },
     {
       "date": "2019-01-01",
       "top1": {
         "symbol": "INDA",
         "sector": "India",
-        "score": 57.1
+        "score": 52.8
       },
       "top2": {
-        "symbol": "ICLN",
-        "sector": "Energia Limpia",
-        "score": 46.0
+        "symbol": "ITA",
+        "sector": "Defensa",
+        "score": 51.6
       },
       "ret_top1": 6.81,
-      "ret_top2": 19.25,
-      "ret_ponderado": 10.54,
+      "ret_top2": 18.06,
+      "ret_ponderado": 10.18,
       "ret_iwda": 15.7,
-      "alpha": -5.16,
+      "alpha": -5.52,
       "bate_top1": false,
-      "score_top1": 57.1
+      "score_top1": 52.8
+    },
+    {
+      "date": "2019-02-01",
+      "top1": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 56.8
+      },
+      "top2": {
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
+        "score": 53.0
+      },
+      "ret_top1": 6.95,
+      "ret_top2": 6.1,
+      "ret_ponderado": 6.7,
+      "ret_iwda": 10.36,
+      "alpha": -3.66,
+      "bate_top1": false,
+      "score_top1": 56.8
+    },
+    {
+      "date": "2019-03-01",
+      "top1": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 59.9
+      },
+      "top2": {
+        "symbol": "IBB",
+        "sector": "Biotecnologia",
+        "score": 55.6
+      },
+      "ret_top1": 3.1,
+      "ret_top2": -13.14,
+      "ret_ponderado": -1.77,
+      "ret_iwda": 1.04,
+      "alpha": -2.81,
+      "bate_top1": true,
+      "score_top1": 59.9
     },
     {
       "date": "2019-04-01",
       "top1": {
-        "symbol": "INDA",
-        "sector": "India",
-        "score": 61.0
-      },
-      "top2": {
-        "symbol": "ICLN",
-        "sector": "Energia Limpia",
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
         "score": 58.9
       },
-      "ret_top1": -0.03,
-      "ret_top2": 8.83,
-      "ret_ponderado": 2.63,
+      "top2": {
+        "symbol": "PAVE",
+        "sector": "Infraestructura",
+        "score": 52.8
+      },
+      "ret_top1": -6.82,
+      "ret_top2": 3.01,
+      "ret_ponderado": -3.87,
       "ret_iwda": 2.79,
-      "alpha": -0.16,
+      "alpha": -6.66,
       "bate_top1": false,
-      "score_top1": 61.0
+      "score_top1": 58.9
+    },
+    {
+      "date": "2019-05-01",
+      "top1": {
+        "symbol": "GRID",
+        "sector": "Infraestructura",
+        "score": 55.9
+      },
+      "top2": {
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
+        "score": 55.9
+      },
+      "ret_top1": 5.39,
+      "ret_top2": -9.94,
+      "ret_ponderado": 0.79,
+      "ret_iwda": 2.54,
+      "alpha": -1.75,
+      "bate_top1": true,
+      "score_top1": 55.9
+    },
+    {
+      "date": "2019-06-01",
+      "top1": {
+        "symbol": "PAVE",
+        "sector": "Infraestructura",
+        "score": 52.1
+      },
+      "top2": {
+        "symbol": "PHO",
+        "sector": "Agua",
+        "score": 52.0
+      },
+      "ret_top1": 4.11,
+      "ret_top2": 9.14,
+      "ret_ponderado": 5.62,
+      "ret_iwda": 5.86,
+      "alpha": -0.24,
+      "bate_top1": false,
+      "score_top1": 52.1
     },
     {
       "date": "2019-07-01",
       "top1": {
         "symbol": "GRID",
         "sector": "Infraestructura",
-        "score": 70.3
+        "score": 56.5
       },
       "top2": {
-        "symbol": "ROBO",
-        "sector": "Robotica e IA",
-        "score": 59.6
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
+        "score": 56.3
       },
       "ret_top1": 2.31,
-      "ret_top2": -5.31,
-      "ret_ponderado": 0.02,
+      "ret_top2": -18.13,
+      "ret_ponderado": -3.82,
       "ret_iwda": 3.81,
-      "alpha": -3.79,
+      "alpha": -7.63,
       "bate_top1": false,
-      "score_top1": 70.3
+      "score_top1": 56.5
+    },
+    {
+      "date": "2019-08-01",
+      "top1": {
+        "symbol": "SMH",
+        "sector": "Semiconductores",
+        "score": 55.9
+      },
+      "top2": {
+        "symbol": "GRID",
+        "sector": "Infraestructura",
+        "score": 53.4
+      },
+      "ret_top1": 11.12,
+      "ret_top2": 6.68,
+      "ret_ponderado": 9.79,
+      "ret_iwda": 0.81,
+      "alpha": 8.98,
+      "bate_top1": true,
+      "score_top1": 55.9
+    },
+    {
+      "date": "2019-09-01",
+      "top1": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 58.2
+      },
+      "top2": {
+        "symbol": "GRID",
+        "sector": "Infraestructura",
+        "score": 50.8
+      },
+      "ret_top1": 1.29,
+      "ret_top2": 9.99,
+      "ret_ponderado": 3.9,
+      "ret_iwda": 7.56,
+      "alpha": -3.66,
+      "bate_top1": false,
+      "score_top1": 58.2
     },
     {
       "date": "2019-10-01",
       "top1": {
         "symbol": "ICLN",
         "sector": "Energia Limpia",
-        "score": 60.1
+        "score": 54.5
       },
       "top2": {
         "symbol": "GRID",
         "sector": "Infraestructura",
-        "score": 59.9
+        "score": 52.4
       },
       "ret_top1": 8.2,
       "ret_top2": 12.7,
@@ -269,59 +706,179 @@
       "ret_iwda": 5.9,
       "alpha": 3.65,
       "bate_top1": true,
-      "score_top1": 60.1
+      "score_top1": 54.5
+    },
+    {
+      "date": "2019-11-01",
+      "top1": {
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 61.3
+      },
+      "top2": {
+        "symbol": "INDA",
+        "sector": "India",
+        "score": 56.0
+      },
+      "ret_top1": 11.53,
+      "ret_top2": -1.63,
+      "ret_ponderado": 7.58,
+      "ret_iwda": 5.24,
+      "alpha": 2.34,
+      "bate_top1": true,
+      "score_top1": 61.3
+    },
+    {
+      "date": "2019-12-01",
+      "top1": {
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 62.8
+      },
+      "top2": {
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
+        "score": 59.2
+      },
+      "ret_top1": 9.96,
+      "ret_top2": -13.57,
+      "ret_ponderado": 2.9,
+      "ret_iwda": -5.61,
+      "alpha": 8.51,
+      "bate_top1": true,
+      "score_top1": 62.8
     },
     {
       "date": "2020-01-01",
       "top1": {
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
+        "score": 62.1
+      },
+      "top2": {
         "symbol": "LIT",
         "sector": "Litio y Baterias",
-        "score": 70.9
+        "score": 61.6
+      },
+      "ret_top1": -41.78,
+      "ret_top2": -20.59,
+      "ret_ponderado": -35.42,
+      "ret_iwda": -17.77,
+      "alpha": -17.65,
+      "bate_top1": false,
+      "score_top1": 62.1
+    },
+    {
+      "date": "2020-02-01",
+      "top1": {
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 61.7
       },
       "top2": {
         "symbol": "ICLN",
         "sector": "Energia Limpia",
-        "score": 61.4
+        "score": 60.4
       },
-      "ret_top1": -20.59,
-      "ret_top2": -18.72,
-      "ret_ponderado": -20.03,
-      "ret_iwda": -17.77,
-      "alpha": -2.26,
+      "ret_top1": -11.56,
+      "ret_top2": -11.22,
+      "ret_ponderado": -11.46,
+      "ret_iwda": -10.89,
+      "alpha": -0.57,
       "bate_top1": false,
-      "score_top1": 70.9
+      "score_top1": 61.7
+    },
+    {
+      "date": "2020-03-01",
+      "top1": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 62.7
+      },
+      "top2": {
+        "symbol": "GRID",
+        "sector": "Infraestructura",
+        "score": 60.5
+      },
+      "ret_top1": -4.33,
+      "ret_top2": -3.09,
+      "ret_ponderado": -3.96,
+      "ret_iwda": 0.32,
+      "alpha": -4.28,
+      "bate_top1": false,
+      "score_top1": 62.7
     },
     {
       "date": "2020-04-01",
       "top1": {
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 40.5
+      },
+      "top2": {
         "symbol": "IBB",
         "sector": "Biotecnologia",
-        "score": 41.2
+        "score": 39.5
+      },
+      "ret_top1": 54.77,
+      "ret_top2": 31.7,
+      "ret_ponderado": 47.85,
+      "ret_iwda": 19.26,
+      "alpha": 28.59,
+      "bate_top1": true,
+      "score_top1": 40.5
+    },
+    {
+      "date": "2020-05-01",
+      "top1": {
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 63.3
+      },
+      "top2": {
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
+        "score": 57.6
+      },
+      "ret_top1": 49.38,
+      "ret_top2": 42.46,
+      "ret_ponderado": 47.3,
+      "ret_iwda": 4.05,
+      "alpha": 43.25,
+      "bate_top1": true,
+      "score_top1": 63.3
+    },
+    {
+      "date": "2020-06-01",
+      "top1": {
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
+        "score": 62.2
       },
       "top2": {
         "symbol": "LIT",
         "sector": "Litio y Baterias",
-        "score": 38.5
+        "score": 61.6
       },
-      "ret_top1": 31.7,
-      "ret_top2": 54.77,
-      "ret_ponderado": 38.62,
-      "ret_iwda": 19.26,
-      "alpha": 19.36,
+      "ret_top1": 37.78,
+      "ret_top2": 33.79,
+      "ret_ponderado": 36.58,
+      "ret_iwda": 5.87,
+      "alpha": 30.71,
       "bate_top1": true,
-      "score_top1": 41.2
+      "score_top1": 62.2
     },
     {
       "date": "2020-07-01",
       "top1": {
         "symbol": "COPX",
         "sector": "Cobre y Metales",
-        "score": 67.1
+        "score": 61.4
       },
       "top2": {
         "symbol": "INDA",
         "sector": "India",
-        "score": 55.9
+        "score": 55.3
       },
       "ret_top1": 17.06,
       "ret_top2": 14.12,
@@ -329,19 +886,59 @@
       "ret_iwda": 3.65,
       "alpha": 12.53,
       "bate_top1": true,
-      "score_top1": 67.1
+      "score_top1": 61.4
+    },
+    {
+      "date": "2020-08-01",
+      "top1": {
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
+        "score": 60.8
+      },
+      "top2": {
+        "symbol": "INDA",
+        "sector": "India",
+        "score": 60.0
+      },
+      "ret_top1": 8.42,
+      "ret_top2": 5.17,
+      "ret_ponderado": 7.44,
+      "ret_iwda": 1.82,
+      "alpha": 5.62,
+      "bate_top1": true,
+      "score_top1": 60.8
+    },
+    {
+      "date": "2020-09-01",
+      "top1": {
+        "symbol": "INDA",
+        "sector": "India",
+        "score": 59.9
+      },
+      "top2": {
+        "symbol": "XBI",
+        "sector": "Biotecnologia",
+        "score": 57.7
+      },
+      "ret_top1": 7.36,
+      "ret_top2": 21.58,
+      "ret_ponderado": 11.63,
+      "ret_iwda": 4.94,
+      "alpha": 6.69,
+      "bate_top1": true,
+      "score_top1": 59.9
     },
     {
       "date": "2020-10-01",
       "top1": {
         "symbol": "IGV",
         "sector": "Software y Cloud",
-        "score": 80.4
+        "score": 60.5
       },
       "top2": {
         "symbol": "COPX",
         "sector": "Cobre y Metales",
-        "score": 78.8
+        "score": 59.2
       },
       "ret_top1": 11.66,
       "ret_top2": 47.38,
@@ -349,19 +946,59 @@
       "ret_iwda": 8.18,
       "alpha": 14.2,
       "bate_top1": true,
-      "score_top1": 80.4
+      "score_top1": 60.5
+    },
+    {
+      "date": "2020-11-01",
+      "top1": {
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
+        "score": 58.2
+      },
+      "top2": {
+        "symbol": "INDA",
+        "sector": "India",
+        "score": 55.6
+      },
+      "ret_top1": 45.07,
+      "ret_top2": 20.87,
+      "ret_ponderado": 37.81,
+      "ret_iwda": 11.94,
+      "alpha": 25.87,
+      "bate_top1": true,
+      "score_top1": 58.2
+    },
+    {
+      "date": "2020-12-01",
+      "top1": {
+        "symbol": "ITA",
+        "sector": "Defensa",
+        "score": 52.7
+      },
+      "top2": {
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 51.1
+      },
+      "ret_top1": 6.14,
+      "ret_top2": 20.03,
+      "ret_ponderado": 10.31,
+      "ret_iwda": 6.53,
+      "alpha": 3.78,
+      "bate_top1": false,
+      "score_top1": 52.7
     },
     {
       "date": "2021-01-01",
       "top1": {
         "symbol": "ITA",
         "sector": "Defensa",
-        "score": 64.7
+        "score": 55.2
       },
       "top2": {
         "symbol": "XBI",
         "sector": "Biotecnologia",
-        "score": 61.8
+        "score": 52.0
       },
       "ret_top1": 9.91,
       "ret_top2": -3.64,
@@ -369,59 +1006,179 @@
       "ret_iwda": 10.2,
       "alpha": -4.36,
       "bate_top1": false,
-      "score_top1": 64.7
+      "score_top1": 55.2
+    },
+    {
+      "date": "2021-02-01",
+      "top1": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 54.1
+      },
+      "top2": {
+        "symbol": "ITA",
+        "sector": "Defensa",
+        "score": 53.7
+      },
+      "ret_top1": -23.73,
+      "ret_top2": 17.47,
+      "ret_ponderado": -11.37,
+      "ret_iwda": 10.26,
+      "alpha": -21.63,
+      "bate_top1": false,
+      "score_top1": 54.1
+    },
+    {
+      "date": "2021-03-01",
+      "top1": {
+        "symbol": "XBI",
+        "sector": "Biotecnologia",
+        "score": 60.7
+      },
+      "top2": {
+        "symbol": "ROBO",
+        "sector": "Robotica e IA",
+        "score": 59.0
+      },
+      "ret_top1": -16.59,
+      "ret_top2": -4.35,
+      "ret_ponderado": -12.92,
+      "ret_iwda": 5.89,
+      "alpha": -18.81,
+      "bate_top1": false,
+      "score_top1": 60.7
     },
     {
       "date": "2021-04-01",
       "top1": {
-        "symbol": "URNM",
-        "sector": "Uranio y Nuclear",
-        "score": 79.4
+        "symbol": "ROBO",
+        "sector": "Robotica e IA",
+        "score": 60.5
       },
       "top2": {
         "symbol": "COPX",
         "sector": "Cobre y Metales",
-        "score": 79.1
+        "score": 59.3
       },
-      "ret_top1": 6.11,
+      "ret_top1": 0.59,
       "ret_top2": 2.03,
-      "ret_ponderado": 4.89,
+      "ret_ponderado": 1.02,
       "ret_iwda": 6.02,
-      "alpha": -1.13,
-      "bate_top1": true,
-      "score_top1": 79.4
+      "alpha": -5.0,
+      "bate_top1": false,
+      "score_top1": 60.5
+    },
+    {
+      "date": "2021-05-01",
+      "top1": {
+        "symbol": "ROBO",
+        "sector": "Robotica e IA",
+        "score": 59.5
+      },
+      "top2": {
+        "symbol": "XBI",
+        "sector": "Biotecnologia",
+        "score": 56.4
+      },
+      "ret_top1": 1.7,
+      "ret_top2": -9.67,
+      "ret_ponderado": -1.71,
+      "ret_iwda": 6.46,
+      "alpha": -8.17,
+      "bate_top1": false,
+      "score_top1": 59.5
+    },
+    {
+      "date": "2021-06-01",
+      "top1": {
+        "symbol": "ITA",
+        "sector": "Defensa",
+        "score": 61.3
+      },
+      "top2": {
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
+        "score": 56.3
+      },
+      "ret_top1": -4.9,
+      "ret_top2": -11.95,
+      "ret_ponderado": -7.01,
+      "ret_iwda": 9.6,
+      "alpha": -16.61,
+      "bate_top1": false,
+      "score_top1": 61.3
     },
     {
       "date": "2021-07-01",
       "top1": {
         "symbol": "ITA",
         "sector": "Defensa",
-        "score": 67.8
+        "score": 61.0
       },
       "top2": {
-        "symbol": "PAVE",
-        "sector": "Infraestructura",
-        "score": 59.6
+        "symbol": "URNM",
+        "sector": "Uranio y Nuclear",
+        "score": 55.4
       },
       "ret_top1": -5.3,
-      "ret_top2": -2.01,
-      "ret_ponderado": -4.31,
+      "ret_top2": 21.81,
+      "ret_ponderado": 2.83,
       "ret_iwda": 2.71,
-      "alpha": -7.02,
+      "alpha": 0.12,
       "bate_top1": false,
-      "score_top1": 67.8
+      "score_top1": 61.0
+    },
+    {
+      "date": "2021-08-01",
+      "top1": {
+        "symbol": "ITA",
+        "sector": "Defensa",
+        "score": 57.7
+      },
+      "top2": {
+        "symbol": "ROBO",
+        "sector": "Robotica e IA",
+        "score": 52.9
+      },
+      "ret_top1": -2.13,
+      "ret_top2": 5.41,
+      "ret_ponderado": 0.13,
+      "ret_iwda": 6.13,
+      "alpha": -6.0,
+      "bate_top1": false,
+      "score_top1": 57.7
+    },
+    {
+      "date": "2021-09-01",
+      "top1": {
+        "symbol": "XBI",
+        "sector": "Biotecnologia",
+        "score": 52.3
+      },
+      "top2": {
+        "symbol": "ITA",
+        "sector": "Defensa",
+        "score": 51.5
+      },
+      "ret_top1": -13.93,
+      "ret_top2": -6.98,
+      "ret_ponderado": -11.84,
+      "ret_iwda": 4.06,
+      "alpha": -15.9,
+      "bate_top1": false,
+      "score_top1": 52.3
     },
     {
       "date": "2021-10-01",
       "top1": {
         "symbol": "IHI",
         "sector": "Salud",
-        "score": 73.4
+        "score": 59.5
       },
       "top2": {
         "symbol": "CIBR",
         "sector": "Ciberseguridad",
-        "score": 65.1
+        "score": 56.4
       },
       "ret_top1": 4.49,
       "ret_top2": 6.84,
@@ -429,67 +1186,227 @@
       "ret_iwda": 10.42,
       "alpha": -5.22,
       "bate_top1": false,
-      "score_top1": 73.4
+      "score_top1": 59.5
+    },
+    {
+      "date": "2021-11-01",
+      "top1": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 53.9
+      },
+      "top2": {
+        "symbol": "URNM",
+        "sector": "Uranio y Nuclear",
+        "score": 52.4
+      },
+      "ret_top1": -27.3,
+      "ret_top2": -28.05,
+      "ret_ponderado": -27.52,
+      "ret_iwda": -1.16,
+      "alpha": -26.36,
+      "bate_top1": false,
+      "score_top1": 53.9
+    },
+    {
+      "date": "2021-12-01",
+      "top1": {
+        "symbol": "PHO",
+        "sector": "Agua",
+        "score": 52.4
+      },
+      "top2": {
+        "symbol": "INDA",
+        "sector": "India",
+        "score": 52.3
+      },
+      "ret_top1": -9.61,
+      "ret_top2": -8.07,
+      "ret_ponderado": -9.15,
+      "ret_iwda": -4.46,
+      "alpha": -4.69,
+      "bate_top1": false,
+      "score_top1": 52.4
     },
     {
       "date": "2022-01-01",
       "top1": {
         "symbol": "CIBR",
         "sector": "Ciberseguridad",
-        "score": 50.9
+        "score": 52.7
       },
       "top2": {
-        "symbol": "SMH",
-        "sector": "Semiconductores",
-        "score": 45.8
+        "symbol": "IBB",
+        "sector": "Biotecnologia",
+        "score": 50.1
       },
       "ret_top1": 0.61,
-      "ret_top2": -12.63,
-      "ret_ponderado": -3.36,
+      "ret_top2": -14.62,
+      "ret_ponderado": -3.96,
       "ret_iwda": -2.38,
-      "alpha": -0.98,
+      "alpha": -1.58,
       "bate_top1": true,
-      "score_top1": 50.9
+      "score_top1": 52.7
+    },
+    {
+      "date": "2022-02-01",
+      "top1": {
+        "symbol": "INDA",
+        "sector": "India",
+        "score": 49.9
+      },
+      "top2": {
+        "symbol": "ITA",
+        "sector": "Defensa",
+        "score": 49.7
+      },
+      "ret_top1": -4.9,
+      "ret_top2": 0.51,
+      "ret_ponderado": -3.28,
+      "ret_iwda": -0.75,
+      "alpha": -2.53,
+      "bate_top1": false,
+      "score_top1": 49.9
+    },
+    {
+      "date": "2022-03-01",
+      "top1": {
+        "symbol": "URNM",
+        "sector": "Uranio y Nuclear",
+        "score": 50.0
+      },
+      "top2": {
+        "symbol": "PAVE",
+        "sector": "Infraestructura",
+        "score": 49.1
+      },
+      "ret_top1": -10.9,
+      "ret_top2": -1.71,
+      "ret_ponderado": -8.14,
+      "ret_iwda": -0.83,
+      "alpha": -7.31,
+      "bate_top1": false,
+      "score_top1": 50.0
     },
     {
       "date": "2022-04-01",
       "top1": {
-        "symbol": "CIBR",
-        "sector": "Ciberseguridad",
-        "score": 48.7
+        "symbol": "IHI",
+        "sector": "Salud",
+        "score": 52.6
       },
       "top2": {
+        "symbol": "CIBR",
+        "sector": "Ciberseguridad",
+        "score": 51.5
+      },
+      "ret_top1": -18.3,
+      "ret_top2": -24.23,
+      "ret_ponderado": -20.08,
+      "ret_iwda": -11.65,
+      "alpha": -8.43,
+      "bate_top1": false,
+      "score_top1": 52.6
+    },
+    {
+      "date": "2022-05-01",
+      "top1": {
         "symbol": "ITA",
         "sector": "Defensa",
-        "score": 44.5
+        "score": 49.9
       },
-      "ret_top1": -24.23,
-      "ret_top2": -11.17,
-      "ret_ponderado": -20.31,
-      "ret_iwda": -11.65,
-      "alpha": -8.66,
+      "top2": {
+        "symbol": "PAVE",
+        "sector": "Infraestructura",
+        "score": 47.2
+      },
+      "ret_top1": 1.62,
+      "ret_top2": -0.08,
+      "ret_ponderado": 1.11,
+      "ret_iwda": 2.09,
+      "alpha": -0.98,
       "bate_top1": false,
-      "score_top1": 48.7
+      "score_top1": 49.9
+    },
+    {
+      "date": "2022-06-01",
+      "top1": {
+        "symbol": "IHI",
+        "sector": "Salud",
+        "score": 48.1
+      },
+      "top2": {
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
+        "score": 47.7
+      },
+      "ret_top1": -4.89,
+      "ret_top2": -24.47,
+      "ret_ponderado": -10.76,
+      "ret_iwda": 1.24,
+      "alpha": -12.0,
+      "bate_top1": false,
+      "score_top1": 48.1
     },
     {
       "date": "2022-07-01",
       "top1": {
-        "symbol": "ITA",
-        "sector": "Defensa",
-        "score": 50.4
+        "symbol": "XBI",
+        "sector": "Biotecnologia",
+        "score": 50.3
       },
       "top2": {
         "symbol": "VHT",
         "sector": "Salud",
-        "score": 45.5
+        "score": 48.1
       },
-      "ret_top1": -9.04,
+      "ret_top1": 3.63,
       "ret_top2": -6.21,
-      "ret_ponderado": -8.19,
+      "ret_ponderado": 0.68,
       "ret_iwda": 1.61,
-      "alpha": -9.8,
+      "alpha": -0.93,
+      "bate_top1": true,
+      "score_top1": 50.3
+    },
+    {
+      "date": "2022-08-01",
+      "top1": {
+        "symbol": "XBI",
+        "sector": "Biotecnologia",
+        "score": 55.2
+      },
+      "top2": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 54.3
+      },
+      "ret_top1": 3.37,
+      "ret_top2": -14.18,
+      "ret_ponderado": -1.89,
+      "ret_iwda": -3.52,
+      "alpha": 1.63,
+      "bate_top1": true,
+      "score_top1": 55.2
+    },
+    {
+      "date": "2022-09-01",
+      "top1": {
+        "symbol": "XBI",
+        "sector": "Biotecnologia",
+        "score": 57.0
+      },
+      "top2": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 51.2
+      },
+      "ret_top1": -2.22,
+      "ret_top2": -2.89,
+      "ret_ponderado": -2.42,
+      "ret_iwda": -0.45,
+      "alpha": -1.97,
       "bate_top1": false,
-      "score_top1": 50.4
+      "score_top1": 57.0
     },
     {
       "date": "2022-10-01",
@@ -499,89 +1416,249 @@
         "score": 53.6
       },
       "top2": {
-        "symbol": "INDA",
-        "sector": "India",
-        "score": 43.1
+        "symbol": "VHT",
+        "sector": "Salud",
+        "score": 47.1
       },
       "ret_top1": 4.64,
-      "ret_top2": 2.35,
-      "ret_ponderado": 3.95,
+      "ret_top2": 10.89,
+      "ret_ponderado": 6.51,
       "ret_iwda": -1.46,
-      "alpha": 5.41,
+      "alpha": 7.97,
       "bate_top1": true,
       "score_top1": 53.6
+    },
+    {
+      "date": "2022-11-01",
+      "top1": {
+        "symbol": "XBI",
+        "sector": "Biotecnologia",
+        "score": 58.8
+      },
+      "top2": {
+        "symbol": "ITA",
+        "sector": "Defensa",
+        "score": 56.1
+      },
+      "ret_top1": 7.34,
+      "ret_top2": 6.83,
+      "ret_ponderado": 7.19,
+      "ret_iwda": -0.93,
+      "alpha": 8.12,
+      "bate_top1": true,
+      "score_top1": 58.8
+    },
+    {
+      "date": "2022-12-01",
+      "top1": {
+        "symbol": "XBI",
+        "sector": "Biotecnologia",
+        "score": 59.7
+      },
+      "top2": {
+        "symbol": "ITA",
+        "sector": "Defensa",
+        "score": 55.8
+      },
+      "ret_top1": -0.29,
+      "ret_top2": 2.41,
+      "ret_ponderado": 0.52,
+      "ret_iwda": -1.46,
+      "alpha": 1.98,
+      "bate_top1": true,
+      "score_top1": 59.7
     },
     {
       "date": "2023-01-01",
       "top1": {
         "symbol": "XBI",
         "sector": "Biotecnologia",
-        "score": 67.0
+        "score": 59.5
       },
       "top2": {
-        "symbol": "PHO",
-        "sector": "Agua",
-        "score": 59.4
+        "symbol": "IHI",
+        "sector": "Salud",
+        "score": 54.1
       },
       "ret_top1": -8.18,
-      "ret_top2": 3.51,
-      "ret_ponderado": -4.67,
+      "ret_top2": 2.68,
+      "ret_ponderado": -4.92,
       "ret_iwda": 3.59,
-      "alpha": -8.26,
+      "alpha": -8.51,
       "bate_top1": false,
-      "score_top1": 67.0
+      "score_top1": 59.5
     },
     {
-      "date": "2023-04-01",
+      "date": "2023-02-01",
       "top1": {
-        "symbol": "SMH",
-        "sector": "Semiconductores",
-        "score": 75.1
+        "symbol": "XBI",
+        "sector": "Biotecnologia",
+        "score": 59.2
+      },
+      "top2": {
+        "symbol": "URNM",
+        "sector": "Uranio y Nuclear",
+        "score": 54.9
+      },
+      "ret_top1": -8.55,
+      "ret_top2": -19.78,
+      "ret_ponderado": -11.92,
+      "ret_iwda": 1.13,
+      "alpha": -13.05,
+      "bate_top1": false,
+      "score_top1": 59.2
+    },
+    {
+      "date": "2023-03-01",
+      "top1": {
+        "symbol": "IHI",
+        "sector": "Salud",
+        "score": 56.1
       },
       "top2": {
         "symbol": "ROBO",
         "sector": "Robotica e IA",
-        "score": 73.9
+        "score": 55.3
       },
-      "ret_top1": 15.7,
-      "ret_top2": 7.02,
-      "ret_ponderado": 13.1,
+      "ret_top1": 2.2,
+      "ret_top2": 3.3,
+      "ret_ponderado": 2.53,
+      "ret_iwda": 4.01,
+      "alpha": -1.48,
+      "bate_top1": false,
+      "score_top1": 56.1
+    },
+    {
+      "date": "2023-04-01",
+      "top1": {
+        "symbol": "IHI",
+        "sector": "Salud",
+        "score": 60.2
+      },
+      "top2": {
+        "symbol": "SMH",
+        "sector": "Semiconductores",
+        "score": 57.3
+      },
+      "ret_top1": 4.59,
+      "ret_top2": 15.7,
+      "ret_ponderado": 7.92,
       "ret_iwda": 6.67,
-      "alpha": 6.43,
+      "alpha": 1.25,
+      "bate_top1": false,
+      "score_top1": 60.2
+    },
+    {
+      "date": "2023-05-01",
+      "top1": {
+        "symbol": "IHI",
+        "sector": "Salud",
+        "score": 59.2
+      },
+      "top2": {
+        "symbol": "XBI",
+        "sector": "Biotecnologia",
+        "score": 55.3
+      },
+      "ret_top1": -1.04,
+      "ret_top2": 2.71,
+      "ret_ponderado": 0.08,
+      "ret_iwda": 9.94,
+      "alpha": -9.86,
+      "bate_top1": false,
+      "score_top1": 59.2
+    },
+    {
+      "date": "2023-06-01",
+      "top1": {
+        "symbol": "IGV",
+        "sector": "Software y Cloud",
+        "score": 57.4
+      },
+      "top2": {
+        "symbol": "CIBR",
+        "sector": "Ciberseguridad",
+        "score": 56.5
+      },
+      "ret_top1": 9.75,
+      "ret_top2": 7.38,
+      "ret_ponderado": 9.04,
+      "ret_iwda": 5.64,
+      "alpha": 3.4,
       "bate_top1": true,
-      "score_top1": 75.1
+      "score_top1": 57.4
     },
     {
       "date": "2023-07-01",
       "top1": {
         "symbol": "CIBR",
         "sector": "Ciberseguridad",
-        "score": 72.4
+        "score": 58.4
       },
       "top2": {
-        "symbol": "ROBO",
-        "sector": "Robotica e IA",
-        "score": 66.1
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 56.3
       },
       "ret_top1": 0.04,
-      "ret_top2": -14.0,
-      "ret_ponderado": -4.17,
+      "ret_top2": -15.15,
+      "ret_ponderado": -4.52,
       "ret_iwda": 0.12,
-      "alpha": -4.29,
+      "alpha": -4.64,
       "bate_top1": false,
-      "score_top1": 72.4
+      "score_top1": 58.4
+    },
+    {
+      "date": "2023-08-01",
+      "top1": {
+        "symbol": "VHT",
+        "sector": "Salud",
+        "score": 57.4
+      },
+      "top2": {
+        "symbol": "XBI",
+        "sector": "Biotecnologia",
+        "score": 56.9
+      },
+      "ret_top1": -8.19,
+      "ret_top2": -20.49,
+      "ret_ponderado": -11.88,
+      "ret_iwda": -5.41,
+      "alpha": -6.47,
+      "bate_top1": false,
+      "score_top1": 57.4
+    },
+    {
+      "date": "2023-09-01",
+      "top1": {
+        "symbol": "IGV",
+        "sector": "Software y Cloud",
+        "score": 59.9
+      },
+      "top2": {
+        "symbol": "PHO",
+        "sector": "Agua",
+        "score": 56.3
+      },
+      "ret_top1": 8.37,
+      "ret_top2": -1.24,
+      "ret_ponderado": 5.49,
+      "ret_iwda": 0.11,
+      "alpha": 5.38,
+      "bate_top1": true,
+      "score_top1": 59.9
     },
     {
       "date": "2023-10-01",
       "top1": {
         "symbol": "INDA",
         "sector": "India",
-        "score": 77.7
+        "score": 58.4
       },
       "top2": {
         "symbol": "IGV",
         "sector": "Software y Cloud",
-        "score": 64.4
+        "score": 54.8
       },
       "ret_top1": 10.4,
       "ret_top2": 18.21,
@@ -589,79 +1666,239 @@
       "ret_iwda": 6.04,
       "alpha": 6.7,
       "bate_top1": true,
-      "score_top1": 77.7
+      "score_top1": 58.4
+    },
+    {
+      "date": "2023-11-01",
+      "top1": {
+        "symbol": "IGV",
+        "sector": "Software y Cloud",
+        "score": 58.9
+      },
+      "top2": {
+        "symbol": "CIBR",
+        "sector": "Ciberseguridad",
+        "score": 55.9
+      },
+      "ret_top1": 23.56,
+      "ret_top2": 24.83,
+      "ret_ponderado": 23.94,
+      "ret_iwda": 12.63,
+      "alpha": 11.31,
+      "bate_top1": true,
+      "score_top1": 58.9
+    },
+    {
+      "date": "2023-12-01",
+      "top1": {
+        "symbol": "IGV",
+        "sector": "Software y Cloud",
+        "score": 60.4
+      },
+      "top2": {
+        "symbol": "CIBR",
+        "sector": "Ciberseguridad",
+        "score": 59.3
+      },
+      "ret_top1": 8.27,
+      "ret_top2": 14.63,
+      "ret_ponderado": 10.18,
+      "ret_iwda": 10.43,
+      "alpha": -0.25,
+      "bate_top1": false,
+      "score_top1": 60.4
     },
     {
       "date": "2024-01-01",
       "top1": {
         "symbol": "IBB",
         "sector": "Biotecnologia",
-        "score": 74.6
+        "score": 61.4
       },
       "top2": {
-        "symbol": "URNM",
-        "sector": "Uranio y Nuclear",
-        "score": 71.2
+        "symbol": "VHT",
+        "sector": "Salud",
+        "score": 60.0
       },
       "ret_top1": -0.91,
-      "ret_top2": 9.93,
-      "ret_ponderado": 2.34,
+      "ret_top2": 5.34,
+      "ret_ponderado": 0.96,
       "ret_iwda": 10.3,
-      "alpha": -7.96,
+      "alpha": -9.34,
       "bate_top1": false,
-      "score_top1": 74.6
+      "score_top1": 61.4
+    },
+    {
+      "date": "2024-02-01",
+      "top1": {
+        "symbol": "IBB",
+        "sector": "Biotecnologia",
+        "score": 59.1
+      },
+      "top2": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 51.2
+      },
+      "ret_top1": -6.85,
+      "ret_top2": -7.16,
+      "ret_ponderado": -6.94,
+      "ret_iwda": 5.76,
+      "alpha": -12.7,
+      "bate_top1": false,
+      "score_top1": 59.1
+    },
+    {
+      "date": "2024-03-01",
+      "top1": {
+        "symbol": "URNM",
+        "sector": "Uranio y Nuclear",
+        "score": 55.8
+      },
+      "top2": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 54.4
+      },
+      "ret_top1": 15.04,
+      "ret_top2": 5.94,
+      "ret_ponderado": 12.31,
+      "ret_iwda": 2.11,
+      "alpha": 10.2,
+      "bate_top1": true,
+      "score_top1": 55.8
     },
     {
       "date": "2024-04-01",
       "top1": {
-        "symbol": "XBI",
-        "sector": "Biotecnologia",
-        "score": 77.5
+        "symbol": "ROBO",
+        "sector": "Robotica e IA",
+        "score": 59.3
       },
       "top2": {
-        "symbol": "CIBR",
-        "sector": "Ciberseguridad",
-        "score": 71.7
+        "symbol": "XBI",
+        "sector": "Biotecnologia",
+        "score": 58.6
       },
-      "ret_top1": -0.86,
-      "ret_top2": 1.21,
-      "ret_ponderado": -0.24,
+      "ret_top1": -5.9,
+      "ret_top2": -0.86,
+      "ret_ponderado": -4.39,
       "ret_iwda": 4.36,
-      "alpha": -4.6,
+      "alpha": -8.75,
       "bate_top1": false,
-      "score_top1": 77.5
+      "score_top1": 59.3
+    },
+    {
+      "date": "2024-05-01",
+      "top1": {
+        "symbol": "PAVE",
+        "sector": "Infraestructura",
+        "score": 59.4
+      },
+      "top2": {
+        "symbol": "IHI",
+        "sector": "Salud",
+        "score": 59.0
+      },
+      "ret_top1": 6.84,
+      "ret_top2": -0.22,
+      "ret_ponderado": 4.72,
+      "ret_iwda": 6.49,
+      "alpha": -1.77,
+      "bate_top1": true,
+      "score_top1": 59.4
+    },
+    {
+      "date": "2024-06-01",
+      "top1": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 63.9
+      },
+      "top2": {
+        "symbol": "IHI",
+        "sector": "Salud",
+        "score": 58.5
+      },
+      "ret_top1": -4.54,
+      "ret_top2": 5.96,
+      "ret_ponderado": -1.39,
+      "ret_iwda": 4.86,
+      "alpha": -6.25,
+      "bate_top1": false,
+      "score_top1": 63.9
     },
     {
       "date": "2024-07-01",
       "top1": {
         "symbol": "SMH",
         "sector": "Semiconductores",
-        "score": 78.0
+        "score": 60.2
+      },
+      "top2": {
+        "symbol": "XBI",
+        "sector": "Biotecnologia",
+        "score": 58.2
+      },
+      "ret_top1": -5.96,
+      "ret_top2": 6.19,
+      "ret_ponderado": -2.31,
+      "ret_iwda": 1.83,
+      "alpha": -4.14,
+      "bate_top1": false,
+      "score_top1": 60.2
+    },
+    {
+      "date": "2024-08-01",
+      "top1": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 59.8
       },
       "top2": {
         "symbol": "COPX",
         "sector": "Cobre y Metales",
-        "score": 64.0
+        "score": 54.4
       },
-      "ret_top1": -5.96,
-      "ret_top2": 3.96,
-      "ret_ponderado": -2.98,
-      "ret_iwda": 1.83,
-      "alpha": -4.81,
+      "ret_top1": -6.29,
+      "ret_top2": 4.77,
+      "ret_ponderado": -2.97,
+      "ret_iwda": 3.28,
+      "alpha": -6.25,
       "bate_top1": false,
-      "score_top1": 78.0
+      "score_top1": 59.8
+    },
+    {
+      "date": "2024-09-01",
+      "top1": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 59.6
+      },
+      "top2": {
+        "symbol": "COPX",
+        "sector": "Cobre y Metales",
+        "score": 56.0
+      },
+      "ret_top1": -13.3,
+      "ret_top2": -1.64,
+      "ret_ponderado": -9.8,
+      "ret_iwda": 9.57,
+      "alpha": -19.37,
+      "bate_top1": false,
+      "score_top1": 59.6
     },
     {
       "date": "2024-10-01",
       "top1": {
         "symbol": "ICLN",
         "sector": "Energia Limpia",
-        "score": 74.7
+        "score": 61.3
       },
       "top2": {
         "symbol": "LIT",
         "sector": "Litio y Baterias",
-        "score": 70.6
+        "score": 58.9
       },
       "ret_top1": -21.52,
       "ret_top2": -7.55,
@@ -669,59 +1906,179 @@
       "ret_iwda": 7.88,
       "alpha": -25.21,
       "bate_top1": false,
-      "score_top1": 74.7
+      "score_top1": 61.3
+    },
+    {
+      "date": "2024-11-01",
+      "top1": {
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 61.0
+      },
+      "top2": {
+        "symbol": "ITA",
+        "sector": "Defensa",
+        "score": 59.2
+      },
+      "ret_top1": -7.3,
+      "ret_top2": 8.33,
+      "ret_ponderado": -2.61,
+      "ret_iwda": 10.04,
+      "alpha": -12.65,
+      "bate_top1": false,
+      "score_top1": 61.0
+    },
+    {
+      "date": "2024-12-01",
+      "top1": {
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 60.6
+      },
+      "top2": {
+        "symbol": "IHI",
+        "sector": "Salud",
+        "score": 60.4
+      },
+      "ret_top1": -9.79,
+      "ret_top2": 4.75,
+      "ret_ponderado": -5.43,
+      "ret_iwda": -0.24,
+      "alpha": -5.19,
+      "bate_top1": false,
+      "score_top1": 60.6
     },
     {
       "date": "2025-01-01",
       "top1": {
         "symbol": "LIT",
         "sector": "Litio y Baterias",
-        "score": 75.4
+        "score": 58.8
       },
       "top2": {
-        "symbol": "CIBR",
-        "sector": "Ciberseguridad",
-        "score": 59.3
+        "symbol": "IGV",
+        "sector": "Software y Cloud",
+        "score": 55.1
       },
       "ret_top1": -4.86,
-      "ret_top2": -0.71,
-      "ret_ponderado": -3.62,
+      "ret_top2": -11.12,
+      "ret_ponderado": -6.74,
       "ret_iwda": -6.75,
-      "alpha": 3.13,
+      "alpha": 0.01,
       "bate_top1": true,
-      "score_top1": 75.4
+      "score_top1": 58.8
+    },
+    {
+      "date": "2025-02-01",
+      "top1": {
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 61.1
+      },
+      "top2": {
+        "symbol": "IGV",
+        "sector": "Software y Cloud",
+        "score": 55.4
+      },
+      "ret_top1": -9.51,
+      "ret_top2": -6.63,
+      "ret_ponderado": -8.65,
+      "ret_iwda": -13.73,
+      "alpha": 5.08,
+      "bate_top1": true,
+      "score_top1": 61.1
+    },
+    {
+      "date": "2025-03-01",
+      "top1": {
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 61.2
+      },
+      "top2": {
+        "symbol": "IHI",
+        "sector": "Salud",
+        "score": 60.2
+      },
+      "ret_top1": -11.24,
+      "ret_top2": -2.95,
+      "ret_ponderado": -8.75,
+      "ret_iwda": -5.85,
+      "alpha": -2.9,
+      "bate_top1": false,
+      "score_top1": 61.2
     },
     {
       "date": "2025-04-01",
       "top1": {
         "symbol": "LIT",
         "sector": "Litio y Baterias",
-        "score": 59.3
+        "score": 53.4
       },
       "top2": {
-        "symbol": "IHI",
-        "sector": "Salud",
-        "score": 55.9
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 52.1
       },
       "ret_top1": -0.54,
-      "ret_top2": 4.47,
-      "ret_ponderado": 0.96,
+      "ret_top2": 14.1,
+      "ret_ponderado": 3.85,
       "ret_iwda": 1.79,
-      "alpha": -0.83,
+      "alpha": 2.06,
       "bate_top1": false,
-      "score_top1": 59.3
+      "score_top1": 53.4
+    },
+    {
+      "date": "2025-05-01",
+      "top1": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 59.9
+      },
+      "top2": {
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 53.0
+      },
+      "ret_top1": 14.22,
+      "ret_top2": 12.34,
+      "ret_ponderado": 13.66,
+      "ret_iwda": 12.43,
+      "alpha": 1.23,
+      "bate_top1": true,
+      "score_top1": 59.9
+    },
+    {
+      "date": "2025-06-01",
+      "top1": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 66.4
+      },
+      "top2": {
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 53.2
+      },
+      "ret_top1": 14.3,
+      "ret_top2": 32.13,
+      "ret_ponderado": 19.65,
+      "ret_iwda": 6.1,
+      "alpha": 13.55,
+      "bate_top1": true,
+      "score_top1": 66.4
     },
     {
       "date": "2025-07-01",
       "top1": {
         "symbol": "ICLN",
         "sector": "Energia Limpia",
-        "score": 87.9
+        "score": 65.9
       },
       "top2": {
         "symbol": "LIT",
         "sector": "Litio y Baterias",
-        "score": 68.7
+        "score": 57.3
       },
       "ret_top1": 17.1,
       "ret_top2": 48.01,
@@ -729,70 +2086,188 @@
       "ret_iwda": 7.23,
       "alpha": 19.14,
       "bate_top1": true,
-      "score_top1": 87.9
+      "score_top1": 65.9
+    },
+    {
+      "date": "2025-08-01",
+      "top1": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 64.6
+      },
+      "top2": {
+        "symbol": "LIT",
+        "sector": "Litio y Baterias",
+        "score": 61.2
+      },
+      "ret_top1": 27.86,
+      "ret_top2": 52.75,
+      "ret_ponderado": 35.33,
+      "ret_iwda": 9.78,
+      "alpha": 25.55,
+      "bate_top1": true,
+      "score_top1": 64.6
+    },
+    {
+      "date": "2025-09-01",
+      "top1": {
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 62.9
+      },
+      "top2": {
+        "symbol": "XBI",
+        "sector": "Biotecnologia",
+        "score": 59.4
+      },
+      "ret_top1": 16.88,
+      "ret_top2": 29.04,
+      "ret_ponderado": 20.53,
+      "ret_iwda": 5.86,
+      "alpha": 14.67,
+      "bate_top1": true,
+      "score_top1": 62.9
     },
     {
       "date": "2025-10-01",
       "top1": {
         "symbol": "XBI",
         "sector": "Biotecnologia",
-        "score": 86.0
+        "score": 64.8
+      },
+      "top2": {
+        "symbol": "VHT",
+        "sector": "Salud",
+        "score": 56.4
+      },
+      "ret_top1": 20.26,
+      "ret_top2": 7.93,
+      "ret_ponderado": 16.56,
+      "ret_iwda": 3.25,
+      "alpha": 13.31,
+      "bate_top1": true,
+      "score_top1": 64.8
+    },
+    {
+      "date": "2025-11-01",
+      "top1": {
+        "symbol": "VHT",
+        "sector": "Salud",
+        "score": 55.2
       },
       "top2": {
         "symbol": "ROBO",
         "sector": "Robotica e IA",
-        "score": 67.7
+        "score": 50.3
       },
-      "ret_top1": 20.26,
-      "ret_top2": 4.49,
-      "ret_ponderado": 15.53,
-      "ret_iwda": 3.25,
-      "alpha": 12.28,
+      "ret_top1": 6.25,
+      "ret_top2": 3.96,
+      "ret_ponderado": 5.56,
+      "ret_iwda": 0.36,
+      "alpha": 5.2,
       "bate_top1": true,
-      "score_top1": 86.0
+      "score_top1": 55.2
+    },
+    {
+      "date": "2025-12-01",
+      "top1": {
+        "symbol": "ROBO",
+        "sector": "Robotica e IA",
+        "score": 56.8
+      },
+      "top2": {
+        "symbol": "ITA",
+        "sector": "Defensa",
+        "score": 55.4
+      },
+      "ret_top1": 15.41,
+      "ret_top2": 22.32,
+      "ret_ponderado": 17.48,
+      "ret_iwda": 2.35,
+      "alpha": 15.13,
+      "bate_top1": true,
+      "score_top1": 56.8
     },
     {
       "date": "2026-01-01",
       "top1": {
-        "symbol": "LIT",
-        "sector": "Litio y Baterias",
-        "score": 75.8
+        "symbol": "ICLN",
+        "sector": "Energia Limpia",
+        "score": 59.9
       },
       "top2": {
         "symbol": "COPX",
         "sector": "Cobre y Metales",
-        "score": 75.1
+        "score": 58.4
       },
-      "ret_top1": 14.63,
+      "ret_top1": 11.32,
       "ret_top2": 6.35,
-      "ret_ponderado": 12.15,
+      "ret_ponderado": 9.83,
       "ret_iwda": -3.12,
-      "alpha": 15.27,
+      "alpha": 12.95,
       "bate_top1": true,
-      "score_top1": 75.8
+      "score_top1": 59.9
     },
     {
-      "date": "2026-04-01",
+      "date": "2026-02-01",
       "top1": {
-        "symbol": "COPX",
-        "sector": "Cobre y Metales",
-        "score": 68.9
+        "symbol": "XBI",
+        "sector": "Biotecnologia",
+        "score": 61.9
+      },
+      "top2": {
+        "symbol": "URNM",
+        "sector": "Uranio y Nuclear",
+        "score": 59.2
+      },
+      "ret_top1": 3.13,
+      "ret_top2": -4.39,
+      "ret_ponderado": 0.87,
+      "ret_iwda": 3.19,
+      "alpha": -2.32,
+      "bate_top1": false,
+      "score_top1": 61.9
+    },
+    {
+      "date": "2026-03-01",
+      "top1": {
+        "symbol": "XBI",
+        "sector": "Biotecnologia",
+        "score": 58.1
       },
       "top2": {
         "symbol": "LIT",
         "sector": "Litio y Baterias",
-        "score": 67.9
+        "score": 57.3
       },
-      "ret_top1": -3.14,
-      "ret_top2": 6.0,
-      "ret_ponderado": -0.4,
-      "ret_iwda": 12.37,
-      "alpha": -12.77,
+      "ret_top1": 5.59,
+      "ret_top2": 14.45,
+      "ret_ponderado": 8.25,
+      "ret_iwda": 8.7,
+      "alpha": -0.45,
       "bate_top1": false,
-      "score_top1": 68.9
+      "score_top1": 58.1
     }
   ],
   "snapshots_b": [
+    {
+      "date": "2017-02-01",
+      "top1_symbol": "LIT",
+      "ret_total": 187.1,
+      "ret_iwda": 194.2,
+      "alpha_total": -7.1,
+      "valor_sis": 1435.48,
+      "valor_iwd": 1471.0
+    },
+    {
+      "date": "2017-03-01",
+      "top1_symbol": "COPX",
+      "ret_total": 206.31,
+      "ret_iwda": 178.35,
+      "alpha_total": 27.96,
+      "valor_sis": 1531.53,
+      "valor_iwd": 1391.75
+    },
     {
       "date": "2017-04-01",
       "top1_symbol": "LIT",
@@ -801,6 +2276,24 @@
       "alpha_total": 16.53,
       "valor_sis": 1488.75,
       "valor_iwd": 1406.1
+    },
+    {
+      "date": "2017-05-01",
+      "top1_symbol": "LIT",
+      "ret_total": 163.99,
+      "ret_iwda": 182.41,
+      "alpha_total": -18.42,
+      "valor_sis": 1319.94,
+      "valor_iwd": 1412.05
+    },
+    {
+      "date": "2017-06-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 120.76,
+      "ret_iwda": 184.48,
+      "alpha_total": -63.72,
+      "valor_sis": 1103.78,
+      "valor_iwd": 1422.4
     },
     {
       "date": "2017-07-01",
@@ -812,13 +2305,49 @@
       "valor_iwd": 1445.8
     },
     {
+      "date": "2017-08-01",
+      "top1_symbol": "IBB",
+      "ret_total": 110.84,
+      "ret_iwda": 190.82,
+      "alpha_total": -79.98,
+      "valor_sis": 1054.21,
+      "valor_iwd": 1454.1
+    },
+    {
+      "date": "2017-09-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 110.3,
+      "ret_iwda": 192.39,
+      "alpha_total": -82.09,
+      "valor_sis": 1051.51,
+      "valor_iwd": 1461.95
+    },
+    {
       "date": "2017-10-01",
       "top1_symbol": "ICLN",
-      "ret_total": 107.01,
+      "ret_total": 149.24,
       "ret_iwda": 183.05,
-      "alpha_total": -76.04,
-      "valor_sis": 1035.03,
+      "alpha_total": -33.81,
+      "valor_sis": 1246.19,
       "valor_iwd": 1415.25
+    },
+    {
+      "date": "2017-11-01",
+      "top1_symbol": "COPX",
+      "ret_total": 183.07,
+      "ret_iwda": 174.59,
+      "alpha_total": 8.48,
+      "valor_sis": 1415.34,
+      "valor_iwd": 1372.95
+    },
+    {
+      "date": "2017-12-01",
+      "top1_symbol": "SMH",
+      "ret_total": 823.41,
+      "ret_iwda": 179.1,
+      "alpha_total": 644.31,
+      "valor_sis": 4617.07,
+      "valor_iwd": 1395.5
     },
     {
       "date": "2018-01-01",
@@ -830,58 +2359,184 @@
       "valor_iwd": 1372.65
     },
     {
+      "date": "2018-02-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 131.09,
+      "ret_iwda": 171.19,
+      "alpha_total": -40.1,
+      "valor_sis": 1155.46,
+      "valor_iwd": 1355.95
+    },
+    {
+      "date": "2018-03-01",
+      "top1_symbol": "VHT",
+      "ret_total": 96.23,
+      "ret_iwda": 178.54,
+      "alpha_total": -82.31,
+      "valor_sis": 981.15,
+      "valor_iwd": 1392.7
+    },
+    {
       "date": "2018-04-01",
-      "top1_symbol": "CIBR",
-      "ret_total": 203.96,
+      "top1_symbol": "ICLN",
+      "ret_total": 155.03,
       "ret_iwda": 188.05,
-      "alpha_total": 15.91,
-      "valor_sis": 1519.78,
+      "alpha_total": -33.02,
+      "valor_sis": 1275.16,
       "valor_iwd": 1440.25
     },
     {
+      "date": "2018-05-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 101.25,
+      "ret_iwda": 175.07,
+      "alpha_total": -73.82,
+      "valor_sis": 1006.24,
+      "valor_iwd": 1375.35
+    },
+    {
+      "date": "2018-06-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 97.99,
+      "ret_iwda": 163.64,
+      "alpha_total": -65.65,
+      "valor_sis": 989.94,
+      "valor_iwd": 1318.2
+    },
+    {
       "date": "2018-07-01",
-      "top1_symbol": "CIBR",
-      "ret_total": 189.09,
+      "top1_symbol": "XBI",
+      "ret_total": 78.39,
       "ret_iwda": 166.59,
-      "alpha_total": 22.5,
-      "valor_sis": 1445.44,
+      "alpha_total": -88.2,
+      "valor_sis": 891.95,
       "valor_iwd": 1332.95
     },
     {
+      "date": "2018-08-01",
+      "top1_symbol": "IGV",
+      "ret_total": 129.45,
+      "ret_iwda": 158.2,
+      "alpha_total": -28.75,
+      "valor_sis": 1147.26,
+      "valor_iwd": 1291.0
+    },
+    {
+      "date": "2018-09-01",
+      "top1_symbol": "GRID",
+      "ret_total": 237.16,
+      "ret_iwda": 153.56,
+      "alpha_total": 83.6,
+      "valor_sis": 1685.79,
+      "valor_iwd": 1267.8
+    },
+    {
       "date": "2018-10-01",
-      "top1_symbol": "IHI",
-      "ret_total": 36.46,
+      "top1_symbol": "GRID",
+      "ret_total": 278.05,
       "ret_iwda": 149.78,
-      "alpha_total": -113.32,
-      "valor_sis": 682.3,
+      "alpha_total": 128.27,
+      "valor_sis": 1890.27,
       "valor_iwd": 1248.9
+    },
+    {
+      "date": "2018-11-01",
+      "top1_symbol": "VHT",
+      "ret_total": 91.49,
+      "ret_iwda": 164.96,
+      "alpha_total": -73.47,
+      "valor_sis": 957.45,
+      "valor_iwd": 1324.8
+    },
+    {
+      "date": "2018-12-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 133.27,
+      "ret_iwda": 163.67,
+      "alpha_total": -30.4,
+      "valor_sis": 1166.36,
+      "valor_iwd": 1318.35
     },
     {
       "date": "2019-01-01",
       "top1_symbol": "INDA",
-      "ret_total": 78.58,
+      "ret_total": 86.18,
       "ret_iwda": 186.35,
-      "alpha_total": -107.77,
-      "valor_sis": 892.92,
+      "alpha_total": -100.17,
+      "valor_sis": 930.91,
       "valor_iwd": 1431.75
     },
     {
+      "date": "2019-02-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 162.56,
+      "ret_iwda": 166.5,
+      "alpha_total": -3.94,
+      "valor_sis": 1312.78,
+      "valor_iwd": 1332.5
+    },
+    {
+      "date": "2019-03-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 95.25,
+      "ret_iwda": 156.23,
+      "alpha_total": -60.97,
+      "valor_sis": 976.27,
+      "valor_iwd": 1281.15
+    },
+    {
       "date": "2019-04-01",
-      "top1_symbol": "INDA",
-      "ret_total": 59.93,
+      "top1_symbol": "COPX",
+      "ret_total": 245.97,
       "ret_iwda": 147.49,
-      "alpha_total": -87.56,
-      "valor_sis": 799.67,
+      "alpha_total": 98.48,
+      "valor_sis": 1729.84,
       "valor_iwd": 1237.45
+    },
+    {
+      "date": "2019-05-01",
+      "top1_symbol": "GRID",
+      "ret_total": 290.52,
+      "ret_iwda": 141.48,
+      "alpha_total": 149.04,
+      "valor_sis": 1952.62,
+      "valor_iwd": 1207.4
+    },
+    {
+      "date": "2019-06-01",
+      "top1_symbol": "PAVE",
+      "ret_total": 238.1,
+      "ret_iwda": 153.58,
+      "alpha_total": 84.52,
+      "valor_sis": 1690.49,
+      "valor_iwd": 1267.9
     },
     {
       "date": "2019-07-01",
       "top1_symbol": "GRID",
-      "ret_total": 232.72,
+      "ret_total": 280.39,
       "ret_iwda": 140.76,
-      "alpha_total": 91.97,
-      "valor_sis": 1663.62,
+      "alpha_total": 139.63,
+      "valor_sis": 1901.93,
       "valor_iwd": 1203.8
+    },
+    {
+      "date": "2019-08-01",
+      "top1_symbol": "SMH",
+      "ret_total": 772.74,
+      "ret_iwda": 134.12,
+      "alpha_total": 638.62,
+      "valor_sis": 4363.69,
+      "valor_iwd": 1170.6
+    },
+    {
+      "date": "2019-09-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 149.9,
+      "ret_iwda": 139.27,
+      "alpha_total": 10.63,
+      "valor_sis": 1249.49,
+      "valor_iwd": 1196.35
     },
     {
       "date": "2019-10-01",
@@ -893,22 +2548,76 @@
       "valor_iwd": 1170.05
     },
     {
-      "date": "2020-01-01",
+      "date": "2019-11-01",
       "top1_symbol": "LIT",
-      "ret_total": 154.32,
+      "ret_total": 156.98,
+      "ret_iwda": 130.19,
+      "alpha_total": 26.79,
+      "valor_sis": 1284.91,
+      "valor_iwd": 1150.95
+    },
+    {
+      "date": "2019-12-01",
+      "top1_symbol": "LIT",
+      "ret_total": 242.52,
+      "ret_iwda": 126.01,
+      "alpha_total": 116.51,
+      "valor_sis": 1712.58,
+      "valor_iwd": 1130.05
+    },
+    {
+      "date": "2020-01-01",
+      "top1_symbol": "COPX",
+      "ret_total": 247.36,
       "ret_iwda": 120.98,
-      "alpha_total": 33.34,
-      "valor_sis": 1271.62,
+      "alpha_total": 126.38,
+      "valor_sis": 1736.82,
       "valor_iwd": 1104.9
     },
     {
+      "date": "2020-02-01",
+      "top1_symbol": "LIT",
+      "ret_total": 143.03,
+      "ret_iwda": 118.72,
+      "alpha_total": 24.31,
+      "valor_sis": 1215.13,
+      "valor_iwd": 1093.6
+    },
+    {
+      "date": "2020-03-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 114.36,
+      "ret_iwda": 136.76,
+      "alpha_total": -22.4,
+      "valor_sis": 1071.82,
+      "valor_iwd": 1183.8
+    },
+    {
       "date": "2020-04-01",
-      "top1_symbol": "IBB",
-      "ret_total": 138.19,
+      "top1_symbol": "LIT",
+      "ret_total": 222.58,
       "ret_iwda": 180.58,
-      "alpha_total": -42.39,
-      "valor_sis": 1190.95,
+      "alpha_total": 42.0,
+      "valor_sis": 1612.89,
       "valor_iwd": 1402.9
+    },
+    {
+      "date": "2020-05-01",
+      "top1_symbol": "LIT",
+      "ret_total": 292.91,
+      "ret_iwda": 145.45,
+      "alpha_total": 147.46,
+      "valor_sis": 1964.57,
+      "valor_iwd": 1227.25
+    },
+    {
+      "date": "2020-06-01",
+      "top1_symbol": "COPX",
+      "ret_total": 309.27,
+      "ret_iwda": 135.99,
+      "alpha_total": 173.28,
+      "valor_sis": 2046.34,
+      "valor_iwd": 1179.95
     },
     {
       "date": "2020-07-01",
@@ -920,6 +2629,24 @@
       "valor_iwd": 1169.15
     },
     {
+      "date": "2020-08-01",
+      "top1_symbol": "COPX",
+      "ret_total": 213.83,
+      "ret_iwda": 135.9,
+      "alpha_total": 77.93,
+      "valor_sis": 1569.17,
+      "valor_iwd": 1179.5
+    },
+    {
+      "date": "2020-09-01",
+      "top1_symbol": "INDA",
+      "ret_total": 43.24,
+      "ret_iwda": 122.12,
+      "alpha_total": -78.88,
+      "valor_sis": 716.18,
+      "valor_iwd": 1110.6
+    },
+    {
       "date": "2020-10-01",
       "top1_symbol": "IGV",
       "ret_total": 105.35,
@@ -927,6 +2654,24 @@
       "alpha_total": -19.74,
       "valor_sis": 1026.73,
       "valor_iwd": 1125.45
+    },
+    {
+      "date": "2020-11-01",
+      "top1_symbol": "COPX",
+      "ret_total": 188.16,
+      "ret_iwda": 128.47,
+      "alpha_total": 59.69,
+      "valor_sis": 1440.82,
+      "valor_iwd": 1142.35
+    },
+    {
+      "date": "2020-12-01",
+      "top1_symbol": "ITA",
+      "ret_total": 122.3,
+      "ret_iwda": 109.57,
+      "alpha_total": 12.73,
+      "valor_sis": 1111.47,
+      "valor_iwd": 1047.85
     },
     {
       "date": "2021-01-01",
@@ -938,22 +2683,76 @@
       "valor_iwd": 1040.35
     },
     {
+      "date": "2021-02-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 25.25,
+      "ret_iwda": 104.1,
+      "alpha_total": -78.85,
+      "valor_sis": 626.24,
+      "valor_iwd": 1020.5
+    },
+    {
+      "date": "2021-03-01",
+      "top1_symbol": "XBI",
+      "ret_total": 6.04,
+      "ret_iwda": 96.72,
+      "alpha_total": -90.68,
+      "valor_sis": 530.19,
+      "valor_iwd": 983.6
+    },
+    {
       "date": "2021-04-01",
-      "top1_symbol": "URNM",
-      "ret_total": 91.35,
+      "top1_symbol": "ROBO",
+      "ret_total": 51.29,
       "ret_iwda": 88.03,
-      "alpha_total": 3.32,
-      "valor_sis": 956.74,
+      "alpha_total": -36.74,
+      "valor_sis": 756.43,
       "valor_iwd": 940.15
+    },
+    {
+      "date": "2021-05-01",
+      "top1_symbol": "ROBO",
+      "ret_total": 21.98,
+      "ret_iwda": 85.11,
+      "alpha_total": -63.13,
+      "valor_sis": 609.92,
+      "valor_iwd": 925.55
+    },
+    {
+      "date": "2021-06-01",
+      "top1_symbol": "ITA",
+      "ret_total": 102.52,
+      "ret_iwda": 85.2,
+      "alpha_total": 17.32,
+      "valor_sis": 1012.6,
+      "valor_iwd": 926.0
     },
     {
       "date": "2021-07-01",
       "top1_symbol": "ITA",
-      "ret_total": 117.78,
+      "ret_total": 101.84,
       "ret_iwda": 76.88,
-      "alpha_total": 40.9,
-      "valor_sis": 1088.92,
+      "alpha_total": 24.96,
+      "valor_sis": 1009.18,
       "valor_iwd": 884.4
+    },
+    {
+      "date": "2021-08-01",
+      "top1_symbol": "ITA",
+      "ret_total": 90.91,
+      "ret_iwda": 73.44,
+      "alpha_total": 17.47,
+      "valor_sis": 954.55,
+      "valor_iwd": 867.2
+    },
+    {
+      "date": "2021-09-01",
+      "top1_symbol": "XBI",
+      "ret_total": 44.77,
+      "ret_iwda": 69.05,
+      "alpha_total": -24.28,
+      "valor_sis": 723.84,
+      "valor_iwd": 845.25
     },
     {
       "date": "2021-10-01",
@@ -965,67 +2764,211 @@
       "valor_iwd": 866.75
     },
     {
+      "date": "2021-11-01",
+      "top1_symbol": "ICLN",
+      "ret_total": -8.3,
+      "ret_iwda": 63.41,
+      "alpha_total": -71.72,
+      "valor_sis": 458.48,
+      "valor_iwd": 817.05
+    },
+    {
+      "date": "2021-12-01",
+      "top1_symbol": "PHO",
+      "ret_total": 14.95,
+      "ret_iwda": 61.07,
+      "alpha_total": -46.12,
+      "valor_sis": 574.75,
+      "valor_iwd": 805.35
+    },
+    {
       "date": "2022-01-01",
       "top1_symbol": "CIBR",
-      "ret_total": 131.38,
+      "ret_total": 46.8,
       "ret_iwda": 56.99,
-      "alpha_total": 74.39,
-      "valor_sis": 1156.89,
+      "alpha_total": -10.19,
+      "valor_sis": 734.0,
       "valor_iwd": 784.95
     },
     {
+      "date": "2022-02-01",
+      "top1_symbol": "INDA",
+      "ret_total": 44.94,
+      "ret_iwda": 63.94,
+      "alpha_total": -19.0,
+      "valor_sis": 724.71,
+      "valor_iwd": 819.7
+    },
+    {
+      "date": "2022-03-01",
+      "top1_symbol": "URNM",
+      "ret_total": 66.37,
+      "ret_iwda": 69.63,
+      "alpha_total": -3.26,
+      "valor_sis": 831.86,
+      "valor_iwd": 848.15
+    },
+    {
       "date": "2022-04-01",
-      "top1_symbol": "CIBR",
-      "ret_total": 73.92,
+      "top1_symbol": "IHI",
+      "ret_total": 3.6,
       "ret_iwda": 61.33,
-      "alpha_total": 12.59,
-      "valor_sis": 869.61,
+      "alpha_total": -57.73,
+      "valor_sis": 517.98,
       "valor_iwd": 806.65
     },
     {
-      "date": "2022-07-01",
+      "date": "2022-05-01",
       "top1_symbol": "ITA",
-      "ret_total": 101.24,
+      "ret_total": 127.36,
+      "ret_iwda": 68.82,
+      "alpha_total": 58.54,
+      "valor_sis": 1136.79,
+      "valor_iwd": 844.1
+    },
+    {
+      "date": "2022-06-01",
+      "top1_symbol": "IHI",
+      "ret_total": 22.84,
+      "ret_iwda": 71.22,
+      "alpha_total": -48.38,
+      "valor_sis": 614.19,
+      "valor_iwd": 856.1
+    },
+    {
+      "date": "2022-07-01",
+      "top1_symbol": "XBI",
+      "ret_total": 73.24,
       "ret_iwda": 81.79,
-      "alpha_total": 19.45,
-      "valor_sis": 1006.19,
+      "alpha_total": -8.55,
+      "valor_sis": 866.19,
       "valor_iwd": 908.95
+    },
+    {
+      "date": "2022-08-01",
+      "top1_symbol": "XBI",
+      "ret_total": 59.79,
+      "ret_iwda": 65.36,
+      "alpha_total": -5.57,
+      "valor_sis": 798.94,
+      "valor_iwd": 826.8
+    },
+    {
+      "date": "2022-09-01",
+      "top1_symbol": "XBI",
+      "ret_total": 50.74,
+      "ret_iwda": 70.08,
+      "alpha_total": -19.34,
+      "valor_sis": 753.7,
+      "valor_iwd": 850.4
     },
     {
       "date": "2022-10-01",
       "top1_symbol": "XBI",
-      "ret_total": 68.63,
+      "ret_total": 70.84,
       "ret_iwda": 78.92,
-      "alpha_total": -10.29,
-      "valor_sis": 843.14,
+      "alpha_total": -8.08,
+      "valor_sis": 854.2,
       "valor_iwd": 894.6
+    },
+    {
+      "date": "2022-11-01",
+      "top1_symbol": "XBI",
+      "ret_total": 92.55,
+      "ret_iwda": 71.1,
+      "alpha_total": 21.45,
+      "valor_sis": 962.75,
+      "valor_iwd": 855.5
+    },
+    {
+      "date": "2022-12-01",
+      "top1_symbol": "XBI",
+      "ret_total": 89.39,
+      "ret_iwda": 69.1,
+      "alpha_total": 20.29,
+      "valor_sis": 946.94,
+      "valor_iwd": 845.5
     },
     {
       "date": "2023-01-01",
       "top1_symbol": "XBI",
-      "ret_total": 65.79,
+      "ret_total": 54.58,
       "ret_iwda": 77.48,
-      "alpha_total": -11.69,
-      "valor_sis": 828.93,
+      "alpha_total": -22.9,
+      "valor_sis": 772.88,
       "valor_iwd": 887.4
     },
     {
+      "date": "2023-02-01",
+      "top1_symbol": "XBI",
+      "ret_total": 59.9,
+      "ret_iwda": 72.82,
+      "alpha_total": -12.92,
+      "valor_sis": 799.51,
+      "valor_iwd": 864.1
+    },
+    {
+      "date": "2023-03-01",
+      "top1_symbol": "IHI",
+      "ret_total": 13.91,
+      "ret_iwda": 73.45,
+      "alpha_total": -59.54,
+      "valor_sis": 569.55,
+      "valor_iwd": 867.25
+    },
+    {
       "date": "2023-04-01",
-      "top1_symbol": "SMH",
-      "ret_total": 274.37,
+      "top1_symbol": "IHI",
+      "ret_total": 105.44,
       "ret_iwda": 71.34,
-      "alpha_total": 203.03,
-      "valor_sis": 1871.85,
+      "alpha_total": 34.1,
+      "valor_sis": 1027.2,
       "valor_iwd": 856.7
+    },
+    {
+      "date": "2023-05-01",
+      "top1_symbol": "IHI",
+      "ret_total": 15.98,
+      "ret_iwda": 72.57,
+      "alpha_total": -56.59,
+      "valor_sis": 579.91,
+      "valor_iwd": 862.85
+    },
+    {
+      "date": "2023-06-01",
+      "top1_symbol": "IGV",
+      "ret_total": 49.17,
+      "ret_iwda": 66.79,
+      "alpha_total": -17.62,
+      "valor_sis": 745.85,
+      "valor_iwd": 833.95
     },
     {
       "date": "2023-07-01",
       "top1_symbol": "CIBR",
-      "ret_total": 71.36,
+      "ret_total": 65.59,
       "ret_iwda": 60.62,
-      "alpha_total": 10.74,
-      "valor_sis": 856.82,
+      "alpha_total": 4.97,
+      "valor_sis": 827.93,
       "valor_iwd": 803.1
+    },
+    {
+      "date": "2023-08-01",
+      "top1_symbol": "VHT",
+      "ret_total": 36.1,
+      "ret_iwda": 57.05,
+      "alpha_total": -20.95,
+      "valor_sis": 680.48,
+      "valor_iwd": 785.25
+    },
+    {
+      "date": "2023-09-01",
+      "top1_symbol": "IGV",
+      "ret_total": 18.93,
+      "ret_iwda": 57.18,
+      "alpha_total": -38.25,
+      "valor_sis": 594.66,
+      "valor_iwd": 785.9
     },
     {
       "date": "2023-10-01",
@@ -1037,31 +2980,103 @@
       "valor_iwd": 803.0
     },
     {
+      "date": "2023-11-01",
+      "top1_symbol": "IGV",
+      "ret_total": 44.97,
+      "ret_iwda": 64.26,
+      "alpha_total": -19.29,
+      "valor_sis": 724.86,
+      "valor_iwd": 821.3
+    },
+    {
+      "date": "2023-12-01",
+      "top1_symbol": "IGV",
+      "ret_total": 25.85,
+      "ret_iwda": 55.28,
+      "alpha_total": -29.43,
+      "valor_sis": 629.23,
+      "valor_iwd": 776.4
+    },
+    {
       "date": "2024-01-01",
       "top1_symbol": "IBB",
-      "ret_total": 26.39,
+      "ret_total": 26.06,
       "ret_iwda": 50.81,
-      "alpha_total": -24.42,
-      "valor_sis": 631.94,
+      "alpha_total": -24.75,
+      "valor_sis": 630.3,
       "valor_iwd": 754.05
     },
     {
+      "date": "2024-02-01",
+      "top1_symbol": "IBB",
+      "ret_total": 36.38,
+      "ret_iwda": 46.4,
+      "alpha_total": -10.02,
+      "valor_sis": 681.88,
+      "valor_iwd": 732.0
+    },
+    {
+      "date": "2024-03-01",
+      "top1_symbol": "URNM",
+      "ret_total": 20.82,
+      "ret_iwda": 39.63,
+      "alpha_total": -18.81,
+      "valor_sis": 604.09,
+      "valor_iwd": 698.15
+    },
+    {
       "date": "2024-04-01",
-      "top1_symbol": "XBI",
-      "ret_total": 56.45,
+      "top1_symbol": "ROBO",
+      "ret_total": 47.04,
       "ret_iwda": 36.73,
-      "alpha_total": 19.72,
-      "valor_sis": 782.27,
+      "alpha_total": 10.31,
+      "valor_sis": 735.2,
       "valor_iwd": 683.65
+    },
+    {
+      "date": "2024-05-01",
+      "top1_symbol": "PAVE",
+      "ret_total": 36.38,
+      "ret_iwda": 38.42,
+      "alpha_total": -2.04,
+      "valor_sis": 681.92,
+      "valor_iwd": 692.1
+    },
+    {
+      "date": "2024-06-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 22.57,
+      "ret_iwda": 36.75,
+      "alpha_total": -14.18,
+      "valor_sis": 612.88,
+      "valor_iwd": 683.75
     },
     {
       "date": "2024-07-01",
       "top1_symbol": "SMH",
-      "ret_total": 115.93,
+      "ret_total": 114.26,
       "ret_iwda": 31.02,
-      "alpha_total": 84.91,
-      "valor_sis": 1079.64,
+      "alpha_total": 83.24,
+      "valor_sis": 1071.29,
       "valor_iwd": 655.1
+    },
+    {
+      "date": "2024-08-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 57.0,
+      "ret_iwda": 31.27,
+      "alpha_total": 25.73,
+      "valor_sis": 785.01,
+      "valor_iwd": 656.35
+    },
+    {
+      "date": "2024-09-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 52.72,
+      "ret_iwda": 29.6,
+      "alpha_total": 23.12,
+      "valor_sis": 763.62,
+      "valor_iwd": 648.0
     },
     {
       "date": "2024-10-01",
@@ -1073,22 +3088,76 @@
       "valor_iwd": 642.05
     },
     {
+      "date": "2024-11-01",
+      "top1_symbol": "LIT",
+      "ret_total": 75.48,
+      "ret_iwda": 26.12,
+      "alpha_total": 49.36,
+      "valor_sis": 877.39,
+      "valor_iwd": 630.6
+    },
+    {
+      "date": "2024-12-01",
+      "top1_symbol": "LIT",
+      "ret_total": 46.76,
+      "ret_iwda": 17.3,
+      "alpha_total": 29.46,
+      "valor_sis": 733.81,
+      "valor_iwd": 586.5
+    },
+    {
       "date": "2025-01-01",
       "top1_symbol": "LIT",
-      "ret_total": 75.07,
+      "ret_total": 61.27,
       "ret_iwda": 19.04,
-      "alpha_total": 56.03,
-      "valor_sis": 875.36,
+      "alpha_total": 42.23,
+      "valor_sis": 806.35,
       "valor_iwd": 595.2
+    },
+    {
+      "date": "2025-02-01",
+      "top1_symbol": "LIT",
+      "ret_total": 61.55,
+      "ret_iwda": 14.61,
+      "alpha_total": 46.94,
+      "valor_sis": 807.74,
+      "valor_iwd": 573.05
+    },
+    {
+      "date": "2025-03-01",
+      "top1_symbol": "LIT",
+      "ret_total": 58.93,
+      "ret_iwda": 17.59,
+      "alpha_total": 41.34,
+      "valor_sis": 794.63,
+      "valor_iwd": 587.95
     },
     {
       "date": "2025-04-01",
       "top1_symbol": "LIT",
-      "ret_total": 67.89,
+      "ret_total": 96.54,
       "ret_iwda": 26.03,
-      "alpha_total": 41.86,
-      "valor_sis": 839.47,
+      "alpha_total": 70.51,
+      "valor_sis": 982.69,
       "valor_iwd": 630.15
+    },
+    {
+      "date": "2025-05-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 87.01,
+      "ret_iwda": 32.85,
+      "alpha_total": 54.16,
+      "valor_sis": 935.04,
+      "valor_iwd": 664.25
+    },
+    {
+      "date": "2025-06-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 79.77,
+      "ret_iwda": 25.5,
+      "alpha_total": 54.27,
+      "valor_sis": 898.87,
+      "valor_iwd": 627.5
     },
     {
       "date": "2025-07-01",
@@ -1100,31 +3169,76 @@
       "valor_iwd": 620.0
     },
     {
+      "date": "2025-08-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 63.98,
+      "ret_iwda": 21.76,
+      "alpha_total": 42.22,
+      "valor_sis": 819.91,
+      "valor_iwd": 608.8
+    },
+    {
+      "date": "2025-09-01",
+      "top1_symbol": "ICLN",
+      "ret_total": 49.6,
+      "ret_iwda": 18.28,
+      "alpha_total": 31.32,
+      "valor_sis": 747.99,
+      "valor_iwd": 591.4
+    },
+    {
       "date": "2025-10-01",
       "top1_symbol": "XBI",
-      "ret_total": 40.61,
+      "ret_total": 35.84,
       "ret_iwda": 14.78,
-      "alpha_total": 25.83,
-      "valor_sis": 703.03,
+      "alpha_total": 21.06,
+      "valor_sis": 679.2,
       "valor_iwd": 573.9
     },
     {
+      "date": "2025-11-01",
+      "top1_symbol": "VHT",
+      "ret_total": 10.24,
+      "ret_iwda": 10.92,
+      "alpha_total": -0.68,
+      "valor_sis": 551.19,
+      "valor_iwd": 554.6
+    },
+    {
+      "date": "2025-12-01",
+      "top1_symbol": "ROBO",
+      "ret_total": 20.41,
+      "ret_iwda": 11.73,
+      "alpha_total": 8.68,
+      "valor_sis": 602.06,
+      "valor_iwd": 558.65
+    },
+    {
       "date": "2026-01-01",
-      "top1_symbol": "LIT",
-      "ret_total": 16.8,
+      "top1_symbol": "ICLN",
+      "ret_total": 18.89,
       "ret_iwda": 11.17,
-      "alpha_total": 5.63,
-      "valor_sis": 583.99,
+      "alpha_total": 7.72,
+      "valor_sis": 594.45,
       "valor_iwd": 555.85
     },
     {
-      "date": "2026-04-01",
-      "top1_symbol": "COPX",
-      "ret_total": -0.4,
-      "ret_iwda": 12.37,
-      "alpha_total": -12.77,
-      "valor_sis": 498.01,
-      "valor_iwd": 561.85
+      "date": "2026-02-01",
+      "top1_symbol": "XBI",
+      "ret_total": 5.01,
+      "ret_iwda": 9.3,
+      "alpha_total": -4.29,
+      "valor_sis": 525.04,
+      "valor_iwd": 546.5
+    },
+    {
+      "date": "2026-03-01",
+      "top1_symbol": "XBI",
+      "ret_total": 14.28,
+      "ret_iwda": 8.93,
+      "alpha_total": 5.35,
+      "valor_sis": 571.41,
+      "valor_iwd": 544.65
     }
   ]
 }
