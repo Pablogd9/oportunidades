@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-25T10:24:57Z",
+  "updated": "2026-06-25T16:00:40Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -24,23 +24,19 @@
     "interpretation": "Confianza consumidor muy baja (50) — recesión probable"
   },
   "vix": {
-    "value": 18.0,
-    "trend": "up",
-    "score": 70,
-    "interpretation": "VIX 18.0 — mercado tranquilo"
+    "value": null,
+    "score": 50,
+    "interpretation": "Sin datos"
   },
   "dxy": {
-    "value": 101.58,
-    "ret_6m": 3.7,
-    "score": 40,
-    "score_inverse": 60,
-    "interpretation": "Dólar algo fuerte (+3.7% 6M)"
+    "value": null,
+    "score": 50,
+    "score_inverse": 50,
+    "interpretation": "Sin datos"
   },
   "inr": {
-    "value": 94.39,
-    "ret_3m": 0.0,
-    "trend": "stable",
-    "interpretation": "Rupia estable (+0.0% 3M)"
+    "value": null,
+    "trend": "stable"
   },
   "uranium_spot": {
     "value": null,
@@ -48,10 +44,10 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 124.84,
-    "ret_6m": 12.06,
-    "ret_1m": 1.36,
-    "ema200": 113.42,
+    "price": 124.09,
+    "ret_6m": 11.39,
+    "ret_1m": 0.75,
+    "ema200": 113.41,
     "above_ema200": true
   },
   "bitcoin_halving": {
@@ -61,7 +57,7 @@
     "description": "Halving hace 26M — ciclo medio"
   },
   "composite_score": {
-    "score": 53.8,
-    "interpretation": "Entorno macro neutro"
+    "score": 48.8,
+    "interpretation": "Entorno macro deteriorado"
   }
 }
