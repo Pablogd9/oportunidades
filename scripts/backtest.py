@@ -1,14 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-backtest.py v10 — Rolling window + splicing + señales trimestrales.
+backtest.py v11 — Rolling window + splicing + Newey-West.
 
-BACKTEST A — Calidad de señal trimestral:
-  Señales en enero, abril, julio, octubre (no solapadas)
-  Horizonte 3 meses por señal — coherente con momentum 6M
-  P-value via bootstrap 1000 simulaciones
+CAMBIOS vs v10:
+  - Señales mensuales (113) en vez de trimestrales (37)
+  - Horizonte 3 meses por señal (momentum predice mejor a 3M que a 1M)
+  - Lookback momentum 12M skip-1 (excluye ultimo mes — evidencia academica)
+  - Correccion Newey-West para p-value con señales solapadas
+  - Todo el universo (no solo ETFs de 20 anos)
 
-BACKTEST B — Simulacion real €500/mes acumulativo hasta hoy
+EVIDENCIA ACADEMICA:
+  Jegadeesh & Titman (1993): momentum 6-12M lookback, holding 3-12M
+  Lookback optimo: 12 meses excluyendo el ultimo mes (skip-1)
+  Horizonte optimo: 3-6 meses
+  Alpha documentado: ~1%/mes sobre benchmark
 """
 
 import json, math, os, random, datetime, urllib.request
@@ -16,11 +22,12 @@ import json, math, os, random, datetime, urllib.request
 ROOT        = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE       = os.path.join(ROOT, "data", "cache")
 OUT         = os.path.join(ROOT, "data", "backtest.json")
-UA          = {"User-Agent": "Mozilla/5.0 (compatible; Backtest/10.0)"}
+UA          = {"User-Agent": "Mozilla/5.0 (compatible; Backtest/11.0)"}
 TODAY       = datetime.date.today()
 APORTACION  = 500
 N_BOOTSTRAP = 1000
 WINDOW_YEARS= 5
+NW_LAGS     = 2
 random.seed(42)
 
 BACKTEST_UNIVERSE = [
@@ -83,7 +90,7 @@ def fetch_yahoo_max(symbol):
 def load_series(symbol):
     p,d=load_from_cache(symbol)
     if p and len(p)>1260: return p,d
-    print(f"    Descargando historico max {symbol}...")
+    print(f"    Descargando {symbol}...")
     return fetch_yahoo_max(symbol)
 
 def pearson_corr(x,y):
@@ -144,6 +151,13 @@ def ret_n(prices,n):
     if len(prices)<n+1: return None
     return (prices[-1]/prices[-(n+1)]-1)*100
 
+def ret_range(prices,start_idx,end_idx):
+    if start_idx<0 or end_idx<0: return None
+    if abs(start_idx)>=len(prices) or abs(end_idx)>=len(prices): return None
+    p0=prices[start_idx]; p1=prices[end_idx]
+    if p0>0: return (p1/p0-1)*100
+    return None
+
 def vol_std(prices,n=252):
     n=min(n,len(prices)-1)
     if n<5: return 20.0
@@ -192,21 +206,33 @@ def price_at_date(all_prices,all_dates,target_date):
         if d>target_str and diff>5: break
     return best_price
 
-def monthly_return(all_prices, all_dates, year, month, n_months=3):
-    """
-    Retorno desde el primer dia del mes hasta N meses despues.
-    Por defecto 3 meses — coherente con horizonte del momentum 6M.
-    Señales trimestrales no solapadas: enero, abril, julio, octubre.
-    """
-    first_day = datetime.date(year, month, 1)
-    end_month = month + n_months
-    end_year  = year
-    while end_month > 12: end_month -= 12; end_year += 1
-    last_day = datetime.date(end_year, end_month, 1) - datetime.timedelta(days=1)
-    p_start = price_at_date(all_prices, all_dates, first_day)
-    p_end   = price_at_date(all_prices, all_dates, last_day)
+def period_return(all_prices,all_dates,year,month,n_months=3):
+    first_day=datetime.date(year,month,1)
+    end_month=month+n_months; end_year=year
+    while end_month>12: end_month-=12; end_year+=1
+    last_day=datetime.date(end_year,end_month,1)-datetime.timedelta(days=1)
+    p_start=price_at_date(all_prices,all_dates,first_day)
+    p_end=price_at_date(all_prices,all_dates,last_day)
     if p_start and p_end and p_start>0: return round((p_end/p_start-1)*100,2)
     return None
+
+def newey_west_pvalue(alphas,lags=NW_LAGS):
+    n=len(alphas)
+    if n<10: return None,None,None,None
+    mean=sum(alphas)/n
+    var=sum((a-mean)**2 for a in alphas)/n
+    for lag in range(1,lags+1):
+        cov=sum((alphas[i]-mean)*(alphas[i-lag]-mean) for i in range(lag,n))/n
+        weight=1.0-lag/(lags+1)
+        var+=2*weight*cov
+    se=math.sqrt(max(var,0)/n) if var>0 else 0.0001
+    tstat=mean/se
+    def norm_cdf(x):
+        t_=1.0/(1.0+0.2316419*abs(x))
+        poly=(0.319381530*t_-0.356563782*t_**2+1.781477937*t_**3-1.821255978*t_**4+1.330274429*t_**5)
+        return 1.0-(1.0/math.sqrt(2*math.pi))*math.exp(-x**2/2)*poly if x>=0 else norm_cdf(-x)
+    pvalue=round(min(1.0,2*(1.0-norm_cdf(abs(tstat)))),4)
+    return pvalue,round(tstat,3),round(mean,4),round(se,4)
 
 def overval_simple(prices):
     sc=0
@@ -228,33 +254,49 @@ def overval_simple(prices):
     return 1.0
 
 def score_at_date(prices,iwda_prices):
-    if not prices or len(prices)<60: return None
+    """Score con momentum 12M skip-1 — evidencia academica Jegadeesh & Titman."""
+    if not prices or len(prices)<273: return None
     wd=WINDOW_YEARS*252
     pw=prices[-wd:] if len(prices)>wd else prices
     n=len(pw); vol=vol_std(pw,min(252,n-1))
+
+    # 1. Fuerza relativa 12M skip-1 vs IWDA
     rs=None; rsh=[]
-    if iwda_prices and len(iwda_prices)>=126:
+    if iwda_prices and len(iwda_prices)>=273:
         iw=iwda_prices[-wd:] if len(iwda_prices)>wd else iwda_prices
-        re=ret_n(pw,min(126,n-1)); ri=ret_n(iw,min(126,len(iw)-1))
-        if re is not None and ri is not None: rs=(re-ri)/(vol/20.0)
-        for i in range(126,min(n,756)):
-            pe=pw[:n-i+126] if n-i+126>126 else pw[:126]
-            pi=iw[:len(iw)-i+126] if len(iw)-i+126>126 else iw[:126]
-            ree=ret_n(pe,126); rii=ret_n(pi,126)
-            if ree is not None and rii is not None:
-                rsh.append((ree-rii)/(vol_std(pe,min(252,len(pe)-1))/20.0))
+        if len(pw)>=273:
+            re=ret_range(pw,-273,-21)
+            ri_iw=ret_range(list(iw),-273,-21) if len(iw)>=273 else None
+            if re is not None and ri_iw is not None:
+                rs=(re-ri_iw)/(vol/20.0)
+        for i in range(273,min(n,756)):
+            pe=pw[:n-i+273] if n-i+273>273 else pw[:273]
+            pi=list(iw)[:len(iw)-i+273] if len(iw)-i+273>273 else list(iw)[:273]
+            if len(pe)>=273 and len(pi)>=273:
+                ree=ret_range(pe,-273,-21); rii=ret_range(pi,-273,-21)
+                if ree is not None and rii is not None:
+                    rsh.append((ree-rii)/(vol_std(pe,min(252,len(pe)-1))/20.0))
     prs=pct_hist(rs,rsh)
+
+    # 2. EMA200
     e200=ema_n(pw,min(200,n)); de=((pw[-1]/e200-1)*100) if e200 else None
     en=(de/(vol/20.0)) if de else None; eh=[]
     for i in range(1,min(504,n-200)):
         pc=pw[:n-i]; e=ema_n(pc,min(200,len(pc)))
         if e: eh.append(((pc[-1]/e-1)*100)/(vol_std(pc,min(252,len(pc)-1))/20.0))
     pe200=pct_hist(en,eh)
-    m6=ret_n(pw,min(126,n-1)); m6n=(m6/(vol/20.0)) if m6 is not None else None; m6h=[]
-    for i in range(1,min(756,n-126)):
-        pc=pw[:n-i]; r=ret_n(pc,min(126,len(pc)-1))
-        if r is not None: m6h.append(r/(vol_std(pc,min(252,len(pc)-1))/20.0))
-    pm6=pct_hist(m6n,m6h)
+
+    # 3. Momentum 12M skip-1
+    m12s1=ret_range(pw,-273,-21) if len(pw)>=273 else None
+    m12n=(m12s1/(vol/20.0)) if m12s1 is not None else None; m12h=[]
+    for i in range(273,min(n,756)):
+        pc=pw[:n-i]
+        if len(pc)>=273:
+            r=ret_range(pc,-273,-21)
+            if r is not None: m12h.append(r/(vol_std(pc,min(252,len(pc)-1))/20.0))
+    pm12=pct_hist(m12n,m12h)
+
+    # 4. Punto de entrada
     d52=drawdown_from_max(pw,252); d5y=drawdown_alltime(pw)
     ec=d52*0.60+d5y*0.40 if d52 is not None and d5y is not None else d52
     dh=[]
@@ -262,14 +304,18 @@ def score_at_date(prices,iwda_prices):
         pc=pw[:n-i]; d=drawdown_from_max(pc,min(252,len(pc)))
         if d is not None: dh.append(-d)
     pen=pct_hist(-ec if ec is not None else None,dh)
+
+    # 5. Consistencia 6M
     co=consistency_6m(pw); coh=[]
     for i in range(1,min(756,n-130)):
         pc=pw[:n-i]; c=consistency_6m(pc)
         if c is not None: coh.append(c)
     pco=pct_hist(co,coh)
-    score=0.25*prs+0.25*pe200+0.20*pm6+0.20*pen+0.10*pco
-    m3=ret_n(pw,min(63,n-1))
-    if m3 is not None and m3<-10: score*=0.6
+
+    # Pesos: momentum domina segun evidencia academica
+    score=0.30*prs+0.20*pe200+0.25*pm12+0.15*pen+0.10*pco
+    m1=ret_n(pw,21)
+    if m1 is not None and m1<-10: score*=0.7
     score*=overval_simple(pw)
     return round(score,1)
 
@@ -293,12 +339,13 @@ def bootstrap_pvalue(real_alpha,all_ids,etf_data,iwda_p,iwda_d,eval_months,n_sim
         rs=0.0; ri_s=0.0; nm=0
         for year,month in eval_months:
             avail=[eid for eid in all_ids if etf_data[eid]["prices"] and
-                   len(prices_up_to(etf_data[eid]["prices"],etf_data[eid]["dates"],datetime.date(year,month,1)))>=252]
+                   len(prices_up_to(etf_data[eid]["prices"],etf_data[eid]["dates"],
+                                    datetime.date(year,month,1)))>=273]
             if len(avail)<2: continue
             ch=random.sample(avail,2)
-            r1=monthly_return(etf_data[ch[0]]["prices"],etf_data[ch[0]]["dates"],year,month)
-            r2=monthly_return(etf_data[ch[1]]["prices"],etf_data[ch[1]]["dates"],year,month)
-            ri=monthly_return(iwda_p,iwda_d,year,month)
+            r1=period_return(etf_data[ch[0]]["prices"],etf_data[ch[0]]["dates"],year,month,3)
+            r2=period_return(etf_data[ch[1]]["prices"],etf_data[ch[1]]["dates"],year,month,3)
+            ri=period_return(iwda_p,iwda_d,year,month,3)
             if r1 is not None and r2 is not None and ri is not None:
                 rs+=r1*0.70+r2*0.30; ri_s+=ri; nm+=1
         if nm>0: random_alphas.append((rs-ri_s)/nm)
@@ -306,12 +353,12 @@ def bootstrap_pvalue(real_alpha,all_ids,etf_data,iwda_p,iwda_d,eval_months,n_sim
     pct=sum(1 for a in random_alphas if a<=real_alpha)/len(random_alphas)*100
     pvalue=round(1-pct/100,4)
     mean_r=round(sum(random_alphas)/len(random_alphas),3)
-    print(f"alpha_aleatorio={mean_r:.2f}% | real={real_alpha:.2f}% | pct={pct:.0f}% | p={pvalue}")
+    print(f"alpha_aleatorio={mean_r:.2f}% | real={real_alpha:.2f}% | pct={pct:.0f}% | p_bootstrap={pvalue}")
     return pvalue,pct,mean_r
 
 def main():
     print("="*65)
-    print("BACKTEST v10 — Rolling Window + Splicing + Señales Trimestrales")
+    print("BACKTEST v11 — Newey-West + Momentum 12M skip-1")
     print(f"Fecha: {TODAY} | ETFs: {len(BACKTEST_UNIVERSE)}")
     print("="*65)
 
@@ -323,7 +370,7 @@ def main():
             prices,dates=build_spliced_series(etf_id)
         else:
             prices,dates=load_series(symbol)
-        if not prices or len(prices)<252:
+        if not prices or len(prices)<273:
             print(f"insuficiente ({len(prices) if prices else 0}d)"); continue
         years=round((datetime.date.fromisoformat(dates[-1])-datetime.date.fromisoformat(dates[0])).days/365.25,1)
         print(f"{len(prices):5d}d | {dates[0]} -> {dates[-1]} | {years:.1f}A")
@@ -335,45 +382,37 @@ def main():
     else: print("ERROR"); return
     if not etf_data: print("ERROR: sin datos"); return
 
-    all_starts=sorted([
-        datetime.date.fromisoformat(data["dates"][0])
-        for data in etf_data.values()
-        if len(data["dates"])>WINDOW_YEARS*252
-    ])
-    if not all_starts: print("ERROR: sin historico suficiente"); return
+    all_starts=sorted([datetime.date.fromisoformat(data["dates"][0])
+                       for data in etf_data.values() if len(data["dates"])>WINDOW_YEARS*252])
+    if not all_starts: print("ERROR"); return
     idx=min(int(len(all_starts)*0.75),len(all_starts)-1)
     min_start=all_starts[idx]
-    print(f"\nFechas inicio: {all_starts[0]} -> {all_starts[-1]}")
-    print(f"Usando percentil 75: {min_start}")
     backtest_start=datetime.date(min_start.year+WINDOW_YEARS,min_start.month,1)
 
-    # Señales trimestrales — enero, abril, julio, octubre
-    # Garantiza señales independientes con horizonte 3 meses
-    # El momentum 6M predice bien a 3 meses pero no a 1 mes
-    eval_months=[]
-    d=backtest_start
+    eval_months=[]; d=backtest_start
     while d<=TODAY.replace(day=1):
-        if d.month in (1,4,7,10):
-            eval_months.append((d.year,d.month))
+        eval_months.append((d.year,d.month))
         if d.month==12: d=datetime.date(d.year+1,1,1)
         else: d=datetime.date(d.year,d.month+1,1)
+    # Excluir ultimos 3 meses sin retorno completo
+    eval_months=[m for m in eval_months
+                 if datetime.date(m[0],m[1],1)<=TODAY.replace(day=1)-datetime.timedelta(days=90)]
 
-    print(f"Periodo: {backtest_start} -> {TODAY}")
-    print(f"Señales trimestrales: {len(eval_months)} (enero/abril/julio/octubre)")
-    print(f"Horizonte: 3 meses por señal")
+    print(f"\nPercentil 75: {min_start} → backtest desde {backtest_start}")
+    print(f"Señales mensuales: {len(eval_months)} | Horizonte: 3M | Newey-West lags={NW_LAGS}")
 
     # BACKTEST A
     print("\n"+"─"*65)
-    print("BACKTEST A — Calidad de señal trimestral (3 meses)")
+    print("BACKTEST A — Señales mensuales, horizonte 3M, Newey-West")
     print("─"*65)
-    snapshots_a=[]; alpha_sum=0.0; n_valid=0
+    snapshots_a=[]; n_valid=0
 
     for year,month in eval_months:
         eval_date=datetime.date(year,month,1)
         scores=[]
         for eid,data in etf_data.items():
             pt=prices_up_to(data["prices"],data["dates"],eval_date)
-            if len(pt)<252: continue
+            if len(pt)<273: continue
             it=prices_up_to(iwda_p,iwda_d,eval_date)
             st=score_at_date(pt,it)
             if st is None: continue
@@ -386,13 +425,13 @@ def main():
             if r["sector"] not in seen: seen.add(r["sector"]); sb.append(r)
         if len(sb)<2: continue
         top1=sb[0]; top2=sb[1]
-        r1=monthly_return(etf_data[top1["id"]]["prices"],etf_data[top1["id"]]["dates"],year,month)
-        r2=monthly_return(etf_data[top2["id"]]["prices"],etf_data[top2["id"]]["dates"],year,month)
-        ri=monthly_return(iwda_p,iwda_d,year,month)
+        r1=period_return(etf_data[top1["id"]]["prices"],etf_data[top1["id"]]["dates"],year,month,3)
+        r2=period_return(etf_data[top2["id"]]["prices"],etf_data[top2["id"]]["dates"],year,month,3)
+        ri=period_return(iwda_p,iwda_d,year,month,3)
         if r1 is None or ri is None: continue
         rp=r1*0.70+r2*0.30 if r2 is not None else r1
         alpha=round(rp-ri,2); bate=r1>ri
-        alpha_sum+=alpha; n_valid+=1
+        n_valid+=1
         snapshots_a.append({"date":eval_date.isoformat(),
             "top1":{"symbol":top1["symbol"],"sector":top1["sector"],"score":top1["score"]},
             "top2":{"symbol":top2["symbol"],"sector":top2["sector"],"score":top2["score"]},
@@ -400,32 +439,43 @@ def main():
             "ret_iwda":ri,"alpha":alpha,"bate_top1":bate,"score_top1":top1["score"]})
 
     if not snapshots_a: print("ERROR: sin señales"); return
-    alpha_medio=round(alpha_sum/n_valid,3)
+
+    alphas=[s["alpha"] for s in snapshots_a]
     bates=[s["bate_top1"] for s in snapshots_a if s.get("bate_top1") is not None]
+    alpha_medio=round(sum(alphas)/len(alphas),3)
     pct_bate=round(sum(1 for b in bates if b)/len(bates)*100,1) if bates else 0
-    print(f"\n  Señales: {n_valid} trimestrales | Alpha: {alpha_medio:+.3f}%/trimestre ({alpha_medio*4:+.1f}%/año) | Bate IWDA: {pct_bate}%")
+
+    pv_nw,tstat,mean_nw,se_nw=newey_west_pvalue(alphas,NW_LAGS)
+    all_ids=list(etf_data.keys())
+    pv_boot,pct_real,mean_rand=bootstrap_pvalue(alpha_medio,all_ids,etf_data,iwda_p,iwda_d,eval_months)
+
+    def sig(pv):
+        if pv is None: return "Sin datos"
+        if pv<0.05: return "✓✓ ESTADISTICAMENTE SIGNIFICATIVO (p<0.05)"
+        if pv<0.10: return "✓  Marginalmente significativo (p<0.10)"
+        if pv<0.20: return "~  Debilmente significativo (p<0.20)"
+        return "✗  No significativo — puede ser azar"
+
+    print(f"\n  Señales: {n_valid} | Alpha: {alpha_medio:+.3f}%/señal ({alpha_medio*4:+.1f}%/año) | Bate: {pct_bate}%")
+    print(f"  P-value Newey-West: {pv_nw} | t={tstat} | {sig(pv_nw)}")
+    print(f"  P-value Bootstrap:  {pv_boot} | {sig(pv_boot)}")
+
     buckets={"alto_70+":[],"medio_55-70":[],"bajo_55-":[]}
     for s in snapshots_a:
         sc=s.get("score_top1",0)
         if sc>=70: buckets["alto_70+"].append(s["alpha"])
         elif sc>=55: buckets["medio_55-70"].append(s["alpha"])
         else: buckets["bajo_55-"].append(s["alpha"])
-    print("  Predictividad:")
-    for b,alphas in buckets.items():
-        if alphas: print(f"    {b:12s}: n={len(alphas):3d} | alpha={round(sum(alphas)/len(alphas),2):+.2f}%")
-    all_ids=list(etf_data.keys())
-    pvalue,pct_real,mean_rand=bootstrap_pvalue(alpha_medio,all_ids,etf_data,iwda_p,iwda_d,eval_months)
-    significance=""
-    if pvalue is not None:
-        if pvalue<0.05:    significance="✓✓ ESTADISTICAMENTE SIGNIFICATIVO (p<0.05)"
-        elif pvalue<0.10:  significance="✓  Marginalmente significativo (p<0.10)"
-        elif pvalue<0.20:  significance="~  Debilmente significativo (p<0.20)"
-        else:              significance="✗  No significativo — puede ser azar"
-    print(f"  P-value: {pvalue} | {significance}")
+    print("\n  Predictividad:")
+    for b,als in buckets.items():
+        if als:
+            am=round(sum(als)/len(als),2)
+            pv_b,_,_,_=newey_west_pvalue(als,NW_LAGS)
+            print(f"    {b:12s}: n={len(als):3d} | alpha={am:+.2f}% | p_NW={pv_b}")
 
     # BACKTEST B
     print("\n"+"─"*65)
-    print("BACKTEST B — Simulacion real €500/trimestre")
+    print("BACKTEST B — Simulacion real €500/mes acumulativo")
     print("─"*65)
     cartera_sis=0.0; cartera_iwd=0.0; n_meses_b=0; snapshots_b=[]
     for s in snapshots_a:
@@ -459,28 +509,26 @@ def main():
     ret_sis=round((cartera_sis/total-1)*100,2) if total>0 else 0
     ret_iwd=round((cartera_iwd/total-1)*100,2) if total>0 else 0
     alpha_b=round(ret_sis-ret_iwd,2)
-    print(f"\n  {n_meses_b} trimestres | €{total:,.0f} invertidos")
+    print(f"\n  {n_meses_b} meses | €{total:,.0f} invertidos")
     print(f"  Sistema: €{cartera_sis:,.0f} (+{ret_sis}%)")
     print(f"  IWDA:    €{cartera_iwd:,.0f} (+{ret_iwd}%)")
     print(f"  Alpha:   {alpha_b:+.2f}% | €{cartera_sis-cartera_iwd:+,.0f}")
     print(f"  {'✓ SISTEMA GANA' if alpha_b>0 else '✗ IWDA GANA'}")
 
-    summary={"fecha":TODAY.isoformat(),"model_version":"10.1","universo":len(etf_data),
-        "metodologia":{"rolling_window_anos":WINDOW_YEARS,"horizonte_meses":3,
-            "backtest_A":"Señales trimestrales independientes (ene/abr/jul/oct), horizonte 3 meses",
-            "backtest_B":"Simulacion €500/trimestre acumulativo hasta hoy",
-            "splicing":"URNM con proxy URA pre-2019, correlacion minima 0.55"},
-        "backtest_A":{"n_senales":n_valid,"alpha_medio_trimestre":alpha_medio,
-            "alpha_anualizado":round(alpha_medio*4,2),"pct_bate_iwda":pct_bate,
-            "predictividad":{b:{"n":len(a),"alpha_medio":round(sum(a)/len(a),2) if a else None} for b,a in buckets.items()},
-            "bootstrap":{"pvalue":pvalue,"percentil_real":pct_real,"alpha_medio_aleatorio":mean_rand,
-                         "n_simulaciones":N_BOOTSTRAP,"significancia":significance}},
-        "backtest_B":{"n_trimestres":n_meses_b,"total_invertido":total,
+    summary={"fecha":TODAY.isoformat(),"model_version":"11.0","universo":len(etf_data),
+        "metodologia":{"rolling_window_anos":WINDOW_YEARS,"horizonte_meses":3,"frecuencia":"mensual",
+            "momentum_lookback":"12M skip-1","pvalue_metodo":"Newey-West lags=2 + Bootstrap",
+            "splicing":"URNM con proxy URA pre-2019"},
+        "backtest_A":{"n_senales":n_valid,"alpha_medio":alpha_medio,
+            "alpha_anualizado_aprox":round(alpha_medio*4,2),"pct_bate_iwda":pct_bate,
+            "pvalue_newey_west":pv_nw,"tstat":tstat,"pvalue_bootstrap":pv_boot,
+            "significancia_nw":sig(pv_nw),
+            "predictividad":{b:{"n":len(a),"alpha_medio":round(sum(a)/len(a),2) if a else None}
+                              for b,a in buckets.items()}},
+        "backtest_B":{"n_meses":n_meses_b,"total_invertido":total,
             "valor_sistema":round(cartera_sis,2),"valor_iwda":round(cartera_iwd,2),
             "ret_sistema":ret_sis,"ret_iwda":ret_iwd,"alpha_total":alpha_b,
-            "diferencia_euros":round(cartera_sis-cartera_iwd,2)},
-        "interpretacion":(f"A({n_valid}señales trimestrales): alpha {alpha_medio:+.3f}%/trimestre ({alpha_medio*4:+.1f}%/año). {significance}. "
-            f"B({n_meses_b}trimestres): sistema €{cartera_sis:,.0f} vs IWDA €{cartera_iwd:,.0f} (alpha {alpha_b:+.2f}%)")}
+            "diferencia_euros":round(cartera_sis-cartera_iwd,2)}}
 
     os.makedirs(os.path.dirname(OUT),exist_ok=True)
     with open(OUT,"w",encoding="utf-8") as f:
@@ -489,8 +537,8 @@ def main():
                   f,ensure_ascii=False,indent=2)
 
     print(f"\n{'='*65}")
-    print(f"BACKTEST A: {n_valid} señales | alpha {alpha_medio:+.3f}%/trim | p={pvalue} | {significance}")
-    print(f"BACKTEST B: €{cartera_sis:,.0f} sistema vs €{cartera_iwd:,.0f} IWDA (€{cartera_sis-cartera_iwd:+,.0f})")
+    print(f"BACKTEST v11 — {n_valid} señales | alpha {alpha_medio:+.3f}% | p_NW={pv_nw} | {sig(pv_nw)}")
+    print(f"B: €{cartera_sis:,.0f} sistema vs €{cartera_iwd:,.0f} IWDA (€{cartera_sis-cartera_iwd:+,.0f})")
     print(f"{'='*65}")
 
 if __name__=="__main__":
