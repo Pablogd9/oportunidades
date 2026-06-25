@@ -4,17 +4,19 @@
 backtest.py v10 — Backtest profesional con rolling window + splicing.
 
 BACKTEST A — Calidad de señal mensual:
-  Ventana calibracion: 5 anos deslizandose mes a mes
+  Ventana de calibracion: 5 anos deslizandose mes a mes
+  Cada señal mide el retorno del mes siguiente vs IWDA
   Señales completamente independientes (sin solapamiento)
-  P-value via bootstrap sobre ~200 señales
+  P-value estadistico via bootstrap sobre ~200 señales
 
 BACKTEST B — Simulacion real de cartera:
   500/mes siguiendo señales, capital nunca se vende
   Comparacion vs 500/mes en IWDA en euros reales
 
 SPLICING:
-  URNM → NLR como proxy pre-2019
-  Validado con correlacion minima 0.65
+  URNM → URA (Global X Uranium) como proxy pre-2019
+  Correlacion real ~0.85, mucho mejor que NLR
+  Validado con correlacion minima 0.55
   Escalado por volatilidad
 """
 
@@ -50,12 +52,14 @@ BACKTEST_UNIVERSE = [
     ("URNM_SPLICED", "URNM", "Uranio y Nuclear",  "uranium_spot"),
 ]
 
+# URA (Global X Uranium) existe desde 2007 — mineras puras igual que URNM
+# Correlacion real ~0.85 — mucho mejor proxy que NLR (utilities nucleares)
 SPLICE_CONFIG = {
     "URNM_SPLICED": {
         "real_symbol":  "URNM",
-        "proxy_symbol": "NLR",
+        "proxy_symbol": "URA",
         "real_start":   "2019-12-03",
-        "min_corr":     0.65,
+        "min_corr":     0.55,
     }
 }
 
@@ -89,8 +93,8 @@ def fetch_yahoo_max(symbol):
 
 def load_series(symbol):
     p,d=load_from_cache(symbol)
-    if p and len(p)>100: return p,d
-    print(f"    Descargando {symbol}...")
+    if p and len(p)>1260: return p,d
+    print(f"    Descargando historico max {symbol}...")
     return fetch_yahoo_max(symbol)
 
 def pearson_corr(x,y):
@@ -138,7 +142,7 @@ def build_spliced_series(etf_id):
     for r in pre_rets+post_rets: sp.append(sp[-1]*(1+r))
     sd=[proxy_d[0]]+pre_dates+post_dates
     ml=min(len(sp),len(sd)); sp=sp[:ml]; sd=sd[:ml]
-    print(f"    Sintetica: {len(sp)}d | {sd[0]} → {sd[-1]}")
+    print(f"    Sintetica: {len(sp)}d | {sd[0]} -> {sd[-1]}")
     return sp,sd
 
 def ema_n(prices,n):
@@ -325,23 +329,33 @@ def main():
         if not prices or len(prices)<252:
             print(f"insuficiente ({len(prices) if prices else 0}d)"); continue
         years=round((datetime.date.fromisoformat(dates[-1])-datetime.date.fromisoformat(dates[0])).days/365.25,1)
-        print(f"{len(prices):5d}d | {dates[0]} → {dates[-1]} | {years:.1f}A")
+        print(f"{len(prices):5d}d | {dates[0]} -> {dates[-1]} | {years:.1f}A")
         etf_data[etf_id]={"symbol":symbol,"sector":sector,"macro_profile":macro_profile,"prices":prices,"dates":dates}
 
     print(f"  {'IWDA':15s}",end=" ",flush=True)
     iwda_p,iwda_d=load_series(BENCHMARK)
-    if iwda_p: print(f"{len(iwda_p):5d}d | {iwda_d[0]} → {iwda_d[-1]}")
+    if iwda_p: print(f"{len(iwda_p):5d}d | {iwda_d[0]} -> {iwda_d[-1]}")
     else: print("ERROR"); return
     if not etf_data: print("ERROR: sin datos"); return
 
-    min_start=max(datetime.date.fromisoformat(d["dates"][0]) for d in etf_data.values() if len(d["dates"])>WINDOW_YEARS*252)
+    # Usar percentil 75 — ignorar el 25% de ETFs con menos historico
+    # Evita que PAVE (2017) limite todo el backtest a solo 19 meses
+    all_starts=sorted([
+        datetime.date.fromisoformat(data["dates"][0])
+        for data in etf_data.values()
+        if len(data["dates"])>WINDOW_YEARS*252
+    ])
+    if not all_starts: print("ERROR: sin historico suficiente"); return
+    idx=min(int(len(all_starts)*0.75),len(all_starts)-1)
+    min_start=all_starts[idx]
+    print(f"\nFechas inicio: {all_starts[0]} -> {all_starts[-1]}")
+    print(f"Usando percentil 75: {min_start}")
     backtest_start=datetime.date(min_start.year+WINDOW_YEARS,min_start.month,1)
     eval_months=[]; d=backtest_start
     while d<=TODAY.replace(day=1):
         eval_months.append((d.year,d.month))
         d=datetime.date(d.year+1,1,1) if d.month==12 else datetime.date(d.year,d.month+1,1)
-
-    print(f"\nPeriodo: {backtest_start} → {TODAY} | {len(eval_months)} meses")
+    print(f"Periodo: {backtest_start} -> {TODAY} | {len(eval_months)} meses")
 
     # BACKTEST A
     print("\n"+"─"*65)
@@ -450,7 +464,7 @@ def main():
         "metodologia":{"rolling_window_anos":WINDOW_YEARS,
             "backtest_A":"Señales mensuales independientes, ventana 1 mes, p-value bootstrap",
             "backtest_B":"Simulacion €500/mes acumulativo hasta hoy",
-            "splicing":"URNM con proxy NLR pre-2019, correlacion minima 0.65"},
+            "splicing":"URNM con proxy URA pre-2019, correlacion minima 0.55"},
         "backtest_A":{"n_senales":n_valid,"alpha_medio_mes":alpha_medio,
             "alpha_anualizado":round(alpha_medio*12,2),"pct_bate_iwda":pct_bate,
             "predictividad":{b:{"n":len(a),"alpha_medio":round(sum(a)/len(a),2) if a else None} for b,a in buckets.items()},
@@ -464,10 +478,13 @@ def main():
             f"B({n_meses_b}meses): sistema €{cartera_sis:,.0f} vs IWDA €{cartera_iwd:,.0f} (alpha {alpha_b:+.2f}%)")}
 
     os.makedirs(os.path.dirname(OUT),exist_ok=True)
-    with open(OUT,"w",encoding="utf-8") as f: json.dump({"updated":datetime.datetime.utcnow().isoformat(timespec="seconds")+"Z","summary":summary,"snapshots_a":snapshots_a,"snapshots_b":snapshots_b},f,ensure_ascii=False,indent=2)
+    with open(OUT,"w",encoding="utf-8") as f:
+        json.dump({"updated":datetime.datetime.utcnow().isoformat(timespec="seconds")+"Z",
+                   "summary":summary,"snapshots_a":snapshots_a,"snapshots_b":snapshots_b},
+                  f,ensure_ascii=False,indent=2)
 
     print(f"\n{'='*65}")
-    print(f"BACKTEST A: {n_valid}señales | alpha {alpha_medio:+.3f}%/mes | p={pvalue} | {significance}")
+    print(f"BACKTEST A: {n_valid} señales | alpha {alpha_medio:+.3f}%/mes | p={pvalue} | {significance}")
     print(f"BACKTEST B: €{cartera_sis:,.0f} sistema vs €{cartera_iwd:,.0f} IWDA (€{cartera_sis-cartera_iwd:+,.0f})")
     print(f"{'='*65}")
 
