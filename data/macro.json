@@ -1,21 +1,21 @@
 {
-  "updated": "2026-06-25T16:00:40Z",
+  "updated": "2026-06-25T22:02:42Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
-    "dgs10": 4.5,
-    "dgs2": 4.16,
-    "yield_curve_spread": 0.34,
+    "dgs10": 4.41,
+    "dgs2": 4.11,
+    "yield_curve_spread": 0.3,
     "yield_curve_inverted": false,
     "score": 45,
     "interpretation": "Tipos elevados (3.63%) — presión moderada",
     "yield_curve_note": "Curva normal"
   },
   "credit_spread": {
-    "value": 2.71,
-    "trend": "neutral",
-    "score": 80,
-    "interpretation": "Spread HY comprimido (2.7%) — condiciones favorables"
+    "value": 2.76,
+    "trend": "up",
+    "score": 70,
+    "interpretation": "Spread HY comprimido (2.8%) — condiciones favorables — tendencia a empeorar"
   },
   "consumer_confidence": {
     "value": 49.8,
@@ -24,19 +24,23 @@
     "interpretation": "Confianza consumidor muy baja (50) — recesión probable"
   },
   "vix": {
-    "value": null,
-    "score": 50,
-    "interpretation": "Sin datos"
+    "value": 18.9,
+    "trend": "up",
+    "score": 70,
+    "interpretation": "VIX 18.9 — mercado tranquilo"
   },
   "dxy": {
-    "value": null,
-    "score": 50,
-    "score_inverse": 50,
-    "interpretation": "Sin datos"
+    "value": 101.42,
+    "ret_6m": 3.6,
+    "score": 40,
+    "score_inverse": 60,
+    "interpretation": "Dólar algo fuerte (+3.6% 6M)"
   },
   "inr": {
-    "value": null,
-    "trend": "stable"
+    "value": 94.39,
+    "ret_3m": 1.0,
+    "trend": "stable",
+    "interpretation": "Rupia estable (+1.0% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -44,10 +48,10 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 124.09,
-    "ret_6m": 11.39,
-    "ret_1m": 0.75,
-    "ema200": 113.41,
+    "price": 124.74,
+    "ret_6m": 12.21,
+    "ret_1m": 1.51,
+    "ema200": 113.32,
     "above_ema200": true
   },
   "bitcoin_halving": {
@@ -57,7 +61,7 @@
     "description": "Halving hace 26M — ciclo medio"
   },
   "composite_score": {
-    "score": 48.8,
-    "interpretation": "Entorno macro deteriorado"
+    "score": 51.2,
+    "interpretation": "Entorno macro neutro"
   }
 }
