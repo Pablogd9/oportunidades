@@ -1,23 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-backtest.py v10 — Backtest profesional con rolling window + splicing.
+backtest.py v10 — Rolling window + splicing + señales trimestrales.
 
-BACKTEST A — Calidad de señal mensual:
-  Ventana de calibracion: 5 anos deslizandose mes a mes
-  Cada señal mide el retorno del mes siguiente vs IWDA
-  Señales completamente independientes (sin solapamiento)
-  P-value estadistico via bootstrap sobre ~200 señales
+BACKTEST A — Calidad de señal trimestral:
+  Señales en enero, abril, julio, octubre (no solapadas)
+  Horizonte 3 meses por señal — coherente con momentum 6M
+  P-value via bootstrap 1000 simulaciones
 
-BACKTEST B — Simulacion real de cartera:
-  500/mes siguiendo señales, capital nunca se vende
-  Comparacion vs 500/mes en IWDA en euros reales
-
-SPLICING:
-  URNM → URA (Global X Uranium) como proxy pre-2019
-  Correlacion real ~0.85, mucho mejor que NLR
-  Validado con correlacion minima 0.55
-  Escalado por volatilidad
+BACKTEST B — Simulacion real €500/mes acumulativo hasta hoy
 """
 
 import json, math, os, random, datetime, urllib.request
@@ -52,8 +43,6 @@ BACKTEST_UNIVERSE = [
     ("URNM_SPLICED", "URNM", "Uranio y Nuclear",  "uranium_spot"),
 ]
 
-# URA (Global X Uranium) existe desde 2007 — mineras puras igual que URNM
-# Correlacion real ~0.85 — mucho mejor proxy que NLR (utilities nucleares)
 SPLICE_CONFIG = {
     "URNM_SPLICED": {
         "real_symbol":  "URNM",
@@ -203,11 +192,19 @@ def price_at_date(all_prices,all_dates,target_date):
         if d>target_str and diff>5: break
     return best_price
 
-def monthly_return(all_prices,all_dates,year,month):
-    first_day=datetime.date(year,month,1)
-    last_day=datetime.date(year+1,1,1)-datetime.timedelta(days=1) if month==12 else datetime.date(year,month+1,1)-datetime.timedelta(days=1)
-    p_start=price_at_date(all_prices,all_dates,first_day)
-    p_end=price_at_date(all_prices,all_dates,last_day)
+def monthly_return(all_prices, all_dates, year, month, n_months=3):
+    """
+    Retorno desde el primer dia del mes hasta N meses despues.
+    Por defecto 3 meses — coherente con horizonte del momentum 6M.
+    Señales trimestrales no solapadas: enero, abril, julio, octubre.
+    """
+    first_day = datetime.date(year, month, 1)
+    end_month = month + n_months
+    end_year  = year
+    while end_month > 12: end_month -= 12; end_year += 1
+    last_day = datetime.date(end_year, end_month, 1) - datetime.timedelta(days=1)
+    p_start = price_at_date(all_prices, all_dates, first_day)
+    p_end   = price_at_date(all_prices, all_dates, last_day)
     if p_start and p_end and p_start>0: return round((p_end/p_start-1)*100,2)
     return None
 
@@ -314,7 +311,7 @@ def bootstrap_pvalue(real_alpha,all_ids,etf_data,iwda_p,iwda_d,eval_months,n_sim
 
 def main():
     print("="*65)
-    print("BACKTEST v10 — Rolling Window + Splicing")
+    print("BACKTEST v10 — Rolling Window + Splicing + Señales Trimestrales")
     print(f"Fecha: {TODAY} | ETFs: {len(BACKTEST_UNIVERSE)}")
     print("="*65)
 
@@ -338,8 +335,6 @@ def main():
     else: print("ERROR"); return
     if not etf_data: print("ERROR: sin datos"); return
 
-    # Usar percentil 75 — ignorar el 25% de ETFs con menos historico
-    # Evita que PAVE (2017) limite todo el backtest a solo 19 meses
     all_starts=sorted([
         datetime.date.fromisoformat(data["dates"][0])
         for data in etf_data.values()
@@ -351,15 +346,25 @@ def main():
     print(f"\nFechas inicio: {all_starts[0]} -> {all_starts[-1]}")
     print(f"Usando percentil 75: {min_start}")
     backtest_start=datetime.date(min_start.year+WINDOW_YEARS,min_start.month,1)
-    eval_months=[]; d=backtest_start
+
+    # Señales trimestrales — enero, abril, julio, octubre
+    # Garantiza señales independientes con horizonte 3 meses
+    # El momentum 6M predice bien a 3 meses pero no a 1 mes
+    eval_months=[]
+    d=backtest_start
     while d<=TODAY.replace(day=1):
-        eval_months.append((d.year,d.month))
-        d=datetime.date(d.year+1,1,1) if d.month==12 else datetime.date(d.year,d.month+1,1)
-    print(f"Periodo: {backtest_start} -> {TODAY} | {len(eval_months)} meses")
+        if d.month in (1,4,7,10):
+            eval_months.append((d.year,d.month))
+        if d.month==12: d=datetime.date(d.year+1,1,1)
+        else: d=datetime.date(d.year,d.month+1,1)
+
+    print(f"Periodo: {backtest_start} -> {TODAY}")
+    print(f"Señales trimestrales: {len(eval_months)} (enero/abril/julio/octubre)")
+    print(f"Horizonte: 3 meses por señal")
 
     # BACKTEST A
     print("\n"+"─"*65)
-    print("BACKTEST A — Calidad de señal mensual")
+    print("BACKTEST A — Calidad de señal trimestral (3 meses)")
     print("─"*65)
     snapshots_a=[]; alpha_sum=0.0; n_valid=0
 
@@ -398,7 +403,7 @@ def main():
     alpha_medio=round(alpha_sum/n_valid,3)
     bates=[s["bate_top1"] for s in snapshots_a if s.get("bate_top1") is not None]
     pct_bate=round(sum(1 for b in bates if b)/len(bates)*100,1) if bates else 0
-    print(f"\n  Señales: {n_valid} | Alpha: {alpha_medio:+.3f}%/mes ({alpha_medio*12:+.1f}%/año) | Bate IWDA: {pct_bate}%")
+    print(f"\n  Señales: {n_valid} trimestrales | Alpha: {alpha_medio:+.3f}%/trimestre ({alpha_medio*4:+.1f}%/año) | Bate IWDA: {pct_bate}%")
     buckets={"alto_70+":[],"medio_55-70":[],"bajo_55-":[]}
     for s in snapshots_a:
         sc=s.get("score_top1",0)
@@ -420,7 +425,7 @@ def main():
 
     # BACKTEST B
     print("\n"+"─"*65)
-    print("BACKTEST B — Simulacion real €500/mes")
+    print("BACKTEST B — Simulacion real €500/trimestre")
     print("─"*65)
     cartera_sis=0.0; cartera_iwd=0.0; n_meses_b=0; snapshots_b=[]
     for s in snapshots_a:
@@ -454,28 +459,28 @@ def main():
     ret_sis=round((cartera_sis/total-1)*100,2) if total>0 else 0
     ret_iwd=round((cartera_iwd/total-1)*100,2) if total>0 else 0
     alpha_b=round(ret_sis-ret_iwd,2)
-    print(f"\n  {n_meses_b} meses | €{total:,.0f} invertidos")
+    print(f"\n  {n_meses_b} trimestres | €{total:,.0f} invertidos")
     print(f"  Sistema: €{cartera_sis:,.0f} (+{ret_sis}%)")
     print(f"  IWDA:    €{cartera_iwd:,.0f} (+{ret_iwd}%)")
     print(f"  Alpha:   {alpha_b:+.2f}% | €{cartera_sis-cartera_iwd:+,.0f}")
     print(f"  {'✓ SISTEMA GANA' if alpha_b>0 else '✗ IWDA GANA'}")
 
-    summary={"fecha":TODAY.isoformat(),"model_version":"10.0","universo":len(etf_data),
-        "metodologia":{"rolling_window_anos":WINDOW_YEARS,
-            "backtest_A":"Señales mensuales independientes, ventana 1 mes, p-value bootstrap",
-            "backtest_B":"Simulacion €500/mes acumulativo hasta hoy",
+    summary={"fecha":TODAY.isoformat(),"model_version":"10.1","universo":len(etf_data),
+        "metodologia":{"rolling_window_anos":WINDOW_YEARS,"horizonte_meses":3,
+            "backtest_A":"Señales trimestrales independientes (ene/abr/jul/oct), horizonte 3 meses",
+            "backtest_B":"Simulacion €500/trimestre acumulativo hasta hoy",
             "splicing":"URNM con proxy URA pre-2019, correlacion minima 0.55"},
-        "backtest_A":{"n_senales":n_valid,"alpha_medio_mes":alpha_medio,
-            "alpha_anualizado":round(alpha_medio*12,2),"pct_bate_iwda":pct_bate,
+        "backtest_A":{"n_senales":n_valid,"alpha_medio_trimestre":alpha_medio,
+            "alpha_anualizado":round(alpha_medio*4,2),"pct_bate_iwda":pct_bate,
             "predictividad":{b:{"n":len(a),"alpha_medio":round(sum(a)/len(a),2) if a else None} for b,a in buckets.items()},
             "bootstrap":{"pvalue":pvalue,"percentil_real":pct_real,"alpha_medio_aleatorio":mean_rand,
                          "n_simulaciones":N_BOOTSTRAP,"significancia":significance}},
-        "backtest_B":{"n_meses":n_meses_b,"total_invertido":total,
+        "backtest_B":{"n_trimestres":n_meses_b,"total_invertido":total,
             "valor_sistema":round(cartera_sis,2),"valor_iwda":round(cartera_iwd,2),
             "ret_sistema":ret_sis,"ret_iwda":ret_iwd,"alpha_total":alpha_b,
             "diferencia_euros":round(cartera_sis-cartera_iwd,2)},
-        "interpretacion":(f"A({n_valid}señales): alpha {alpha_medio:+.3f}%/mes ({alpha_medio*12:+.1f}%/año). {significance}. "
-            f"B({n_meses_b}meses): sistema €{cartera_sis:,.0f} vs IWDA €{cartera_iwd:,.0f} (alpha {alpha_b:+.2f}%)")}
+        "interpretacion":(f"A({n_valid}señales trimestrales): alpha {alpha_medio:+.3f}%/trimestre ({alpha_medio*4:+.1f}%/año). {significance}. "
+            f"B({n_meses_b}trimestres): sistema €{cartera_sis:,.0f} vs IWDA €{cartera_iwd:,.0f} (alpha {alpha_b:+.2f}%)")}
 
     os.makedirs(os.path.dirname(OUT),exist_ok=True)
     with open(OUT,"w",encoding="utf-8") as f:
@@ -484,7 +489,7 @@ def main():
                   f,ensure_ascii=False,indent=2)
 
     print(f"\n{'='*65}")
-    print(f"BACKTEST A: {n_valid} señales | alpha {alpha_medio:+.3f}%/mes | p={pvalue} | {significance}")
+    print(f"BACKTEST A: {n_valid} señales | alpha {alpha_medio:+.3f}%/trim | p={pvalue} | {significance}")
     print(f"BACKTEST B: €{cartera_sis:,.0f} sistema vs €{cartera_iwd:,.0f} IWDA (€{cartera_sis-cartera_iwd:+,.0f})")
     print(f"{'='*65}")
 
