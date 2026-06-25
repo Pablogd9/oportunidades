@@ -34,6 +34,7 @@ UNIVERSE = [
     {"id":"CIBR", "symbol":"CIBR",    "name":"First Trust Nasdaq Cybersecurity",   "sector":"Ciberseguridad",  "use":"backtest+scan", "inception":"2015-07-07", "aum_bn":6.2},
     {"id":"PAVE", "symbol":"PAVE",    "name":"Global X US Infrastructure Dev",     "sector":"Infraestructura", "use":"backtest+scan", "inception":"2016-10-11", "aum_bn":7.3},
     {"id":"NLR",  "symbol":"NLR",     "name":"VanEck Uranium+Nuclear Energy ETF",  "sector":"Uranio y Nuclear","use":"proxy",         "inception":"2007-08-13", "aum_bn":0.9},
+    {"id":"URA",  "symbol":"URA",     "name":"Global X Uranium ETF",               "sector":"Uranio y Nuclear","use":"proxy",         "inception":"2007-11-12", "aum_bn":7.1},
     {"id":"XAR",  "symbol":"XAR",     "name":"SPDR S&P Aerospace & Defense ETF",   "sector":"Defensa",         "use":"proxy",         "inception":"2011-09-28", "aum_bn":2.1},
     {"id":"HACK", "symbol":"HACK",    "name":"ETFMG Prime Cyber Security ETF",     "sector":"Ciberseguridad",  "use":"proxy",         "inception":"2014-11-12", "aum_bn":1.5},
     {"id":"CGW",  "symbol":"CGW",     "name":"Invesco S&P Global Water ETF",       "sector":"Agua",            "use":"proxy",         "inception":"2005-05-13", "aum_bn":0.8},
@@ -50,8 +51,8 @@ UNIVERSE = [
     {"id":"SPY",  "symbol":"SPY",     "name":"SPDR S&P 500 ETF Trust",             "sector":"Benchmark",       "use":"benchmark",     "inception":"1993-01-22", "aum_bn":580.0},
 ]
 
-MAX_WORKERS = 4
-TRAMO_YEARS = 2
+MAX_WORKERS  = 4
+TRAMO_YEARS  = 2
 
 def _get(url, timeout=30):
     req=urllib.request.Request(url,headers=UA)
