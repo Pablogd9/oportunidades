@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-26T10:35:43Z",
+  "updated": "2026-06-26T15:38:11Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -12,7 +12,7 @@
     "yield_curve_note": "Curva normal"
   },
   "credit_spread": {
-    "value": 2.76,
+    "value": 2.78,
     "trend": "up",
     "score": 70,
     "interpretation": "Spread HY comprimido (2.8%) — condiciones favorables — tendencia a empeorar"
@@ -24,10 +24,10 @@
     "interpretation": "Confianza consumidor muy baja (50) — recesión probable"
   },
   "vix": {
-    "value": 20.2,
+    "value": 19.1,
     "trend": "up",
-    "score": 50,
-    "interpretation": "VIX 20.2 — volatilidad moderada"
+    "score": 70,
+    "interpretation": "VIX 19.1 — mercado tranquilo"
   },
   "dxy": {
     "value": 101.23,
@@ -48,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 122.92,
-    "ret_6m": 10.24,
-    "ret_1m": -0.37,
+    "price": 123.47,
+    "ret_6m": 10.74,
+    "ret_1m": 0.07,
     "ema200": 113.5,
     "above_ema200": true
   },
@@ -61,7 +61,7 @@
     "description": "Halving hace 26M — ciclo medio"
   },
   "composite_score": {
-    "score": 46.2,
-    "interpretation": "Entorno macro deteriorado"
+    "score": 51.2,
+    "interpretation": "Entorno macro neutro"
   }
 }
