@@ -1,0 +1,999 @@
+{
+  "n": 110,
+  "alpha": 2.237,
+  "pv_nw": 0.0896,
+  "pv_boot": 0.007,
+  "pct_bate": 57.3,
+  "snapshots": [
+    {
+      "date": "2017-02-01",
+      "top1": "COPX",
+      "score": 100.0,
+      "r1": -14.28,
+      "ri": 3.89,
+      "alpha": -11.39,
+      "bate": false
+    },
+    {
+      "date": "2017-03-01",
+      "top1": "PHO",
+      "score": 100.0,
+      "r1": 1.97,
+      "ri": -2.77,
+      "alpha": -1.06,
+      "bate": true
+    },
+    {
+      "date": "2017-04-01",
+      "top1": "IGV",
+      "score": 100.0,
+      "r1": 8.15,
+      "ri": -2.74,
+      "alpha": 9.53,
+      "bate": true
+    },
+    {
+      "date": "2017-05-01",
+      "top1": "COPX",
+      "score": 100.0,
+      "r1": 16.66,
+      "ri": -3.11,
+      "alpha": 17.05,
+      "bate": true
+    },
+    {
+      "date": "2017-06-01",
+      "top1": "SMH",
+      "score": 100.0,
+      "r1": 2.82,
+      "ri": -3.21,
+      "alpha": 6.86,
+      "bate": true
+    },
+    {
+      "date": "2017-07-01",
+      "top1": "SMH",
+      "score": 100.0,
+      "r1": 14.0,
+      "ri": 1.26,
+      "alpha": 10.62,
+      "bate": true
+    },
+    {
+      "date": "2017-08-01",
+      "top1": "ITA",
+      "score": 100.0,
+      "r1": 8.91,
+      "ri": 5.46,
+      "alpha": 3.69,
+      "bate": true
+    },
+    {
+      "date": "2017-09-01",
+      "top1": "ITA",
+      "score": 100.0,
+      "r1": 9.0,
+      "ri": 5.67,
+      "alpha": 2.38,
+      "bate": true
+    },
+    {
+      "date": "2017-10-01",
+      "top1": "ITA",
+      "score": 100.0,
+      "r1": 4.27,
+      "ri": 3.14,
+      "alpha": 1.51,
+      "bate": true
+    },
+    {
+      "date": "2017-11-01",
+      "top1": "SMH",
+      "score": 100.0,
+      "r1": 5.1,
+      "ri": 1.59,
+      "alpha": 5.81,
+      "bate": true
+    },
+    {
+      "date": "2017-12-01",
+      "top1": "SMH",
+      "score": 100.0,
+      "r1": 7.2,
+      "ri": 1.33,
+      "alpha": 6.94,
+      "bate": true
+    },
+    {
+      "date": "2018-01-01",
+      "top1": "SMH",
+      "score": 100.0,
+      "r1": 3.9,
+      "ri": -3.86,
+      "alpha": 8.11,
+      "bate": true
+    },
+    {
+      "date": "2018-02-01",
+      "top1": "SMH",
+      "score": 100.0,
+      "r1": -8.22,
+      "ri": -1.41,
+      "alpha": -6.11,
+      "bate": false
+    },
+    {
+      "date": "2018-03-01",
+      "top1": "SMH",
+      "score": 100.0,
+      "r1": 2.24,
+      "ri": 4.93,
+      "alpha": -3.32,
+      "bate": false
+    },
+    {
+      "date": "2018-04-01",
+      "top1": "IGV",
+      "score": 100.0,
+      "r1": 10.15,
+      "ri": 8.74,
+      "alpha": -2.02,
+      "bate": true
+    },
+    {
+      "date": "2018-05-01",
+      "top1": "ICLN",
+      "score": 95.2,
+      "r1": -7.61,
+      "ri": 6.38,
+      "alpha": -9.94,
+      "bate": false
+    },
+    {
+      "date": "2018-06-01",
+      "top1": "ICLN",
+      "score": 98.8,
+      "r1": -9.73,
+      "ri": 3.98,
+      "alpha": -8.38,
+      "bate": false
+    },
+    {
+      "date": "2018-07-01",
+      "top1": "ICLN",
+      "score": 100.0,
+      "r1": -1.72,
+      "ri": 6.73,
+      "alpha": -8.58,
+      "bate": false
+    },
+    {
+      "date": "2018-08-01",
+      "top1": "ICLN",
+      "score": 94.6,
+      "r1": -10.49,
+      "ri": -2.49,
+      "alpha": -5.39,
+      "bate": false
+    },
+    {
+      "date": "2018-09-01",
+      "top1": "IHI",
+      "score": 94.4,
+      "r1": -1.49,
+      "ri": -3.83,
+      "alpha": 2.84,
+      "bate": true
+    },
+    {
+      "date": "2018-10-01",
+      "top1": "IHI",
+      "score": 99.6,
+      "r1": -12.26,
+      "ri": -12.77,
+      "alpha": 0.82,
+      "bate": true
+    },
+    {
+      "date": "2018-11-01",
+      "top1": "VHT",
+      "score": 91.1,
+      "r1": 0.41,
+      "ri": -0.63,
+      "alpha": 1.82,
+      "bate": true
+    },
+    {
+      "date": "2018-12-01",
+      "top1": "VHT",
+      "score": 74.5,
+      "r1": -2.53,
+      "ri": 2.8,
+      "alpha": -3.24,
+      "bate": false
+    },
+    {
+      "date": "2019-01-01",
+      "top1": "ICLN",
+      "score": 85.5,
+      "r1": 19.25,
+      "ri": 15.7,
+      "alpha": 0.04,
+      "bate": true
+    },
+    {
+      "date": "2019-02-01",
+      "top1": "PAVE",
+      "score": 50.0,
+      "r1": 8.97,
+      "ri": 10.36,
+      "alpha": -5.13,
+      "bate": false
+    },
+    {
+      "date": "2019-03-01",
+      "top1": "ICLN",
+      "score": 71.6,
+      "r1": 3.1,
+      "ri": 1.04,
+      "alpha": -0.87,
+      "bate": true
+    },
+    {
+      "date": "2019-04-01",
+      "top1": "ICLN",
+      "score": 85.1,
+      "r1": 8.83,
+      "ri": 2.79,
+      "alpha": 2.81,
+      "bate": true
+    },
+    {
+      "date": "2019-05-01",
+      "top1": "ICLN",
+      "score": 81.8,
+      "r1": 6.03,
+      "ri": 2.54,
+      "alpha": 2.51,
+      "bate": true
+    },
+    {
+      "date": "2019-06-01",
+      "top1": "ICLN",
+      "score": 71.2,
+      "r1": 8.81,
+      "ri": 5.86,
+      "alpha": 1.19,
+      "bate": true
+    },
+    {
+      "date": "2019-07-01",
+      "top1": "ICLN",
+      "score": 72.0,
+      "r1": 1.68,
+      "ri": 3.81,
+      "alpha": -4.34,
+      "bate": false
+    },
+    {
+      "date": "2019-08-01",
+      "top1": "ICLN",
+      "score": 99.8,
+      "r1": -0.84,
+      "ri": 0.81,
+      "alpha": -0.49,
+      "bate": false
+    },
+    {
+      "date": "2019-09-01",
+      "top1": "ICLN",
+      "score": 93.4,
+      "r1": 1.29,
+      "ri": 7.56,
+      "alpha": -5.52,
+      "bate": false
+    },
+    {
+      "date": "2019-10-01",
+      "top1": "ICLN",
+      "score": 99.8,
+      "r1": 8.2,
+      "ri": 5.9,
+      "alpha": 2.08,
+      "bate": true
+    },
+    {
+      "date": "2019-11-01",
+      "top1": "ICLN",
+      "score": 100.0,
+      "r1": 13.27,
+      "ri": 5.24,
+      "alpha": 3.56,
+      "bate": true
+    },
+    {
+      "date": "2019-12-01",
+      "top1": "ICLN",
+      "score": 100.0,
+      "r1": 14.08,
+      "ri": -5.61,
+      "alpha": 14.19,
+      "bate": true
+    },
+    {
+      "date": "2020-01-01",
+      "top1": "ICLN",
+      "score": 99.8,
+      "r1": -18.72,
+      "ri": -17.77,
+      "alpha": -1.0,
+      "bate": false
+    },
+    {
+      "date": "2020-02-01",
+      "top1": "PHO",
+      "score": 100.0,
+      "r1": -11.97,
+      "ri": -10.89,
+      "alpha": -0.85,
+      "bate": false
+    },
+    {
+      "date": "2020-03-01",
+      "top1": "ICLN",
+      "score": 100.0,
+      "r1": -4.33,
+      "ri": 0.32,
+      "alpha": -3.83,
+      "bate": false
+    },
+    {
+      "date": "2020-04-01",
+      "top1": "ICLN",
+      "score": 90.5,
+      "r1": 36.24,
+      "ri": 19.26,
+      "alpha": 16.41,
+      "bate": true
+    },
+    {
+      "date": "2020-05-01",
+      "top1": "ICLN",
+      "score": 31.3,
+      "r1": 38.59,
+      "ri": 4.05,
+      "alpha": 29.7,
+      "bate": true
+    },
+    {
+      "date": "2020-06-01",
+      "top1": "ICLN",
+      "score": 51.3,
+      "r1": 41.19,
+      "ri": 5.87,
+      "alpha": 23.3,
+      "bate": true
+    },
+    {
+      "date": "2020-07-01",
+      "top1": "IBB",
+      "score": 84.3,
+      "r1": -1.43,
+      "ri": 3.65,
+      "alpha": 9.1,
+      "bate": false
+    },
+    {
+      "date": "2020-08-01",
+      "top1": "IBB",
+      "score": 81.0,
+      "r1": -2.79,
+      "ri": 1.82,
+      "alpha": 6.98,
+      "bate": false
+    },
+    {
+      "date": "2020-09-01",
+      "top1": "ICLN",
+      "score": 95.2,
+      "r1": 35.07,
+      "ri": 4.94,
+      "alpha": 22.31,
+      "bate": true
+    },
+    {
+      "date": "2020-10-01",
+      "top1": "ICLN",
+      "score": 98.1,
+      "r1": 47.93,
+      "ri": 8.18,
+      "alpha": 28.62,
+      "bate": true
+    },
+    {
+      "date": "2020-11-01",
+      "top1": "ICLN",
+      "score": 100.0,
+      "r1": 53.04,
+      "ri": 11.94,
+      "alpha": 32.62,
+      "bate": true
+    },
+    {
+      "date": "2020-12-01",
+      "top1": "ICLN",
+      "score": 100.0,
+      "r1": 15.1,
+      "ri": 6.53,
+      "alpha": 10.05,
+      "bate": true
+    },
+    {
+      "date": "2021-01-01",
+      "top1": "ICLN",
+      "score": 100.0,
+      "r1": -13.95,
+      "ri": 10.2,
+      "alpha": -21.63,
+      "bate": false
+    },
+    {
+      "date": "2021-02-01",
+      "top1": "ICLN",
+      "score": 100.0,
+      "r1": -23.73,
+      "ri": 10.26,
+      "alpha": -28.25,
+      "bate": false
+    },
+    {
+      "date": "2021-03-01",
+      "top1": "LIT",
+      "score": 100.0,
+      "r1": 6.83,
+      "ri": 5.89,
+      "alpha": -5.54,
+      "bate": true
+    },
+    {
+      "date": "2021-04-01",
+      "top1": "COPX",
+      "score": 100.0,
+      "r1": 2.03,
+      "ri": 6.02,
+      "alpha": 1.76,
+      "bate": false
+    },
+    {
+      "date": "2021-05-01",
+      "top1": "SMH",
+      "score": 100.0,
+      "r1": 8.29,
+      "ri": 6.46,
+      "alpha": 2.79,
+      "bate": true
+    },
+    {
+      "date": "2021-06-01",
+      "top1": "GRID",
+      "score": 100.0,
+      "r1": 8.55,
+      "ri": 9.6,
+      "alpha": -7.2,
+      "bate": false
+    },
+    {
+      "date": "2021-07-01",
+      "top1": "COPX",
+      "score": 100.0,
+      "r1": -7.52,
+      "ri": 2.71,
+      "alpha": -3.85,
+      "bate": false
+    },
+    {
+      "date": "2021-08-01",
+      "top1": "GRID",
+      "score": 100.0,
+      "r1": 7.16,
+      "ri": 6.13,
+      "alpha": -1.43,
+      "bate": true
+    },
+    {
+      "date": "2021-09-01",
+      "top1": "GRID",
+      "score": 100.0,
+      "r1": 1.7,
+      "ri": 4.06,
+      "alpha": -3.83,
+      "bate": false
+    },
+    {
+      "date": "2021-10-01",
+      "top1": "COPX",
+      "score": 100.0,
+      "r1": 6.74,
+      "ri": 10.42,
+      "alpha": -4.56,
+      "bate": false
+    },
+    {
+      "date": "2021-11-01",
+      "top1": "COPX",
+      "score": 100.0,
+      "r1": -0.29,
+      "ri": -1.16,
+      "alpha": -3.56,
+      "bate": true
+    },
+    {
+      "date": "2021-12-01",
+      "top1": "VHT",
+      "score": 100.0,
+      "r1": -1.61,
+      "ri": -4.46,
+      "alpha": 0.53,
+      "bate": true
+    },
+    {
+      "date": "2022-01-01",
+      "top1": "LIT",
+      "score": 100.0,
+      "r1": -8.83,
+      "ri": -2.38,
+      "alpha": -4.63,
+      "bate": false
+    },
+    {
+      "date": "2022-02-01",
+      "top1": "INDA",
+      "score": 99.6,
+      "r1": -4.9,
+      "ri": -0.75,
+      "alpha": -3.04,
+      "bate": false
+    },
+    {
+      "date": "2022-03-01",
+      "top1": "INDA",
+      "score": 97.9,
+      "r1": -2.77,
+      "ri": -0.83,
+      "alpha": -1.62,
+      "bate": false
+    },
+    {
+      "date": "2022-04-01",
+      "top1": "PAVE",
+      "score": 90.9,
+      "r1": -19.46,
+      "ri": -11.65,
+      "alpha": -4.55,
+      "bate": false
+    },
+    {
+      "date": "2022-05-01",
+      "top1": "VHT",
+      "score": 88.0,
+      "r1": 1.7,
+      "ri": 2.09,
+      "alpha": -8.26,
+      "bate": false
+    },
+    {
+      "date": "2022-06-01",
+      "top1": "INDA",
+      "score": 74.1,
+      "r1": 3.81,
+      "ri": 1.24,
+      "alpha": -5.91,
+      "bate": true
+    },
+    {
+      "date": "2022-07-01",
+      "top1": "COPX",
+      "score": 54.7,
+      "r1": -5.14,
+      "ri": 1.61,
+      "alpha": -7.92,
+      "bate": false
+    },
+    {
+      "date": "2022-08-01",
+      "top1": "ITA",
+      "score": 39.1,
+      "r1": 2.51,
+      "ri": -3.52,
+      "alpha": 1.84,
+      "bate": true
+    },
+    {
+      "date": "2022-09-01",
+      "top1": "ITA",
+      "score": 52.0,
+      "r1": 11.31,
+      "ri": -0.45,
+      "alpha": 11.35,
+      "bate": true
+    },
+    {
+      "date": "2022-10-01",
+      "top1": "ITA",
+      "score": 50.5,
+      "r1": 22.67,
+      "ri": -1.46,
+      "alpha": 13.93,
+      "bate": true
+    },
+    {
+      "date": "2022-11-01",
+      "top1": "ITA",
+      "score": 46.0,
+      "r1": 6.83,
+      "ri": -0.93,
+      "alpha": 16.89,
+      "bate": true
+    },
+    {
+      "date": "2022-12-01",
+      "top1": "ITA",
+      "score": 53.4,
+      "r1": 2.41,
+      "ri": -1.46,
+      "alpha": 4.03,
+      "bate": true
+    },
+    {
+      "date": "2023-01-01",
+      "top1": "ITA",
+      "score": 56.5,
+      "r1": 2.88,
+      "ri": 3.59,
+      "alpha": 1.2,
+      "bate": false
+    },
+    {
+      "date": "2023-02-01",
+      "top1": "ITA",
+      "score": 55.5,
+      "r1": -0.45,
+      "ri": 1.13,
+      "alpha": -3.16,
+      "bate": false
+    },
+    {
+      "date": "2023-03-01",
+      "top1": "ITA",
+      "score": 61.3,
+      "r1": -6.13,
+      "ri": 4.01,
+      "alpha": -10.42,
+      "bate": false
+    },
+    {
+      "date": "2023-04-01",
+      "top1": "ITA",
+      "score": 54.9,
+      "r1": 1.38,
+      "ri": 6.67,
+      "alpha": -2.45,
+      "bate": false
+    },
+    {
+      "date": "2023-05-01",
+      "top1": "ITA",
+      "score": 48.9,
+      "r1": 3.04,
+      "ri": 9.94,
+      "alpha": -2.81,
+      "bate": false
+    },
+    {
+      "date": "2023-06-01",
+      "top1": "ITA",
+      "score": 54.7,
+      "r1": 5.46,
+      "ri": 5.64,
+      "alpha": 0.84,
+      "bate": false
+    },
+    {
+      "date": "2023-07-01",
+      "top1": "ITA",
+      "score": 53.0,
+      "r1": -9.17,
+      "ri": 0.12,
+      "alpha": -10.21,
+      "bate": false
+    },
+    {
+      "date": "2023-08-01",
+      "top1": "ITA",
+      "score": 65.0,
+      "r1": -6.68,
+      "ri": -5.41,
+      "alpha": -2.71,
+      "bate": false
+    },
+    {
+      "date": "2023-09-01",
+      "top1": "ITA",
+      "score": 57.8,
+      "r1": 2.94,
+      "ri": 0.11,
+      "alpha": -1.12,
+      "bate": true
+    },
+    {
+      "date": "2023-10-01",
+      "top1": "ITA",
+      "score": 63.8,
+      "r1": 20.82,
+      "ri": 6.04,
+      "alpha": 13.06,
+      "bate": true
+    },
+    {
+      "date": "2023-11-01",
+      "top1": "SMH",
+      "score": 62.9,
+      "r1": 30.52,
+      "ri": 12.63,
+      "alpha": 12.01,
+      "bate": true
+    },
+    {
+      "date": "2023-12-01",
+      "top1": "SMH",
+      "score": 72.9,
+      "r1": 31.54,
+      "ri": 10.43,
+      "alpha": 14.13,
+      "bate": true
+    },
+    {
+      "date": "2024-01-01",
+      "top1": "IGV",
+      "score": 96.9,
+      "r1": 7.79,
+      "ri": 10.3,
+      "alpha": 5.62,
+      "bate": false
+    },
+    {
+      "date": "2024-02-01",
+      "top1": "IGV",
+      "score": 97.5,
+      "r1": -7.41,
+      "ri": 5.76,
+      "alpha": -6.7,
+      "bate": false
+    },
+    {
+      "date": "2024-03-01",
+      "top1": "IGV",
+      "score": 97.7,
+      "r1": -10.15,
+      "ri": 2.11,
+      "alpha": -11.53,
+      "bate": false
+    },
+    {
+      "date": "2024-04-01",
+      "top1": "IGV",
+      "score": 99.6,
+      "r1": 2.73,
+      "ri": 4.36,
+      "alpha": 1.9,
+      "bate": false
+    },
+    {
+      "date": "2024-05-01",
+      "top1": "IGV",
+      "score": 95.2,
+      "r1": 7.02,
+      "ri": 6.49,
+      "alpha": 4.07,
+      "bate": true
+    },
+    {
+      "date": "2024-06-01",
+      "top1": "SMH",
+      "score": 99.8,
+      "r1": 1.24,
+      "ri": 4.86,
+      "alpha": -0.65,
+      "bate": false
+    },
+    {
+      "date": "2024-07-01",
+      "top1": "ITA",
+      "score": 99.6,
+      "r1": 13.73,
+      "ri": 1.83,
+      "alpha": 5.99,
+      "bate": true
+    },
+    {
+      "date": "2024-08-01",
+      "top1": "SMH",
+      "score": 100.0,
+      "r1": 4.62,
+      "ri": 3.28,
+      "alpha": -0.54,
+      "bate": true
+    },
+    {
+      "date": "2024-09-01",
+      "top1": "ITA",
+      "score": 92.8,
+      "r1": 5.32,
+      "ri": 9.57,
+      "alpha": -6.33,
+      "bate": false
+    },
+    {
+      "date": "2024-10-01",
+      "top1": "XBI",
+      "score": 98.1,
+      "r1": -8.07,
+      "ri": 7.88,
+      "alpha": -14.72,
+      "bate": false
+    },
+    {
+      "date": "2024-11-01",
+      "top1": "SMH",
+      "score": 100.0,
+      "r1": -0.46,
+      "ri": 10.04,
+      "alpha": -7.86,
+      "bate": false
+    },
+    {
+      "date": "2024-12-01",
+      "top1": "SMH",
+      "score": 100.0,
+      "r1": -6.09,
+      "ri": -0.24,
+      "alpha": -5.02,
+      "bate": false
+    },
+    {
+      "date": "2025-01-01",
+      "top1": "ITA",
+      "score": 100.0,
+      "r1": 5.33,
+      "ri": -6.75,
+      "alpha": 7.5,
+      "bate": true
+    },
+    {
+      "date": "2025-02-01",
+      "top1": "ITA",
+      "score": 95.0,
+      "r1": 0.21,
+      "ri": -13.73,
+      "alpha": 11.99,
+      "bate": true
+    },
+    {
+      "date": "2025-03-01",
+      "top1": "ITA",
+      "score": 100.0,
+      "r1": 14.5,
+      "ri": -5.85,
+      "alpha": 15.11,
+      "bate": true
+    },
+    {
+      "date": "2025-04-01",
+      "top1": "IHI",
+      "score": 99.6,
+      "r1": 4.47,
+      "ri": 1.79,
+      "alpha": 8.04,
+      "bate": true
+    },
+    {
+      "date": "2025-05-01",
+      "top1": "ITA",
+      "score": 89.0,
+      "r1": 24.0,
+      "ri": 12.43,
+      "alpha": 4.58,
+      "bate": true
+    },
+    {
+      "date": "2025-06-01",
+      "top1": "ITA",
+      "score": 92.3,
+      "r1": 11.32,
+      "ri": 6.1,
+      "alpha": 2.09,
+      "bate": true
+    },
+    {
+      "date": "2025-07-01",
+      "top1": "ITA",
+      "score": 100.0,
+      "r1": 13.11,
+      "ri": 7.23,
+      "alpha": 0.79,
+      "bate": true
+    },
+    {
+      "date": "2025-08-01",
+      "top1": "ITA",
+      "score": 100.0,
+      "r1": 10.22,
+      "ri": 9.78,
+      "alpha": 13.2,
+      "bate": true
+    },
+    {
+      "date": "2025-09-01",
+      "top1": "LIT",
+      "score": 100.0,
+      "r1": 34.63,
+      "ri": 5.86,
+      "alpha": 18.49,
+      "bate": true
+    },
+    {
+      "date": "2025-10-01",
+      "top1": "LIT",
+      "score": 100.0,
+      "r1": 12.66,
+      "ri": 3.25,
+      "alpha": 6.39,
+      "bate": true
+    },
+    {
+      "date": "2025-11-01",
+      "top1": "LIT",
+      "score": 100.0,
+      "r1": 12.24,
+      "ri": 0.36,
+      "alpha": 9.68,
+      "bate": true
+    },
+    {
+      "date": "2025-12-01",
+      "top1": "ICLN",
+      "score": 100.0,
+      "r1": 10.09,
+      "ri": 2.35,
+      "alpha": 10.61,
+      "bate": true
+    },
+    {
+      "date": "2026-01-01",
+      "top1": "ICLN",
+      "score": 100.0,
+      "r1": 11.32,
+      "ri": -3.12,
+      "alpha": 12.95,
+      "bate": true
+    },
+    {
+      "date": "2026-02-01",
+      "top1": "ICLN",
+      "score": 100.0,
+      "r1": 13.93,
+      "ri": 3.19,
+      "alpha": 4.59,
+      "bate": true
+    },
+    {
+      "date": "2026-03-01",
+      "top1": "ICLN",
+      "score": 100.0,
+      "r1": 25.7,
+      "ri": 8.7,
+      "alpha": 8.16,
+      "bate": true
+    }
+  ]
+}
