@@ -1,0 +1,24 @@
+name: Backtest Factor 6
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Ejecutar backtest factor 6
+        run: python scripts/backtest_factor6.py
+      - name: Commit resultado
+        run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add data/backtest_factor6.json
+          git diff --staged --quiet || git commit -m "Backtest factor6 $(date -u '+%Y-%m-%d %H:%M')"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
