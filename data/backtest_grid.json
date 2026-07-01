@@ -1,0 +1,30 @@
+{
+  "fecha": "2026-07-01",
+  "total_evaluadas": 256,
+  "total_robustas": 1,
+  "esperados_azar": 12.8,
+  "criterios": {
+    "p_nw": 0.05,
+    "alpha_min": 0.0,
+    "diff_max": 2.0,
+    "p_mitad": 0.2
+  },
+  "modelos_robustos": [
+    {
+      "lookback": 9,
+      "skip": 1,
+      "peso_entrada": 0.45,
+      "f1_sharpe": false,
+      "f2_lp_inv": false,
+      "f3_cross": false,
+      "n": 110,
+      "alpha": 2.408,
+      "pvalue_nw": 0.049,
+      "alpha_m1": 2.662,
+      "pvalue_m1": 0.1258,
+      "alpha_m2": 2.115,
+      "pvalue_m2": 0.2137,
+      "consistencia": 0.547
+    }
+  ]
+}
