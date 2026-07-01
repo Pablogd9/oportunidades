@@ -43,6 +43,50 @@
       "ret_iwda_3m": null,
       "alpha_3m": null,
       "validated": false
+    },
+    {
+      "month": "2026-07",
+      "date": "2026-07-01",
+      "regime": "bull",
+      "score_top1": 71.5,
+      "calidad": "🟢 Señal fuerte",
+      "top1": {
+        "symbol": "GNOM",
+        "sector": "Genomica",
+        "score": 71.5,
+        "euros": 350
+      },
+      "top2": {
+        "symbol": "ROBO",
+        "sector": "IA y Robotica",
+        "score": 68.6,
+        "euros": 150
+      },
+      "portfolio_signals": {
+        "SEMI.AS": "green",
+        "BTC-EUR": "yellow"
+      },
+      "eps_forward_snapshot": {},
+      "entry_prices": {
+        "GNOM": 56.834,
+        "ROBO": 85.66,
+        "QCLN": 61.32,
+        "CIBR": 89.85,
+        "SEMI.AS": 23.665,
+        "XBI": 158.25,
+        "COPX": 76.97,
+        "PAVE": 58.92,
+        "ITA": 242.42,
+        "CGW": 65.73,
+        "FLIN": 35.57,
+        "VHT": 299.01,
+        "URNM": 52.59
+      },
+      "ret_top1_3m": null,
+      "ret_top2_3m": null,
+      "ret_iwda_3m": null,
+      "alpha_3m": null,
+      "validated": false
     }
   ]
 }
