@@ -1,0 +1,47 @@
+{
+  "fecha": "2026-07-01",
+  "vix_umbral": 25,
+  "meses_vix_alto": 20,
+  "resultados": {
+    "M0 Factor5 base": {
+      "alpha": 2.983,
+      "bate": 56.8,
+      "pvalue_nw": 0.0487
+    },
+    "M1 EMA200": {
+      "alpha": 2.209,
+      "bate": 57.7,
+      "pvalue_nw": 0.1619
+    },
+    "M2A VIX->IWDA": {
+      "alpha": 1.786,
+      "bate": 46.8,
+      "pvalue_nw": 0.0961
+    },
+    "M2B VIX->Defensivos": {
+      "alpha": 1.874,
+      "bate": 54.1,
+      "pvalue_nw": 0.1117
+    },
+    "M2C VIX->ignorar": {
+      "alpha": 2.983,
+      "bate": 56.8,
+      "pvalue_nw": 0.0487
+    },
+    "M3A EMA200+VIX->IWDA": {
+      "alpha": 1.834,
+      "bate": 45.0,
+      "pvalue_nw": 0.0718
+    },
+    "M3B EMA200+VIX->Def": {
+      "alpha": 1.758,
+      "bate": 55.0,
+      "pvalue_nw": 0.1303
+    },
+    "M3C EMA200+VIX->ignorar": {
+      "alpha": 2.983,
+      "bate": 56.8,
+      "pvalue_nw": 0.0487
+    }
+  }
+}
