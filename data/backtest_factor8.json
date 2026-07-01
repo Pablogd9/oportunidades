@@ -1,0 +1,29 @@
+{
+  "fecha": "2026-07-01",
+  "n_senales": 111,
+  "filtro1_meses": 51,
+  "filtro2_meses": 15,
+  "concentracion_umbral": 0.6,
+  "resultados": {
+    "M0 Factor5 base": {
+      "alpha": 2.983,
+      "bate": 56.8,
+      "pvalue_nw": 0.0487
+    },
+    "M1 Fuerza relativa 1M": {
+      "alpha": 2.462,
+      "bate": 55.0,
+      "pvalue_nw": 0.0961
+    },
+    "M2 Concentracion temporal": {
+      "alpha": 2.832,
+      "bate": 54.1,
+      "pvalue_nw": 0.0796
+    },
+    "M3 Ambos filtros": {
+      "alpha": 2.588,
+      "bate": 54.1,
+      "pvalue_nw": 0.0826
+    }
+  }
+}
