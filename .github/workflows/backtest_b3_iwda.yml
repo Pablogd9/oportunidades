@@ -1,0 +1,25 @@
+name: Backtest B3 IWDA
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Ejecutar backtest B3 e IWDA
+        run: python scripts/backtest_b3_iwda.py
+      - name: Commit resultado
+        run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add data/backtest_b3_iwda.json
+          git diff --staged --quiet || git commit -m "Backtest B3 IWDA $(date -u '+%Y-%m-%d %H:%M')"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
