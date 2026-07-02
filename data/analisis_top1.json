@@ -1,0 +1,92 @@
+{
+  "fecha": "2026-07-02",
+  "n_senales": 111,
+  "alpha_medio": 2.98,
+  "pvalue_nw": 0.0487,
+  "rank_real_medio": 6.7,
+  "spearman_medio": 0.138,
+  "pct_top1_mejor": 11.7,
+  "pct_top1_top3": 30.6,
+  "señal_actual": {
+    "sym": "SMH",
+    "score": 100.0,
+    "sector": "Semiconductores"
+  },
+  "scores_hoy": [
+    {
+      "sym": "SMH",
+      "score": 100.0,
+      "sector": "Semiconductores"
+    },
+    {
+      "sym": "IBB",
+      "score": 100.0,
+      "sector": "Biotecnologia"
+    },
+    {
+      "sym": "ICLN",
+      "score": 100.0,
+      "sector": "EnergiaLimpia"
+    },
+    {
+      "sym": "COPX",
+      "score": 100.0,
+      "sector": "Cobre"
+    },
+    {
+      "sym": "LIT",
+      "score": 100.0,
+      "sector": "Litio"
+    },
+    {
+      "sym": "ROBO",
+      "score": 100.0,
+      "sector": "Robotica"
+    },
+    {
+      "sym": "GRID",
+      "score": 96.7,
+      "sector": "Infraestructura"
+    },
+    {
+      "sym": "PAVE",
+      "score": 74.1,
+      "sector": "Infraestructura2"
+    },
+    {
+      "sym": "ITA",
+      "score": 71.8,
+      "sector": "Defensa"
+    },
+    {
+      "sym": "VHT",
+      "score": 67.1,
+      "sector": "Salud"
+    },
+    {
+      "sym": "CIBR",
+      "score": 54.2,
+      "sector": "Ciberseguridad"
+    },
+    {
+      "sym": "IGV",
+      "score": 2.3,
+      "sector": "Software"
+    },
+    {
+      "sym": "PHO",
+      "score": 1.0,
+      "sector": "Agua"
+    },
+    {
+      "sym": "IHI",
+      "score": 0.0,
+      "sector": "Salud2"
+    },
+    {
+      "sym": "INDA",
+      "score": 0.0,
+      "sector": "India"
+    }
+  ]
+}
