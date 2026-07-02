@@ -1,0 +1,25 @@
+name: Backtest Definitivo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Ejecutar backtest definitivo
+        run: python scripts/backtest_definitivo.py
+      - name: Commit resultado
+        run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add data/backtest_definitivo.json
+          git diff --staged --quiet || git commit -m "Backtest definitivo $(date -u '+%Y-%m-%d %H:%M')"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
