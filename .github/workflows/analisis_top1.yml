@@ -1,0 +1,25 @@
+name: Analisis Top1
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Analisis consistencia Top1
+        run: python scripts/analisis_top1.py
+      - name: Commit resultado
+        run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add data/analisis_top1.json
+          git diff --staged --quiet || git commit -m "Analisis Top1 $(date -u '+%Y-%m-%d %H:%M')"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
