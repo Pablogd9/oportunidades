@@ -1,0 +1,118 @@
+{
+  "fecha": "2026-07-02",
+  "top1": {
+    "sym": "COPX",
+    "sector": "Cobre",
+    "score_momentum": 100.0,
+    "score_entrada": 39.9,
+    "distancia_max_pct": 19.6
+  },
+  "ranking": [
+    {
+      "sym": "COPX",
+      "sector": "Cobre",
+      "score_momentum": 100.0,
+      "score_entrada": 39.9,
+      "distancia_max_pct": 19.6
+    },
+    {
+      "sym": "ROBO",
+      "sector": "Robotica",
+      "score_momentum": 100.0,
+      "score_entrada": 21.4,
+      "distancia_max_pct": 5.2
+    },
+    {
+      "sym": "SMH",
+      "sector": "Semiconductores",
+      "score_momentum": 100.0,
+      "score_entrada": 16.9,
+      "distancia_max_pct": 1.9
+    },
+    {
+      "sym": "ICLN",
+      "sector": "EnergiaLimpia",
+      "score_momentum": 100.0,
+      "score_entrada": 5.4,
+      "distancia_max_pct": 13.7
+    },
+    {
+      "sym": "LIT",
+      "sector": "Litio",
+      "score_momentum": 100.0,
+      "score_entrada": 4.6,
+      "distancia_max_pct": 14.6
+    },
+    {
+      "sym": "IBB",
+      "sector": "Biotecnologia",
+      "score_momentum": 100.0,
+      "score_entrada": 0.0,
+      "distancia_max_pct": 0.0
+    },
+    {
+      "sym": "GRID",
+      "sector": "Infraestructura",
+      "score_momentum": 96.7,
+      "score_entrada": 45.6,
+      "distancia_max_pct": 4.0
+    },
+    {
+      "sym": "PAVE",
+      "sector": "Infraestructura2",
+      "score_momentum": 74.1,
+      "score_entrada": 31.3,
+      "distancia_max_pct": 1.8
+    },
+    {
+      "sym": "ITA",
+      "sector": "Defensa",
+      "score_momentum": 71.8,
+      "score_entrada": 56.0,
+      "distancia_max_pct": 3.3
+    },
+    {
+      "sym": "VHT",
+      "sector": "Salud",
+      "score_momentum": 67.1,
+      "score_entrada": 14.7,
+      "distancia_max_pct": 1.1
+    },
+    {
+      "sym": "CIBR",
+      "sector": "Ciberseguridad",
+      "score_momentum": 54.2,
+      "score_entrada": 54.4,
+      "distancia_max_pct": 4.7
+    },
+    {
+      "sym": "IGV",
+      "sector": "Software",
+      "score_momentum": 2.3,
+      "score_entrada": 98.2,
+      "distancia_max_pct": 23.1
+    },
+    {
+      "sym": "PHO",
+      "sector": "Agua",
+      "score_momentum": 1.0,
+      "score_entrada": 81.7,
+      "distancia_max_pct": 7.4
+    },
+    {
+      "sym": "IHI",
+      "sector": "Salud2",
+      "score_momentum": 0.0,
+      "score_entrada": 100.0,
+      "distancia_max_pct": 23.4
+    },
+    {
+      "sym": "INDA",
+      "sector": "India",
+      "score_momentum": 0.0,
+      "score_entrada": 85.5,
+      "distancia_max_pct": 11.6
+    }
+  ],
+  "n_empatados": 6
+}
