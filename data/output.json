@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-04T08:30:54Z",
+  "updated": "2026-07-04T09:36:09Z",
   "total_analyzed": 23,
   "model_version": "11.0",
   "factor_weights": {
@@ -225,11 +225,11 @@
       "sector": "Bitcoin y Cripto",
       "signal": "yellow",
       "signal_text": "Atención — EMA200 semanal bajo. Vigilar.",
-      "dist_ema200": -6.4,
+      "dist_ema200": -6.5,
       "ema_type": "weekly",
-      "r3m": -18.04,
-      "r12m": -42.77,
-      "drawdown": -44.46,
+      "r3m": -18.14,
+      "r12m": -42.84,
+      "drawdown": -44.53,
       "sparkline": [
         69080.8672,
         69314.125,
@@ -290,7 +290,7 @@
         51308.3945,
         52738.7422,
         53827.5508,
-        54658.0312
+        54591.0586
       ],
       "spark_dates": [
         "2026-05-05",
@@ -7272,7 +7272,7 @@
     "dolar": "Dólar algo fuerte (+2.5% 6M)",
     "halving": "Halving hace 26M — ciclo medio",
     "fred": true,
-    "updated": "2026-07-04T08:30:30Z",
+    "updated": "2026-07-04T09:35:42Z",
     "regime": {
       "regime": "bull",
       "w_tech": {
