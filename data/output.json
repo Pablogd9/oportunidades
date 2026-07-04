@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-03T21:40:26Z",
+  "updated": "2026-07-04T08:30:54Z",
   "total_analyzed": 23,
   "model_version": "11.0",
   "factor_weights": {
@@ -37,7 +37,7 @@
     },
     "description": "Mercado alcista fuerte — priorizando momentum y liderazgo",
     "regime_note": "IWDA +11.5% 6M, VIX bajo",
-    "vix": 15.8,
+    "vix": 16.1,
     "iwda_6m": 11.53,
     "yield_curve_spread": 0.31,
     "yield_curve_inverted": false
@@ -227,9 +227,9 @@
       "signal_text": "Atención — EMA200 semanal bajo. Vigilar.",
       "dist_ema200": -6.4,
       "ema_type": "weekly",
-      "r3m": -18.08,
-      "r12m": -42.8,
-      "drawdown": -44.49,
+      "r3m": -18.04,
+      "r12m": -42.77,
+      "drawdown": -44.46,
       "sparkline": [
         69080.8672,
         69314.125,
@@ -290,7 +290,7 @@
         51308.3945,
         52738.7422,
         53827.5508,
-        54631.7891
+        54658.0312
       ],
       "spark_dates": [
         "2026-05-05",
@@ -352,7 +352,7 @@
         "2026-06-30",
         "2026-07-01",
         "2026-07-02",
-        "2026-07-03"
+        "2026-07-04"
       ]
     }
   ],
@@ -7268,11 +7268,11 @@
   ],
   "macro_context": {
     "tipos": "Tipos elevados (3.63%) — presión moderada",
-    "vix": "VIX 15.8 — mercado tranquilo",
+    "vix": "VIX 16.1 — mercado tranquilo",
     "dolar": "Dólar algo fuerte (+2.5% 6M)",
     "halving": "Halving hace 26M — ciclo medio",
     "fred": true,
-    "updated": "2026-07-03T21:39:58Z",
+    "updated": "2026-07-04T08:30:30Z",
     "regime": {
       "regime": "bull",
       "w_tech": {
@@ -7290,7 +7290,7 @@
       },
       "description": "Mercado alcista fuerte — priorizando momentum y liderazgo",
       "regime_note": "IWDA +11.5% 6M, VIX bajo",
-      "vix": 15.8,
+      "vix": 16.1,
       "iwda_6m": 11.53,
       "yield_curve_spread": 0.31,
       "yield_curve_inverted": false

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-03T21:39:58Z",
+  "updated": "2026-07-04T08:30:30Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -24,10 +24,10 @@
     "interpretation": "Confianza consumidor muy baja (45) — recesión probable"
   },
   "vix": {
-    "value": 15.8,
+    "value": 16.1,
     "trend": "down",
     "score": 70,
-    "interpretation": "VIX 15.8 — mercado tranquilo"
+    "interpretation": "VIX 16.1 — mercado tranquilo"
   },
   "dxy": {
     "value": 100.86,
@@ -56,7 +56,7 @@
   },
   "bitcoin_halving": {
     "halving_date": "2024-04-19",
-    "months_since": 26.4,
+    "months_since": 26.5,
     "halving_score": 50,
     "description": "Halving hace 26M — ciclo medio"
   },
