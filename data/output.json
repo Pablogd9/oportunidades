@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-04T21:28:06Z",
+  "updated": "2026-07-05T08:47:36Z",
   "total_analyzed": 23,
   "model_version": "11.0",
   "factor_weights": {
@@ -225,11 +225,11 @@
       "sector": "Bitcoin y Cripto",
       "signal": "yellow",
       "signal_text": "Atención — EMA200 semanal bajo. Vigilar.",
-      "dist_ema200": -5.1,
+      "dist_ema200": -5.7,
       "ema_type": "weekly",
-      "r3m": -17.33,
-      "r12m": -42.27,
-      "drawdown": -43.67,
+      "r3m": -17.96,
+      "r12m": -42.71,
+      "drawdown": -44.1,
       "sparkline": [
         69314.125,
         68203.2422,
@@ -290,7 +290,7 @@
         52738.7422,
         53827.5508,
         54664.3203,
-        55441.8086
+        55018.0898
       ],
       "spark_dates": [
         "2026-05-06",
@@ -352,7 +352,7 @@
         "2026-07-01",
         "2026-07-02",
         "2026-07-03",
-        "2026-07-04"
+        "2026-07-05"
       ]
     }
   ],
@@ -598,8 +598,8 @@
       "peg": null,
       "dist_from_max_5y_overval": -41.67,
       "breadth_score": 8,
-      "breadth_desc": "Breadth excelente — 88% sobre EMA50",
-      "breadth_pct": 88.0,
+      "breadth_desc": "Breadth excelente — 94% sobre EMA50",
+      "breadth_pct": 94.0,
       "failure_patterns": [
         "Patrón B: recuperación desde mínimos extremos (-42%) — posible rebote"
       ],
@@ -736,7 +736,7 @@
         "Lidera al mercado — pct 85",
         "Muy por encima EMA200 (+28.1%) — pct 100",
         "Momentum 6M fuerte (+28.0%) — pct 89",
-        "Breadth: Breadth excelente — 88% sobre EMA50"
+        "Breadth: Breadth excelente — 94% sobre EMA50"
       ],
       "reasons_down": [
         "Valoración: Mom3M 32.2%=12.2x media",
@@ -3091,8 +3091,8 @@
       "peg": null,
       "dist_from_max_5y_overval": -41.67,
       "breadth_score": 8,
-      "breadth_desc": "Breadth excelente — 88% sobre EMA50",
-      "breadth_pct": 88.0,
+      "breadth_desc": "Breadth excelente — 94% sobre EMA50",
+      "breadth_pct": 94.0,
       "failure_patterns": [
         "Patrón B: recuperación desde mínimos extremos (-42%) — posible rebote"
       ],
@@ -3229,7 +3229,7 @@
         "Lidera al mercado — pct 85",
         "Muy por encima EMA200 (+28.1%) — pct 100",
         "Momentum 6M fuerte (+28.0%) — pct 89",
-        "Breadth: Breadth excelente — 88% sobre EMA50"
+        "Breadth: Breadth excelente — 94% sobre EMA50"
       ],
       "reasons_down": [
         "Valoración: Mom3M 32.2%=12.2x media",
@@ -7269,10 +7269,10 @@
   "macro_context": {
     "tipos": "Tipos elevados (3.63%) — presión moderada",
     "vix": "VIX 16.1 — mercado tranquilo",
-    "dolar": "Dólar algo fuerte (+2.5% 6M)",
-    "halving": "Halving hace 26M — ciclo medio",
+    "dolar": "Dólar algo fuerte (+2.6% 6M)",
+    "halving": "Halving hace 27M — ciclo medio",
     "fred": true,
-    "updated": "2026-07-04T21:27:34Z",
+    "updated": "2026-07-05T08:46:55Z",
     "regime": {
       "regime": "bull",
       "w_tech": {

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-04T21:27:34Z",
+  "updated": "2026-07-05T08:46:55Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -31,10 +31,10 @@
   },
   "dxy": {
     "value": 100.86,
-    "ret_6m": 2.5,
+    "ret_6m": 2.6,
     "score": 40,
     "score_inverse": 60,
-    "interpretation": "Dólar algo fuerte (+2.5% 6M)"
+    "interpretation": "Dólar algo fuerte (+2.6% 6M)"
   },
   "inr": {
     "value": 95.2,
@@ -58,7 +58,7 @@
     "halving_date": "2024-04-19",
     "months_since": 26.5,
     "halving_score": 50,
-    "description": "Halving hace 26M — ciclo medio"
+    "description": "Halving hace 27M — ciclo medio"
   },
   "composite_score": {
     "score": 53.8,
