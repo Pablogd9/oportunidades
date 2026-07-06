@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-06T10:08:32Z",
+  "updated": "2026-07-06T11:47:49Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -30,7 +30,7 @@
     "interpretation": "VIX 16.3 — mercado tranquilo"
   },
   "dxy": {
-    "value": 101.12,
+    "value": 101.08,
     "ret_6m": 2.7,
     "score": 40,
     "score_inverse": 60,
@@ -48,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 126.13,
-    "ret_6m": 11.5,
-    "ret_1m": 2.84,
+    "price": 126.0,
+    "ret_6m": 11.39,
+    "ret_1m": 2.73,
     "ema200": 114.07,
     "above_ema200": true
   },
