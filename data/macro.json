@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-07T09:33:12Z",
+  "updated": "2026-07-07T10:37:45Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -37,10 +37,10 @@
     "interpretation": "Dólar algo fuerte (+2.7% 6M)"
   },
   "inr": {
-    "value": 95.01,
-    "ret_3m": 2.8,
+    "value": 94.97,
+    "ret_3m": 2.7,
     "trend": "down",
-    "interpretation": "Rupia depreciándose (+2.8% 3M)"
+    "interpretation": "Rupia depreciándose (+2.7% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -48,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 126.18,
-    "ret_6m": 11.22,
-    "ret_1m": 4.41,
+    "price": 126.16,
+    "ret_6m": 11.2,
+    "ret_1m": 4.39,
     "ema200": 114.17,
     "above_ema200": true
   },
