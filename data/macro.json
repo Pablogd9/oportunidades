@@ -1,21 +1,21 @@
 {
-  "updated": "2026-07-09T16:11:47Z",
+  "updated": "2026-07-09T21:56:39Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
-    "dgs10": 4.55,
-    "dgs2": 4.19,
-    "yield_curve_spread": 0.36,
+    "dgs10": 4.56,
+    "dgs2": 4.21,
+    "yield_curve_spread": 0.35,
     "yield_curve_inverted": false,
     "score": 45,
     "interpretation": "Tipos elevados (3.63%) — presión moderada",
     "yield_curve_note": "Curva normal"
   },
   "credit_spread": {
-    "value": 2.67,
-    "trend": "down",
-    "score": 90,
-    "interpretation": "Spread HY comprimido (2.7%) — condiciones favorables — tendencia a mejorar"
+    "value": 2.7,
+    "trend": "neutral",
+    "score": 80,
+    "interpretation": "Spread HY comprimido (2.7%) — condiciones favorables"
   },
   "consumer_confidence": {
     "value": 44.8,
@@ -24,23 +24,23 @@
     "interpretation": "Confianza consumidor muy baja (45) — recesión probable"
   },
   "vix": {
-    "value": 16.1,
+    "value": 15.8,
     "trend": "neutral",
     "score": 70,
-    "interpretation": "VIX 16.1 — mercado tranquilo"
+    "interpretation": "VIX 15.8 — mercado tranquilo"
   },
   "dxy": {
-    "value": 100.86,
-    "ret_6m": 2.2,
+    "value": 100.94,
+    "ret_6m": 2.3,
     "score": 40,
     "score_inverse": 60,
-    "interpretation": "Dólar algo fuerte (+2.2% 6M)"
+    "interpretation": "Dólar algo fuerte (+2.3% 6M)"
   },
   "inr": {
     "value": 95.38,
-    "ret_3m": 0.5,
-    "trend": "stable",
-    "interpretation": "Rupia estable (+0.5% 3M)"
+    "ret_3m": 2.4,
+    "trend": "down",
+    "interpretation": "Rupia depreciándose (+2.4% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -61,7 +61,7 @@
     "description": "Halving hace 27M — ciclo medio"
   },
   "composite_score": {
-    "score": 56.2,
+    "score": 53.8,
     "interpretation": "Entorno macro neutro"
   }
 }
