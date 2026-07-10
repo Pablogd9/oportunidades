@@ -1,11 +1,11 @@
 {
-  "updated": "2026-07-10T15:52:53Z",
+  "updated": "2026-07-10T21:34:30Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
-    "dgs10": 4.56,
-    "dgs2": 4.21,
-    "yield_curve_spread": 0.35,
+    "dgs10": 4.54,
+    "dgs2": 4.16,
+    "yield_curve_spread": 0.38,
     "yield_curve_inverted": false,
     "score": 45,
     "interpretation": "Tipos elevados (3.63%) — presión moderada",
@@ -13,9 +13,9 @@
   },
   "credit_spread": {
     "value": 2.7,
-    "trend": "neutral",
-    "score": 80,
-    "interpretation": "Spread HY comprimido (2.7%) — condiciones favorables"
+    "trend": "up",
+    "score": 70,
+    "interpretation": "Spread HY comprimido (2.7%) — condiciones favorables — tendencia a empeorar"
   },
   "consumer_confidence": {
     "value": 44.8,
@@ -24,23 +24,22 @@
     "interpretation": "Confianza consumidor muy baja (45) — recesión probable"
   },
   "vix": {
-    "value": 15.5,
+    "value": 15.0,
     "trend": "neutral",
     "score": 70,
-    "interpretation": "VIX 15.5 — mercado tranquilo"
+    "interpretation": "VIX 15.0 — mercado tranquilo"
   },
   "dxy": {
-    "value": 100.81,
-    "ret_6m": 1.9,
-    "score": 60,
-    "score_inverse": 40,
-    "interpretation": "Dólar estable (1.9% 6M)"
+    "value": null,
+    "score": 50,
+    "score_inverse": 50,
+    "interpretation": "Sin datos"
   },
   "inr": {
-    "value": 95.32,
-    "ret_3m": 2.3,
+    "value": 95.37,
+    "ret_3m": 2.1,
     "trend": "down",
-    "interpretation": "Rupia depreciándose (+2.3% 3M)"
+    "interpretation": "Rupia depreciándose (+2.1% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -61,7 +60,7 @@
     "description": "Halving hace 27M — ciclo medio"
   },
   "composite_score": {
-    "score": 53.8,
+    "score": 51.2,
     "interpretation": "Entorno macro neutro"
   }
 }
