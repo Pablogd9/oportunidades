@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-10T21:34:30Z",
+  "updated": "2026-07-11T07:47:26Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -30,10 +30,11 @@
     "interpretation": "VIX 15.0 — mercado tranquilo"
   },
   "dxy": {
-    "value": null,
-    "score": 50,
-    "score_inverse": 50,
-    "interpretation": "Sin datos"
+    "value": 100.97,
+    "ret_6m": 2.1,
+    "score": 40,
+    "score_inverse": 60,
+    "interpretation": "Dólar algo fuerte (+2.1% 6M)"
   },
   "inr": {
     "value": 95.37,
