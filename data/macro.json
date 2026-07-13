@@ -1,11 +1,11 @@
 {
-  "updated": "2026-07-13T16:03:15Z",
+  "updated": "2026-07-13T21:28:56Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
-    "dgs10": 4.54,
-    "dgs2": 4.16,
-    "yield_curve_spread": 0.38,
+    "dgs10": 4.56,
+    "dgs2": 4.21,
+    "yield_curve_spread": 0.35,
     "yield_curve_inverted": false,
     "score": 45,
     "interpretation": "Tipos elevados (3.63%) — presión moderada",
@@ -24,23 +24,23 @@
     "interpretation": "Confianza consumidor muy baja (45) — recesión probable"
   },
   "vix": {
-    "value": 16.2,
-    "trend": "neutral",
+    "value": 17.2,
+    "trend": "up",
     "score": 70,
-    "interpretation": "VIX 16.2 — mercado tranquilo"
+    "interpretation": "VIX 17.2 — mercado tranquilo"
   },
   "dxy": {
-    "value": 101.14,
-    "ret_6m": 2.0,
+    "value": 101.28,
+    "ret_6m": 2.2,
     "score": 40,
     "score_inverse": 60,
-    "interpretation": "Dólar algo fuerte (+2.0% 6M)"
+    "interpretation": "Dólar algo fuerte (+2.2% 6M)"
   },
   "inr": {
-    "value": 95.61,
-    "ret_3m": 2.4,
+    "value": 95.62,
+    "ret_3m": 2.8,
     "trend": "down",
-    "interpretation": "Rupia depreciándose (+2.4% 3M)"
+    "interpretation": "Rupia depreciándose (+2.8% 3M)"
   },
   "uranium_spot": {
     "value": null,
