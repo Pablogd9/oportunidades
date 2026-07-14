@@ -1,11 +1,11 @@
 {
-  "updated": "2026-07-14T15:07:29Z",
+  "updated": "2026-07-14T21:30:17Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
-    "dgs10": 4.56,
-    "dgs2": 4.21,
-    "yield_curve_spread": 0.35,
+    "dgs10": 4.62,
+    "dgs2": 4.26,
+    "yield_curve_spread": 0.36,
     "yield_curve_inverted": false,
     "score": 45,
     "interpretation": "Tipos elevados (3.63%) — presión moderada",
@@ -30,17 +30,17 @@
     "interpretation": "VIX 16.5 — mercado tranquilo"
   },
   "dxy": {
-    "value": 100.75,
-    "ret_6m": 1.9,
-    "score": 60,
-    "score_inverse": 40,
-    "interpretation": "Dólar estable (1.9% 6M)"
+    "value": 100.93,
+    "ret_6m": 2.1,
+    "score": 40,
+    "score_inverse": 60,
+    "interpretation": "Dólar algo fuerte (+2.1% 6M)"
   },
   "inr": {
     "value": 96.19,
-    "ret_3m": 3.4,
+    "ret_3m": 3.9,
     "trend": "down",
-    "interpretation": "Rupia depreciándose (+3.4% 3M)"
+    "interpretation": "Rupia depreciándose (+3.9% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -48,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 125.87,
-    "ret_6m": 10.74,
-    "ret_1m": 1.39,
+    "price": 126.09,
+    "ret_6m": 10.93,
+    "ret_1m": 1.57,
     "ema200": 114.63,
     "above_ema200": true
   },
