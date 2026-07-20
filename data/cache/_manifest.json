@@ -1,163 +1,163 @@
 {
-  "updated": "2026-07-19T07:24:15Z",
+  "updated": "2026-07-20T07:54:32Z",
   "etfs": {
     "IGV": {
-      "last_updated": "2026-07-19T07:24:13Z",
+      "last_updated": "2026-07-20T07:54:29Z",
       "days": 6287,
       "status": "updated"
     },
     "IBB": {
-      "last_updated": "2026-07-19T07:24:13Z",
+      "last_updated": "2026-07-20T07:54:29Z",
       "days": 6394,
       "status": "updated"
     },
     "ITA": {
-      "last_updated": "2026-07-19T07:24:13Z",
+      "last_updated": "2026-07-20T07:54:29Z",
       "days": 5081,
       "status": "updated"
     },
     "PHO": {
-      "last_updated": "2026-07-19T07:24:14Z",
+      "last_updated": "2026-07-20T07:54:30Z",
       "days": 5184,
       "status": "updated"
     },
     "SMH": {
-      "last_updated": "2026-07-19T07:24:13Z",
+      "last_updated": "2026-07-20T07:54:29Z",
       "days": 6568,
       "status": "updated"
     },
     "VHT": {
-      "last_updated": "2026-07-19T07:24:14Z",
+      "last_updated": "2026-07-20T07:54:30Z",
       "days": 5651,
       "status": "updated"
     },
     "ICLN": {
-      "last_updated": "2026-07-19T07:24:14Z",
+      "last_updated": "2026-07-20T07:54:30Z",
       "days": 4543,
       "status": "updated"
     },
     "XBI": {
-      "last_updated": "2026-07-19T07:24:14Z",
+      "last_updated": "2026-07-20T07:54:30Z",
       "days": 5143,
       "status": "updated"
     },
     "COPX": {
-      "last_updated": "2026-07-19T07:24:15Z",
+      "last_updated": "2026-07-20T07:54:32Z",
       "days": 4086,
       "status": "updated"
     },
     "IHI": {
-      "last_updated": "2026-07-19T07:24:14Z",
+      "last_updated": "2026-07-20T07:54:30Z",
       "days": 5081,
       "status": "updated"
     },
     "LIT": {
-      "last_updated": "2026-07-19T07:24:15Z",
+      "last_updated": "2026-07-20T07:54:32Z",
       "days": 4020,
       "status": "updated"
     },
     "GRID": {
-      "last_updated": "2026-07-19T07:24:14Z",
+      "last_updated": "2026-07-20T07:54:30Z",
       "days": 4188,
       "status": "updated"
     },
     "ROBO": {
-      "last_updated": "2026-07-19T07:24:15Z",
+      "last_updated": "2026-07-20T07:54:32Z",
       "days": 3202,
       "status": "updated"
     },
     "INDA": {
-      "last_updated": "2026-07-19T07:24:15Z",
+      "last_updated": "2026-07-20T07:54:32Z",
       "days": 3633,
       "status": "updated"
     },
     "CIBR": {
-      "last_updated": "2026-07-19T07:24:15Z",
+      "last_updated": "2026-07-20T07:54:32Z",
       "days": 2774,
       "status": "updated"
     },
     "NLR": {
-      "last_updated": "2026-07-19T07:24:14Z",
+      "last_updated": "2026-07-20T07:54:31Z",
       "days": 4760,
       "status": "updated"
     },
     "HACK": {
-      "last_updated": "2026-07-19T07:24:15Z",
+      "last_updated": "2026-07-20T07:54:32Z",
       "days": 2935,
       "status": "updated"
     },
     "PAVE": {
-      "last_updated": "2026-07-19T07:24:15Z",
+      "last_updated": "2026-07-20T07:54:32Z",
       "days": 2353,
       "status": "updated"
     },
     "XAR": {
-      "last_updated": "2026-07-19T07:24:15Z",
+      "last_updated": "2026-07-20T07:54:32Z",
       "days": 3720,
       "status": "updated"
     },
     "WTAI": {
-      "last_updated": "2026-07-19T07:24:15Z",
+      "last_updated": "2026-07-20T07:54:32Z",
       "days": 882,
       "status": "updated"
     },
     "CGW": {
-      "last_updated": "2026-07-19T07:24:14Z",
+      "last_updated": "2026-07-20T07:54:31Z",
       "days": 4825,
       "status": "updated"
     },
     "SEMI.AS": {
-      "last_updated": "2026-07-19T07:24:15Z",
-      "days": 1268,
+      "last_updated": "2026-07-20T07:54:32Z",
+      "days": 1269,
       "status": "updated"
     },
     "NATO": {
-      "last_updated": "2026-07-19T07:24:15Z",
+      "last_updated": "2026-07-20T07:54:32Z",
       "days": 441,
       "status": "updated"
     },
     "GNOM": {
-      "last_updated": "2026-07-19T07:24:15Z",
+      "last_updated": "2026-07-20T07:54:32Z",
       "days": 1827,
       "status": "updated"
     },
     "EMXC": {
-      "last_updated": "2026-07-19T07:24:15Z",
+      "last_updated": "2026-07-20T07:54:32Z",
       "days": 2256,
       "status": "updated"
     },
     "BUG": {
-      "last_updated": "2026-07-19T07:24:15Z",
+      "last_updated": "2026-07-20T07:54:32Z",
       "days": 1683,
       "status": "updated"
     },
     "FLIN": {
-      "last_updated": "2026-07-19T07:24:15Z",
+      "last_updated": "2026-07-20T07:54:32Z",
       "days": 2120,
       "status": "updated"
     },
     "QCLN": {
-      "last_updated": "2026-07-19T07:24:14Z",
+      "last_updated": "2026-07-20T07:54:31Z",
       "days": 4883,
       "status": "updated"
     },
     "IWDA.AS": {
-      "last_updated": "2026-07-19T07:24:14Z",
-      "days": 4301,
+      "last_updated": "2026-07-20T07:54:31Z",
+      "days": 4302,
       "status": "updated"
     },
     "URNM": {
-      "last_updated": "2026-07-19T07:24:15Z",
+      "last_updated": "2026-07-20T07:54:32Z",
       "days": 1662,
       "status": "updated"
     },
     "SPY": {
-      "last_updated": "2026-07-19T07:24:14Z",
+      "last_updated": "2026-07-20T07:54:31Z",
       "days": 8423,
       "status": "updated"
     },
     "URA": {
-      "last_updated": "2026-07-19T07:24:14Z",
+      "last_updated": "2026-07-20T07:54:31Z",
       "days": 3946,
       "status": "updated"
     }
