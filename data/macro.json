@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-21T10:00:48Z",
+  "updated": "2026-07-21T15:22:06Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -12,10 +12,10 @@
     "yield_curve_note": "Curva normal"
   },
   "credit_spread": {
-    "value": 2.73,
-    "trend": "up",
-    "score": 70,
-    "interpretation": "Spread HY comprimido (2.7%) — condiciones favorables — tendencia a empeorar"
+    "value": 2.69,
+    "trend": "neutral",
+    "score": 80,
+    "interpretation": "Spread HY comprimido (2.7%) — condiciones favorables"
   },
   "consumer_confidence": {
     "value": 44.8,
@@ -24,23 +24,23 @@
     "interpretation": "Confianza consumidor muy baja (45) — recesión probable"
   },
   "vix": {
-    "value": 17.5,
+    "value": 17.4,
     "trend": "up",
     "score": 70,
-    "interpretation": "VIX 17.5 — mercado tranquilo"
+    "interpretation": "VIX 17.4 — mercado tranquilo"
   },
   "dxy": {
-    "value": 100.91,
-    "ret_6m": 2.3,
+    "value": 101.13,
+    "ret_6m": 2.5,
     "score": 40,
     "score_inverse": 60,
-    "interpretation": "Dólar algo fuerte (+2.3% 6M)"
+    "interpretation": "Dólar algo fuerte (+2.5% 6M)"
   },
   "inr": {
-    "value": 96.24,
-    "ret_3m": 2.3,
+    "value": 96.22,
+    "ret_3m": 2.2,
     "trend": "down",
-    "interpretation": "Rupia depreciándose (+2.3% 3M)"
+    "interpretation": "Rupia depreciándose (+2.2% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -48,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 125.3,
-    "ret_6m": 11.59,
-    "ret_1m": 1.06,
+    "price": 125.53,
+    "ret_6m": 11.79,
+    "ret_1m": 1.24,
     "ema200": 115.07,
     "above_ema200": true
   },
@@ -61,7 +61,7 @@
     "description": "Halving hace 27M — ciclo medio"
   },
   "composite_score": {
-    "score": 51.2,
+    "score": 53.8,
     "interpretation": "Entorno macro neutro"
   }
 }
