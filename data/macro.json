@@ -1,11 +1,11 @@
 {
-  "updated": "2026-07-22T15:19:46Z",
+  "updated": "2026-07-22T21:41:40Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
-    "dgs10": 4.6,
-    "dgs2": 4.21,
-    "yield_curve_spread": 0.39,
+    "dgs10": 4.63,
+    "dgs2": 4.26,
+    "yield_curve_spread": 0.37,
     "yield_curve_inverted": false,
     "score": 45,
     "interpretation": "Tipos elevados (3.63%) — presión moderada",
@@ -24,13 +24,13 @@
     "interpretation": "Confianza consumidor muy baja (45) — recesión probable"
   },
   "vix": {
-    "value": 17.0,
+    "value": 16.6,
     "trend": "neutral",
     "score": 70,
-    "interpretation": "VIX 17.0 — mercado tranquilo"
+    "interpretation": "VIX 16.6 — mercado tranquilo"
   },
   "dxy": {
-    "value": 101.1,
+    "value": 101.13,
     "ret_6m": 2.4,
     "score": 40,
     "score_inverse": 60,
@@ -48,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 125.93,
-    "ret_6m": 11.44,
-    "ret_1m": 0.95,
+    "price": 126.03,
+    "ret_6m": 11.53,
+    "ret_1m": 1.03,
     "ema200": 115.16,
     "above_ema200": true
   },
