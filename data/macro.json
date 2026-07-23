@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-22T21:41:40Z",
+  "updated": "2026-07-23T08:22:20Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -24,20 +24,20 @@
     "interpretation": "Confianza consumidor muy baja (45) — recesión probable"
   },
   "vix": {
-    "value": 16.6,
-    "trend": "neutral",
+    "value": 17.7,
+    "trend": "down",
     "score": 70,
-    "interpretation": "VIX 16.6 — mercado tranquilo"
+    "interpretation": "VIX 17.7 — mercado tranquilo"
   },
   "dxy": {
-    "value": 101.13,
-    "ret_6m": 2.4,
+    "value": 101.07,
+    "ret_6m": 2.8,
     "score": 40,
     "score_inverse": 60,
-    "interpretation": "Dólar algo fuerte (+2.4% 6M)"
+    "interpretation": "Dólar algo fuerte (+2.8% 6M)"
   },
   "inr": {
-    "value": 96.56,
+    "value": 96.54,
     "ret_3m": 2.4,
     "trend": "down",
     "interpretation": "Rupia depreciándose (+2.4% 3M)"
@@ -48,10 +48,10 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 126.03,
-    "ret_6m": 11.53,
-    "ret_1m": 1.03,
-    "ema200": 115.16,
+    "price": 125.19,
+    "ret_6m": 11.0,
+    "ret_1m": 0.89,
+    "ema200": 115.24,
     "above_ema200": true
   },
   "bitcoin_halving": {
