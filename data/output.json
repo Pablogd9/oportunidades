@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-24T21:36:54Z",
+  "updated": "2026-07-25T08:00:13Z",
   "total_analyzed": 23,
   "model_version": "11.0",
   "factor_weights": {
@@ -225,13 +225,12 @@
       "sector": "Bitcoin y Cripto",
       "signal": "yellow",
       "signal_text": "Atención — EMA200 semanal bajo. Vigilar.",
-      "dist_ema200": -2.9,
+      "dist_ema200": -3.2,
       "ema_type": "weekly",
-      "r3m": -13.27,
-      "r12m": -30.54,
-      "drawdown": -32.24,
+      "r3m": -14.85,
+      "r12m": -31.56,
+      "drawdown": -32.41,
       "sparkline": [
-        65162.9688,
         63994.6562,
         63108.707,
         62913.1992,
@@ -290,10 +289,10 @@
         58325.3906,
         57924.7266,
         57177.0586,
-        56402.3281
+        56344.6133,
+        56260.0
       ],
       "spark_dates": [
-        "2026-05-26",
         "2026-05-27",
         "2026-05-28",
         "2026-05-29",
@@ -352,7 +351,8 @@
         "2026-07-21",
         "2026-07-22",
         "2026-07-23",
-        "2026-07-24"
+        "2026-07-24",
+        "2026-07-25"
       ]
     }
   ],
@@ -1117,7 +1117,7 @@
       "macro_profile": "growth_rates_sensitive",
       "aum_bn": 0.5,
       "universe": "primary",
-      "last": 53.9873,
+      "last": 53.987,
       "score_tech": 73.2,
       "score_macro": 45,
       "score_final": 56.2,
@@ -1225,7 +1225,7 @@
         54.855,
         54.705,
         54.9,
-        53.9873
+        53.987
       ],
       "spark_dates": [
         "2026-04-29",
@@ -3964,7 +3964,7 @@
       "macro_profile": "growth_rates_sensitive",
       "aum_bn": 0.5,
       "universe": "primary",
-      "last": 53.9873,
+      "last": 53.987,
       "score_tech": 73.2,
       "score_macro": 45,
       "score_final": 56.2,
@@ -4072,7 +4072,7 @@
         54.855,
         54.705,
         54.9,
-        53.9873
+        53.987
       ],
       "spark_dates": [
         "2026-04-29",
@@ -7192,7 +7192,7 @@
     "dolar": "Dólar algo fuerte (+4.0% 6M)",
     "halving": "Halving hace 27M — ciclo medio",
     "fred": true,
-    "updated": "2026-07-24T21:36:28Z",
+    "updated": "2026-07-25T07:59:39Z",
     "regime": {
       "regime": "bull",
       "w_tech": {
