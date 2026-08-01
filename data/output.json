@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-31T21:37:56Z",
+  "updated": "2026-08-01T08:12:43Z",
   "total_analyzed": 23,
   "model_version": "11.0",
   "factor_weights": {
@@ -38,7 +38,7 @@
     "yield_curve_inverted": false
   },
   "recommendation": {
-    "mes": "July 2026",
+    "mes": "August 2026",
     "calidad": "🟢 Señal fuerte",
     "score_top1": 72.1,
     "accion_principal": "Aporta este mes en: Global X Cybersecurity ETF (BUG)",
@@ -220,13 +220,12 @@
       "sector": "Bitcoin y Cripto",
       "signal": "yellow",
       "signal_text": "Atención — EMA200 semanal bajo. Vigilar.",
-      "dist_ema200": -5.8,
+      "dist_ema200": -5.6,
       "ema_type": "weekly",
-      "r3m": -13.21,
-      "r12m": -26.11,
-      "drawdown": -34.4,
+      "r3m": -13.49,
+      "r12m": -25.56,
+      "drawdown": -34.28,
       "sparkline": [
-        57391.8281,
         55141.7188,
         54942.4062,
         52870.5156,
@@ -285,10 +284,10 @@
         56094.5781,
         55732.2695,
         56169.2695,
-        54602.3984
+        54447.8359,
+        54703.6016
       ],
       "spark_dates": [
-        "2026-06-02",
         "2026-06-03",
         "2026-06-04",
         "2026-06-05",
@@ -347,7 +346,8 @@
         "2026-07-28",
         "2026-07-29",
         "2026-07-30",
-        "2026-07-31"
+        "2026-07-31",
+        "2026-08-01"
       ]
     }
   ],
@@ -7153,7 +7153,7 @@
     "dolar": "Dólar algo fuerte (+2.9% 6M)",
     "halving": "Halving hace 27M — ciclo medio",
     "fred": true,
-    "updated": "2026-07-31T21:37:16Z",
+    "updated": "2026-08-01T08:12:15Z",
     "regime": {
       "regime": "neutral",
       "w_tech": {
