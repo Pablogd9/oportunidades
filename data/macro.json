@@ -1,20 +1,21 @@
 {
-  "updated": "2026-08-03T16:00:37Z",
+  "updated": "2026-08-03T21:39:38Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
-    "dgs10": 4.68,
-    "dgs2": 4.23,
-    "yield_curve_spread": 0.45,
+    "dgs10": 4.75,
+    "dgs2": 4.28,
+    "yield_curve_spread": 0.47,
     "yield_curve_inverted": false,
     "score": 45,
     "interpretation": "Tipos elevados (3.63%) — presión moderada",
     "yield_curve_note": "Curva normal"
   },
   "credit_spread": {
-    "value": null,
-    "score": 50,
-    "interpretation": "Sin datos"
+    "value": 2.84,
+    "trend": "neutral",
+    "score": 80,
+    "interpretation": "Spread HY comprimido (2.8%) — condiciones favorables"
   },
   "consumer_confidence": {
     "value": 49.5,
@@ -23,10 +24,10 @@
     "interpretation": "Confianza consumidor muy baja (50) — recesión probable"
   },
   "vix": {
-    "value": 15.6,
+    "value": 15.9,
     "trend": "down",
     "score": 70,
-    "interpretation": "VIX 15.6 — mercado tranquilo"
+    "interpretation": "VIX 15.9 — mercado tranquilo"
   },
   "dxy": {
     "value": 99.96,
@@ -37,9 +38,9 @@
   },
   "inr": {
     "value": 95.33,
-    "ret_3m": 0.8,
+    "ret_3m": 1.1,
     "trend": "stable",
-    "interpretation": "Rupia estable (+0.8% 3M)"
+    "interpretation": "Rupia estable (+1.1% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -60,7 +61,7 @@
     "description": "Halving hace 27M — ciclo medio"
   },
   "composite_score": {
-    "score": 46.2,
-    "interpretation": "Entorno macro deteriorado"
+    "score": 53.8,
+    "interpretation": "Entorno macro neutro"
   }
 }
