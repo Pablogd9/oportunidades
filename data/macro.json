@@ -1,21 +1,21 @@
 {
-  "updated": "2026-08-05T15:37:03Z",
+  "updated": "2026-08-05T21:46:04Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
-    "dgs10": 4.7,
-    "dgs2": 4.25,
-    "yield_curve_spread": 0.45,
+    "dgs10": 4.63,
+    "dgs2": 4.2,
+    "yield_curve_spread": 0.43,
     "yield_curve_inverted": false,
     "score": 45,
     "interpretation": "Tipos elevados (3.63%) — presión moderada",
     "yield_curve_note": "Curva normal"
   },
   "credit_spread": {
-    "value": 2.78,
-    "trend": "neutral",
-    "score": 80,
-    "interpretation": "Spread HY comprimido (2.8%) — condiciones favorables"
+    "value": 2.73,
+    "trend": "down",
+    "score": 90,
+    "interpretation": "Spread HY comprimido (2.7%) — condiciones favorables — tendencia a mejorar"
   },
   "consumer_confidence": {
     "value": 49.5,
@@ -24,13 +24,13 @@
     "interpretation": "Confianza consumidor muy baja (50) — recesión probable"
   },
   "vix": {
-    "value": 16.3,
-    "trend": "neutral",
+    "value": 15.8,
+    "trend": "down",
     "score": 70,
-    "interpretation": "VIX 16.3 — mercado tranquilo"
+    "interpretation": "VIX 15.8 — mercado tranquilo"
   },
   "dxy": {
-    "value": 99.71,
+    "value": 99.69,
     "ret_6m": 2.1,
     "score": 40,
     "score_inverse": 60,
@@ -38,9 +38,9 @@
   },
   "inr": {
     "value": 95.11,
-    "ret_3m": 0.7,
+    "ret_3m": -0.3,
     "trend": "stable",
-    "interpretation": "Rupia estable (+0.7% 3M)"
+    "interpretation": "Rupia estable (-0.3% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -48,10 +48,10 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 128.32,
-    "ret_6m": 13.93,
-    "ret_1m": 2.33,
-    "ema200": 115.89,
+    "price": 128.26,
+    "ret_6m": 14.97,
+    "ret_1m": 3.04,
+    "ema200": 115.99,
     "above_ema200": true
   },
   "bitcoin_halving": {
@@ -61,7 +61,7 @@
     "description": "Halving hace 28M — ciclo medio"
   },
   "composite_score": {
-    "score": 53.8,
+    "score": 56.2,
     "interpretation": "Entorno macro neutro"
   }
 }
