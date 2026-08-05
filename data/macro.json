@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-05T08:27:50Z",
+  "updated": "2026-08-05T10:06:36Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -24,23 +24,23 @@
     "interpretation": "Confianza consumidor muy baja (50) — recesión probable"
   },
   "vix": {
-    "value": 16.0,
-    "trend": "down",
+    "value": 16.3,
+    "trend": "neutral",
     "score": 70,
-    "interpretation": "VIX 16.0 — mercado tranquilo"
+    "interpretation": "VIX 16.3 — mercado tranquilo"
   },
   "dxy": {
     "value": 99.82,
-    "ret_6m": 2.3,
+    "ret_6m": 2.2,
     "score": 40,
     "score_inverse": 60,
-    "interpretation": "Dólar algo fuerte (+2.3% 6M)"
+    "interpretation": "Dólar algo fuerte (+2.2% 6M)"
   },
   "inr": {
-    "value": 95.17,
-    "ret_3m": 0.8,
+    "value": 95.12,
+    "ret_3m": 0.7,
     "trend": "stable",
-    "interpretation": "Rupia estable (+0.8% 3M)"
+    "interpretation": "Rupia estable (+0.7% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -48,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 128.49,
-    "ret_6m": 14.08,
-    "ret_1m": 2.46,
+    "price": 128.46,
+    "ret_6m": 14.05,
+    "ret_1m": 2.44,
     "ema200": 115.9,
     "above_ema200": true
   },
