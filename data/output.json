@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-07T21:10:20Z",
+  "updated": "2026-08-08T06:42:27Z",
   "total_analyzed": 23,
   "model_version": "11.0",
   "factor_weights": {
@@ -290,7 +290,7 @@
         55545.0938,
         55894.1484,
         55763.4492,
-        56200.0391
+        56199.8984
       ],
       "spark_dates": [
         "2026-06-09",
@@ -352,7 +352,7 @@
         "2026-08-04",
         "2026-08-05",
         "2026-08-06",
-        "2026-08-07"
+        "2026-08-08"
       ]
     }
   ],
@@ -742,7 +742,7 @@
       "macro_profile": "growth_rates_sensitive",
       "aum_bn": 0.5,
       "universe": "primary",
-      "last": 58.1737,
+      "last": 58.174,
       "score_tech": 83.2,
       "score_macro": 45,
       "score_final": 65.8,
@@ -852,7 +852,7 @@
         55.813,
         56.323,
         55.705,
-        58.1737
+        58.174
       ],
       "spark_dates": [
         "2026-05-13",
@@ -3222,7 +3222,7 @@
       "macro_profile": "growth_rates_sensitive",
       "aum_bn": 0.5,
       "universe": "primary",
-      "last": 58.1737,
+      "last": 58.174,
       "score_tech": 83.2,
       "score_macro": 45,
       "score_final": 65.8,
@@ -3332,7 +3332,7 @@
         55.813,
         56.323,
         55.705,
-        58.1737
+        58.174
       ],
       "spark_dates": [
         "2026-05-13",
@@ -5124,28 +5124,28 @@
       "macro_profile": "em_dollar_sensitive",
       "aum_bn": 8.9,
       "universe": "primary",
-      "last": 50.365,
+      "last": 50.37,
       "score_tech": 37.2,
       "score_macro": 54.0,
       "score_final": 39.7,
       "pct_rel_strength": 15.9,
       "pct_ema200": 55.9,
-      "pct_mom6m": 24.2,
+      "pct_mom6m": 24.4,
       "pct_entry": 78.4,
       "pct_consistency": 45.3,
-      "rel_strength": -25.22,
-      "dist_ema200": 0.1,
-      "ema200_abs": 50.3154,
-      "dist_from_max": -8.91,
+      "rel_strength": -25.2,
+      "dist_ema200": 0.11,
+      "ema200_abs": 50.3155,
+      "dist_from_max": -8.9,
       "dist_from_max_5y": -14.92,
       "consistency_pct": 50.0,
       "mom_penalty": true,
-      "r1m": 2.74,
-      "r3m": 1.09,
-      "r6m": -4.88,
-      "r12m": -3.63,
+      "r1m": 2.75,
+      "r3m": 1.1,
+      "r6m": -4.87,
+      "r12m": -3.62,
       "vol": 14.0,
-      "drawdown": -8.91,
+      "drawdown": -8.9,
       "ann_ret": -3.6,
       "pe": null,
       "pe_forward": null,
@@ -5230,7 +5230,7 @@
         50.53,
         50.31,
         50.12,
-        50.365
+        50.37
       ],
       "spark_dates": [
         "2026-05-13",
@@ -7224,7 +7224,7 @@
     "dolar": "Dólar algo fuerte (+2.0% 6M)",
     "halving": "Halving hace 28M — ciclo medio",
     "fred": true,
-    "updated": "2026-08-07T21:09:54Z",
+    "updated": "2026-08-08T06:41:48Z",
     "regime": {
       "regime": "bull",
       "w_tech": {

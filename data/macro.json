@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-07T21:09:54Z",
+  "updated": "2026-08-08T06:41:48Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -30,7 +30,7 @@
     "interpretation": "VIX 14.9 — complacencia (cautela)"
   },
   "dxy": {
-    "value": 99.61,
+    "value": 99.6,
     "ret_6m": 2.0,
     "score": 40,
     "score_inverse": 60,
