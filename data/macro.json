@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-11T21:21:03Z",
+  "updated": "2026-08-12T07:17:10Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -30,14 +30,14 @@
     "interpretation": "VIX 15.3 — mercado tranquilo"
   },
   "dxy": {
-    "value": 99.82,
+    "value": 99.86,
     "ret_6m": 3.1,
     "score": 40,
     "score_inverse": 60,
     "interpretation": "Dólar algo fuerte (+3.1% 6M)"
   },
   "inr": {
-    "value": 95.43,
+    "value": 95.4,
     "ret_3m": -0.6,
     "trend": "stable",
     "interpretation": "Rupia estable (-0.6% 3M)"
@@ -48,15 +48,15 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 128.7,
-    "ret_6m": 13.46,
-    "ret_1m": 2.07,
-    "ema200": 116.36,
+    "price": 128.75,
+    "ret_6m": 13.51,
+    "ret_1m": 1.92,
+    "ema200": 116.27,
     "above_ema200": true
   },
   "bitcoin_halving": {
     "halving_date": "2024-04-19",
-    "months_since": 27.7,
+    "months_since": 27.8,
     "halving_score": 50,
     "description": "Halving hace 28M — ciclo medio"
   },
