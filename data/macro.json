@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-12T21:13:28Z",
+  "updated": "2026-08-13T07:18:36Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -30,17 +30,17 @@
     "interpretation": "VIX 14.6 — complacencia (cautela)"
   },
   "dxy": {
-    "value": 99.97,
+    "value": 100.02,
     "ret_6m": 3.2,
     "score": 40,
     "score_inverse": 60,
     "interpretation": "Dólar algo fuerte (+3.2% 6M)"
   },
   "inr": {
-    "value": 95.32,
-    "ret_3m": -1.0,
+    "value": 95.42,
+    "ret_3m": -0.9,
     "trend": "stable",
-    "interpretation": "Rupia estable (-1.0% 3M)"
+    "interpretation": "Rupia estable (-0.9% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -48,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 128.8,
-    "ret_6m": 13.55,
-    "ret_1m": 2.15,
+    "price": 128.7,
+    "ret_6m": 13.46,
+    "ret_1m": 2.07,
     "ema200": 116.36,
     "above_ema200": true
   },
