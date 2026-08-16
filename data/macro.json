@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-15T20:47:35Z",
+  "updated": "2026-08-16T06:30:44Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -31,10 +31,10 @@
   },
   "dxy": {
     "value": 99.67,
-    "ret_6m": 2.9,
+    "ret_6m": 3.0,
     "score": 40,
     "score_inverse": 60,
-    "interpretation": "Dólar algo fuerte (+2.9% 6M)"
+    "interpretation": "Dólar algo fuerte (+3.0% 6M)"
   },
   "inr": {
     "value": 95.43,
@@ -48,10 +48,10 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 129.39,
-    "ret_6m": 15.24,
-    "ret_1m": 2.48,
-    "ema200": 116.54,
+    "price": 128.84,
+    "ret_6m": 15.05,
+    "ret_1m": 3.2,
+    "ema200": 116.62,
     "above_ema200": true
   },
   "bitcoin_halving": {
