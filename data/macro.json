@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-16T13:52:07Z",
+  "updated": "2026-08-16T20:46:47Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -37,10 +37,10 @@
     "interpretation": "Dólar algo fuerte (+2.9% 6M)"
   },
   "inr": {
-    "value": 95.43,
-    "ret_3m": -1.1,
+    "value": 95.42,
+    "ret_3m": -1.2,
     "trend": "stable",
-    "interpretation": "Rupia estable (-1.1% 3M)"
+    "interpretation": "Rupia estable (-1.2% 3M)"
   },
   "uranium_spot": {
     "value": null,

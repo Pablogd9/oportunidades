@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-16T13:52:30Z",
+  "updated": "2026-08-16T20:47:12Z",
   "total_analyzed": 23,
   "model_version": "11.0",
   "factor_weights": {
@@ -227,9 +227,9 @@
       "signal_text": "Atención — EMA200 semanal bajo. Vigilar.",
       "dist_ema200": -5.4,
       "ema_type": "weekly",
-      "r3m": -3.78,
-      "r12m": -29.83,
-      "drawdown": -34.53,
+      "r3m": -3.8,
+      "r12m": -29.85,
+      "drawdown": -34.55,
       "sparkline": [
         54891.1367,
         55361.2227,
@@ -290,7 +290,7 @@
         54970.3789,
         54442.4023,
         54476.8984,
-        54492.6406
+        54479.8906
       ],
       "spark_dates": [
         "2026-06-18",
@@ -7222,7 +7222,7 @@
     "dolar": "Dólar algo fuerte (+2.9% 6M)",
     "halving": "Halving hace 28M — ciclo medio",
     "fred": true,
-    "updated": "2026-08-16T13:52:07Z",
+    "updated": "2026-08-16T20:46:47Z",
     "regime": {
       "regime": "bull",
       "w_tech": {
