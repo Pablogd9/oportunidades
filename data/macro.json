@@ -1,45 +1,46 @@
 {
-  "updated": "2026-08-19T14:05:24Z",
+  "updated": "2026-08-19T20:53:53Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
-    "dgs10": 4.72,
+    "dgs10": 4.71,
     "dgs2": 4.19,
-    "yield_curve_spread": 0.53,
+    "yield_curve_spread": 0.52,
     "yield_curve_inverted": false,
     "score": 45,
     "interpretation": "Tipos elevados (3.63%) — presión moderada",
     "yield_curve_note": "Curva normal"
   },
   "credit_spread": {
-    "value": 2.7,
-    "trend": "neutral",
-    "score": 80,
-    "interpretation": "Spread HY comprimido (2.7%) — condiciones favorables"
-  },
-  "consumer_confidence": {
-    "value": null,
-    "score": 50,
-    "interpretation": "Sin datos"
-  },
-  "vix": {
-    "value": 15.5,
+    "value": 2.75,
     "trend": "up",
     "score": 70,
-    "interpretation": "VIX 15.5 — mercado tranquilo"
+    "interpretation": "Spread HY comprimido (2.8%) — condiciones favorables — tendencia a empeorar"
+  },
+  "consumer_confidence": {
+    "value": 49.5,
+    "trend": "neutral",
+    "score": 20,
+    "interpretation": "Confianza consumidor muy baja (50) — recesión probable"
+  },
+  "vix": {
+    "value": 14.9,
+    "trend": "neutral",
+    "score": 85,
+    "interpretation": "VIX 14.9 — complacencia (cautela)"
   },
   "dxy": {
-    "value": 98.95,
-    "ret_6m": 1.0,
+    "value": 98.79,
+    "ret_6m": 2.0,
     "score": 60,
     "score_inverse": 40,
-    "interpretation": "Dólar estable (1.0% 6M)"
+    "interpretation": "Dólar estable (2.0% 6M)"
   },
   "inr": {
     "value": 95.74,
-    "ret_3m": 0.0,
+    "ret_3m": 0.5,
     "trend": "stable",
-    "interpretation": "Rupia estable (+0.0% 3M)"
+    "interpretation": "Rupia estable (+0.5% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -47,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 126.92,
-    "ret_6m": 11.79,
-    "ret_1m": 0.93,
+    "price": 126.99,
+    "ret_6m": 11.85,
+    "ret_1m": 0.99,
     "ema200": 116.78,
     "above_ema200": true
   },
@@ -60,7 +61,7 @@
     "description": "Halving hace 28M — ciclo medio"
   },
   "composite_score": {
-    "score": 61.2,
+    "score": 55.0,
     "interpretation": "Entorno macro neutro"
   }
 }
