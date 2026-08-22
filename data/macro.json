@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-21T20:49:34Z",
+  "updated": "2026-08-22T06:30:46Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -30,14 +30,14 @@
     "interpretation": "VIX 15.1 — mercado tranquilo"
   },
   "dxy": {
-    "value": 98.85,
-    "ret_6m": 1.2,
+    "value": 98.8,
+    "ret_6m": 1.1,
     "score": 60,
     "score_inverse": 40,
-    "interpretation": "Dólar estable (1.2% 6M)"
+    "interpretation": "Dólar estable (1.1% 6M)"
   },
   "inr": {
-    "value": 95.68,
+    "value": 95.71,
     "ret_3m": -0.4,
     "trend": "stable",
     "interpretation": "Rupia estable (-0.4% 3M)"
@@ -48,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 126.51,
-    "ret_6m": 11.3,
-    "ret_1m": 1.7,
+    "price": 126.18,
+    "ret_6m": 11.01,
+    "ret_1m": 1.43,
     "ema200": 116.93,
     "above_ema200": true
   },
