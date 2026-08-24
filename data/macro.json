@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-24T08:10:31Z",
+  "updated": "2026-08-24T14:09:39Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -37,7 +37,7 @@
     "interpretation": "Dólar estable (1.1% 6M)"
   },
   "inr": {
-    "value": 95.72,
+    "value": 95.74,
     "ret_3m": -0.3,
     "trend": "stable",
     "interpretation": "Rupia estable (-0.3% 3M)"
@@ -48,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 126.17,
-    "ret_6m": 11.29,
-    "ret_1m": 1.14,
+    "price": 126.16,
+    "ret_6m": 11.28,
+    "ret_1m": 1.13,
     "ema200": 117.08,
     "above_ema200": true
   },
