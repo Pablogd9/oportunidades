@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-23T20:48:57Z",
+  "updated": "2026-08-24T06:46:35Z",
   "total_analyzed": 23,
   "model_version": "11.0",
   "factor_weights": {
@@ -290,7 +290,7 @@
         62487.1953,
         67070.5859,
         65998.8203,
-        66229.5469
+        66231.8281
       ],
       "spark_dates": [
         "2026-06-25",
@@ -352,7 +352,7 @@
         "2026-08-20",
         "2026-08-21",
         "2026-08-22",
-        "2026-08-23"
+        "2026-08-24"
       ]
     }
   ],
@@ -7225,10 +7225,10 @@
   "macro_context": {
     "tipos": "Tipos elevados (3.63%) — presión moderada",
     "vix": "VIX 15.1 — mercado tranquilo",
-    "dolar": "Dólar estable (1.1% 6M)",
+    "dolar": "Dólar estable (1.0% 6M)",
     "halving": "Halving hace 28M — ciclo medio",
     "fred": true,
-    "updated": "2026-08-23T20:48:32Z",
+    "updated": "2026-08-24T06:45:57Z",
     "regime": {
       "regime": "bull",
       "w_tech": {
