@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-27T23:01:39Z",
+  "updated": "2026-08-28T04:25:20Z",
   "total_analyzed": 23,
   "model_version": "11.0",
   "factor_weights": {
@@ -225,11 +225,11 @@
       "sector": "Bitcoin y Cripto",
       "signal": "green",
       "signal_text": "Tesis intacta — EMA200 alcista. Sigue aportando.",
-      "dist_ema200": 19.2,
+      "dist_ema200": 18.7,
       "ema_type": "weekly",
-      "r3m": 31.08,
-      "r12m": -5.47,
-      "drawdown": -17.22,
+      "r3m": 30.5,
+      "r12m": -5.89,
+      "drawdown": -17.59,
       "sparkline": [
         52657.1641,
         51308.3945,
@@ -290,7 +290,7 @@
         67676.4297,
         67296.7969,
         67802.3672,
-        68903.1719
+        68596.2188
       ],
       "spark_dates": [
         "2026-06-29",
@@ -352,7 +352,7 @@
         "2026-08-24",
         "2026-08-25",
         "2026-08-26",
-        "2026-08-27"
+        "2026-08-28"
       ]
     }
   ],
@@ -1364,8 +1364,8 @@
       "peg": null,
       "dist_from_max_5y_overval": 0.0,
       "breadth_score": 8,
-      "breadth_desc": "Breadth excelente — 82% sobre EMA50",
-      "breadth_pct": 82.0,
+      "breadth_desc": "Breadth excelente — 91% sobre EMA50",
+      "breadth_pct": 91.0,
       "failure_patterns": [],
       "failure_penalty": 1.0,
       "regime_penalty": 1.0,
@@ -1498,7 +1498,7 @@
       ],
       "reasons_up": [
         "Muy por encima EMA200 (+24.5%) — pct 71",
-        "Breadth: Breadth excelente — 82% sobre EMA50"
+        "Breadth: Breadth excelente — 91% sobre EMA50"
       ],
       "reasons_down": [
         "Sin datos",
@@ -2312,7 +2312,7 @@
       "peg": null,
       "dist_from_max_5y_overval": -3.26,
       "breadth_score": -8,
-      "breadth_desc": "Breadth muy negativo — concentrado (-5.3%)",
+      "breadth_desc": "Breadth muy negativo — concentrado (-5.4%)",
       "breadth_pct": null,
       "failure_patterns": [
         "Patrón A: sector defensivo en mercado alcista — históricamente queda rezagado"
@@ -4610,8 +4610,8 @@
       "peg": null,
       "dist_from_max_5y_overval": 0.0,
       "breadth_score": 8,
-      "breadth_desc": "Breadth excelente — 82% sobre EMA50",
-      "breadth_pct": 82.0,
+      "breadth_desc": "Breadth excelente — 91% sobre EMA50",
+      "breadth_pct": 91.0,
       "failure_patterns": [],
       "failure_penalty": 1.0,
       "regime_penalty": 1.0,
@@ -4744,7 +4744,7 @@
       ],
       "reasons_up": [
         "Muy por encima EMA200 (+24.5%) — pct 71",
-        "Breadth: Breadth excelente — 82% sobre EMA50"
+        "Breadth: Breadth excelente — 91% sobre EMA50"
       ],
       "reasons_down": [
         "Sin datos",
@@ -6311,7 +6311,7 @@
       "peg": null,
       "dist_from_max_5y_overval": -3.26,
       "breadth_score": -8,
-      "breadth_desc": "Breadth muy negativo — concentrado (-5.3%)",
+      "breadth_desc": "Breadth muy negativo — concentrado (-5.4%)",
       "breadth_pct": null,
       "failure_patterns": [
         "Patrón A: sector defensivo en mercado alcista — históricamente queda rezagado"
@@ -7039,7 +7039,7 @@
       "macro_profile": "water_scarcity",
       "aum_bn": 0.8,
       "universe": "primary",
-      "last": 65.3625,
+      "last": 65.36,
       "score_tech": 23.5,
       "score_macro": 57.5,
       "score_final": 14.9,
@@ -7048,17 +7048,17 @@
       "pct_mom6m": 9.5,
       "pct_entry": 64.2,
       "pct_consistency": 43.0,
-      "rel_strength": -23.07,
-      "dist_ema200": 1.64,
+      "rel_strength": -23.08,
+      "dist_ema200": 1.63,
       "ema200_abs": 64.3094,
       "dist_from_max": -5.08,
       "dist_from_max_5y": -5.08,
       "consistency_pct": 50.0,
       "mom_penalty": true,
-      "r1m": 1.09,
+      "r1m": 1.08,
       "r3m": 4.46,
       "r6m": -5.08,
-      "r12m": 1.48,
+      "r12m": 1.47,
       "vol": 13.6,
       "drawdown": -5.08,
       "ann_ret": 1.5,
@@ -7079,7 +7079,7 @@
       "peg": null,
       "dist_from_max_5y_overval": -5.08,
       "breadth_score": -8,
-      "breadth_desc": "Breadth muy negativo — concentrado (-5.3%)",
+      "breadth_desc": "Breadth muy negativo — concentrado (-5.4%)",
       "breadth_pct": null,
       "failure_patterns": [
         "Patrón A: sector defensivo en mercado alcista — históricamente queda rezagado"
@@ -7149,7 +7149,7 @@
         65.44,
         65.61,
         65.74,
-        65.3625
+        65.36
       ],
       "spark_dates": [
         "2026-06-03",
@@ -7227,10 +7227,10 @@
   "macro_context": {
     "tipos": "Tipos elevados (3.63%) — presión moderada",
     "vix": "VIX 14.5 — complacencia (cautela)",
-    "dolar": "Dólar estable (1.6% 6M)",
+    "dolar": "Dólar estable (0.8% 6M)",
     "halving": "Halving hace 28M — ciclo medio",
     "fred": true,
-    "updated": "2026-08-27T23:00:51Z",
+    "updated": "2026-08-28T04:24:54Z",
     "regime": {
       "regime": "bull",
       "w_tech": {
