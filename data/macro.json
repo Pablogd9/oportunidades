@@ -1,10 +1,10 @@
 {
-  "updated": "2026-08-28T19:31:12Z",
+  "updated": "2026-08-28T23:07:55Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
-    "dgs10": 4.66,
-    "dgs2": 4.19,
+    "dgs10": 4.67,
+    "dgs2": 4.2,
     "yield_curve_spread": 0.47,
     "yield_curve_inverted": false,
     "score": 45,
@@ -37,10 +37,10 @@
     "interpretation": "Dólar estable (1.3% 6M)"
   },
   "inr": {
-    "value": 95.37,
-    "ret_3m": 0.1,
+    "value": 95.36,
+    "ret_3m": -0.8,
     "trend": "stable",
-    "interpretation": "Rupia estable (+0.1% 3M)"
+    "interpretation": "Rupia estable (-0.8% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -48,10 +48,10 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 128.22,
-    "ret_6m": 12.89,
-    "ret_1m": 3.66,
-    "ema200": 117.34,
+    "price": 126.67,
+    "ret_6m": 11.08,
+    "ret_1m": 1.88,
+    "ema200": 117.25,
     "above_ema200": true
   },
   "bitcoin_halving": {
