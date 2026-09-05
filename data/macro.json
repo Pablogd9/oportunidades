@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-04T22:27:10Z",
+  "updated": "2026-09-05T09:51:50Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -37,7 +37,7 @@
     "interpretation": "Dólar estable (-0.0% 6M)"
   },
   "inr": {
-    "value": 94.48,
+    "value": 94.49,
     "ret_3m": -1.2,
     "trend": "stable",
     "interpretation": "Rupia estable (-1.2% 3M)"
@@ -48,10 +48,10 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 126.79,
-    "ret_6m": 11.96,
-    "ret_1m": -1.15,
-    "ema200": 117.66,
+    "price": 127.88,
+    "ret_6m": 14.75,
+    "ret_1m": -0.19,
+    "ema200": 117.76,
     "above_ema200": true
   },
   "bitcoin_halving": {

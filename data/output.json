@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-04T22:27:33Z",
+  "updated": "2026-09-05T09:52:14Z",
   "total_analyzed": 23,
   "model_version": "11.0",
   "factor_weights": {
@@ -36,9 +36,9 @@
       "water_scarcity": 0.92
     },
     "description": "Mercado alcista fuerte — priorizando momentum y liderazgo",
-    "regime_note": "IWDA +12.0% 6M, VIX bajo",
+    "regime_note": "IWDA +14.8% 6M, VIX bajo",
     "vix": 14.5,
-    "iwda_6m": 11.96,
+    "iwda_6m": 14.75,
     "yield_curve_spread": 0.43,
     "yield_curve_inverted": false
   },
@@ -225,13 +225,12 @@
       "sector": "Bitcoin y Cripto",
       "signal": "green",
       "signal_text": "Tesis intacta — EMA200 alcista. Sigue aportando.",
-      "dist_ema200": 18.8,
+      "dist_ema200": 18.7,
       "ema_type": "weekly",
-      "r3m": 25.59,
-      "r12m": -7.42,
-      "drawdown": -17.52,
+      "r3m": 24.4,
+      "r12m": -7.98,
+      "drawdown": -17.56,
       "sparkline": [
-        55516.9453,
         54508.0,
         55271.3828,
         56158.6406,
@@ -290,10 +289,10 @@
         66781.2891,
         66723.8438,
         69892.0781,
-        68651.1562
+        68576.2812,
+        68622.4766
       ],
       "spark_dates": [
-        "2026-07-07",
         "2026-07-08",
         "2026-07-09",
         "2026-07-10",
@@ -352,7 +351,8 @@
         "2026-09-01",
         "2026-09-02",
         "2026-09-03",
-        "2026-09-04"
+        "2026-09-04",
+        "2026-09-05"
       ]
     }
   ],
@@ -2069,7 +2069,7 @@
       "macro_profile": "clean_energy",
       "aum_bn": 1.1,
       "universe": "primary",
-      "last": 49.4306,
+      "last": 49.43,
       "score_tech": 32.9,
       "score_macro": 46.5,
       "score_final": 32.5,
@@ -2078,7 +2078,7 @@
       "pct_mom6m": 69.1,
       "pct_entry": 72.8,
       "pct_consistency": 67.0,
-      "rel_strength": -1.54,
+      "rel_strength": -1.55,
       "dist_ema200": -3.49,
       "ema200_abs": 51.2164,
       "dist_from_max": -27.81,
@@ -2088,7 +2088,7 @@
       "r1m": -4.11,
       "r3m": -19.48,
       "r6m": 9.77,
-      "r12m": 31.96,
+      "r12m": 31.95,
       "vol": 46.2,
       "drawdown": -27.81,
       "ann_ret": 32.0,
@@ -2175,7 +2175,7 @@
         48.19,
         48.5,
         49.13,
-        49.4306
+        49.43
       ],
       "spark_dates": [
         "2026-06-11",
@@ -5478,7 +5478,7 @@
       "macro_profile": "clean_energy",
       "aum_bn": 1.1,
       "universe": "primary",
-      "last": 49.4306,
+      "last": 49.43,
       "score_tech": 32.9,
       "score_macro": 46.5,
       "score_final": 32.5,
@@ -5487,7 +5487,7 @@
       "pct_mom6m": 69.1,
       "pct_entry": 72.8,
       "pct_consistency": 67.0,
-      "rel_strength": -1.54,
+      "rel_strength": -1.55,
       "dist_ema200": -3.49,
       "ema200_abs": 51.2164,
       "dist_from_max": -27.81,
@@ -5497,7 +5497,7 @@
       "r1m": -4.11,
       "r3m": -19.48,
       "r6m": 9.77,
-      "r12m": 31.96,
+      "r12m": 31.95,
       "vol": 46.2,
       "drawdown": -27.81,
       "ann_ret": 32.0,
@@ -5584,7 +5584,7 @@
         48.19,
         48.5,
         49.13,
-        49.4306
+        49.43
       ],
       "spark_dates": [
         "2026-06-11",
@@ -6615,7 +6615,7 @@
       "macro_profile": "water_scarcity",
       "aum_bn": 0.8,
       "universe": "primary",
-      "last": 64.6347,
+      "last": 64.63,
       "score_tech": 29.1,
       "score_macro": 57.5,
       "score_final": 20.6,
@@ -6624,17 +6624,17 @@
       "pct_mom6m": 29.0,
       "pct_entry": 71.4,
       "pct_consistency": 43.3,
-      "rel_strength": -19.11,
-      "dist_ema200": 0.48,
-      "ema200_abs": 64.3246,
+      "rel_strength": -19.12,
+      "dist_ema200": 0.47,
+      "ema200_abs": 64.3245,
       "dist_from_max": -6.14,
       "dist_from_max_5y": -6.14,
       "consistency_pct": 50.0,
       "mom_penalty": true,
       "r1m": -2.94,
-      "r3m": 3.7,
+      "r3m": 3.69,
       "r6m": -0.26,
-      "r12m": 1.37,
+      "r12m": 1.36,
       "vol": 13.4,
       "drawdown": -6.14,
       "ann_ret": 1.4,
@@ -6725,7 +6725,7 @@
         63.81,
         64.2,
         64.67,
-        64.6347
+        64.63
       ],
       "spark_dates": [
         "2026-06-11",
@@ -7188,7 +7188,7 @@
     "dolar": "Dólar estable (-0.0% 6M)",
     "halving": "Halving hace 29M — ciclo medio",
     "fred": true,
-    "updated": "2026-09-04T22:27:10Z",
+    "updated": "2026-09-05T09:51:50Z",
     "regime": {
       "regime": "bull",
       "w_tech": {
@@ -7205,9 +7205,9 @@
         "water_scarcity": 0.92
       },
       "description": "Mercado alcista fuerte — priorizando momentum y liderazgo",
-      "regime_note": "IWDA +12.0% 6M, VIX bajo",
+      "regime_note": "IWDA +14.8% 6M, VIX bajo",
       "vix": 14.5,
-      "iwda_6m": 11.96,
+      "iwda_6m": 14.75,
       "yield_curve_spread": 0.43,
       "yield_curve_inverted": false
     }
