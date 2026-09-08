@@ -1,11 +1,11 @@
 {
-  "updated": "2026-09-08T17:20:41Z",
+  "updated": "2026-09-08T22:52:49Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
-    "dgs10": 4.77,
-    "dgs2": 4.34,
-    "yield_curve_spread": 0.43,
+    "dgs10": 4.78,
+    "dgs2": 4.37,
+    "yield_curve_spread": 0.41,
     "yield_curve_inverted": false,
     "score": 45,
     "interpretation": "Tipos elevados (3.63%) — presión moderada",
@@ -30,7 +30,7 @@
     "interpretation": "VIX 14.5 — complacencia (cautela)"
   },
   "dxy": {
-    "value": 98.86,
+    "value": 98.84,
     "ret_6m": 0.0,
     "score": 60,
     "score_inverse": 40,
@@ -38,9 +38,9 @@
   },
   "inr": {
     "value": 94.81,
-    "ret_3m": -1.0,
+    "ret_3m": -0.3,
     "trend": "stable",
-    "interpretation": "Rupia estable (-1.0% 3M)"
+    "interpretation": "Rupia estable (-0.3% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -48,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 127.16,
-    "ret_6m": 12.93,
-    "ret_1m": -1.23,
+    "price": 127.33,
+    "ret_6m": 13.08,
+    "ret_1m": -1.1,
     "ema200": 117.94,
     "above_ema200": true
   },
