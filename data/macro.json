@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-08T10:28:01Z",
+  "updated": "2026-09-08T12:14:21Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -48,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 127.31,
-    "ret_6m": 13.06,
-    "ret_1m": -1.12,
+    "price": 127.37,
+    "ret_6m": 13.12,
+    "ret_1m": -1.07,
     "ema200": 117.94,
     "above_ema200": true
   },
