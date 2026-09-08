@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-08T12:14:21Z",
+  "updated": "2026-09-08T17:20:41Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -12,10 +12,10 @@
     "yield_curve_note": "Curva normal"
   },
   "credit_spread": {
-    "value": 2.65,
-    "trend": "neutral",
-    "score": 80,
-    "interpretation": "Spread HY comprimido (2.6%) — condiciones favorables"
+    "value": 2.68,
+    "trend": "up",
+    "score": 70,
+    "interpretation": "Spread HY comprimido (2.7%) — condiciones favorables — tendencia a empeorar"
   },
   "consumer_confidence": {
     "value": 55.2,
@@ -30,14 +30,14 @@
     "interpretation": "VIX 14.5 — complacencia (cautela)"
   },
   "dxy": {
-    "value": 98.96,
-    "ret_6m": 0.1,
+    "value": 98.86,
+    "ret_6m": 0.0,
     "score": 60,
     "score_inverse": 40,
-    "interpretation": "Dólar estable (0.1% 6M)"
+    "interpretation": "Dólar estable (0.0% 6M)"
   },
   "inr": {
-    "value": 94.82,
+    "value": 94.81,
     "ret_3m": -1.0,
     "trend": "stable",
     "interpretation": "Rupia estable (-1.0% 3M)"
@@ -48,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 127.37,
-    "ret_6m": 13.12,
-    "ret_1m": -1.07,
+    "price": 127.16,
+    "ret_6m": 12.93,
+    "ret_1m": -1.23,
     "ema200": 117.94,
     "above_ema200": true
   },
@@ -61,7 +61,7 @@
     "description": "Halving hace 29M — ciclo medio"
   },
   "composite_score": {
-    "score": 57.5,
+    "score": 55.0,
     "interpretation": "Entorno macro neutro"
   }
 }
