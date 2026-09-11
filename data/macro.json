@@ -1,11 +1,11 @@
 {
-  "updated": "2026-09-11T17:04:12Z",
+  "updated": "2026-09-11T22:42:48Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
-    "dgs10": 4.83,
-    "dgs2": 4.43,
-    "yield_curve_spread": 0.4,
+    "dgs10": 4.95,
+    "dgs2": 4.56,
+    "yield_curve_spread": 0.39,
     "yield_curve_inverted": false,
     "score": 45,
     "interpretation": "Tipos elevados (3.63%) — presión moderada",
@@ -48,10 +48,10 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 126.64,
-    "ret_6m": 12.92,
-    "ret_1m": -2.13,
-    "ema200": 118.21,
+    "price": 125.44,
+    "ret_6m": 11.85,
+    "ret_1m": -3.05,
+    "ema200": 118.2,
     "above_ema200": true
   },
   "bitcoin_halving": {
