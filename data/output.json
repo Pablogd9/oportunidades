@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-11T22:43:28Z",
+  "updated": "2026-09-12T09:57:49Z",
   "total_analyzed": 23,
   "model_version": "11.0",
   "factor_weights": {
@@ -225,13 +225,12 @@
       "sector": "Bitcoin y Cripto",
       "signal": "green",
       "signal_text": "Tesis intacta — EMA200 alcista. Sigue aportando.",
-      "dist_ema200": 15.3,
+      "dist_ema200": 15.5,
       "ema_type": "weekly",
-      "r3m": 18.5,
-      "r12m": -13.24,
-      "drawdown": -20.05,
+      "r3m": 19.36,
+      "r12m": -13.65,
+      "drawdown": -19.85,
       "sparkline": [
-        56857.3203,
         56420.0039,
         55734.7969,
         55856.5625,
@@ -290,10 +289,10 @@
         67457.7266,
         67268.9844,
         65944.2969,
-        66547.3672
+        66508.375,
+        66710.4219
       ],
       "spark_dates": [
-        "2026-07-14",
         "2026-07-15",
         "2026-07-16",
         "2026-07-17",
@@ -352,7 +351,8 @@
         "2026-09-08",
         "2026-09-09",
         "2026-09-10",
-        "2026-09-11"
+        "2026-09-11",
+        "2026-09-12"
       ]
     }
   ],
@@ -553,7 +553,7 @@
       "macro_profile": "growth_rates_sensitive",
       "aum_bn": 0.5,
       "universe": "primary",
-      "last": 62.2188,
+      "last": 62.219,
       "score_tech": 90.0,
       "score_macro": 45,
       "score_final": 68.4,
@@ -663,7 +663,7 @@
         63.441,
         62.753,
         61.97,
-        62.2188
+        62.219
       ],
       "spark_dates": [
         "2026-06-17",
@@ -3211,7 +3211,7 @@
       "macro_profile": "growth_rates_sensitive",
       "aum_bn": 0.5,
       "universe": "primary",
-      "last": 62.2188,
+      "last": 62.219,
       "score_tech": 90.0,
       "score_macro": 45,
       "score_final": 68.4,
@@ -3321,7 +3321,7 @@
         63.441,
         62.753,
         61.97,
-        62.2188
+        62.219
       ],
       "spark_dates": [
         "2026-06-17",
@@ -7181,10 +7181,10 @@
   "macro_context": {
     "tipos": "Tipos elevados (3.63%) — presión moderada",
     "vix": "VIX 15.8 — mercado tranquilo",
-    "dolar": "Dólar estable (-1.3% 6M)",
+    "dolar": "Dólar estable (-1.2% 6M)",
     "halving": "Halving hace 29M — ciclo medio",
     "fred": true,
-    "updated": "2026-09-11T22:42:48Z",
+    "updated": "2026-09-12T09:57:19Z",
     "regime": {
       "regime": "bull",
       "w_tech": {
