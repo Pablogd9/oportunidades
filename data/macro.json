@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-18T22:44:07Z",
+  "updated": "2026-09-19T10:11:10Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -30,14 +30,14 @@
     "interpretation": "VIX 14.8 — complacencia (cautela)"
   },
   "dxy": {
-    "value": 100.21,
+    "value": 100.22,
     "ret_6m": 0.6,
     "score": 60,
     "score_inverse": 40,
     "interpretation": "Dólar estable (0.6% 6M)"
   },
   "inr": {
-    "value": 95.86,
+    "value": 95.88,
     "ret_3m": 1.5,
     "trend": "stable",
     "interpretation": "Rupia estable (+1.5% 3M)"
@@ -48,10 +48,10 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 126.47,
-    "ret_6m": 16.27,
-    "ret_1m": -0.41,
-    "ema200": 118.5,
+    "price": 127.4,
+    "ret_6m": 16.68,
+    "ret_1m": 0.97,
+    "ema200": 118.59,
     "above_ema200": true
   },
   "bitcoin_halving": {
