@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-19T22:23:36Z",
+  "updated": "2026-09-20T10:29:40Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -48,10 +48,10 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 127.4,
-    "ret_6m": 16.68,
-    "ret_1m": 0.97,
-    "ema200": 118.59,
+    "price": 127.05,
+    "ret_6m": 16.32,
+    "ret_1m": 0.43,
+    "ema200": 118.67,
     "above_ema200": true
   },
   "bitcoin_halving": {
