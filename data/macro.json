@@ -1,15 +1,15 @@
 {
-  "updated": "2026-09-25T18:00:55Z",
+  "updated": "2026-09-25T23:23:51Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
-    "dgs10": null,
-    "dgs2": 4.85,
-    "yield_curve_spread": null,
+    "dgs10": 5.18,
+    "dgs2": 4.87,
+    "yield_curve_spread": 0.31,
     "yield_curve_inverted": false,
     "score": 45,
     "interpretation": "Tipos elevados (3.63%) — presión moderada",
-    "yield_curve_note": "Sin datos curva"
+    "yield_curve_note": "Curva normal"
   },
   "credit_spread": {
     "value": 2.8,
@@ -24,13 +24,13 @@
     "interpretation": "Confianza consumidor muy baja (52) — recesión probable"
   },
   "vix": {
-    "value": 15.0,
+    "value": 14.9,
     "trend": "neutral",
     "score": 85,
-    "interpretation": "VIX 15.0 — complacencia (cautela)"
+    "interpretation": "VIX 14.9 — complacencia (cautela)"
   },
   "dxy": {
-    "value": 101.05,
+    "value": 101.04,
     "ret_6m": 0.9,
     "score": 60,
     "score_inverse": 40,
@@ -38,9 +38,9 @@
   },
   "inr": {
     "value": 95.8,
-    "ret_3m": 0.9,
+    "ret_3m": 0.4,
     "trend": "stable",
-    "interpretation": "Rupia estable (+0.9% 3M)"
+    "interpretation": "Rupia estable (+0.4% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -48,10 +48,10 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 128.91,
-    "ret_6m": 19.1,
-    "ret_1m": 1.39,
-    "ema200": 119.02,
+    "price": 128.37,
+    "ret_6m": 18.6,
+    "ret_1m": 0.97,
+    "ema200": 119.01,
     "above_ema200": true
   },
   "bitcoin_halving": {
