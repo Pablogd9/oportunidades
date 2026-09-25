@@ -1,43 +1,43 @@
 {
-  "updated": "2026-09-25T12:51:59Z",
+  "updated": "2026-09-25T18:00:55Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
-    "dgs10": 5.11,
+    "dgs10": null,
     "dgs2": 4.85,
-    "yield_curve_spread": 0.26,
+    "yield_curve_spread": null,
     "yield_curve_inverted": false,
     "score": 45,
     "interpretation": "Tipos elevados (3.63%) — presión moderada",
-    "yield_curve_note": "Curva normal"
+    "yield_curve_note": "Sin datos curva"
   },
   "credit_spread": {
-    "value": 2.73,
+    "value": 2.8,
     "trend": "up",
     "score": 70,
-    "interpretation": "Spread HY comprimido (2.7%) — condiciones favorables — tendencia a empeorar"
+    "interpretation": "Spread HY comprimido (2.8%) — condiciones favorables — tendencia a empeorar"
   },
   "consumer_confidence": {
-    "value": 55.2,
-    "trend": "up",
+    "value": 51.7,
+    "trend": "neutral",
     "score": 20,
-    "interpretation": "Confianza consumidor muy baja (55) — recesión probable"
+    "interpretation": "Confianza consumidor muy baja (52) — recesión probable"
   },
   "vix": {
-    "value": 15.2,
+    "value": 15.0,
     "trend": "neutral",
-    "score": 70,
-    "interpretation": "VIX 15.2 — mercado tranquilo"
+    "score": 85,
+    "interpretation": "VIX 15.0 — complacencia (cautela)"
   },
   "dxy": {
-    "value": 101.0,
-    "ret_6m": 0.8,
+    "value": 101.05,
+    "ret_6m": 0.9,
     "score": 60,
     "score_inverse": 40,
-    "interpretation": "Dólar estable (0.8% 6M)"
+    "interpretation": "Dólar estable (0.9% 6M)"
   },
   "inr": {
-    "value": 95.81,
+    "value": 95.8,
     "ret_3m": 0.9,
     "trend": "stable",
     "interpretation": "Rupia estable (+0.9% 3M)"
@@ -48,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 129.07,
-    "ret_6m": 19.25,
-    "ret_1m": 1.52,
+    "price": 128.91,
+    "ret_6m": 19.1,
+    "ret_1m": 1.39,
     "ema200": 119.02,
     "above_ema200": true
   },
@@ -61,7 +61,7 @@
     "description": "Halving hace 29M — ciclo medio"
   },
   "composite_score": {
-    "score": 51.2,
+    "score": 55.0,
     "interpretation": "Entorno macro neutro"
   }
 }
