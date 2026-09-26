@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-25T23:24:18Z",
+  "updated": "2026-09-26T10:42:06Z",
   "total_analyzed": 23,
   "model_version": "11.0",
   "factor_weights": {
@@ -225,13 +225,12 @@
       "sector": "Bitcoin y Cripto",
       "signal": "green",
       "signal_text": "Tesis intacta — EMA200 alcista. Sigue aportando.",
-      "dist_ema200": 27.5,
+      "dist_ema200": 27.7,
       "ema_type": "weekly",
-      "r3m": 30.92,
-      "r12m": -10.4,
-      "drawdown": -9.97,
+      "r3m": 30.71,
+      "r12m": -9.82,
+      "drawdown": -8.27,
       "sparkline": [
-        56094.5781,
         55732.2695,
         56169.2695,
         54447.8359,
@@ -290,10 +289,10 @@
         75273.7266,
         74138.9062,
         74188.9375,
-        73768.2109
+        73769.2188,
+        73888.8438
       ],
       "spark_dates": [
-        "2026-07-28",
         "2026-07-29",
         "2026-07-30",
         "2026-07-31",
@@ -352,7 +351,8 @@
         "2026-09-22",
         "2026-09-23",
         "2026-09-24",
-        "2026-09-25"
+        "2026-09-25",
+        "2026-09-26"
       ]
     }
   ],
@@ -745,7 +745,7 @@
       "macro_profile": "growth_rates_sensitive",
       "aum_bn": 0.5,
       "universe": "primary",
-      "last": 70.2058,
+      "last": 70.206,
       "score_tech": 92.6,
       "score_macro": 45,
       "score_final": 72.6,
@@ -785,8 +785,8 @@
       "peg": null,
       "dist_from_max_5y_overval": -24.41,
       "breadth_score": 0,
-      "breadth_desc": "Breadth neutro — 56% sobre EMA50",
-      "breadth_pct": 56.0,
+      "breadth_desc": "Breadth neutro — 50% sobre EMA50",
+      "breadth_pct": 50.0,
       "failure_patterns": [],
       "failure_penalty": 1.0,
       "regime_penalty": 1.0,
@@ -853,7 +853,7 @@
         69.282,
         67.759,
         70.249,
-        70.2058
+        70.206
       ],
       "spark_dates": [
         "2026-07-02",
@@ -3409,7 +3409,7 @@
       "macro_profile": "growth_rates_sensitive",
       "aum_bn": 0.5,
       "universe": "primary",
-      "last": 70.2058,
+      "last": 70.206,
       "score_tech": 92.6,
       "score_macro": 45,
       "score_final": 72.6,
@@ -3449,8 +3449,8 @@
       "peg": null,
       "dist_from_max_5y_overval": -24.41,
       "breadth_score": 0,
-      "breadth_desc": "Breadth neutro — 56% sobre EMA50",
-      "breadth_pct": 56.0,
+      "breadth_desc": "Breadth neutro — 50% sobre EMA50",
+      "breadth_pct": 50.0,
       "failure_patterns": [],
       "failure_penalty": 1.0,
       "regime_penalty": 1.0,
@@ -3517,7 +3517,7 @@
         69.282,
         67.759,
         70.249,
-        70.2058
+        70.206
       ],
       "spark_dates": [
         "2026-07-02",
@@ -7189,10 +7189,10 @@
   "macro_context": {
     "tipos": "Tipos elevados (3.63%) — presión moderada",
     "vix": "VIX 14.9 — complacencia (cautela)",
-    "dolar": "Dólar estable (0.9% 6M)",
+    "dolar": "Dólar estable (0.8% 6M)",
     "halving": "Halving hace 29M — ciclo medio",
     "fred": true,
-    "updated": "2026-09-25T23:23:51Z",
+    "updated": "2026-09-26T10:41:43Z",
     "regime": {
       "regime": "bull",
       "w_tech": {
