@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-27T13:12:26Z",
+  "updated": "2026-09-27T17:53:26Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -37,7 +37,7 @@
     "interpretation": "Dólar estable (0.8% 6M)"
   },
   "inr": {
-    "value": 95.82,
+    "value": 95.8,
     "ret_3m": 0.4,
     "trend": "stable",
     "interpretation": "Rupia estable (+0.4% 3M)"
