@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-29T23:52:13Z",
+  "updated": "2026-09-30T11:48:13Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -24,23 +24,23 @@
     "interpretation": "Confianza consumidor muy baja (52) — recesión probable"
   },
   "vix": {
-    "value": 16.0,
-    "trend": "up",
+    "value": 16.1,
+    "trend": "neutral",
     "score": 70,
-    "interpretation": "VIX 16.0 — mercado tranquilo"
+    "interpretation": "VIX 16.1 — mercado tranquilo"
   },
   "dxy": {
-    "value": 101.41,
-    "ret_6m": 1.4,
+    "value": 101.21,
+    "ret_6m": 1.6,
     "score": 60,
     "score_inverse": 40,
-    "interpretation": "Dólar estable (1.4% 6M)"
+    "interpretation": "Dólar estable (1.6% 6M)"
   },
   "inr": {
-    "value": 95.98,
-    "ret_3m": 0.5,
+    "value": 95.83,
+    "ret_3m": 0.6,
     "trend": "stable",
-    "interpretation": "Rupia estable (+0.5% 3M)"
+    "interpretation": "Rupia estable (+0.6% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -48,15 +48,15 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 128.57,
-    "ret_6m": 16.52,
-    "ret_1m": 1.41,
-    "ema200": 119.19,
+    "price": 128.78,
+    "ret_6m": 16.69,
+    "ret_1m": 1.74,
+    "ema200": 119.28,
     "above_ema200": true
   },
   "bitcoin_halving": {
     "halving_date": "2024-04-19",
-    "months_since": 29.3,
+    "months_since": 29.4,
     "halving_score": 50,
     "description": "Halving hace 29M — ciclo medio"
   },
