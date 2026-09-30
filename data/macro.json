@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-30T14:04:04Z",
+  "updated": "2026-09-30T18:30:56Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.63,
@@ -12,10 +12,10 @@
     "yield_curve_note": "Curva normal"
   },
   "credit_spread": {
-    "value": 3.02,
+    "value": 3.08,
     "trend": "up",
     "score": 55,
-    "interpretation": "Spread HY normal (3.0%) — condiciones sanas — tendencia a empeorar"
+    "interpretation": "Spread HY normal (3.1%) — condiciones sanas — tendencia a empeorar"
   },
   "consumer_confidence": {
     "value": 51.7,
@@ -30,11 +30,11 @@
     "interpretation": "VIX 15.8 — mercado tranquilo"
   },
   "dxy": {
-    "value": 101.2,
-    "ret_6m": 1.6,
+    "value": 101.43,
+    "ret_6m": 1.8,
     "score": 60,
     "score_inverse": 40,
-    "interpretation": "Dólar estable (1.6% 6M)"
+    "interpretation": "Dólar estable (1.8% 6M)"
   },
   "inr": {
     "value": 95.82,
@@ -48,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 128.88,
-    "ret_6m": 16.78,
-    "ret_1m": 1.82,
+    "price": 129.15,
+    "ret_6m": 17.02,
+    "ret_1m": 2.03,
     "ema200": 119.28,
     "above_ema200": true
   },
