@@ -175,6 +175,50 @@
       "ret_iwda_3m": null,
       "alpha_3m": null,
       "validated": false
+    },
+    {
+      "month": "2026-10",
+      "date": "2026-10-01",
+      "regime": "bull",
+      "score_top1": 77.2,
+      "calidad": "🟢 Señal fuerte",
+      "top1": {
+        "symbol": "WTAI",
+        "sector": "IA y Robotica",
+        "score": 77.2,
+        "euros": 350
+      },
+      "top2": {
+        "symbol": "CIBR",
+        "sector": "Ciberseguridad",
+        "score": 77.2,
+        "euros": 150
+      },
+      "portfolio_signals": {
+        "SEMI.AS": "green",
+        "BTC-EUR": "green"
+      },
+      "eps_forward_snapshot": {},
+      "entry_prices": {
+        "WTAI": 43.88,
+        "CIBR": 101.97,
+        "SMH": 606.9,
+        "GNOM": 70.352,
+        "IBB": 211.04,
+        "COPX": 85.48,
+        "FLIN": 33.73,
+        "VHT": 319.79,
+        "PHO": 68.31,
+        "GRID": 178.27,
+        "URNM": 48.25,
+        "QCLN": 48.59,
+        "ITA": 209.3
+      },
+      "ret_top1_3m": null,
+      "ret_top2_3m": null,
+      "ret_iwda_3m": null,
+      "alpha_3m": null,
+      "validated": false
     }
   ]
 }
