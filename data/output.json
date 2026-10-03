@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-03T12:40:36Z",
+  "updated": "2026-10-03T17:30:17Z",
   "total_analyzed": 23,
   "model_version": "11.0",
   "factor_weights": {
@@ -290,7 +290,7 @@
         73765.4297,
         75437.2109,
         75058.625,
-        75505.0391
+        75507.6094
       ],
       "spark_dates": [
         "2026-08-05",
@@ -7176,7 +7176,7 @@
     "dolar": "Dólar estable (2.0% 6M)",
     "halving": "Halving hace 29M — ciclo medio",
     "fred": true,
-    "updated": "2026-10-03T12:39:59Z",
+    "updated": "2026-10-03T17:29:46Z",
     "regime": {
       "regime": "bull",
       "w_tech": {
