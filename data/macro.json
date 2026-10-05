@@ -1,11 +1,11 @@
 {
-  "updated": "2026-10-05T16:17:23Z",
+  "updated": "2026-10-05T21:15:51Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.75,
-    "dgs10": 5.24,
-    "dgs2": 4.78,
-    "yield_curve_spread": 0.46,
+    "dgs10": 5.28,
+    "dgs2": 4.83,
+    "yield_curve_spread": 0.45,
     "yield_curve_inverted": false,
     "score": 45,
     "interpretation": "Tipos elevados (3.75%) — presión moderada",
@@ -24,23 +24,23 @@
     "interpretation": "Confianza consumidor muy baja (52) — recesión probable"
   },
   "vix": {
-    "value": 15.6,
+    "value": 15.5,
     "trend": "neutral",
     "score": 70,
-    "interpretation": "VIX 15.6 — mercado tranquilo"
+    "interpretation": "VIX 15.5 — mercado tranquilo"
   },
   "dxy": {
-    "value": 102.21,
-    "ret_6m": 2.6,
+    "value": 102.13,
+    "ret_6m": 2.5,
     "score": 40,
     "score_inverse": 60,
-    "interpretation": "Dólar algo fuerte (+2.6% 6M)"
+    "interpretation": "Dólar algo fuerte (+2.5% 6M)"
   },
   "inr": {
-    "value": 96.28,
-    "ret_3m": 0.4,
+    "value": 96.3,
+    "ret_3m": 1.0,
     "trend": "stable",
-    "interpretation": "Rupia estable (+0.4% 3M)"
+    "interpretation": "Rupia estable (+1.0% 3M)"
   },
   "uranium_spot": {
     "value": null,
