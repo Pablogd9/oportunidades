@@ -1,11 +1,11 @@
 {
-  "updated": "2026-10-06T18:58:30Z",
+  "updated": "2026-10-06T23:57:53Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.75,
-    "dgs10": 5.28,
-    "dgs2": 4.83,
-    "yield_curve_spread": 0.45,
+    "dgs10": 5.31,
+    "dgs2": 4.84,
+    "yield_curve_spread": 0.47,
     "yield_curve_inverted": false,
     "score": 45,
     "interpretation": "Tipos elevados (3.75%) — presión moderada",
@@ -30,14 +30,14 @@
     "interpretation": "VIX 15.0 — mercado tranquilo"
   },
   "dxy": {
-    "value": 101.85,
-    "ret_6m": 2.7,
+    "value": 101.92,
+    "ret_6m": 2.8,
     "score": 40,
     "score_inverse": 60,
-    "interpretation": "Dólar algo fuerte (+2.7% 6M)"
+    "interpretation": "Dólar algo fuerte (+2.8% 6M)"
   },
   "inr": {
-    "value": 96.41,
+    "value": 96.36,
     "ret_3m": 1.1,
     "trend": "stable",
     "interpretation": "Rupia estable (+1.1% 3M)"
@@ -48,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 131.87,
-    "ret_6m": 16.72,
-    "ret_1m": 3.57,
+    "price": 131.18,
+    "ret_6m": 16.11,
+    "ret_1m": 3.02,
     "ema200": 119.68,
     "above_ema200": true
   },
