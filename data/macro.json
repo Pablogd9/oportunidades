@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-07T12:31:27Z",
+  "updated": "2026-10-07T14:38:44Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.75,
@@ -24,17 +24,17 @@
     "interpretation": "Confianza consumidor muy baja (52) — recesión probable"
   },
   "vix": {
-    "value": 15.8,
+    "value": 15.7,
     "trend": "neutral",
     "score": 70,
-    "interpretation": "VIX 15.8 — mercado tranquilo"
+    "interpretation": "VIX 15.7 — mercado tranquilo"
   },
   "dxy": {
-    "value": 102.46,
-    "ret_6m": 3.7,
+    "value": 102.33,
+    "ret_6m": 3.6,
     "score": 40,
     "score_inverse": 60,
-    "interpretation": "Dólar algo fuerte (+3.7% 6M)"
+    "interpretation": "Dólar algo fuerte (+3.6% 6M)"
   },
   "inr": {
     "value": 96.76,
@@ -48,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 131.76,
-    "ret_6m": 16.66,
-    "ret_1m": 3.62,
+    "price": 131.37,
+    "ret_6m": 16.31,
+    "ret_1m": 3.31,
     "ema200": 119.78,
     "above_ema200": true
   },
