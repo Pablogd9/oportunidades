@@ -1,11 +1,11 @@
 {
-  "updated": "2026-10-09T18:54:27Z",
+  "updated": "2026-10-10T00:12:21Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.75,
-    "dgs10": 5.28,
-    "dgs2": 4.77,
-    "yield_curve_spread": 0.51,
+    "dgs10": 5.22,
+    "dgs2": 4.75,
+    "yield_curve_spread": 0.47,
     "yield_curve_inverted": false,
     "score": 45,
     "interpretation": "Tipos elevados (3.75%) — presión moderada",
@@ -24,20 +24,20 @@
     "interpretation": "Confianza consumidor muy baja (52) — recesión probable"
   },
   "vix": {
-    "value": 14.9,
+    "value": 14.8,
     "trend": "neutral",
     "score": 85,
-    "interpretation": "VIX 14.9 — complacencia (cautela)"
+    "interpretation": "VIX 14.8 — complacencia (cautela)"
   },
   "dxy": {
-    "value": 102.24,
+    "value": 102.23,
     "ret_6m": 3.9,
     "score": 40,
     "score_inverse": 60,
     "interpretation": "Dólar algo fuerte (+3.9% 6M)"
   },
   "inr": {
-    "value": 96.72,
+    "value": 96.78,
     "ret_3m": 0.3,
     "trend": "stable",
     "interpretation": "Rupia estable (+0.3% 3M)"
@@ -48,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 131.67,
-    "ret_6m": 14.86,
-    "ret_1m": 4.97,
+    "price": 130.98,
+    "ret_6m": 14.26,
+    "ret_1m": 4.42,
     "ema200": 119.98,
     "above_ema200": true
   },
