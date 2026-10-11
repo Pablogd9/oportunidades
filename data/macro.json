@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-11T18:16:46Z",
+  "updated": "2026-10-11T23:49:55Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.75,
@@ -30,11 +30,11 @@
     "interpretation": "VIX 14.8 — complacencia (cautela)"
   },
   "dxy": {
-    "value": 102.21,
-    "ret_6m": 3.9,
+    "value": 102.19,
+    "ret_6m": 4.2,
     "score": 40,
     "score_inverse": 60,
-    "interpretation": "Dólar algo fuerte (+3.9% 6M)"
+    "interpretation": "Dólar algo fuerte (+4.2% 6M)"
   },
   "inr": {
     "value": 96.78,
