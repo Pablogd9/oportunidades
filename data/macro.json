@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-12T21:48:18Z",
+  "updated": "2026-10-13T02:10:36Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.75,
@@ -30,7 +30,7 @@
     "interpretation": "VIX 15.2 — mercado tranquilo"
   },
   "dxy": {
-    "value": 102.58,
+    "value": 102.45,
     "ret_6m": 4.5,
     "score": 40,
     "score_inverse": 60,
@@ -48,10 +48,10 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 132.26,
-    "ret_6m": 13.36,
-    "ret_1m": 4.61,
-    "ema200": 120.19,
+    "price": 131.67,
+    "ret_6m": 14.18,
+    "ret_1m": 3.97,
+    "ema200": 120.08,
     "above_ema200": true
   },
   "bitcoin_halving": {
