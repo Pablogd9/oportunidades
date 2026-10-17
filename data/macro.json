@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-16T22:56:45Z",
+  "updated": "2026-10-17T10:02:34Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.75,
@@ -30,14 +30,14 @@
     "interpretation": "VIX 20.0 — mercado tranquilo"
   },
   "dxy": {
-    "value": 101.78,
-    "ret_6m": 3.8,
+    "value": 101.84,
+    "ret_6m": 3.9,
     "score": 40,
     "score_inverse": 60,
-    "interpretation": "Dólar algo fuerte (+3.8% 6M)"
+    "interpretation": "Dólar algo fuerte (+3.9% 6M)"
   },
   "inr": {
-    "value": 94.95,
+    "value": 94.96,
     "ret_3m": -1.7,
     "trend": "stable",
     "interpretation": "Rupia estable (-1.7% 3M)"
