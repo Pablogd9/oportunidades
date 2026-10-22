@@ -1,44 +1,46 @@
 {
-  "updated": "2026-10-21T23:31:02Z",
+  "updated": "2026-10-22T11:01:00Z",
   "fred_available": true,
   "interest_rates": {
-    "fed_funds": null,
-    "dgs10": null,
-    "dgs2": null,
-    "yield_curve_spread": null,
+    "fed_funds": 3.75,
+    "dgs10": 5.12,
+    "dgs2": 4.79,
+    "yield_curve_spread": 0.33,
     "yield_curve_inverted": false,
-    "score": 50,
-    "interpretation": "Sin datos de tipos",
-    "yield_curve_note": "Sin datos curva"
+    "score": 45,
+    "interpretation": "Tipos elevados (3.75%) — presión moderada",
+    "yield_curve_note": "Curva normal"
   },
   "credit_spread": {
-    "value": null,
-    "score": 50,
-    "interpretation": "Sin datos"
+    "value": 3.33,
+    "trend": "neutral",
+    "score": 65,
+    "interpretation": "Spread HY normal (3.3%) — condiciones sanas"
   },
   "consumer_confidence": {
-    "value": null,
-    "score": 50,
-    "interpretation": "Sin datos"
+    "value": 51.7,
+    "trend": "neutral",
+    "score": 20,
+    "interpretation": "Confianza consumidor muy baja (52) — recesión probable"
   },
   "vix": {
-    "value": 16.7,
-    "trend": "neutral",
+    "value": 18.1,
+    "trend": "down",
     "score": 70,
-    "interpretation": "VIX 16.7 — mercado tranquilo"
+    "interpretation": "VIX 18.1 — mercado tranquilo"
   },
   "dxy": {
-    "value": 101.69,
-    "ret_6m": 2.9,
+    "value": 101.66,
+    "ret_6m": 3.2,
     "score": 40,
     "score_inverse": 60,
-    "interpretation": "Dólar algo fuerte (+2.9% 6M)"
+    "interpretation": "Dólar algo fuerte (+3.2% 6M)"
   },
   "inr": {
-    "value": 94.45,
-    "ret_3m": -1.4,
+    "value": 94.82,
+    "ret_3m": -1.0,
     "trend": "stable",
-    "interpretation": "Rupia estable (-1.4% 3M)"
+    "interpretation": "Rupia estable (-1.0% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -46,10 +48,10 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 130.48,
-    "ret_6m": 11.9,
-    "ret_1m": 0.85,
-    "ema200": 120.75,
+    "price": 130.23,
+    "ret_6m": 11.97,
+    "ret_1m": 1.45,
+    "ema200": 120.92,
     "above_ema200": true
   },
   "bitcoin_halving": {
@@ -59,7 +61,7 @@
     "description": "Halving hace 30M — fin de ciclo"
   },
   "composite_score": {
-    "score": 55.0,
-    "interpretation": "Entorno macro neutro"
+    "score": 50.0,
+    "interpretation": "Entorno macro deteriorado"
   }
 }
