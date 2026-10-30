@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-30T14:26:10Z",
+  "updated": "2026-10-30T18:42:55Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.75,
@@ -24,17 +24,17 @@
     "interpretation": "Confianza consumidor muy baja (48) — recesión probable"
   },
   "vix": {
-    "value": 19.1,
-    "trend": "neutral",
-    "score": 70,
-    "interpretation": "VIX 19.1 — mercado tranquilo"
+    "value": 22.8,
+    "trend": "up",
+    "score": 50,
+    "interpretation": "VIX 22.8 — volatilidad moderada"
   },
   "dxy": {
-    "value": 102.01,
-    "ret_6m": 3.6,
+    "value": 101.89,
+    "ret_6m": 3.5,
     "score": 40,
     "score_inverse": 60,
-    "interpretation": "Dólar algo fuerte (+3.6% 6M)"
+    "interpretation": "Dólar algo fuerte (+3.5% 6M)"
   },
   "inr": {
     "value": 94.94,
@@ -48,10 +48,10 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 130.26,
-    "ret_6m": 9.0,
-    "ret_1m": 0.16,
-    "ema200": 121.42,
+    "price": 129.7,
+    "ret_6m": 8.53,
+    "ret_1m": -0.27,
+    "ema200": 121.41,
     "above_ema200": true
   },
   "bitcoin_halving": {
@@ -61,7 +61,7 @@
     "description": "Halving hace 30M — fin de ciclo"
   },
   "composite_score": {
-    "score": 50.0,
+    "score": 45.0,
     "interpretation": "Entorno macro deteriorado"
   }
 }
