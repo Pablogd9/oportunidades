@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-01T18:28:28Z",
+  "updated": "2026-11-01T23:45:04Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.75,
@@ -30,7 +30,7 @@
     "interpretation": "VIX 19.4 — mercado tranquilo"
   },
   "dxy": {
-    "value": 101.88,
+    "value": 101.96,
     "ret_6m": 3.5,
     "score": 40,
     "score_inverse": 60,
