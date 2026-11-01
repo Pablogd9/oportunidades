@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-01T12:32:51Z",
+  "updated": "2026-11-01T14:24:36Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.75,
@@ -37,7 +37,7 @@
     "interpretation": "Dólar algo fuerte (+3.5% 6M)"
   },
   "inr": {
-    "value": 94.95,
+    "value": 94.94,
     "ret_3m": -0.1,
     "trend": "stable",
     "interpretation": "Rupia estable (-0.1% 3M)"
