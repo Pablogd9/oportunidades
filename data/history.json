@@ -219,6 +219,50 @@
       "ret_iwda_3m": null,
       "alpha_3m": null,
       "validated": false
+    },
+    {
+      "month": "2026-11",
+      "date": "2026-11-01",
+      "regime": "neutral",
+      "score_top1": 80.9,
+      "calidad": "🟢 Señal fuerte",
+      "top1": {
+        "symbol": "CIBR",
+        "sector": "Ciberseguridad",
+        "score": 80.9,
+        "euros": 350
+      },
+      "top2": {
+        "symbol": "IHI",
+        "sector": "Salud",
+        "score": 67.6,
+        "euros": 150
+      },
+      "portfolio_signals": {
+        "SEMI.AS": "yellow",
+        "BTC-EUR": "green"
+      },
+      "eps_forward_snapshot": {},
+      "entry_prices": {
+        "CIBR": 101.03,
+        "IHI": 54.59,
+        "GNOM": 69.61,
+        "INDA": 47.72,
+        "XBI": 155.98,
+        "PHO": 73.76,
+        "COPX": 71.96,
+        "WTAI": 36.28,
+        "PAVE": 53.52,
+        "ITA": 209.74,
+        "SMH": 522.49,
+        "ICLN": 15.31,
+        "URNM": 42.36
+      },
+      "ret_top1_3m": null,
+      "ret_top2_3m": null,
+      "ret_iwda_3m": null,
+      "alpha_3m": null,
+      "validated": false
     }
   ]
 }

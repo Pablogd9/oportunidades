@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-31T23:32:08Z",
+  "updated": "2026-11-01T12:33:14Z",
   "total_analyzed": 23,
   "model_version": "11.0",
   "factor_weights": {
@@ -38,7 +38,7 @@
     "yield_curve_inverted": false
   },
   "recommendation": {
-    "mes": "October 2026",
+    "mes": "November 2026",
     "calidad": "🟢 Señal fuerte",
     "score_top1": 80.9,
     "accion_principal": "Aporta este mes en: First Trust Nasdaq Cybersecurity (CIBR)",
@@ -220,13 +220,12 @@
       "sector": "Bitcoin y Cripto",
       "signal": "green",
       "signal_text": "Tesis intacta — EMA200 alcista. Sigue aportando.",
-      "dist_ema200": 19.9,
+      "dist_ema200": 20.6,
       "ema_type": "weekly",
-      "r3m": 2.71,
-      "r12m": 20.21,
-      "drawdown": -9.69,
+      "r3m": 3.89,
+      "r12m": 21.77,
+      "drawdown": -9.38,
       "sparkline": [
-        66723.8438,
         69892.0781,
         68576.2812,
         68730.7422,
@@ -285,10 +284,10 @@
         72849.0,
         69551.4844,
         68899.3281,
-        69386.1328
+        69141.2578,
+        69626.4922
       ],
       "spark_dates": [
-        "2026-09-02",
         "2026-09-03",
         "2026-09-04",
         "2026-09-05",
@@ -347,7 +346,8 @@
         "2026-10-28",
         "2026-10-29",
         "2026-10-30",
-        "2026-10-31"
+        "2026-10-31",
+        "2026-11-01"
       ]
     }
   ],
@@ -7161,7 +7161,7 @@
     "dolar": "Dólar algo fuerte (+3.5% 6M)",
     "halving": "Halving hace 30M — fin de ciclo",
     "fred": true,
-    "updated": "2026-10-31T23:31:37Z",
+    "updated": "2026-11-01T12:32:51Z",
     "regime": {
       "regime": "neutral",
       "w_tech": {
