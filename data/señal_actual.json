@@ -1,118 +1,118 @@
 {
-  "fecha": "2026-10-01",
+  "fecha": "2026-11-01",
   "top1": {
-    "sym": "LIT",
-    "sector": "Litio",
+    "sym": "ICLN",
+    "sector": "EnergiaLimpia",
     "score_momentum": 100.0,
-    "score_entrada": 46.0,
-    "distancia_max_pct": 25.3
+    "score_entrada": 75.8,
+    "distancia_max_pct": 35.5
   },
   "ranking": [
-    {
-      "sym": "LIT",
-      "sector": "Litio",
-      "score_momentum": 100.0,
-      "score_entrada": 46.0,
-      "distancia_max_pct": 25.3
-    },
     {
       "sym": "ICLN",
       "sector": "EnergiaLimpia",
       "score_momentum": 100.0,
-      "score_entrada": 40.5,
-      "distancia_max_pct": 28.4
-    },
-    {
-      "sym": "COPX",
-      "sector": "Cobre",
-      "score_momentum": 100.0,
-      "score_entrada": 22.0,
-      "distancia_max_pct": 12.1
+      "score_entrada": 75.8,
+      "distancia_max_pct": 35.5
     },
     {
       "sym": "IBB",
       "sector": "Biotecnologia",
       "score_momentum": 100.0,
-      "score_entrada": 17.1,
-      "distancia_max_pct": 3.0
+      "score_entrada": 4.4,
+      "distancia_max_pct": 0.1
     },
     {
-      "sym": "VHT",
-      "sector": "Salud",
-      "score_momentum": 95.4,
-      "score_entrada": 34.7,
-      "distancia_max_pct": 4.1
+      "sym": "LIT",
+      "sector": "Litio",
+      "score_momentum": 97.5,
+      "score_entrada": 55.4,
+      "distancia_max_pct": 34.7
     },
     {
       "sym": "ROBO",
       "sector": "Robotica",
-      "score_momentum": 92.3,
-      "score_entrada": 62.3,
-      "distancia_max_pct": 10.9
+      "score_momentum": 94.2,
+      "score_entrada": 87.7,
+      "distancia_max_pct": 17.4
+    },
+    {
+      "sym": "COPX",
+      "sector": "Cobre",
+      "score_momentum": 90.5,
+      "score_entrada": 55.0,
+      "distancia_max_pct": 25.3
+    },
+    {
+      "sym": "VHT",
+      "sector": "Salud",
+      "score_momentum": 83.0,
+      "score_entrada": 0.0,
+      "distancia_max_pct": 0.0
     },
     {
       "sym": "SMH",
       "sector": "Semiconductores",
-      "score_momentum": 71.4,
-      "score_entrada": 48.0,
-      "distancia_max_pct": 9.0
-    },
-    {
-      "sym": "GRID",
-      "sector": "Infraestructura",
-      "score_momentum": 56.1,
-      "score_entrada": 82.3,
-      "distancia_max_pct": 11.4
+      "score_momentum": 70.6,
+      "score_entrada": 89.5,
+      "distancia_max_pct": 21.9
     },
     {
       "sym": "CIBR",
       "sector": "Ciberseguridad",
-      "score_momentum": 44.9,
-      "score_entrada": 22.2,
-      "distancia_max_pct": 0.9
+      "score_momentum": 44.7,
+      "score_entrada": 69.4,
+      "distancia_max_pct": 8.2
+    },
+    {
+      "sym": "GRID",
+      "sector": "Infraestructura",
+      "score_momentum": 43.7,
+      "score_entrada": 96.2,
+      "distancia_max_pct": 17.7
     },
     {
       "sym": "PAVE",
       "sector": "Infraestructura2",
-      "score_momentum": 27.5,
-      "score_entrada": 88.3,
-      "distancia_max_pct": 12.5
-    },
-    {
-      "sym": "ITA",
-      "sector": "Defensa",
-      "score_momentum": 15.7,
-      "score_entrada": 100.0,
-      "distancia_max_pct": 18.2
-    },
-    {
-      "sym": "INDA",
-      "sector": "India",
-      "score_momentum": 2.5,
-      "score_entrada": 92.7,
-      "distancia_max_pct": 15.6
+      "score_momentum": 19.7,
+      "score_entrada": 85.1,
+      "distancia_max_pct": 10.8
     },
     {
       "sym": "PHO",
       "sector": "Agua",
-      "score_momentum": 1.4,
-      "score_entrada": 89.7,
-      "distancia_max_pct": 9.1
+      "score_momentum": 0.8,
+      "score_entrada": 25.6,
+      "distancia_max_pct": 1.0
+    },
+    {
+      "sym": "ITA",
+      "sector": "Defensa",
+      "score_momentum": 0.0,
+      "score_entrada": 99.6,
+      "distancia_max_pct": 17.2
     },
     {
       "sym": "IHI",
       "sector": "Salud2",
-      "score_momentum": 0.6,
-      "score_entrada": 95.6,
-      "distancia_max_pct": 20.7
+      "score_momentum": 0.0,
+      "score_entrada": 94.0,
+      "distancia_max_pct": 15.3
+    },
+    {
+      "sym": "INDA",
+      "sector": "India",
+      "score_momentum": 0.0,
+      "score_entrada": 86.3,
+      "distancia_max_pct": 13.0
     },
     {
       "sym": "IGV",
       "sector": "Software",
-      "score_momentum": 0.6,
-      "score_entrada": 71.6,
-      "distancia_max_pct": 9.1
+      "score_momentum": 0.0,
+      "score_entrada": 74.8,
+      "distancia_max_pct": 9.9
     }
   ],
-  "n_empatados": 4
+  "n_empatados": 2
 }
