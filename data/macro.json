@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03T15:24:06Z",
+  "updated": "2026-11-03T20:12:12Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.88,
@@ -12,10 +12,10 @@
     "yield_curve_note": "Curva normal"
   },
   "credit_spread": {
-    "value": 3.44,
-    "trend": "up",
-    "score": 55,
-    "interpretation": "Spread HY normal (3.4%) — condiciones sanas — tendencia a empeorar"
+    "value": 3.43,
+    "trend": "neutral",
+    "score": 65,
+    "interpretation": "Spread HY normal (3.4%) — condiciones sanas"
   },
   "consumer_confidence": {
     "value": 48.1,
@@ -24,13 +24,13 @@
     "interpretation": "Confianza consumidor muy baja (48) — recesión probable"
   },
   "vix": {
-    "value": 20.8,
+    "value": 21.0,
     "trend": "up",
     "score": 50,
-    "interpretation": "VIX 20.8 — volatilidad moderada"
+    "interpretation": "VIX 21.0 — volatilidad moderada"
   },
   "dxy": {
-    "value": 101.86,
+    "value": 101.87,
     "ret_6m": 3.9,
     "score": 40,
     "score_inverse": 60,
@@ -48,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 129.0,
-    "ret_6m": 8.26,
-    "ret_1m": -2.18,
+    "price": 128.95,
+    "ret_6m": 8.22,
+    "ret_1m": -2.21,
     "ema200": 121.59,
     "above_ema200": true
   },
@@ -61,7 +61,7 @@
     "description": "Halving hace 30M — fin de ciclo"
   },
   "composite_score": {
-    "score": 42.5,
+    "score": 45.0,
     "interpretation": "Entorno macro deteriorado"
   }
 }
