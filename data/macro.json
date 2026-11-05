@@ -1,14 +1,14 @@
 {
-  "updated": "2026-11-04T20:29:12Z",
+  "updated": "2026-11-05T00:58:36Z",
   "fred_available": true,
   "interest_rates": {
-    "fed_funds": null,
-    "dgs10": 4.91,
-    "dgs2": 4.59,
-    "yield_curve_spread": 0.32,
+    "fed_funds": 3.88,
+    "dgs10": 4.95,
+    "dgs2": 4.61,
+    "yield_curve_spread": 0.34,
     "yield_curve_inverted": false,
-    "score": 50,
-    "interpretation": "Sin datos de tipos",
+    "score": 45,
+    "interpretation": "Tipos elevados (3.88%) — presión moderada",
     "yield_curve_note": "Curva normal"
   },
   "credit_spread": {
@@ -24,23 +24,23 @@
     "interpretation": "Confianza consumidor muy baja (48) — recesión probable"
   },
   "vix": {
-    "value": 16.9,
+    "value": 16.6,
     "trend": "neutral",
     "score": 70,
-    "interpretation": "VIX 16.9 — mercado tranquilo"
+    "interpretation": "VIX 16.6 — mercado tranquilo"
   },
   "dxy": {
-    "value": 101.53,
-    "ret_6m": 3.3,
+    "value": 101.41,
+    "ret_6m": 3.2,
     "score": 40,
     "score_inverse": 60,
-    "interpretation": "Dólar algo fuerte (+3.3% 6M)"
+    "interpretation": "Dólar algo fuerte (+3.2% 6M)"
   },
   "inr": {
-    "value": 94.63,
-    "ret_3m": -0.6,
+    "value": 94.75,
+    "ret_3m": -0.5,
     "trend": "stable",
-    "interpretation": "Rupia estable (-0.6% 3M)"
+    "interpretation": "Rupia estable (-0.5% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -48,20 +48,20 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 130.53,
-    "ret_6m": 8.39,
-    "ret_1m": -0.7,
-    "ema200": 121.67,
+    "price": 128.95,
+    "ret_6m": 8.22,
+    "ret_1m": -2.21,
+    "ema200": 121.59,
     "above_ema200": true
   },
   "bitcoin_halving": {
     "halving_date": "2024-04-19",
-    "months_since": 30.5,
+    "months_since": 30.6,
     "halving_score": 40,
     "description": "Halving hace 31M — fin de ciclo"
   },
   "composite_score": {
-    "score": 53.8,
+    "score": 52.5,
     "interpretation": "Entorno macro neutro"
   }
 }
