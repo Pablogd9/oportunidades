@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-05T15:41:08Z",
+  "updated": "2026-11-05T20:44:52Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.88,
@@ -24,13 +24,13 @@
     "interpretation": "Confianza consumidor muy baja (48) — recesión probable"
   },
   "vix": {
-    "value": 24.4,
+    "value": 26.2,
     "trend": "up",
-    "score": 50,
-    "interpretation": "VIX 24.4 — volatilidad moderada"
+    "score": 30,
+    "interpretation": "VIX 26.2 — miedo elevado (bear market)"
   },
   "dxy": {
-    "value": 101.52,
+    "value": 101.56,
     "ret_6m": 3.8,
     "score": 40,
     "score_inverse": 60,
@@ -48,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 127.71,
-    "ret_6m": 4.69,
-    "ret_1m": -2.5,
+    "price": 127.47,
+    "ret_6m": 4.49,
+    "ret_1m": -2.68,
     "ema200": 121.75,
     "above_ema200": true
   },
@@ -61,7 +61,7 @@
     "description": "Halving hace 31M — fin de ciclo"
   },
   "composite_score": {
-    "score": 47.5,
+    "score": 42.5,
     "interpretation": "Entorno macro deteriorado"
   }
 }
