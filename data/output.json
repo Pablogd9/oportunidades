@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-07T18:09:20Z",
+  "updated": "2026-11-07T23:48:44Z",
   "total_analyzed": 23,
   "model_version": "11.0",
   "factor_weights": {
@@ -225,11 +225,11 @@
       "sector": "Bitcoin y Cripto",
       "signal": "green",
       "signal_text": "Tesis intacta — EMA200 alcista. Sigue aportando.",
-      "dist_ema200": 17.6,
+      "dist_ema200": 17.7,
       "ema_type": "weekly",
-      "r3m": -1.03,
-      "r12m": 19.99,
-      "drawdown": -11.46,
+      "r3m": -0.95,
+      "r12m": 20.09,
+      "drawdown": -11.4,
       "sparkline": [
         67268.9844,
         65944.2969,
@@ -290,7 +290,7 @@
         71568.3438,
         67637.0156,
         67956.3516,
-        68024.7891
+        68077.4375
       ],
       "spark_dates": [
         "2026-09-09",
@@ -7157,7 +7157,7 @@
     "dolar": "Dólar algo fuerte (+4.5% 6M)",
     "halving": "Halving hace 31M — fin de ciclo",
     "fred": true,
-    "updated": "2026-11-07T18:08:51Z",
+    "updated": "2026-11-07T23:48:11Z",
     "regime": {
       "regime": "bear",
       "w_tech": {
