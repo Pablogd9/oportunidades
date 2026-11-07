@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-07T00:11:58Z",
+  "updated": "2026-11-07T12:19:11Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.88,
@@ -30,17 +30,17 @@
     "interpretation": "VIX 25.6 — miedo elevado (bear market)"
   },
   "dxy": {
-    "value": 102.28,
-    "ret_6m": 4.4,
+    "value": 102.3,
+    "ret_6m": 4.5,
     "score": 40,
     "score_inverse": 60,
-    "interpretation": "Dólar algo fuerte (+4.4% 6M)"
+    "interpretation": "Dólar algo fuerte (+4.5% 6M)"
   },
   "inr": {
-    "value": 94.46,
-    "ret_3m": -1.0,
+    "value": 93.91,
+    "ret_3m": -1.5,
     "trend": "stable",
-    "interpretation": "Rupia estable (-1.0% 3M)"
+    "interpretation": "Rupia estable (-1.5% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -48,10 +48,10 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 127.47,
-    "ret_6m": 4.49,
-    "ret_1m": -2.68,
-    "ema200": 121.75,
+    "price": 127.33,
+    "ret_6m": 5.23,
+    "ret_1m": -3.3,
+    "ema200": 121.82,
     "above_ema200": true
   },
   "bitcoin_halving": {
