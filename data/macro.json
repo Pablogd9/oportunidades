@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-08T18:25:14Z",
+  "updated": "2026-11-08T23:53:08Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.88,
@@ -30,11 +30,11 @@
     "interpretation": "VIX 25.6 — miedo elevado (bear market)"
   },
   "dxy": {
-    "value": 102.3,
-    "ret_6m": 4.5,
+    "value": 102.24,
+    "ret_6m": 4.0,
     "score": 40,
     "score_inverse": 60,
-    "interpretation": "Dólar algo fuerte (+4.5% 6M)"
+    "interpretation": "Dólar algo fuerte (+4.0% 6M)"
   },
   "inr": {
     "value": 93.89,
