@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-07T23:48:11Z",
+  "updated": "2026-11-08T12:38:44Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.88,
@@ -56,7 +56,7 @@
   },
   "bitcoin_halving": {
     "halving_date": "2024-04-19",
-    "months_since": 30.6,
+    "months_since": 30.7,
     "halving_score": 40,
     "description": "Halving hace 31M — fin de ciclo"
   },
