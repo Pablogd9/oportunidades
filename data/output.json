@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-09T23:05:28Z",
+  "updated": "2026-11-10T02:50:45Z",
   "total_analyzed": 23,
   "model_version": "11.0",
   "factor_weights": {
@@ -220,11 +220,11 @@
       "sector": "Bitcoin y Cripto",
       "signal": "green",
       "signal_text": "Tesis intacta — EMA200 alcista. Sigue aportando.",
-      "dist_ema200": 16.0,
+      "dist_ema200": 15.6,
       "ema_type": "weekly",
-      "r3m": -1.69,
-      "r12m": 13.74,
-      "drawdown": -12.94,
+      "r3m": -2.01,
+      "r12m": 13.37,
+      "drawdown": -13.23,
       "sparkline": [
         66508.375,
         66600.9609,
@@ -285,7 +285,7 @@
         67956.3516,
         67956.9375,
         66908.1719,
-        66892.0781
+        66671.8438
       ],
       "spark_dates": [
         "2026-09-11",
@@ -347,7 +347,7 @@
         "2026-11-06",
         "2026-11-07",
         "2026-11-08",
-        "2026-11-09"
+        "2026-11-10"
       ]
     }
   ],
@@ -4707,28 +4707,28 @@
       "macro_profile": "water_scarcity",
       "aum_bn": 0.8,
       "universe": "primary",
-      "last": 65.9938,
-      "score_tech": 58.5,
+      "last": 65.99,
+      "score_tech": 58.4,
       "score_macro": 63.5,
-      "score_final": 45.6,
-      "pct_rel_strength": 65.4,
+      "score_final": 45.5,
+      "pct_rel_strength": 65.2,
       "pct_ema200": 51.3,
       "pct_mom6m": 48.7,
       "pct_entry": 55.4,
       "pct_consistency": 84.6,
-      "rel_strength": -1.62,
-      "dist_ema200": 2.84,
-      "ema200_abs": 64.1737,
-      "dist_from_max": -4.16,
-      "dist_from_max_5y": -4.16,
+      "rel_strength": -1.63,
+      "dist_ema200": 2.83,
+      "ema200_abs": 64.1736,
+      "dist_from_max": -4.17,
+      "dist_from_max_5y": -4.17,
       "consistency_pct": 67.0,
       "mom_penalty": true,
       "r1m": 3.13,
       "r3m": -0.15,
-      "r6m": 3.2,
-      "r12m": 3.12,
+      "r6m": 3.19,
+      "r12m": 3.11,
       "vol": 15.2,
-      "drawdown": -4.16,
+      "drawdown": -4.17,
       "ann_ret": 3.1,
       "pe": null,
       "pe_forward": null,
@@ -4745,7 +4745,7 @@
       ],
       "per_expansion": null,
       "peg": null,
-      "dist_from_max_5y_overval": -4.16,
+      "dist_from_max_5y_overval": -4.17,
       "breadth_score": -8,
       "breadth_desc": "Breadth muy negativo — concentrado (-6.1%)",
       "breadth_pct": null,
@@ -4815,7 +4815,7 @@
         66.43,
         65.1,
         64.8,
-        65.9938
+        65.99
       ],
       "spark_dates": [
         "2026-08-17",
@@ -7161,10 +7161,10 @@
   "macro_context": {
     "tipos": "Tipos elevados (3.88%) — presión moderada",
     "vix": "VIX 19.9 — mercado tranquilo",
-    "dolar": "Dólar algo fuerte (+3.5% 6M)",
+    "dolar": "Dólar algo fuerte (+3.3% 6M)",
     "halving": "Halving hace 31M — fin de ciclo",
     "fred": true,
-    "updated": "2026-11-09T23:04:56Z",
+    "updated": "2026-11-10T02:50:15Z",
     "regime": {
       "regime": "neutral",
       "w_tech": {
