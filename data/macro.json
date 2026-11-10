@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-10T02:50:15Z",
+  "updated": "2026-11-10T14:10:47Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.88,
@@ -24,23 +24,23 @@
     "interpretation": "Confianza consumidor muy baja (48) — recesión probable"
   },
   "vix": {
-    "value": 19.9,
-    "trend": "neutral",
-    "score": 70,
-    "interpretation": "VIX 19.9 — mercado tranquilo"
+    "value": 21.2,
+    "trend": "up",
+    "score": 50,
+    "interpretation": "VIX 21.2 — volatilidad moderada"
   },
   "dxy": {
-    "value": 101.73,
-    "ret_6m": 3.3,
+    "value": 102.02,
+    "ret_6m": 3.6,
     "score": 40,
     "score_inverse": 60,
-    "interpretation": "Dólar algo fuerte (+3.3% 6M)"
+    "interpretation": "Dólar algo fuerte (+3.6% 6M)"
   },
   "inr": {
-    "value": 93.9,
-    "ret_3m": -1.5,
+    "value": 93.92,
+    "ret_3m": -1.6,
     "trend": "stable",
-    "interpretation": "Rupia estable (-1.5% 3M)"
+    "interpretation": "Rupia estable (-1.6% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -48,10 +48,10 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 127.33,
-    "ret_6m": 5.23,
-    "ret_1m": -3.3,
-    "ema200": 121.82,
+    "price": 128.46,
+    "ret_6m": 6.78,
+    "ret_1m": -2.48,
+    "ema200": 121.98,
     "above_ema200": true
   },
   "bitcoin_halving": {
@@ -61,7 +61,7 @@
     "description": "Halving hace 31M — fin de ciclo"
   },
   "composite_score": {
-    "score": 50.0,
+    "score": 45.0,
     "interpretation": "Entorno macro deteriorado"
   }
 }
