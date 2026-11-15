@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-15T14:54:57Z",
+  "updated": "2026-11-15T19:25:57Z",
   "total_analyzed": 23,
   "model_version": "11.0",
   "factor_weights": {
@@ -222,9 +222,9 @@
       "signal_text": "Tesis intacta — EMA200 alcista. Sigue aportando.",
       "dist_ema200": 2.8,
       "ema_type": "weekly",
-      "r3m": -10.95,
-      "r12m": 3.1,
-      "drawdown": -23.19,
+      "r3m": -10.92,
+      "r12m": 3.14,
+      "drawdown": -23.16,
       "sparkline": [
         66579.3984,
         70419.5469,
@@ -285,7 +285,7 @@
         64565.7422,
         61912.3281,
         58173.7617,
-        59018.9219
+        59038.8906
       ],
       "spark_dates": [
         "2026-09-17",
@@ -7163,7 +7163,7 @@
     "dolar": "Dólar algo fuerte (+4.5% 6M)",
     "halving": "Halving hace 31M — fin de ciclo",
     "fred": true,
-    "updated": "2026-11-15T14:54:19Z",
+    "updated": "2026-11-15T19:25:32Z",
     "regime": {
       "regime": "neutral",
       "w_tech": {
