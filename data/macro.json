@@ -1,11 +1,11 @@
 {
-  "updated": "2026-11-17T16:59:11Z",
+  "updated": "2026-11-17T21:50:58Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.88,
-    "dgs10": 5.15,
-    "dgs2": 4.88,
-    "yield_curve_spread": 0.27,
+    "dgs10": 5.12,
+    "dgs2": 4.83,
+    "yield_curve_spread": 0.29,
     "yield_curve_inverted": false,
     "score": 45,
     "interpretation": "Tipos elevados (3.88%) — presión moderada",
@@ -24,20 +24,20 @@
     "interpretation": "Confianza consumidor muy baja (48) — recesión probable"
   },
   "vix": {
-    "value": 26.6,
+    "value": 25.5,
     "trend": "up",
     "score": 30,
-    "interpretation": "VIX 26.6 — miedo elevado (bear market)"
+    "interpretation": "VIX 25.5 — miedo elevado (bear market)"
   },
   "dxy": {
-    "value": 103.42,
-    "ret_6m": 4.3,
+    "value": 103.55,
+    "ret_6m": 4.5,
     "score": 40,
     "score_inverse": 60,
-    "interpretation": "Dólar algo fuerte (+4.3% 6M)"
+    "interpretation": "Dólar algo fuerte (+4.5% 6M)"
   },
   "inr": {
-    "value": 93.46,
+    "value": 93.47,
     "ret_3m": -2.4,
     "trend": "up",
     "interpretation": "Rupia apreciándose (-2.4% 3M)"
