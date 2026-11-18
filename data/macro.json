@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T21:50:58Z",
+  "updated": "2026-11-18T02:31:12Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.88,
@@ -30,17 +30,17 @@
     "interpretation": "VIX 25.5 — miedo elevado (bear market)"
   },
   "dxy": {
-    "value": 103.55,
+    "value": 103.59,
     "ret_6m": 4.5,
     "score": 40,
     "score_inverse": 60,
     "interpretation": "Dólar algo fuerte (+4.5% 6M)"
   },
   "inr": {
-    "value": 93.47,
-    "ret_3m": -2.4,
+    "value": 93.46,
+    "ret_3m": -2.3,
     "trend": "up",
-    "interpretation": "Rupia apreciándose (-2.4% 3M)"
+    "interpretation": "Rupia apreciándose (-2.3% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -48,15 +48,15 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 127.19,
-    "ret_6m": 3.31,
-    "ret_1m": -2.52,
-    "ema200": 122.42,
+    "price": 129.99,
+    "ret_6m": 5.23,
+    "ret_1m": -0.52,
+    "ema200": 122.35,
     "above_ema200": true
   },
   "bitcoin_halving": {
     "halving_date": "2024-04-19",
-    "months_since": 30.9,
+    "months_since": 31.0,
     "halving_score": 40,
     "description": "Halving hace 31M — fin de ciclo"
   },
