@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-20T14:47:23Z",
+  "updated": "2026-11-20T16:17:21Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.88,
@@ -24,10 +24,10 @@
     "interpretation": "Confianza consumidor muy baja (48) — recesión probable"
   },
   "vix": {
-    "value": 29.5,
+    "value": 30.9,
     "trend": "up",
     "score": 30,
-    "interpretation": "VIX 29.5 — miedo elevado (bear market)"
+    "interpretation": "VIX 30.9 — miedo elevado (bear market)"
   },
   "dxy": {
     "value": 103.74,
@@ -48,10 +48,10 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 123.97,
-    "ret_6m": 0.48,
-    "ret_1m": -4.56,
-    "ema200": 122.63,
+    "price": 122.93,
+    "ret_6m": -0.36,
+    "ret_1m": -5.36,
+    "ema200": 122.62,
     "above_ema200": true
   },
   "bitcoin_halving": {
