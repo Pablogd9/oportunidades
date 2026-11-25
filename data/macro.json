@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-25T03:38:56Z",
+  "updated": "2026-11-25T16:40:57Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.88,
@@ -12,10 +12,10 @@
     "yield_curve_note": "Curva normal"
   },
   "credit_spread": {
-    "value": 3.63,
+    "value": 3.72,
     "trend": "neutral",
     "score": 65,
-    "interpretation": "Spread HY normal (3.6%) — condiciones sanas"
+    "interpretation": "Spread HY normal (3.7%) — condiciones sanas"
   },
   "consumer_confidence": {
     "value": 48.0,
@@ -24,23 +24,23 @@
     "interpretation": "Confianza consumidor muy baja (48) — recesión probable"
   },
   "vix": {
-    "value": 26.4,
+    "value": 32.8,
     "trend": "up",
     "score": 30,
-    "interpretation": "VIX 26.4 — miedo elevado (bear market)"
+    "interpretation": "VIX 32.8 — miedo elevado (bear market)"
   },
   "dxy": {
-    "value": 103.91,
+    "value": 103.92,
     "ret_6m": 5.1,
     "score": 25,
     "score_inverse": 75,
     "interpretation": "Dólar fuerte (+5.1% 6M) — presión a emergentes"
   },
   "inr": {
-    "value": 92.72,
-    "ret_3m": -2.8,
+    "value": 92.22,
+    "ret_3m": -3.3,
     "trend": "up",
-    "interpretation": "Rupia apreciándose (-2.8% 3M)"
+    "interpretation": "Rupia apreciándose (-3.3% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -48,10 +48,10 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 126.76,
-    "ret_6m": 2.45,
-    "ret_1m": -2.89,
-    "ema200": 122.69,
+    "price": 122.85,
+    "ret_6m": -0.86,
+    "ret_1m": -6.74,
+    "ema200": 122.79,
     "above_ema200": true
   },
   "bitcoin_halving": {
