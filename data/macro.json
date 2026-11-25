@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-24T23:10:56Z",
+  "updated": "2026-11-25T03:38:56Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.88,
@@ -30,17 +30,17 @@
     "interpretation": "VIX 26.4 — miedo elevado (bear market)"
   },
   "dxy": {
-    "value": 103.83,
-    "ret_6m": 4.9,
-    "score": 40,
-    "score_inverse": 60,
-    "interpretation": "Dólar algo fuerte (+4.9% 6M)"
+    "value": 103.91,
+    "ret_6m": 5.1,
+    "score": 25,
+    "score_inverse": 75,
+    "interpretation": "Dólar fuerte (+5.1% 6M) — presión a emergentes"
   },
   "inr": {
-    "value": 92.9,
-    "ret_3m": -2.7,
+    "value": 92.72,
+    "ret_3m": -2.8,
     "trend": "up",
-    "interpretation": "Rupia apreciándose (-2.7% 3M)"
+    "interpretation": "Rupia apreciándose (-2.8% 3M)"
   },
   "uranium_spot": {
     "value": null,
