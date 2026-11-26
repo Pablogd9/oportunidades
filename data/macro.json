@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-26T16:15:10Z",
+  "updated": "2026-11-26T17:50:15Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.88,
@@ -24,13 +24,13 @@
     "interpretation": "Confianza consumidor muy baja (48) — recesión probable"
   },
   "vix": {
-    "value": 26.6,
+    "value": 26.8,
     "trend": "down",
     "score": 30,
-    "interpretation": "VIX 26.6 — miedo elevado (bear market)"
+    "interpretation": "VIX 26.8 — miedo elevado (bear market)"
   },
   "dxy": {
-    "value": 103.76,
+    "value": 103.79,
     "ret_6m": 4.6,
     "score": 40,
     "score_inverse": 60,
@@ -48,9 +48,9 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 126.0,
-    "ret_6m": 1.72,
-    "ret_1m": -4.19,
+    "price": 125.82,
+    "ret_6m": 1.57,
+    "ret_1m": -4.33,
     "ema200": 122.86,
     "above_ema200": true
   },
