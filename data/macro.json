@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-27T22:12:31Z",
+  "updated": "2026-11-28T02:52:15Z",
   "fred_available": true,
   "interest_rates": {
     "fed_funds": 3.88,
@@ -37,10 +37,10 @@
     "interpretation": "Dólar algo fuerte (+4.9% 6M)"
   },
   "inr": {
-    "value": 92.98,
-    "ret_3m": -2.1,
+    "value": 92.45,
+    "ret_3m": -2.6,
     "trend": "up",
-    "interpretation": "Rupia apreciándose (-2.1% 3M)"
+    "interpretation": "Rupia apreciándose (-2.6% 3M)"
   },
   "uranium_spot": {
     "value": null,
@@ -48,10 +48,10 @@
     "interpretation": "Sin datos"
   },
   "iwda": {
-    "price": 127.23,
-    "ret_6m": 3.16,
-    "ret_1m": -1.9,
-    "ema200": 122.94,
+    "price": 125.82,
+    "ret_6m": 1.57,
+    "ret_1m": -4.33,
+    "ema200": 122.86,
     "above_ema200": true
   },
   "bitcoin_halving": {
